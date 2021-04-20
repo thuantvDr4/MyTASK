@@ -16,8 +16,8 @@ import PopupWarning from 'app-libs/components/PopupWarning';
 import * as api from '../api';
 // ACTION
 import {mapLocation} from 'app-libs/helpers/mapPicker';
-import {actions as a, constants as c} from '../';
-const {saveInstallAddress, resetAllDataBookport} = a;
+import {actions as act, constants as c} from '../';
+const {saveInstallAddress, resetAllDataBookport} = act;
 
 // STYLE
 import ols from '../../../styles/Ola-style';
@@ -238,6 +238,14 @@ class BookportAddress extends React.Component {
         });
     }
 
+    /*
+    * TEST
+    * */
+    onSubmit_2 =()=>{
+        NavigationService.navigate('ChooseServiceType');
+    }
+
+
     onSubmit() {
         if (! this.isValidData()) {
             return;
@@ -255,7 +263,7 @@ class BookportAddress extends React.Component {
 
         };
 
-        if (this.state.data.HomeType.Id == c.HOME_TYPE_BUILDING) {
+        if (this.state.data.HomeType.Id === c.HOME_TYPE_BUILDING) {
 
             infoAddress.BuildingId = this.state.data.Building ? this.state.data.Building.Id : null;
         }
@@ -278,7 +286,9 @@ class BookportAddress extends React.Component {
                     }
                 }, () => {
                     this.props.saveInstallAddress(this.state.data, () => {
-                        NavigationService.navigate('BookPort');
+                        // NavigationService.navigate('BookPort'); //-------->V2.8
+                        //
+                        NavigationService.navigate('ChooseServiceType'); //--------> V2.10
                     });
                 });
 

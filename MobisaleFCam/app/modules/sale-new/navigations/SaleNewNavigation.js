@@ -7,6 +7,7 @@ import {createStackNavigator, HeaderBackButton} from 'react-navigation';
 import BookPort from '../scenes/BookPort';
 import BookportAddress from '../scenes/BookportAddress';
 import BookPortCab from '../scenes/BookPortCab';
+import ChooseServiceType from '../scenes/ChooseServiceType';
 
 
 export default createStackNavigator(
@@ -19,7 +20,10 @@ export default createStackNavigator(
         },
         BookPortCab: {
             screen: BookPortCab,
-        }
+        },
+        ChooseServiceType: {
+            screen: ChooseServiceType,
+        },
     },
     {
         initialRouteName: 'BookportAddress',

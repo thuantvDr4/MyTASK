@@ -25,6 +25,9 @@ let initialState = {
         allowBookport: 1, // cho phep bookport,
         isMapReady : false
     },
+
+    //thong tin goi openSafe-service
+    openSafeObj: RegistrationObj,
 };
 
 const saleNewReducer = (state = initialState, action) => {
@@ -71,6 +74,31 @@ const saleNewReducer = (state = initialState, action) => {
                     PotentialObjID:     action.data.PotentialObjID ? action.data.PotentialObjID : null,
                     Telegram:           action.data.Telegram ? action.data.Telegram : "",
                 },
+
+                openSafeObj:{
+                    ...state.openSafeObj,
+                    LocationId:         action.data.Location.Id || null,
+                    BillTo_City:        action.data.Location.Name || "",
+                    DistrictId:         action.data.District ? action.data.District.Id : null,
+                    BillTo_District:    action.data.District ? action.data.District.Name : "",
+                    WardId:             action.data.Ward ? action.data.Ward.Id : null,
+                    BillTo_Ward:        action.data.Ward ? action.data.Ward.Name : "",
+                    StreetId:           action.data.Street ? action.data.Street.Id : null,
+                    BillTo_Street:      action.data.Street ? action.data.Street.Name : "",
+                    BillTo_Number:      action.data.BillTo_Number ? action.data.BillTo_Number : "",
+                    TypeHouseName:      action.data.HomeType ? action.data.HomeType.Name : "",
+                    TypeHouse:          action.data.HomeType ? action.data.HomeType.Id : null,
+                    BuildingName :      action.data.Building ? action.data.Building.Name : "",
+                    BuildingId:         action.data.Building ? action.data.Building.Id : null,
+                    FullAddress:        action.data.FullAddress,
+                    Address:            action.data.FullAddress,
+                    Email:              action.data.Email ? action.data.Email : "",
+                    FullName:           action.data.FullName ? action.data.FullName : "",
+                    Phone1:             action.data.Phone1 ? action.data.Phone1 : "",
+                    PotentialObjID:     action.data.PotentialObjID ? action.data.PotentialObjID : null,
+                    Telegram:           action.data.Telegram ? action.data.Telegram : "",
+                },
+
             };
             break;
 

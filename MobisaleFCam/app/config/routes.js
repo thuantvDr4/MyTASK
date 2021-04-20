@@ -5,7 +5,9 @@ import {
 } from 'react-native'
 
 // SCREEN
-import Splash from '../modules/splash/scenes/Splash';
+import Splash from '../modules/openSafe/scenes/ServiceType';
+
+// import Splash from '../modules/splash/scenes/Splash';
 import Upgrade from '../modules/splash/scenes/Upgrade';
 import Login from '../modules/auth/scenes/Login';
 import ImeiScreen from '../modules/auth/scenes/ImeiScreen';
@@ -16,9 +18,9 @@ import CustomerInfoNavigation from '../modules/customer-info/navigations/Custome
 import ListCustomerInfoNavigation from '../modules/list-customer-info/navigations/ListCustomerInfoNavigation';
 import UploadImageCusNavigation from '../modules/list-customer-info/navigations/UploadImageCusNavigation';
 import HomeNavigation from '../modules/home/navigations/HomeNavigation';
-// import SaleNavigation from '../modules/sale/navigations/SaleNavigation';
 import ContractNavigation from '../modules/contract/navigations/ContractNavigation';
 import SaleNewNavigation from '../modules/sale-new/navigations/SaleNewNavigation';
+import OpenSafeNavigation from '../modules/openSafe/navigations/openSafe-nav';
 
 // COMPONENT
 import SearchPickerDynamic from '../libs/components/SearchPickerDynamic';
@@ -40,14 +42,14 @@ import Settings from '../modules/home/scenes/Settings';
 // v2.2 - 2019 July
 import NotificationList from '../modules/home/scenes/NotificationList';
 
-// v2.4 - 2020 
+// v2.4 - 2020
 import ExtraServiceNavigation from '../modules/extra-service/navigations/ExtraServiceNavigation';
 import CustomerInfoExtraNavigation from '../modules/extra-service-infomation/navigations/ExtraServiceInfoNavigation';
 import ExSerBookNavigation from '../modules/extra-service-bookport/navigations/ExSerBookNavigation';
 
 
 const AppNavigator = createStackNavigator(
-    { 
+    {
         Splash: {
             screen: Splash
         },
@@ -78,6 +80,13 @@ const AppNavigator = createStackNavigator(
                 header: null,
             })
         },
+        OpenSafe: {
+            screen: OpenSafeNavigation,
+            navigationOptions: {
+                header: null,
+            }
+        },
+
         CustomerInfo: {
             screen: CustomerInfoNavigation,
             navigationOptions: {

@@ -62,6 +62,11 @@
         },
         "dialog": {
             "title": "You're still booking port!"
+        },
+        "choose_type":{
+            "title": "Choose service type",
+            "internet" : "Internet",
+            "open_safe" : "OpenSafe"
         }
     }
 }

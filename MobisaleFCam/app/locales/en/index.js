@@ -8,6 +8,7 @@ import customer_info from './customer-info.json';
 import contract from './contract.json';
 import report from './report';
 import modal from './modal';
+import open_safe from './open_safe';
 
 // V2
 import all from './all';
@@ -44,5 +45,6 @@ export default en = {
     ...settings,
     ...division,
     ...bill_history,
-    ...extra_service
+    ...extra_service,
+    ...open_safe,
 };
