@@ -1,0 +1,26 @@
+{
+    "history": {
+        "nav": {
+            "titleBillHistory": "Bill History",
+            "titleChangeSTT": "Change Status History"
+        },
+        "itemBillHtr": {
+            "lblBillNum": "Bill number",
+            "lblBillDate": "Bill date",
+            "lblFromDate": "From date",
+            "lblToDate": "To date",
+            "lblSerType": "Service type",
+            "lblAmount": "Total amount",
+            "lblPaid": "Paid",
+            "lblPayType": "Payment type",
+            "lblPayDate": "Payment date"
+        },
+        "itemChangeSTT": {
+            "lblOldStt": "Old Status",
+            "lblNewStt": "New Status",
+            "lblReason": "Reason",
+            "lblUpdateBy": "Update By",
+            "lblDateCh": "Date Changed"
+        }
+    }
+}

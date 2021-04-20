@@ -1,0 +1,44 @@
+(node:10259) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'send' of undefined
+    at _getSSID.then.ssid (/Applications/Skype.app/Contents/Resources/app.asar/SsidStore.js:11:38)
+(node:10259) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 1)
+(node:10259) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:10259) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'send' of undefined
+    at _getSSID.then.ssid (/Applications/Skype.app/Contents/Resources/app.asar/SsidStore.js:11:38)
+(node:10259) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 2)
+(node:10259) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'send' of undefined
+    at _getSSID.then.ssid (/Applications/Skype.app/Contents/Resources/app.asar/SsidStore.js:11:38)
+(node:10259) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 3)
+(node:10259) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'send' of undefined
+    at _getSSID.then.ssid (/Applications/Skype.app/Contents/Resources/app.asar/SsidStore.js:11:38)
+(node:10259) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 4)
+(node:10259) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'send' of undefined
+    at _getSSID.then.ssid (/Applications/Skype.app/Contents/Resources/app.asar/SsidStore.js:11:38)
+(node:10259) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 5)
+(node:10259) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'send' of undefined
+    at _getSSID.then.ssid (/Applications/Skype.app/Contents/Resources/app.asar/SsidStore.js:11:38)
+(node:10259) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 6)
+(node:10259) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'send' of undefined
+    at _getSSID.then.ssid (/Applications/Skype.app/Contents/Resources/app.asar/SsidStore.js:11:38)
+(node:10259) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 7)
+(node:10259) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'send' of undefined
+    at _getSSID.then.ssid (/Applications/Skype.app/Contents/Resources/app.asar/SsidStore.js:11:38)
+(node:10259) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 8)
+(node:10259) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'send' of undefined
+    at _getSSID.then.ssid (/Applications/Skype.app/Contents/Resources/app.asar/SsidStore.js:11:38)
+(node:10259) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 9)
+(node:10259) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'send' of undefined
+    at _getSSID.then.ssid (/Applications/Skype.app/Contents/Resources/app.asar/SsidStore.js:11:38)
+(node:10259) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 10)
+(node:10259) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'send' of undefined
+    at _getSSID.then.ssid (/Applications/Skype.app/Contents/Resources/app.asar/SsidStore.js:11:38)
+(node:10259) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 11)
+(node:10259) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'send' of undefined
+    at _getSSID.then.ssid (/Applications/Skype.app/Contents/Resources/app.asar/SsidStore.js:11:38)
+(node:10259) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 12)
+(node:3015) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'send' of undefined
+    at _getSSID.then.ssid (/Applications/Skype.app/Contents/Resources/app.asar/SsidStore.js:11:38)
+(node:3015) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 1)
+(node:3015) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+(node:3015) UnhandledPromiseRejectionWarning: TypeError: Cannot read property 'send' of undefined
+    at _getSSID.then.ssid (/Applications/Skype.app/Contents/Resources/app.asar/SsidStore.js:11:38)
+(node:3015) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 2)

@@ -1,0 +1,66 @@
+{
+    "list_customer_info": {
+        "list": {
+            "title": "List cus info",
+            "filter" : {
+                "placeholder_name" : "Enter Name",
+                "placeholder_phone" : "Enter Phone",
+                "placeholder_id" : "Enter Contract ",
+                "header_picker" : "Search by"
+            },
+            "filter_option" : {
+                "fullname" : "Customer’s name",
+                "contract" : "Customer’s contract ",
+                "phone" : "Customer’s phone "
+            },
+            "filter_tab" : {
+                "Customer_Info" : "Customer Info",
+                "Unpaid_contract" : "Unpaid contract",
+                "Paid_contract" : "Paid contract"
+            },
+            "list" : {
+                "Status" : "Status",
+                "fullname" : "Customer name",
+                "phone" : "Mobile phone",
+                "address" : "Install address",
+                "Detail" : "Detail",
+                "Contract_No" : "Contract No",
+                "Reg_Code" : "Code"
+            }
+        },
+        "detail": {
+            "title": "Detail customer's info",
+            "view_contract" : "View contract",
+            "cus_info" : "Cus info ",
+            "detail_payment" : "Detail payment",
+            "info_point_group" : "POP info",
+            "pop" : "POP",
+            "customer_information" : "Customer information",
+            "update" : "Update",
+            "Reg_Code" : "Code",
+            "Status" : "Status",
+            "fullname" : "Customer name",
+            "phone" : "Mobile phone",
+            "address" : "Install address ",
+            "detail" : "Detail",
+            "Deposit" : "Deposit",
+            "Contract_No" : "Contract No",
+            "Conection_fee" : "Connection fee",
+            "Vat": "VAT",
+            "Internet": "Internet",
+            "IpAddress": "IP Address",
+            "payment_type" : "Type payment",
+            "Total_amount" : "Total amount",
+            "Prepaid_promotion" : "Prepaid promotion",
+            "gift" : "Gift",
+            "upload": "Upload",
+            "Profile_image" : "Profile image"
+        },
+        "upload_image": {
+            "title": "Upload customer info images",
+            "note": "Upload image (Maximum 5 images)",
+            "warning": "All old photos will be deleted and replaced by new ones",
+            "confirm": "Confirm"
+        }
+    }
+}

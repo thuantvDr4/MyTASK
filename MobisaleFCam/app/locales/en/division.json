@@ -1,0 +1,46 @@
+{
+    "dvs": {
+        "nav": {
+            "titleCrt": "Create Division",
+            "titleList": "Division List",
+            "titleDetail": "Division Detail"
+        },
+        "popup": {
+            "titRequest": "Choose the Request",
+            "titSubRequest": "Choose the Sub Request",
+            "titDepartment": "Choose the Department"
+        },
+        "form": {
+            "headline": {
+                "infCon": "Info Contract",
+                "infDvs": "Info Division",
+                "hlNote": "Note",
+                "hlDescription": "Description"
+            },
+            "input": {
+                "lblRequest": "Request",
+                "plhRequest": "Choose the request",
+                "lblSubRequest": "Sub Request",
+                "plhSubRequest": "Choose the sub request",
+                "lblDepartment": "Department",
+                "plhDepartment": "Choose the department",
+                "lblSubject": "Subject",
+                "lblNote": "Note",
+                "lblDesc": "Description"
+            },
+            "btn": {
+                "create": "Create"
+            }
+        },
+        "item": {
+            "lblStatus": "Status",
+            "lblCusName": "Customer name",
+            "lblPhoNum": "Phone number",
+            "lblDepart": "Department",
+            "lblSubject": "Subject",
+            "lblDateCre": "Date Created",
+            "lblDetail": "Detail",
+            "lblId": "Contract"
+        }
+    }
+}

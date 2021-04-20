@@ -1,0 +1,14 @@
+{
+    "": {
+        "nav": {
+            "titleNav": "Change Status History"
+        },
+        "item": {
+            "lblOldStt": "Old Status",
+            "lblNewStt": "New Status",
+            "lblReason": "Reason",
+            "lblUpdateBy": "Update By",
+            "lblDateCh": "Date Changed"
+        }
+    }
+}

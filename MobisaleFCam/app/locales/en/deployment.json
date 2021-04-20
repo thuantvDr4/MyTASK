@@ -1,0 +1,44 @@
+{
+    "dplment": {
+        "nav": {
+            "titleList": "Deployment List",
+            "titleDetail": "Deployment Detail"
+        },
+        "item": {
+            "lblRtrs": "Return reason",
+            "lblCusName": "Customer name",
+            "lblConNum": "Contract number",
+            "lblPhoNum": "Phone number",
+            "lblInsAdd": "Install address",
+            "lblDept": "Dept",
+            "lblAppo": "Appointment Date",
+            "lblNote": "Note"
+        },
+        "list": {
+            "return_reason" : "Return reason",
+            "customer_name" : "Customer name",
+            "contract_number" : "Contract number",
+            "phone_number" : "Phone number",
+            "install_address" : "Install Address",
+            "dept" : "Dept"
+        },
+        "detail": {
+            
+        },
+        "form": {
+            "headline": {
+                "inf": "Info Deployment",
+                "-": ""
+            },
+            "input": {
+
+            },
+            "btn": {
+                "btnDetail": "Detail",
+                "btnDeploy": "Deploy Appointment",
+                "btnTransfer": "Forward Construction",
+                "btnNotOk": "Suggest Cancel"
+            }
+        }
+    }
+}

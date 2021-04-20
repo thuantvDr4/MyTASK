@@ -1,0 +1,8 @@
+{
+    "modal": {
+        "datePick": {
+            "btnChoose_label": "Choose",
+            "btnCancel_label": "Cancel"
+        }
+    }
+}

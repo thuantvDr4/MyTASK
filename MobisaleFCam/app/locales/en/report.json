@@ -1,0 +1,102 @@
+{
+  "report": {
+    "filter": {
+      "title": "Subscriber Report",
+      "Search_filter": "Search filter",
+      "Status": "Status",
+      "From": "From",
+      "To": "To",
+      "Confirm": "Confirm",
+      "Date_to_invalid": "Input date to Invalid",
+      "Date_from_invalid": "Input date from Invalid",
+      "filter_option": {
+        "Choose_contract_status": "Choose contract status",
+        "All": "All",
+        "Online": "Online",
+        "Not_yet_online": "Not yet online "
+      }
+    },
+    //V2.8- thuantv-06/10/2020
+    "extraService": {
+      "title": "Extra Service Report",
+      "Search_filter": "Search filter",
+      "Status": "Status",
+      "Service": "Service",
+      "From": "From",
+      "To": "To",
+      "Placeholder": "Choose date",
+      "Confirm": "Confirm",
+      "Date_to_invalid": "Input date to Invalid",
+      "Date_from_invalid": "Input date from Invalid",
+      "filter_option": {
+        "Choose_contract_status": "Choose contract status",
+        "Choose_service": "Choose service",
+        "All": "All",
+        "Online": "Online",
+        "Not_yet_online": "Not yet online ",
+      },
+      "form": {
+        "status": "Status",
+        "name": "Customer name",
+        "contract": "Contract number",
+        "createDate": "Create date",
+        "service": "Service",
+        "dept": "Dept",
+        "appointmentDate": "Appointment date "
+      }
+    },
+    "list": {
+      "title": "Subscriber Report",
+      "Status": "Status",
+      "Date": "Date",
+      "Filter": "Filter",
+      "Customer_name": "Customer name",
+      "Contract_No": "Contract No",
+      "Create_contract_date": "Create contract date",
+      "Service_Package": "Service Package",
+      "Dept": "Dept",
+      "Appointment_Date": "Appointment Date"
+    },
+    "typereportchoose": {
+      "title": "Choose report type",
+      "placeholder": "Enter the report type name",
+      "typereports": {
+        "salaryreport": {
+          "title": "Salary Report"
+        },
+        "cancelservicereport": {
+          "title": "Cancel service report (T-)",
+          "list": {
+            "filter_tab": {
+              "tabt1": "T-1",
+              "tabt4": "T-4"
+            },
+            "list": {
+              "Status": "Status",
+              "PaymentStatus": "Payment Status",
+              "fullname": "Customer name",
+              "phone": "Phone number",
+              "contractnumber": "Contract number",
+              "address": "Install address",
+              "date": "Date",
+              "canceldate": "Cancel date",
+              "lastpaymentmonth": "Last payment month",
+              "cancelreason": "Cancel reason"
+            }
+          }
+        },
+        "salarybonusreport": {
+          "title": "Salary bonus report (T+)",
+          "list": {
+            "list": {
+              "contractnumber": "Contract number",
+              "name": "Name",
+              "description": "Description",
+              "date": "Date"
+            }
+          }
+        }
+      }
+    }
+  }
+}

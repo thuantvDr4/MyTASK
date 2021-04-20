@@ -1,0 +1,67 @@
+{
+    "sale_new": {
+        "bookport_address": {
+            "title": "Install Address",
+            "titleTop": "Select Install Address",
+            "form": {
+                "city_label": "City",
+                "city_placeholder": "Choose City",
+                "city_filterText": "Enter City name",
+
+                "district_label": "District",
+                "district_placeholder": "Choose District",
+                "district_filterText": "Enter District name",
+
+                "ward_label": "Ward",
+                "ward_placeholder": "Choose Ward",
+                "ward_filterText": "Enter Ward name",
+
+                "home_type_label": "Home type",
+                "home_type_placeholder": "Choose Home type",
+                "home_type_filterText": "Enter Home type name",
+
+                "street_label": "Street",
+                "street_placeholder": "Choose Street",
+                "street_filterText": "Enter Street name",
+
+                "building_label": "Building",
+                "building_placeholder": "Choose Building",
+                "building_filterText": "Enter Building name",
+
+                "apartment_no_label": "Home number",
+                "apartment_no_placeholder": "Home number",
+
+                "button_next": "Next"
+            }
+        },
+        "bookport_map": {
+            "title": "Survey POP",
+            "point_group" : "POP",
+            "address" : "Address",
+            "location" : "Location",
+            "drag_to_bookport" : "Pin Cus’s Location",
+            "process_auto_bookport" : "Auto book port",
+            "choose_point_group" : "Choose Connection box",
+            "notification": "Notification",
+            "agree" : "Agree",
+            "create_potential_customer": "Create Potential Cus",
+            "book_port": "Book port"
+        },
+        "bookport_cab": {
+            "title": "Survey Infastructure",
+            "info_point_group" : "POP Info",
+            "customer_information" : "Customer Information",
+            "point_group" : "POP",
+            "cab_info" : "Cable Info",
+            "indoor_m" : "Indoor",
+            "outdoor_m" : "Outdoor",
+            "length_indoor" : "Length of indoor cable",
+            "length_outdoor" : "Length of outdoor cable",
+            "book_port": "Bookport",
+            "next": "Next"
+        },
+        "dialog": {
+            "title": "You're still booking port!"
+        }
+    }
+}

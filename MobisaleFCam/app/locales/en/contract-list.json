@@ -1,0 +1,47 @@
+{
+    "ctl": {
+        "nav": {
+            "titleCtl": "List Contract",
+            "titleCrt": "Create Prechecklist"
+        },
+        "search": {
+            "plhname": "Enter Name",
+            "plhcon": "Enter Contract",
+            "plhphone": "Enter Phone",
+            "plhpp": "Enter Passport"
+        },
+        "item": {
+            "lblStatus": "Status",
+            "lblServiceType": "Service type", // V2.8, thuantv-05/10/2020
+            "lblCusName": "Customer name",
+            "lblConNum": "Contract number",
+            "lblPhoNum": "Phone number",
+            "lblInsAdd": "Install address",
+            "lblManaCon": "Manage contract",
+            "lblDataEmpty": "No contract have been searched"
+        },
+        "popup": {
+            "titFilter": "Filter contract by",
+            "titManage": "Manage contract",
+            "titReason": "Choose the Reason"
+        },
+        "form": {
+            "headline": {
+                "infCon": "Info Contract",
+                "infPre": "Info Prechecklist"
+            },
+            "input": {
+                "lblConName": "Name",
+                "plhConName": "Contact name",
+                "lblPhoNum": "Phone",
+                "plhPhoNum": "Contact phone number",
+                "lblReason": "Reason",
+                "plhReason": "Choose the reason",
+                "lblDesc": "Description"
+            },
+            "btn": {
+                "create": "Create"
+            }
+        }
+    }
+}

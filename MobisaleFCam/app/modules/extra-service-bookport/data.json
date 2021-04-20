@@ -1,0 +1,52 @@
+{
+    "ServiceTypeList":[
+       {
+          "Id":1,
+          "Name":"Internet"
+       },
+       {
+          "Id":2,
+          "Name":"Thiết bị"
+       }
+    ],
+    "LocalType":3,
+    "LocalTypeName":"ADSL - HomeAdv - Flat",
+    "PromotionId":1952,
+    "PromotionName":"Prepaid 8M, Offer 0 USD/M - 5M first, Offer 24 USD/M - 3M next",
+    "MonthOfPrepaid":8,
+    "ConnectionFee":1,
+    "ConnectionFeeName":"15",
+    "PaymentMethodPerMonth":1,
+    "PaymentMethodPerMonthName":"Thanh toán tại quầy",
+    "DeviceTotal":220,
+    "ListDevice":[
+       {
+          "Name":"HDBox-RouterTLWR741ND",
+          "Id":"322_142_3",
+          "Price":0,
+          "Number":1,
+          "ChangeNumber":0
+       },
+       {
+          "Name":"HDBox-ONU1GE",
+          "Id":"322_542_2",
+          "Price":10,
+          "Number":2,
+          "ChangeNumber":1
+       },
+       {
+          "Name":"ADSL2Fp801W",
+          "Id":"332_0_1",
+          "Price":20,
+          "Number":4,
+          "ChangeNumber":1
+       },
+       {
+          "Name":"F600W-TL_WDR4300",
+          "Id":"462_282_2",
+          "Price":30,
+          "Number":4,
+          "ChangeNumber":1
+       }
+    ]
+ }

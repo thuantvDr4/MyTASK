@@ -1,0 +1,19 @@
+{
+	"settings": {
+		"nav": {
+			"title": "Settings",
+		},
+		"notification": {
+			"label": "Notifications",
+			"statusOn": "On",
+			"statusOff": "Off",
+			"btn": {
+				"re": "Register",
+				"te": "Test"
+			}
+		},
+		"help": {
+			"label": "Help"
+		}
+	}
+}

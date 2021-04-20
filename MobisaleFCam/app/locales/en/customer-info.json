@@ -1,0 +1,144 @@
+{
+    "customer_info": {
+        "titleNavigation": {
+            "new": "Register",
+            "update": "Update"
+        },
+        "tabbar": {
+            "cus_info": "Customer Information",
+            "type_ser": "Type of service",
+            "total": "Total of cost"
+        },
+        "customer_info": {
+            "cus_info": "Customer Information",
+            "con_info": "Contact Information",
+            "add_info": "Address Information",
+            "form": {
+                "cus_info_type_default": "Personal",
+                "cus_info_type_label": "Type of customer",
+                "cus_info_type_placeholder": "Type of customer",
+                "cus_info_type_headertitle": "Choose type of customer",
+
+                "cus_name_label": "Full name*",
+                "cus_name_placeholder": "Type full name customer",
+
+                "cus_birth_label": "Date of birth",
+                "cus_birth_placeholder": "Choose date",
+
+                "cus_ID_label": "ID certification*",
+                "cus_ID_placeholder": "Type of ID",
+
+                "cus_per_label": "Personality*",
+                "cus_per_placeholder": "Choose type of personality",
+                "cus_per_headertitle": "Choose type of customer",
+
+                "cus_name_personal_label": "Name of company*",
+                "cus_name_personal_placeholder": "Type name of company",
+
+                "cus_delegate_label": "Name of delegate*",
+                "cus_delegate_placeholder": "Type name of delegate",
+
+                "cus_tax_label": "Tax number*",
+                "cus_tax_placeholder": "Type number of tax",
+
+                "cus_aniversary_date_label": "Date of aniversary*",
+                "cus_aniversary_date_placeholder": "Choose date",
+
+                "con_phone_placeholder": "Mobile phone*",
+                "con_phone_other_placeholder": "Mobile phone other",
+                "con_name_placeholder": "Contact name*",
+                "con_name_other_placeholder": "Contact name",
+                "con_mail_placeholder": "Email",
+
+                "telegram_label": "Telegram",
+                "telegram_placeholder": "Telegram",
+
+                "add_placeholder": "Setup address*",
+
+                "note_label": "Note address",
+                "note_placeholder": "Type of note",
+
+                "btnNext_label": "Next",
+                "btnCreate_label": "Create Customer Info",
+                "btnUpdate_label": "Update Customer Info"
+            }
+        },
+        "service_type": {
+            "internet": "Internet",
+            "promotion": "Prepaid promotion",
+            "bookport": "Bookport",
+            "paymentMethodPerMonth": "Payment type",
+            "device": "Equipments",
+            "ipAdd": "IP Address",
+            "form": {
+                "serviceType_label": "Type of service",
+                "serviceType_placeholder": "Choose type of service",
+                "serviceType_filterText": "Type of service",
+
+                "localType_label": "Service type",
+                "localType_placeholder": "Choose service type",
+                "localType_filterText": "Service type",
+
+                "promotion_label": "Promotion",
+                "promotion_placeholder": "Choose promotion",
+                "promotion_filterText": "Promotion",
+                "promotion_seletedText": "Change promotion",
+
+                "connectionFee_label": "Connection fee",
+                "connectionFee_placeholder": "Choose connection fee",
+                "connectionFee_filterText": "Connection fee",
+
+                "paymentMethodPerMonth_label": "Type payment",
+                "paymentMethodPerMonth_placeholder": "Choose type payment",
+                "paymentMethodPerMonth_filterText": "Type payment",
+
+                "listDevice_label": "Equipment",
+                "listDevice_placeholder": "Choose equipment",
+                "listDevice_filterText": "Enter equipment name",
+                "listDevice_unitPrice": "Unit price",
+                "listDevice_amount": "Amount",
+
+                "listIP_IPlabel": "IP Address",
+                "listIP_IPplaceholder": "None",
+                "listIP_IPfilterText": "Enter IP type",
+
+                "listIP_Monthlabel": "Month of prepaid",
+                "listIP_Monthplaceholder": "Choose Month",
+                "listIP_MonthfilterText": "Enter Month type",
+                "listIP_pricelabel": "Price",
+
+                "btnNext": "Next"
+            }
+        },
+        "total": {
+            "gifts": "Gifts",
+            "total_ser": "Total amount services",
+            "form": {
+                "internet_placeholder": "Internet",
+                "device_placeholder": "Device",
+                "equip_placeholder": "Equipment",
+                "staticip_placeholder": "IP Address",
+                "connectionfee_placeholder": "Connection Fee",
+
+                "gifts_label": "Gifts",
+                "gifts_placeholder": "Choose Gifts",
+                "gifts_headertitle": "Choose Gifts",
+
+                "depositefee_label": "Deposit Fee",
+                "depositefee_placeholder": "Choose Deposit Fee",
+                "depositefee_headertitle": "Choose Deposit Fee",
+
+                "vat_label": "VAT",
+                "vat_placeholder": "Choose VAT",
+                "vat_headertitle": "Choose VAT",
+
+                "total_placeholder": "Total",
+                "khmerName_label": "Khmer Name",
+                "khmerName_placeholder": "Type full Khmer name customer"
+            }
+        },
+        "dialog": {
+            "title": "You're still editing!"
+        }
+    }
+}

@@ -1,0 +1,169 @@
+
+Version 2.9, 2021-03-23
+
+- mirgrate androidX
+
+#################################################################################
+Version 2.8.1, 2021-03-10
+
+- them khmer-name trong phiếu Bán them
+
+##################################################################################
+
+Version 2.8, 2020-11-12
+
+-      KHTN - Thêm thông tin Email, Telegram, Birthday vào màn hình tạo, cập nhật KHTN
+-      KHTN - Thêm tính năng recare, birthday, remind thông tin recare, birthday qua notification cho sale
+-      KHTN - Cập nhật báo cáo KHTN trên inside, thêm thông tin recare, birthday
+-      KHTN - Thêm tính năng cập nhật KHTN với những thông tin sai.
+-      Thêm thông tin gói dịch vụ hiện hành trong danh sách kết quả của kiếm kiếm HD bán thêm.
+-      Thêm Note vào HD bán thêm upgrade
+-      Thêm thông tin Total money, Payment menthod trên phiếu thi công của inside
+-      Thêm báo cáo phát triển thuê bao cho bán thêm
+-      Cập nhật báo cáo lương có bổ sung thêm Bán thêm
+
+##################################################################################
+
+Version 2.7, 2020-09-16
+
+-      Bán thêm Internet Upgrade
+-      Bán thêm Equipment, IP thêm thanh toán qua Transfer, Wing
+-      Bán thêm Internet Upgrade thêm thanh toán qua Cash, Transfer, Wing, Collect When Deploy
+-      Thêm Notification tới sale
+
+##################################################################################
+
+Version 2.6, 2020-05-21
+-----------------------
+-      Thanh toán qua Wing (bán mới)
+-      Bán mới IP
+-      Quà tặng bán mới
+-      Bán thêm IP
+
+
+##################################################################################
+
+Version 2.5, 2020-04-17
+-----------------------
+-      Thanh toán chuyển khoản
+
+
+##################################################################################
+
+Version 2.4, 2020-02-14
+-----------------------
+-      Xem notification khi thay đổi Pre-checklist, Division
+-      Bán thêm: Tạo phiếu bán thêm, tích hẹn bán thêm, thanh toán bán thêm, xem chi tiết HĐ bán thêm.
+-      Tích hẹn triển khai: Thêm thông tin POP
+
+
+##################################################################################
+
+Version 2.3, 2019-10-17
+-----------------------
+-      Phân trang cho LogNoti
+-      Thông báo chi tiết khi xét trùng hợp đồng nợ cước
+-      Template SMS
+-      Hợp đồng điện tử
+-      Note (Advisory Results)
+-      Tích hẹn triển khai
+-      Phiếu thi công, Update Contract (Inside)
+-      Tạo Division từ Mobisale
+-      Xem báo cáo Division
+-      Bill history
+-      Change status history
+-      Ghi nhớ đăng nhập
+-      Trang Help (Settings)
+
+
+##################################################################################
+
+Version 2.1, 2019-07-09
+-----------------------
+-      Xử lý phiếu thi công trả về từ MobiNet
+-      Đăng ký và nhận push notification thông qua amazon service
+-      Hiển thị tiếng anh & campuchia ở tất cả các pop-ups thông báo
+-      Thêm Rule check số điện thoại khi lên hợp đồng
+-      Hiển thị thời gian tích hẹn, tổ thi công ở Subscriber Report, chi tiết Paid/Unpaid Contract
+-      Hiển thị tên, số điện thoại Sale trên hợp đồng điện tử
+-      Tự đồng Regen PDF hợp đồng điện tử
+-      Hiển thị vị trí theo loại Port
+-      Tìm kiếm/ tạo mới Khách hàng, KHTN, Pre-Checklist theo Location
+
+##################################################################################
+
+Version 2.0, 2019-02-25
+-----------------------
+1. Tạo hợp đồng từ khách hàng tiềm năng => BookPort luôn (bỏ qua bước nhập địa chỉ) => Trao đổi chi tiết sau
+2. Tìm kiếm khách hàng và tạo pre-checklist cho CC hỗ trợ => Trên Inside đã có Pre-CL (gọi API chỗ TamTTT3) => Trao đổi chi tiết
+3. Show lương Sale, T-, T+ ( show ID T-) => Input từ data của SangTT (FCAM cc template, tương tự giao diện xem lương hiện tại theo từng tháng) => FCAM mô tả chi tiết
+4. Thông báo KH tiềm năng cho sale => Trao đổi với Anh An
+5. Thông báo trả về từ kỹ thuật => Triển khai NOK (MBN báo noti về MBS)
+6. Add hình sale trên mobisale => Up lên MBS
+
+##################################################################################
+
+Version 1.7, 2019-01-17
+-----------------------
+- Fix security
+
+##################################################################################
+
+Version 1.6, 2019-01-10
+-----------------------
+- Fix security
+
+##################################################################################
+
+Version 1.5, 2018-11-12
+-----------------------
+- Bổ sung toạ độ thiết bị lúc bookport lại và tạo phiếu TTKH
+- Cho màu text trạng thái, đồng nhất fontsize ở danh sách ttkh
+- CLKM rút gọn, show more
+- Loading sau khi tạo hợp đồng
+- Gửi tọa đôj thiết bị
+- Bookport lại khi không có hạ tầng
+- Show marker vị trí bookport trước đó
+- Bổ sung param LocalType vào DSTB
+- Hiển thị thông báo của server trả về khi bookport thất bại
+- Ẩn bookport khi nhấn show tập điểm
+- Form thiết bị vỡ layout khi text quá dài
+- Port =0 hiển thị màu đỏ
+
+##################################################################################
+
+Version 1.4, 2018-10-18
+-----------------------
+- MST doanh nghiệp cho phép nhập chữ
+
+##################################################################################
+
+Version 1.3, 2018-10-17
+-----------------------
+- Không hiển thị được google map khi địa chỉ sai
+
+##################################################################################
+
+Version 1.2, 2018-10-12
+-----------------------
+- Loading khi tính tiền bước 3
+- Tap ra ngoài ẩn bàn phím chỗ nhập mét cáp
+- Không tạo được khtn
+- Loading bookport
+- Tích hẹn load múi giờ từ server
+- Canh giữa title
+
+##################################################################################
+
+Version 1.1, 2018-10-10
+-----------------------
+- Tạo KHTN không xóa data cũ
+- nhập mét cáp chỉ cho nhập số
+- Tap ra ngoài ẩn bàn phím ở Màn hình nhập mét cáp
+
+##################################################################################
+
+Version 1.0, 2018-10-09
+-----------------------
+- Build version đầu tiên
+

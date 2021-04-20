@@ -1,0 +1,154 @@
+{
+    "contract": {
+        "create_contract": {
+            "title": "Contract",
+            "cus_info": "Cus info",
+            "contract_info": "Contract info",
+            "cus_name": "Customer name",
+            "ticket_no": "Code",
+            "cus_phone": "Mobile phone",
+            "email": "Email",
+            "address": "Install address",
+            "view_detail": "View detail",
+            "create_sign": "Create signature",
+            "party_a": "Representative of Party A",
+            "sign_and_name": "(Sign and write full name)",
+            "create_contract": "Create contract",
+            "dialog_title_sign": "Sign to confirm the contract",
+            "dialog_re_sign": "Re-sign",
+            "dialog_confirm": "Confirm"
+        },
+
+        "contract_pattern": {
+            "title": "Contract simple"
+        },
+
+        "contract_detail": {
+            "title": "Contract detail",
+            "cus_info": "Cus info",
+            "status": "Status",
+            "cus_name": "Customer name",
+            "contract_no": "Contract No",
+            "cus_phone": "Mobile phone",
+            "address": "Install address",
+            "appointmentDate": "Appointment date",
+            "appointmentDept": "Dept",
+            "appointmentPhone": "Dept phone",
+            "nodata": "No data",
+            "service_list": "Detail payment",
+            "internet": "Internet",
+            "connection_fee": "Connection fee",
+            "deposit_fee": "Deposit fee",
+            "vat": "VAT",
+            "type_payment": "Type payment",
+            "total": "Total",
+            "promotion": "Promotion",
+            "btnPayment": "Payment",
+            "extens_feature": "Extension feature",
+            "fn_appointment": "Deploy Appointment",
+            "fn_update_amount": "Update total amount",
+            "fn_download_pdf": "Download contract file"
+        },
+
+        "invoice_detail": {
+            "title": "Receipt detail",
+            "service_info": "Detail payment",
+            "internet": "Internet",
+            "connection_fee": "Connection fee",
+            "device": "Equipments",
+            "ip": "IP address",
+            "deposit_fee": "Deposit Fee",
+            "vat": "VAT",
+            "total": "Total",
+            "payment": "Payment",
+            "payment_method": "Payment method",
+            "btnConfirm": "Confirm"
+
+        },
+
+        "update_total": {
+            "title" : "Update total amount",
+            "internet": "Internet",
+            "cus_info": "Cus info",
+            "promotion": "Prepaid promotion",
+            "device": "Equipments",
+            "other_fee": "Other fee",
+            "new_total": "New amount",
+            "current_total": "Current amount",
+            "difference": "Difference",
+            "btnCalcAmount": "Calculate amount",
+            "btnUpdate": "Update",
+
+            "form": {
+                "serviceType_label": "Type of service",
+                "serviceType_placeholder": "Choose type of service",
+                "serviceType_filterText": "Type of service",
+
+                "localType_label": "Service type",
+                "localType_placeholder": "Choose service type",
+                "localType_filterText": "Service type",
+
+                "promotion_label": "Promotion",
+                "promotion_placeholder": "Choose promotion",
+                "promotion_filterText": "Promotion",
+                "promotion_seletedText": "Change promotion",
+
+                "connectionFee_label": "Connection fee",
+                "connectionFee_placeholder": "Choose connection fee",
+                "connectionFee_filterText": "Connection fee",
+
+                "listDevice_label": "Equipment",
+                "listDevice_placeholder": "Choose equipment",
+                "listDevice_filterText": "Enter equipment name",
+                "listDevice_unitPrice": "Unit price",
+                "listDevice_amount": "Amount",
+
+                "vat_label": "VAT",
+                "vat_placeholder": "Choose VAT",
+                "vat_filterText": "VAT",
+
+                "deposit_label": "Deposit Fee",
+                "deposit_placeholder": "Choose Deposit Fee",
+                "deposit_filterText": "Deposit Fee"
+            }
+        },
+
+        "DeployAppointment": {
+            "titleNavigation": "Deploy Appointment",
+            "headline": {
+                "partner": "Parner Deployment",
+                "date": "Date Deployment",
+                "capacity": "Capacity Deployment"
+            },
+            "form": {
+                "partner": {
+                    "partnerLabel": "Partner",
+                    "partnerGroupLabel": "Crew Deployment"
+                },
+                "date": {
+                    "dateLabel": "Date",
+                    "datePlaceHolder": "Choose Date",
+                    "dateHeaderTitle": "Date",
+
+                    "hourLabel": "Timezone",
+                    "hourPlaceHolder": "Choose timezone",
+                    "hourHeaderTitle": "Timezone"
+                },
+                "capacity": {
+                    "time": "Time Zone"
+                },
+                "btn": {
+                    "view": "View Deploy Appointment",
+                    "send": "Appointment"
+                }
+            }
+        },
+
+        "Qr_code": {
+            "title": "Qr Code",
+            "btnConfirm": "Done",
+            "back": "Please complete this payment step"
+        }
+        
+    }
+}

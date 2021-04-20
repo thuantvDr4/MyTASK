@@ -1,0 +1,33 @@
+{
+    "prcl": {
+        "nav": {
+            "titlePrcl": "View Prechecklist",
+            "titlePrclDe": "Prechecklist Details",
+            "titleFilter": "Filter Prechecklist"
+        },
+        "item": {
+            "lblStatus": "Status",
+            "lblCusName": "Customer name",
+            "lblConNum": "Contract number",
+            "lblPhoNum": "Phone number",
+            "lblInsAdd": "Install address",
+            "lblSee": "See details"
+        },
+        "form": {
+            "headline": {
+                "coInf": "Contract infomation",
+                "desc": "Description",
+                "filter": "Filter by"
+            },
+            "input": {
+                "btnPending": "Pending",
+                "btnComplete": "Complete",
+                "btnFrom": "From",
+                "btnTo": "To"
+            },
+            "btn": {
+                "filter": "Filter"
+            }
+        },
+    }
+}

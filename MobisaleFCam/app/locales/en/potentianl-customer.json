@@ -1,0 +1,203 @@
+{
+    "potentianl_customer": {
+        "list_customers": {
+            "title": "Potential customer",
+            "filter" : {
+                "placeholder" : "Enter customer’s name ",
+                "header_picker" : "Search by"
+            },
+            "menu" :{
+                "recare_list": "Recare List",
+                "birthday_list": "Birthday List"
+            },
+            "filter_option" : {
+                "fullname" : "Enter Name",
+                "phone" : "Enter Phone",
+                "address" : "Enter Address",
+                "mylist": "My List",
+                "system": "System"
+            },
+            "list" : {
+                "name" : "Customer name",
+                "phone" : "Mobile phone",
+                "address" : "Address",
+                "detail" : "Detail"
+            }
+        },
+        "add_customers": {
+            "title": "Potential customer  ",
+            "titleTop": "Cus's info",
+            "form" : {
+                "fullname_lable" : "Customer name",
+                "fullname_placehoder" : "Customer name",
+
+                "birthday_label" : "Date of birth",
+                "birthday_placeholder" : "Choose date",
+
+                "phone_lable" : "Mobile phone",
+                "phone_placehoder" : "Mobile phone",
+
+                "telegram_label" : "Telegram",
+                "telegram_placeholder" : "Telegram number",
+
+                "email_label" : "Email",
+                "email_placeholder" : "Email",
+
+                "city_label": "City",
+                "city_placeholder": "Choose City",
+                "city_filterText": "Enter City name",
+
+                "district_label": "District",
+                "district_placeholder": "Choose District",
+                "district_filterText": "Enter District name",
+
+                "ward_label": "Ward",
+                "ward_placeholder": "Choose ward",
+                "ward_filterText": "Enter Ward name",
+
+                "home_type_label": "Home type",
+                "home_type_placeholder": "Choose Home type",
+                "home_type_filterText": "Enter Home type name",
+
+                "street_label": "Street",
+                "street_placeholder": "Choose Street",
+                "street_filterText": "Enter Street name",
+
+                "building_label": "Building",
+                "building_placeholder": "Choose Building",
+                "building_filterText": "Enter Building name",
+
+                "house_number_label" : "House number",
+                "house_number_placeholder" : "House number",
+
+                "note_label" : "Note",
+                "note_placeholder" : "Note",
+
+                "confirm" : "Confirm"
+            }
+        },
+        "detail_po": {
+            "title": "Potential customer detail",
+            "form" : {
+                "headline": {
+                    "info": "Info Potential Customer",
+                    "note": "Note"
+                },
+                "btnCall": "Call",
+                "btnCreate": "Create Customer Info",
+                "btnUpdate" : "Update"
+            },
+            "menu": {
+                "updateInfo": "Update Infomation",
+                "advisoryResults": "Advisory Results",
+                "reCare" : "Recare"
+            }
+        },
+        "advisory": {
+            "title": "Advisory Results",
+            "form" : {
+                "headline": {
+                    "info": "Update Advisory Results",
+                    "list": "Advisory Results"
+                },
+                "pickerlabel": "Results",
+                "pickerPlh": "Choose results",
+                "pickerTitle": "Enter results",
+
+                "resultsNo": "No",
+                "results": "Results",
+                "resultsCallDate": "Call Date",
+                "note": "Note",
+                "btn": "Update"
+            }
+        },
+
+        // V2.8
+        "reCare":{
+            "title": "Recare",
+            "headline" : "Update Recare Information",
+            "form" : {
+                "recareDate_label" : "Recare Date",
+                "recareDate_placeholder" : "Choose date",
+                "list":{
+                    "status": "No",
+                    "recare_date": "Recare Date",
+                    "delete": "Delete"
+                },
+
+                "results": "Recare List",
+                "note": "Note",
+                "btn": "Update"
+            }
+        },
+
+        //V2.8
+        "reCare_list": {
+            "title": "Recare List",
+            "label_result": "CHOOSE TIME TO VIEW:",
+
+            "form" : {
+                "headline": {
+                    "info": "Update Advisory Results",
+                    "list": "Advisory Results"
+                },
+                "pickerlabel": "Results",
+                "pickerPlh": "Choose results",
+                "pickerTitle": "Enter results",
+
+                "resultsNo": "No",
+                "results": "Results",
+                "resultsCallDate": "Call Date",
+                "note": "Note",
+                "btn": "Update",
+
+                //V2.8
+                "from_date_label": "From",
+                "from_date_placeholder": "Choose date",
+                "to_date_label": "To",
+                "to_date_placeholder": "Choose date",
+
+                "cusName" : "Customer name",
+                "phone" : "Mobile phone",
+                "address" : "Address ",
+                "detail" : "Detail"
+            }
+        },
+
+        //V2.8
+        "birthday_list": {
+            "title": "Birthday List",
+            "label_result": "CHOOSE TIME TO VIEW:",
+            "noti_err":{
+                "to_date_required" : "The appointment date must not be less than the start date"
+            },
+
+            "form" : {
+                "headline": {
+                    "info": "Update Advisory Results",
+                    "list": "Advisory Results"
+                },
+                "pickerlabel": "Results",
+                "pickerPlh": "Choose results",
+                "pickerTitle": "Enter results",
+
+                "resultsNo": "No",
+                "results": "Results",
+                "resultsCallDate": "Call Date",
+                "note": "Note",
+                "btn": "Update",
+
+                //V2.8
+                "from_date_label": "From",
+                "from_date_placeholder": "Choose date",
+                "to_date_label": "To",
+                "to_date_placeholder": "Choose date",
+
+                "cusName" : "Customer name",
+                "phone" : "Mobile phone",
+                "address" : "Address ",
+                "detail" : "Detail"
+            }
+        }
+    }
+}

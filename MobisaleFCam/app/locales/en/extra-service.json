@@ -1,0 +1,154 @@
+{
+	"extra_service": {
+		"list_extra_service": {
+			"title": "Extra Service List",
+			"filter": {
+				"placeholder": "placeholder aaaaaaaa",
+				"header_picker": "Search by"
+			},
+			"filter_option": {
+				"fullname": "Enter Name",
+				"id": "Enter Contract",
+				"phone": "Enter Phone",
+				"address": "Enter Address",
+				"unpaid": "Unpaid Contract",
+				"paid": "Paid Contract"
+			},
+			"filter_city": {
+				"city_label": "City",
+				"city_placeholder": "Choose City",
+				"city_filterText": "Enter City name"
+			},
+			"list": {
+				"status": "Status",
+				"type": "Service type",
+				"name": "Customer name",
+				"contract": "Contract number",
+				"reg_code": "Registration code",
+				"address": "Install address",
+				"phone": "Phone number",
+				"detail": "Detail"
+			}
+		},
+
+		"contract_list": {
+			"nav": {
+				"titleCtl": "Contract List"
+			},
+			"action": {
+				"create_cus_inf": "Create Customer Info"
+			}
+		},
+
+		"extra_service_info": {
+			"titleNavigation": {
+				"new": "Register",
+				"update": "Update"
+			},
+			"customer_info": {
+				"cus_info": "Customer Information",
+				"lb_fullname": "Full name*",
+				"plh_fullname": "Type full name customer",
+				"lb_contractNum": "Contract number",
+				"plh_contractNum": "Type of contract number",
+				"lb_mobilePhone": "Mobile phone",
+				"plh_mobilePhone": "Type mobile phone",
+				"lb_email": "Email",
+				"plh_email": "Type email",
+				"lb_setupAddress": "Setup address*",
+				"plh_setupAddress": "Type setup address",
+				"lb_contactName": "Contact name*",
+				"plh_contactName": "Type contact name",
+				"lb_contactPhone": "Contact phone",
+				"plh_contactPhone": "Type contact phone"
+			},
+			"type_of_service": {
+				"serType": {
+					"block_title": "Services Type",
+					"label": "Services",
+					"placeholder": "Choose Services"
+				},
+				"infomation": {
+					"block_title": "Infomation",
+					"lb_old_equi": "Old equipment",
+					"equi_return": "Return",
+					"equi_notReturn": "Not return",
+					"lb_oldMac": "Old MAC",
+					"lb_newPackage": "New package",
+					"pl_newPackage": "Choose package",
+					"ft_newPackage": "Package",
+					"lb_newPromotion": "New promotion",
+					"lb_newEquipment": "New equipment",
+					"lb_oldMoney": "Add old months money",
+					"pl_oldMoney": "Add money",
+					"btn_bookport": "Bookport",
+					"lb_note": "Note"
+				},
+				"equipments": {
+					"block_title": "Equipments",
+					"lb_newEqui": "New equipment",
+					"plh_newEqui": "Choose equipment",
+					"lb_discount": "Discount",
+					"plh_discount": "Choose discount",
+					"add_equi": "Add equipment",
+					"lb_note": "Note"
+				}
+			},
+			"total_of_cost": {
+				"total_amount": {
+					"block_title": "Total amount services",
+					"lb_equi": "Equipment",
+					"lb_ip": "IP address",
+					"lb_total": "Total",
+					"lb_internet": "Internet",
+					"lb_oldMoney": "Old months money",
+					"lb_confee": "Connection fee",
+					"lb_vat": "VAT"
+				}
+			}
+		},
+
+		"contract_detail": {
+			"title": "Contract detail",
+
+			"cus_info": "Customer infomation",
+			"service_list": "Detail payment",
+			"title_update": "Update",
+
+			"status": "Status",
+			"cus_name": "Customer name",
+			"contract_no": "Contract number",
+			"regis_code": "Registration code",
+			"cus_phone": "Phone number",
+			"address": "Install address",
+			"appointmentDate": "Appointment date",
+			"appointmentDept": "Dept",
+			"appointmentPhone": "Dept phone",
+			"deploymentStatus": "Deployment status",
+
+			"equipment_info": "Equipment info",
+			"equipment_name": "Equipment name",
+			"discount": "Discount",
+			"equipments": "Equipments",
+			"ip": "IP Address",
+
+			"internet": "Internet",
+			"internet_upgrade": "Internet upgrade",
+			"old_month": "Old months money",
+			"connection_fee": "Connection fee",
+			"deposit_fee": "Deposit fee",
+			"vat": "VAT",
+			"promotion": "Promotion",
+
+			"type_payment": "Type payment",
+			"total": "Total",
+
+			"btnPayment": "Payment",
+			"nodata": "No data",
+			"extens_feature": "Extension feature",
+			"fn_appointment": "Deploy Appointment",
+			"fn_update_amount": "Update total amount",
+			"fn_download_pdf": "Download contract file"
+		}
+	}
+}

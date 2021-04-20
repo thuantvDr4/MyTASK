@@ -1,0 +1,1 @@
+export const prcl_route_dt = 'PrechecklistDetails';

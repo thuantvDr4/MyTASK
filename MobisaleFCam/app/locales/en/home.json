@@ -1,0 +1,67 @@
+{
+  "home": {
+    "home_screen": {
+      "Salesman": "Salesman",
+      "personal_information": "Sale's info",
+      "full_name": "Full name",
+      "region": "Region",
+      "phone_number": "Phone number",
+      "email": "Email",
+      "prominent_features": "Prominent Features",
+      "list_customer_information": "CUS's info",
+      "search": "Search",
+      "potential_customer": "Potential Cus",
+      "report": "Report",
+      "con_ls": "List Contract",
+      "Exit_Application": "Notification",
+      "extra_service": "Extra Service"
+    },
+    "main_menu": {
+      "salesman": "Salesman",
+      "creat_cus_info": "Create Cus Info",
+      "contract_list": "List Contract ",
+      "precheck_list": "View Prechecklist",
+      "division": "View Division",
+      "search": "Search",
+      "potential_customer": "Potential Cus",
+      "report": "Report",
+      "notifications": "Notifications",
+      "change_password": "Change password",
+      "change_action": "Change",
+      "language": "Language",
+      "hepl": "Help",
+      "deployment": "Deployment",
+      "settings": "Settings",
+      "extra_service": "Extra Service"
+    },
+    "change_password": {
+      "title": "Change password",
+      "current_pass": "Current password",
+      "current_pass_placeholder": "Enter current password",
+      "new_pass": "New password",
+      "new_pass_placeholder": "Enter new password",
+      "re_new_pass": "Confirm new password",
+      "re_new_pass_placeholder": "Re-enter new password",
+      "btn_confirm": "Confirm",
+      "noti": {
+        "change_success": "Change password successful",
+        "current_pass_err": "Current password is required",
+        "new_pass_err": "New password must be at least 6 characters long",
+        "re_new_pass_err": "Confirm new password is required",
+        "re_new_pass_not_match": "Confirm new password not match"
+      }
+    },
+    "detail_avatar": {
+      "title": "Avatar",
+      "label_button_change_avatar": "Change Avatar"
+    }
+  },
+  "settings": {
+    "nav": {
+      "titleNav": "Settings"
+    }
+  },
+  "noti": {
+    "navTitle": "Notification"
+  }
+}

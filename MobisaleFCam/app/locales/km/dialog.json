@@ -1,0 +1,11 @@
+{
+    "dialog": {
+        "title": "Notification",
+        "skip": "Cancel",
+        "agree": "Got it",
+        "confirm": "Confirm",
+        "request_rule": "You need to grant the necessary permissions to run the application.",
+        "lost_internet": "Unable to connect to the internet, please check again.",
+        "error_connection": "Can't connect to server, please try again later.",
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "all": {
+        "data": {
+            "noData": "No data has been searched",
+            "noDataContractList": "No contract has been searched",
+            "noDataPotentialCus": "No potential customer \nhas been searched",
+            "noDataExtraList": "No contract has been searched",
+            "noDataNotificationList": "Not available notification received",
+            "noDataNormal": "No data has been found",
+            "future": "The feature will be built in next version"
+        }
+    }
+}
