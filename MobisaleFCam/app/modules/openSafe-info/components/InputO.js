@@ -23,7 +23,7 @@ export default class InputO extends Component {
 		};
 	}
 
-	setValid(isValid) {
+	setValid =(isValid)=> {
 		this.setState({
 			isValid: isValid
 		});
@@ -35,7 +35,7 @@ export default class InputO extends Component {
 			<View style={[styles.field, validStyle.validStyleBorder]}>
 				<Text style={[styles.plfake, ols.fs12]}>{this.props.label}</Text>
 				<TextInput
-					{...this.props} 
+					{...this.props}
 					style={[this.props.style, validStyle.validStyleText, {}]}
 					placeholder={this.props.placeholder}
 					placeholderTextColor={

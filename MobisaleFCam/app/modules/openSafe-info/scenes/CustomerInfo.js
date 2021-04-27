@@ -69,7 +69,7 @@ class CustomerInfo extends React.Component {
         // LOAD API FIRST
         this.props.navigation.addListener('willFocus', () => {
             // GET API
-            // this._getNationly();
+            this._getNationly();
         });
     }
 
@@ -78,7 +78,7 @@ class CustomerInfo extends React.Component {
      * @param
      * @private
      */
-    _onChange(key, text) {
+    _onChange =(key, text)=> {
         let state = this.state;
         state.data[key] = text;
         this.setState(state);
@@ -88,7 +88,7 @@ class CustomerInfo extends React.Component {
         }
     }
 
-    _convertPhone(key) {
+    _convertPhone =(key)=> {
         // console.log(key);
         // console.log(this.state.data);
 
@@ -123,11 +123,11 @@ class CustomerInfo extends React.Component {
      * @param
      * @private
      */
-    _onChangeSel(value, kind) {
+    _onChangeSel =(value, kind)=> {
         switch (kind) {
 
             case 'lkh':
-                if (this.state.data.CusTypeDetail != value.Id) {
+                if (this.state.data.CusTypeDetail !== value.Id) {
                     this.setState({
                         data: {
                             ...this.state.data,
@@ -184,7 +184,7 @@ class CustomerInfo extends React.Component {
      * @param dataTemp: Step Page
      * @private
      */
-    _onNextStep() {
+    _onNextStep =()=> {
         const {data, dataTemp} = this.state;
         if (! this.isValidData()) {
             return;
@@ -208,12 +208,12 @@ class CustomerInfo extends React.Component {
     /**
      * VALIDATE FORM
      */
-    isValidData() {
+    isValidData =()=> {
         const { data } = this.state;
         let errorList = [];
 
         // Check loai khach hang
-        if (data.CusTypeDetail == null) {
+        if (data.CusTypeDetail === null) {
             this.refs['CusTypeDetailType'].setValid(false);
 
             errorList.push({
@@ -225,9 +225,9 @@ class CustomerInfo extends React.Component {
         }
 
         // Check Theo form
-        if (data.CusTypeDetail == 12) {
+        if (data.CusTypeDetail === 12) {
             // Check ca nhan
-            if (data.FullName == "" || ( convertWhiteSpace(data.FullName) === "")) {
+            if (data.FullName === "" || ( convertWhiteSpace(data.FullName) === "")) {
                 this.refs['formPersonalType'].setValidForm();
 
                 errorList.push({
@@ -239,7 +239,7 @@ class CustomerInfo extends React.Component {
             }
 
             // Check Ngày Sinh
-            if (data.Birthday == "") {
+            if (data.Birthday === "") {
                 this.refs['formPersonalType'].setValidForm();
 
                 errorList.push({
@@ -251,7 +251,7 @@ class CustomerInfo extends React.Component {
             }
 
             // Check CMND
-            if (data.Passport == "" || ( convertWhiteSpace(data.Passport) === "") ) {
+            if (data.Passport === "" || ( convertWhiteSpace(data.Passport) === "") ) {
                 this.refs['formPersonalType'].setValidForm();
 
                 errorList.push({
@@ -263,7 +263,7 @@ class CustomerInfo extends React.Component {
             }
         } else {
             // Check ten doanh nghiep
-            if (data.FullName == "" || ( convertWhiteSpace(data.FullName) === "")) {
+            if (data.FullName === "" || ( convertWhiteSpace(data.FullName) === "")) {
                 this.refs['formBusinessType'].setValidForm();
 
                 errorList.push({
@@ -275,7 +275,7 @@ class CustomerInfo extends React.Component {
             }
 
             // Check dai dien doanh nghiep
-            if (data.Representive == "" || ( convertWhiteSpace(data.Representive) === "")) {
+            if (data.Representive === "" || ( convertWhiteSpace(data.Representive) === "")) {
                 this.refs['formBusinessType'].setValidForm();
 
                 errorList.push({
@@ -287,7 +287,7 @@ class CustomerInfo extends React.Component {
             }
 
             // Check mst
-            if (data.TaxCode == "" || ( convertWhiteSpace( data.TaxCode) === "")) {
+            if (data.TaxCode === "" || ( convertWhiteSpace( data.TaxCode) === "")) {
                 this.refs['formBusinessType'].setValidForm();
 
                 errorList.push({
@@ -299,7 +299,7 @@ class CustomerInfo extends React.Component {
             }
 
             // Check ngay thanh lap
-            if (data.Birthday == "") {
+            if (data.Birthday === "") {
                 this.refs['formBusinessType'].setValidForm();
 
                 errorList.push({
@@ -312,7 +312,7 @@ class CustomerInfo extends React.Component {
         }
 
         // Check quoc tich
-        if (data.Nationality == null) {
+        if (data.Nationality === null) {
             this.refs['NationalType'].setValid(false);
 
             errorList.push({
@@ -324,7 +324,7 @@ class CustomerInfo extends React.Component {
         }
 
         // Phone 1
-        if (data.Phone1 == "" || (convertWhiteSpace(data.Phone1) === "")) {
+        if (data.Phone1 === "" || (convertWhiteSpace(data.Phone1) === "")) {
             this.refs['Phone1Type'].setValid(false);
 
             errorList.push({
@@ -336,7 +336,7 @@ class CustomerInfo extends React.Component {
         }
 
         // Contact 1
-        if (data.Contact1 == "" || (convertWhiteSpace(data.Contact1) === "")) {
+        if (data.Contact1 === "" || (convertWhiteSpace(data.Contact1) === "")) {
             this.refs['Contact1Type'].setValid(false);
 
             errorList.push({
@@ -347,23 +347,9 @@ class CustomerInfo extends React.Component {
             this.refs['Contact1Type'].setValid(true);
         }
 
-        // Phone 2 cho Business
-        if (data.CusTypeDetail != 12) {
-            // Phone 2
-            if (data.Phone2 == "" || (convertWhiteSpace(data.Phone2) === "")) {
-                this.refs['Phone2Type'].setValid(false);
-
-                errorList.push({
-                    name: 'Phone2Type',
-                    msg: strings('dl.customer_info.customer_info.err.Phone2Type')
-                });
-            } else {
-                this.refs['Phone2Type'].setValid(true);
-            }
-        }
 
         // Email
-        if (data.Email != "") {
+        if (data.Email !== "") {
             let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
 
             if (reg.test(data.Email) === false) {
@@ -381,7 +367,7 @@ class CustomerInfo extends React.Component {
             this.refs['EmailType'].setValid(true);
         }
 
-        if (errorList.length == 0) {
+        if (errorList.length === 0) {
             return true;
         }
 
@@ -392,12 +378,12 @@ class CustomerInfo extends React.Component {
     /**
      * LIVE VALIDATE FORM
      */
-    _liveCheck(key, text) {
+    _liveCheck =(key, text)=> {
         const data = this.state.data;
 
         switch (key) {
             case 'FullName':
-                if (data.CusTypeDetail == 12) {
+                if (data.CusTypeDetail === 12) {
                     this.refs['formPersonalType']._liveCheck(key);
                 } else {
                     this.refs['formBusinessType']._liveCheck(key);
@@ -429,7 +415,7 @@ class CustomerInfo extends React.Component {
                 break;
 
             case 'Email':
-                if (data.Email != "") {
+                if (data.Email !== "") {
                     this.refs['EmailType'].setValid(true);
                 }
                 break;
@@ -439,12 +425,15 @@ class CustomerInfo extends React.Component {
         }
     }
 
+
+
+
     /**
      * GET API LOAI KHACH HANG
      * @param
      * @private
      */
-    _getCustomerType() {
+    _getCustomerType =()=> {
 
         // goi API generation
         api.GetCustomerType({}, (success, result, msg) => {
@@ -475,7 +464,7 @@ class CustomerInfo extends React.Component {
      * @param
      * @private
      */
-    _getNationly() {
+    _getNationly =()=> {
         this._loading(true);
 
         // goi API generation
@@ -486,7 +475,7 @@ class CustomerInfo extends React.Component {
                 this.setState({
                     dataAPI: {
                         ...this.state.dataAPI,
-                        apiNationaly: result,
+                        apiNationaly: result
                     }
                 });
 
@@ -528,21 +517,19 @@ class CustomerInfo extends React.Component {
         const opjNationCus = Object.values(this.state.dataAPI.apiNationaly);
         // const opjTypeCus1 = [{ id: 1, kind: "Personal" }, { id: 2, kind: "Business" }];
 
-        // console.log(this.state.data);
-        // console.log(FormDataUpdated);
 
         const renderForm = (this.state.dataTemp.changeForm && this.state.data.CusTypeDetail !== 10) ?
             <FormPersonalInfo
                 ref="formPersonalType"
                 data={this.state.data}
-                onChangeText={this._onChange.bind(this)}
-                onChangeFromChild = {this._onChangeFromChild.bind(this)}
+                onChangeText={this._onChange}
+                onChangeFromChild = {this._onChangeFromChild}
             /> :
             <FormBussinessInfo
                 ref="formBusinessType"
                 data={this.state.data}
-                onChangeText={this._onChange.bind(this)}
-                onChangeFromChild = {this._onChangeFromChild.bind(this)}
+                onChangeText={this._onChange}
+                onChangeFromChild = {this._onChangeFromChild}
             />;
 
         return (

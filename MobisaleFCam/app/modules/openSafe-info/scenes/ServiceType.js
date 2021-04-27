@@ -482,7 +482,9 @@ class ServiceType extends Component
 }
 
 export default connect((state) => {
-    const RegistrationObj = state.saleNewReducer.RegistrationObj;
+    const RegistrationObj = state.saleNewReducer.openSafeObj;
+
+    console.log('openSafe-->reducer--', RegistrationObj);
 
     return {
         SaleId: state.authReducer.userInfo.SaleId,

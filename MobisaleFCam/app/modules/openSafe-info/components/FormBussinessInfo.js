@@ -4,7 +4,7 @@ import {strings} from 'locales/i18n';
 
 import { convertPhone, convertWhiteSpace } from "app-libs/helpers/regex";
 
-// Component    
+// Component
 import InputO from './InputO';
 import DateTimePicker from './DateTimePicker';
 
@@ -23,15 +23,14 @@ class FormBussinessInfo extends Component
             data: this.props.data,
         };
 
-        this._changeValue = this._changeValue.bind(this);
     }
 
     /**
      * TEXT CHANGE
-     * @param 
+     * @param
      * @private
      */
-    _changeValue(name, value) {
+    _changeValue =(name, value)=> {
         let data = this.state.data;
         data[name] = value;
 
@@ -42,7 +41,7 @@ class FormBussinessInfo extends Component
         });
     }
 
-    _onOut(key) {
+    _onOut =(key)=> {
         let state = this.state;
 
         if (key === 'FullName' && convertWhiteSpace(state.data.FullName) === '' ) {
@@ -68,11 +67,11 @@ class FormBussinessInfo extends Component
 
     /**
      * SELECT CHANGE
-     * @param 
+     * @param
      * @private
      */
-    _onChange(key, text) {
-        var state = this.state;
+    _onChange =(key, text)=> {
+        let state = this.state;
         state.data[key] = text;
         this.setState({
             state
@@ -82,32 +81,32 @@ class FormBussinessInfo extends Component
     }
 
 
-    setValidForm() {
+    setValidForm =()=> {
         const {data} = this.state;
-        
+
         // FULLNAME
-        if (data.FullName == "" || (data.FullName.replace(/^\s\s*/, '').replace(/\s+$/, '') === "")) {
+        if (data.FullName === "" || (data.FullName.replace(/^\s\s*/, '').replace(/\s+$/, '') === "")) {
             this.refs['FullNameType'].setValid(false);
         } else {
             this.refs['FullNameType'].setValid(true);
         }
 
         // DAI DIEN
-        if (data.Representive == "" || (data.Representive.replace(/^\s\s*/, '').replace(/\s+$/, '') === "")) {
+        if (data.Representive === "" || (data.Representive.replace(/^\s\s*/, '').replace(/\s+$/, '') === "")) {
             this.refs['RepresentiveType'].setValid(false);
         } else {
             this.refs['RepresentiveType'].setValid(true);
         }
 
         // TAX
-        if (data.TaxCode == "" || (data.TaxCode.replace(/^\s\s*/, '').replace(/\s+$/, '') === "")) {
+        if (data.TaxCode === "" || (data.TaxCode.replace(/^\s\s*/, '').replace(/\s+$/, '') === "")) {
             this.refs['TaxCodeType'].setValid(false);
         } else {
             this.refs['TaxCodeType'].setValid(true);
         }
 
         // ANIVERSARY
-        if (data.Birthday == "") {
+        if (data.Birthday === "") {
             this.refs['BirthdayType'].setValid(false);
         } else {
             this.refs['BirthdayType'].setValid(true);
@@ -118,12 +117,12 @@ class FormBussinessInfo extends Component
     /**
      * LIVE VALIDATE FORM
      */
-    _liveCheck(key, text) {
+    _liveCheck =(key, text)=> {
         const data = this.state.data;
 
         switch (key) {
             case 'FullName':
-                if (data.FullName == "" || (data.FullName.replace(/^\s\s*/, '').replace(/\s+$/, '') === "")) {
+                if (data.FullName === "" || (data.FullName.replace(/^\s\s*/, '').replace(/\s+$/, '') === "")) {
                     this.refs['FullNameType'].setValid(false);
                 } else {
                     this.refs['FullNameType'].setValid(true);
@@ -131,7 +130,7 @@ class FormBussinessInfo extends Component
                 break;
 
             case 'Representive':
-                if (data.Representive == "" || (data.Representive.replace(/^\s\s*/, '').replace(/\s+$/, '') === "")) {
+                if (data.Representive === "" || (data.Representive.replace(/^\s\s*/, '').replace(/\s+$/, '') === "")) {
                     this.refs['RepresentiveType'].setValid(false);
                 } else {
                     this.refs['RepresentiveType'].setValid(true);
@@ -139,7 +138,7 @@ class FormBussinessInfo extends Component
                 break;
 
             case 'TaxCode':
-                if (data.TaxCode == "" || (data.TaxCode.replace(/^\s\s*/, '').replace(/\s+$/, '') === "")) {
+                if (data.TaxCode === "" || (data.TaxCode.replace(/^\s\s*/, '').replace(/\s+$/, '') === "")) {
                     this.refs['TaxCodeType'].setValid(false);
                 } else {
                     this.refs['TaxCodeType'].setValid(true);
@@ -226,7 +225,7 @@ class FormBussinessInfo extends Component
                 </View>
             </View>
 
-            
+
         );
     }
 }

@@ -124,6 +124,18 @@ const saleNewReducer = (state = initialState, action) => {
             };
             break;
 
+        // cập nhật thong tin openSafe-Registation
+        case t.UPDATE_OPENSAFE_REGISTRATION:
+            state = {
+                ...state,
+                openSafeObj: {
+                    ...state.openSafeObj,
+                    ...action.data
+                },
+            };
+            break;
+
+
         // day thong tin da co tu man hinh chi tiet TTKH vao registation - port map
         case t.PUSH_DATA_INFO_REGISTRATION:
             state = {

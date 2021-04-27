@@ -19,3 +19,5 @@ export const CHANGE_TYPE_NOTIFY= 'sale-new/CHANGE_TYPE_NOTIFY';
 export const ALLOW_BOOKPORT= 'sale-new/ALLOW_BOOKPORT';
 export const REGION_BOOK_PORT= 'sale-new/REGION_BOOK_PORT';
 export const IS_MAP_READY  = 'sale-new/IS_MAP_READY';
+
+export const UPDATE_OPENSAFE_REGISTRATION  = 'sale-new/update_openSafe_registration';

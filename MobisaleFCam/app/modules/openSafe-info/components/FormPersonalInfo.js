@@ -4,7 +4,7 @@ import {strings} from 'locales/i18n';
 
 import { convertPhone, convertWhiteSpace } from "app-libs/helpers/regex";
 
-// Component    
+// Component
 import InputO from './InputO';
 import DateTimePicker from './DateTimePicker';
 
@@ -23,15 +23,14 @@ export default class FormPersonalInfo extends Component
             data: this.props.data,
         };
 
-        this._changeValue = this._changeValue.bind(this);
     }
 
     /**
      * TEXT CHANGE
-     * @param 
+     * @param
      * @private
      */
-    _changeValue(name, value) {
+    _changeValue =(name, value)=> {
         let data = this.state.data;
         data[name] = value;
 
@@ -45,10 +44,10 @@ export default class FormPersonalInfo extends Component
 
     /**
      * SELECT CHANGE
-     * @param 
+     * @param
      * @private
      */
-    _onChange(key, text) {
+    _onChange =(key, text)=> {
         var state = this.state;
         state.data[key] = text;
         this.setState({
@@ -58,7 +57,7 @@ export default class FormPersonalInfo extends Component
         });
     }
 
-    _onOut(key) {
+    _onOut =(key)=> {
         let state = this.state;
 
         if (key === 'FullName' && convertWhiteSpace(state.data.FullName) === '' ) {
@@ -78,25 +77,25 @@ export default class FormPersonalInfo extends Component
     }
 
 
-    setValidForm() {
+    setValidForm =()=> {
         const {data} = this.state;
-        
+
         // FULLNAME
-        if (data.FullName == "" || (data.FullName.replace(/^\s\s*/, '').replace(/\s+$/, '') === "")) {
+        if (data.FullName === "" || (data.FullName.replace(/^\s\s*/, '').replace(/\s+$/, '') === "")) {
             this.refs['FullNameType'].setValid(false);
         } else {
             this.refs['FullNameType'].setValid(true);
         }
 
         // BIRTHDAY
-        if (data.Birthday == "") {
+        if (data.Birthday === "") {
             this.refs['BirthdayType'].setValid(false);
         } else {
             this.refs['BirthdayType'].setValid(true);
         }
 
         // PASSPORT
-        if (data.Passport == "" || (data.Passport.replace(/^\s\s*/, '').replace(/\s+$/, '') === "")) {
+        if (data.Passport === "" || (data.Passport.replace(/^\s\s*/, '').replace(/\s+$/, '') === "")) {
             this.refs['PassportType'].setValid(false);
         } else {
             this.refs['PassportType'].setValid(true);
@@ -107,12 +106,12 @@ export default class FormPersonalInfo extends Component
     /**
      * LIVE VALIDATE FORM
      */
-    _liveCheck(key, text) {
+    _liveCheck =(key, text)=> {
         const data = this.state.data;
 
         switch (key) {
             case 'FullName':
-                if (data.FullName == "" || (data.FullName.replace(/^\s\s*/, '').replace(/\s+$/, '') === "")) {
+                if (data.FullName === "" || (data.FullName.replace(/^\s\s*/, '').replace(/\s+$/, '') === "")) {
                     this.refs['FullNameType'].setValid(false);
                 } else {
                     this.refs['FullNameType'].setValid(true);
@@ -120,7 +119,7 @@ export default class FormPersonalInfo extends Component
                 break;
 
             case 'Passport':
-                if (data.Passport == "" || (data.Passport.replace(/^\s\s*/, '').replace(/\s+$/, '') === "")) {
+                if (data.Passport === "" || (data.Passport.replace(/^\s\s*/, '').replace(/\s+$/, '') === "")) {
                     this.refs['PassportType'].setValid(false);
                 } else {
                     this.refs['PassportType'].setValid(true);
@@ -132,7 +131,7 @@ export default class FormPersonalInfo extends Component
         }
     }
 
-    
+
     render() {
         return (
             <View>
@@ -185,7 +184,7 @@ export default class FormPersonalInfo extends Component
                     />
                 </View>
             </View>
-            
+
         );
     }
 }

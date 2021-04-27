@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Dimensions from 'Dimensions';
-import { StyleSheet, 
+import { StyleSheet,
 	View, TextInput, Image, Text,
 	Animated, Keyboard } from 'react-native';
 
@@ -24,7 +24,7 @@ export default class InputN extends Component {
 		};
 	}
 
-    setValid(isValid) {
+    setValid =(isValid)=> {
         this.setState({
             isValid: isValid
         })

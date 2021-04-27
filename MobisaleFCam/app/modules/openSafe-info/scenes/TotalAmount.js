@@ -590,7 +590,7 @@ class TotalAmount extends Component {
 function mapStateToProps(state) {
     // console.log('--------- all state ', state.saleNewReducer.RegistrationObj);
 
-    const stateSL = state.saleNewReducer.RegistrationObj;
+    const stateSL = state.saleNewReducer.openSafeObj;
     console.log('----RegistrationObj ', stateSL)
 
     const FormData = {

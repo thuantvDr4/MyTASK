@@ -32,7 +32,7 @@ export function submitCreateTTKH(dataTemp) {
 
 export function updateInfoRegistration(data, callback) {
     return (dispatch) => {
-        dispatch({type: 'sale-new/UPDATE_INFO_REGISTRATION', data: data });
+        dispatch({type: 'sale-new/update_openSafe_registration', data: data });
         callback();
     }
 }
