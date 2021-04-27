@@ -68,7 +68,7 @@ class CustomerInfo extends React.Component {
         // LOAD API FIRST
         this.props.navigation.addListener('willFocus', () => {
             // GET API
-            this._getNationly();
+            // this._getNationly();
         });
     }
 
@@ -166,8 +166,15 @@ class CustomerInfo extends React.Component {
      * @param
      * @private
      */
-    _onPress() {
-        NavigationService.navigate('BookportAddress', {});
+    _editInstallAddress =()=>{
+        NavigationService.navigate('BookportAddress', {
+            payload: 'OpenSafe_Info'
+        });
+    }
+
+
+    _onNextStep =()=> {
+        NavigationService.navigate('openSafe_ciServiceType');
     }
 
     /**
@@ -176,7 +183,7 @@ class CustomerInfo extends React.Component {
      * @param dataTemp: Step Page
      * @private
      */
-    _onNextStep() {
+    _onNextStep_2() {
         const {data, dataTemp} = this.state;
         if (! this.isValidData()) {
             return;
@@ -194,6 +201,8 @@ class CustomerInfo extends React.Component {
             }, 0);
         });
     }
+
+
 
     /**
      * VALIDATE FORM
@@ -659,7 +668,7 @@ class CustomerInfo extends React.Component {
                                 {!FormDataUpdated.RegCode ?
                                     <TouchableOpacity
                                         style={{ }}
-                                        onPress={ this._onPress }>
+                                        onPress={ this._editInstallAddress }>
                                         <Text style={[ols.fs12, ols.mgt05, ols.fs14, ols.fw500, ols.clBlueDark, {  }]}>{'Edit Address'}</Text>
                                     </TouchableOpacity>
                                     : <View></View>

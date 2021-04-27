@@ -17,6 +17,9 @@ import * as api from '../api';
 // ACTION
 import {mapLocation} from 'app-libs/helpers/mapPicker';
 import {actions as act, constants as c} from '../';
+
+
+
 const {saveInstallAddress, resetAllDataBookport} = act;
 
 // STYLE
@@ -30,11 +33,11 @@ class BookportAddress extends React.Component {
 
     constructor(props) {
         super(props);
-
         this.state = {
             data: {},
             showBuilding: false,
-            loadingVisible : false
+            loadingVisible : false,
+            route_name: ''
         };
 
         this.changeLocation = this.changeLocation.bind(this);
@@ -47,6 +50,7 @@ class BookportAddress extends React.Component {
         this._error = this._error.bind(this);
         this._errorMsg = this._errorMsg.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+
     }
 
     componentDidMount() {
@@ -55,7 +59,18 @@ class BookportAddress extends React.Component {
         const globalData = this.props.RegistrationObj
         const bookportForward = navigation.getParam('bookportForward', false);
 
+        //check cho TH edit -address
+        this.props.navigation.addListener('willFocus', (prop) => {
+            //
+            const payload = this.props.navigation.getParam('payload', 'ChooseServiceType');
+            this.setState({
+                ...this.state,
+                route_name: payload? payload : 'ChooseServiceType'
+            })
 
+        });
+
+        //
         if (bookportForward) {
 
             var myData = {};
@@ -125,6 +140,7 @@ class BookportAddress extends React.Component {
         }
 
     }
+
 
     getLocationData(callback) {
 
@@ -288,7 +304,7 @@ class BookportAddress extends React.Component {
                     this.props.saveInstallAddress(this.state.data, () => {
                         // NavigationService.navigate('BookPort'); //-------->V2.8
                         //
-                        NavigationService.navigate('ChooseServiceType'); //--------> V2.10
+                        NavigationService.navigate(this.state.route_name); //--------> V2.10
                     });
                 });
 

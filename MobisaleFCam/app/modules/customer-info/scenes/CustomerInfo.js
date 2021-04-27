@@ -172,8 +172,22 @@ class CustomerInfo extends React.Component {
      * @private
      */
     _onPress() {
-        NavigationService.navigate('BookportAddress', {});
+        NavigationService.navigate('BookportAddress', {
+            payload: 'BookPort'
+        });
     }
+
+    /**
+     * PRESS Navigation Back
+     * @param
+     * @private
+     */
+    _editInstallAddress =()=> {
+        NavigationService.navigate('BookportAddress', {
+            payload: 'BookPort'
+        });
+    }
+
 
     /**
      * GO TO STEP 2
@@ -720,7 +734,7 @@ class CustomerInfo extends React.Component {
                                 {!FormDataUpdated.RegCode ?
                                     <TouchableOpacity
                                         style={{ }}
-                                        onPress={ this._onPress }>
+                                        onPress={ this._editInstallAddress }>
                                         <Text style={[ols.fs12, ols.mgt05, ols.fs14, ols.fw500, ols.clBlueDark, {  }]}>{'Edit Address'}</Text>
                                     </TouchableOpacity>
                                     : <View></View>

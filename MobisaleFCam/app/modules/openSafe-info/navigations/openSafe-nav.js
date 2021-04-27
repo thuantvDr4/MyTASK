@@ -52,7 +52,7 @@ const CustomTabStack = createMaterialTopTabNavigator(
 );
 
 
-const OpeenSafeNavigation = createStackNavigator(
+const OpenSafeNavigation = createStackNavigator(
     {
         ciMain: {
             screen: CustomTabStack,
@@ -83,4 +83,4 @@ const OpeenSafeNavigation = createStackNavigator(
     }
 );
 
-export default OpeenSafeNavigation;
+export default OpenSafeNavigation;

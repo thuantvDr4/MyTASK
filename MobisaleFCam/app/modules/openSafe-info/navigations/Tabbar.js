@@ -61,7 +61,6 @@ class Tabbar extends Component {
 
     _onPress(jumpTo, tabName, tabIndex) {
         var dataStep = {};
-
         switch (tabIndex) {
             case 0:
                 if (this.state.isTabF) {
@@ -90,6 +89,8 @@ class Tabbar extends Component {
         }
     }
 
+
+
     /**
      * Pass OnBack to component HandleHardBack
      * @public
@@ -99,20 +100,20 @@ class Tabbar extends Component {
         const { navigation, jumpTo, FormDataUpdated } = this.props;
         var dataStep = {};
 
-        if (isScreen == 'ciAmount') {
+        if (isScreen === 'openSafe_ciAmount') {
 
             dataStep = {
                 step: 2,
-                isScreen: 'ciServiceType'
+                isScreen: 'openSafe_ciServiceType'
             }
-            this._jumpTo(jumpTo, 'ciServiceType');
+            this._jumpTo(jumpTo, 'openSafe_ciServiceType');
             this.props.nextStep(dataStep);
 
-        } else if (isScreen == 'ciServiceType') {
+        } else if (isScreen === 'openSafe_ciServiceType') {
 
             dataStep = {
                 step: 1,
-                isScreen: 'ciInfo'
+                isScreen: 'openSafe_ciInfo'
             }
             this._jumpTo(jumpTo, 'ciInfo');
             this.props.nextStep(dataStep);
@@ -140,7 +141,7 @@ class Tabbar extends Component {
             );
         }
         return true;
-	};
+    };
 
 
     /**
@@ -154,7 +155,6 @@ class Tabbar extends Component {
         } = this.props;
 
         const { routes } = navigation.state;
-        console.log('ROUTES---', routes)
 
         const tab1tit = strings('customer_info.tabbar.cus_info');
         const tab2tit = strings('customer_info.tabbar.type_ser');

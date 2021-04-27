@@ -5,9 +5,9 @@ import {
 } from 'react-native'
 
 // SCREEN
-import Splash from '../modules/openSafe/scenes/ServiceType';
+// import Splash from '../modules/openSafe-info/scenes/CustomerInfo'; // for TEST
 
-// import Splash from '../modules/splash/scenes/Splash';
+import Splash from '../modules/splash/scenes/Splash';
 import Upgrade from '../modules/splash/scenes/Upgrade';
 import Login from '../modules/auth/scenes/Login';
 import ImeiScreen from '../modules/auth/scenes/ImeiScreen';
@@ -20,7 +20,9 @@ import UploadImageCusNavigation from '../modules/list-customer-info/navigations/
 import HomeNavigation from '../modules/home/navigations/HomeNavigation';
 import ContractNavigation from '../modules/contract/navigations/ContractNavigation';
 import SaleNewNavigation from '../modules/sale-new/navigations/SaleNewNavigation';
-import OpenSafeNavigation from '../modules/openSafe/navigations/openSafe-nav';
+
+import OpenSafeInfo_nav from '../modules/openSafe-info/navigations/openSafe-nav';
+import OpenSafeService_nav from '../modules/openSafe-service/navigations/openSafeService-nav';
 
 // COMPONENT
 import SearchPickerDynamic from '../libs/components/SearchPickerDynamic';
@@ -80,8 +82,15 @@ const AppNavigator = createStackNavigator(
                 header: null,
             })
         },
-        OpenSafe: {
-            screen: OpenSafeNavigation,
+        OpenSafe_Info: {
+            screen: OpenSafeInfo_nav,
+            navigationOptions: {
+                header: null,
+            }
+        },
+
+        OpenSafe_DetailCustomer: {
+            screen: OpenSafeService_nav,
             navigationOptions: {
                 header: null,
             }

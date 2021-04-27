@@ -24,8 +24,8 @@ class HandleSoftBackButton extends React.Component {
         const FormDataUpdated = this.props.FormDataUpdated;
 
         Alert.alert(
-            strings('customer_info.dialog.title'),
-            strings('dl.customer_info.goBack'),
+            strings('dl.open_safe.title_dialog'),
+            strings('dl.open_safe.goBack'),
 			[
 				{ text: strings('dialog.btnCancel'), onPress: () => {}, style: "cancel" },
                 { text: strings('dialog.btnOK'), onPress: () => {

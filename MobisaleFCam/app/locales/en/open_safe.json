@@ -98,6 +98,65 @@
         },
         "dialog": {
             "title": "You're still editing!"
+        },
+        "detail_info": {
+            "header_title" : "Detail customer’s info",
+            "cus_info" : "Customer information",
+            "update" : "Update",
+            "status" : "Status",
+            "service_type": "Service type",
+            "cus_name" : "Customer name",
+            "registration_code" : "Registration Code",
+            "phone" : "Mobile phone",
+            "install_address" : "Install address",
+            "profile_img" : "Profile image",
+            "upload" : "Upload",
+            "detail" : "Detail",
+            "detail_payment" : "Detail Payment",
+            "equipment" : "Equipment",
+            "package" : "Package",
+            "vat" : "VAT",
+            "total_amount" : "Total amount",
+            "view_contract" : "View Contract",
+            "gift" : "Gift"
+        },
+        "create_contract": {
+            "header_title" : "Contract",
+            "cus_info" : "Cus info",
+            "cus_name" : "Customer name",
+            "code" : "Code",
+            "phone" : "Mobile phone",
+            "email" : "Email",
+            "address" : "Address",
+            "create_contract" : "Create Contract"
+        },
+        "detail_contract": {
+            "header_title" : "Contract Detail",
+            "payment" : "Payment",
+            "status" : "Status",
+            "service_type": "Service type",
+            "cus_name" : "Customer name",
+            "contract_no" : "Contract No",
+            "phone" : "Mobile phone",
+            "install_address" : "Install address",
+            "detail_payment" : "Detail Payment",
+            "equipment" : "Equipment",
+            "package" : "Package",
+            "vat" : "VAT",
+            "total_amount" : "Total amount",
+            "gift" : "Gift"
+        },
+        "receipt_detail": {
+            "header_title" : "Receipt Detail",
+            "detail_payment" : "Detail payment",
+            "equipment" : "Equipment",
+            "package" : "Package",
+            "vat" : "VAT",
+            "total" : "Total",
+            "payment_method" : "Payment method",
+            "choose_payment_method" : "Choose payment method",
+            "payment" : "Payment",
+            "confirm" : "Confirm"
         }
     }
 }

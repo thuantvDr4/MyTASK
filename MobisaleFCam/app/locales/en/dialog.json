@@ -323,6 +323,11 @@
         "service": "\nService is required. \n\nតម្រូវឱ្យមាន កសេវាកម្ម",
         "date_err" : "\nFromDate must be less than or equal ToDate \n\nFromDate ត្រូវតែតូចជាងឬស្មើ ToDate"
       }
+    },
+    "open_safe": {
+      "title_dialog": "You’re still editing!",
+      "goBack": "\nAre you sure you want to go back with your unfinished info? \n\nតើអ្នកប្រាកដទេថាអ្នកចង់ត្រលប់ទៅវិញជាមួយព័ត៌មានដែលមិនទាន់បញ្ចប់របស់អ្នក?"
+
     }
   }
 }

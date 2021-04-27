@@ -26,7 +26,7 @@ import ols from '../../../styles/Ola-style';
 
 /**
  * Man hinh chi tiet hop dong
- * 
+ *
  * @author DaiDP
  * @since Aug, 2018
  */
@@ -35,8 +35,8 @@ class ContractDetail extends React.Component {
         return {
             title: strings('contract.contract_detail.title'),
             headerRight: (
-                navigation.state.params.isAction ? 
-                    <MenuPicker onValueChange={navigation.getParam('selectMenu')} options={navigation.getParam('options', [])} /> : 
+                navigation.state.params.isAction ?
+                    <MenuPicker onValueChange={navigation.getParam('selectMenu')} options={navigation.getParam('options', [])} /> :
                     <View />
             ),
             headerBackTitle: null,
@@ -66,7 +66,6 @@ class ContractDetail extends React.Component {
     componentDidMount() {
         // Dang ky event xu ly khi chon menu phai
         this.props.navigation.setParams({ selectMenu: this.selectMenu.bind(this) });
-
         // Event load data
         this.props.navigation.addListener('willFocus', this.loadData.bind(this));
         this.props.navigation.addListener('willBlur', this.clearTimeoutLoading.bind(this));
@@ -122,10 +121,10 @@ class ContractDetail extends React.Component {
 
     /**
      * Xử lý khi load detail success
-     * 
-     * @param {*} isSucess 
-     * @param {*} data 
-     * @param {*} msg 
+     *
+     * @param {*} isSucess
+     * @param {*} data
+     * @param {*} msg
      */
     loadDetailSuccess(isSucess, data, msg) {
         if (isSucess) {
@@ -167,8 +166,8 @@ class ContractDetail extends React.Component {
 
     /**
      * Xử lý khi click chọn menu phải
-     * 
-     * @param {*} route 
+     *
+     * @param {*} route
      */
     selectMenu(route) {
         if (route.Id === c.ACT_DOWNLOAD_PDF) {
@@ -219,8 +218,8 @@ class ContractDetail extends React.Component {
 
     /**
      * An hien loading
-     * 
-     * @param {*} isShow 
+     *
+     * @param {*} isShow
      */
     showLoading(isShow) {
         this.setState({
@@ -230,8 +229,8 @@ class ContractDetail extends React.Component {
 
     /**
      * Render thong tin thiết bị
-     * 
-     * @param {*} ListDevice 
+     *
+     * @param {*} ListDevice
      */
     _renderDevice(ListDevice) {
         const views = [];
@@ -280,7 +279,7 @@ class ContractDetail extends React.Component {
                                     text={info.GroupPoints || ''}
                                 />
                             </View>
-                            
+
                             {/*
                                 // ---- Customer infomation
                             */}
@@ -343,8 +342,8 @@ class ContractDetail extends React.Component {
                                 />
 
                                 {
-                                    info 
-                                    && info.ListDevice 
+                                    info
+                                    && info.ListDevice
                                     && info.ListDevice.length > 0
                                     ?
                                         <View style={styles.lineMid} />
@@ -354,8 +353,8 @@ class ContractDetail extends React.Component {
                                 {this._renderDevice(info.ListDevice)}
 
                                 {
-                                    info 
-                                    && info.ListStaticIP 
+                                    info
+                                    && info.ListStaticIP
                                     && info.ListStaticIP.length > 0
                                     ?
                                         <View>
@@ -404,7 +403,7 @@ class ContractDetail extends React.Component {
                                 // ---- PROMOTION
                             }
                             {
-                                info && info.PromotionName && 
+                                info && info.PromotionName &&
                                 <View>
                                     <Text style={[moduleStyle.textTitle, moduleStyle.boxSpace]}>
                                         {strings('contract.contract_detail.promotion')}
@@ -412,7 +411,7 @@ class ContractDetail extends React.Component {
                                     <SearchPickerCLKMItem
                                         Name={info.PromotionName}
                                         Description={info.PromotionDescription}
-                                        style={{backgroundColor:'#FFF'}} 
+                                        style={{backgroundColor:'#FFF'}}
                                     />
                                 </View>
                             }
@@ -421,8 +420,8 @@ class ContractDetail extends React.Component {
                                 // ---- GIFT
                             }
                             {
-								info && info.ListGift && info.ListGift.length > 0 && 
-							
+								info && info.ListGift && info.ListGift.length > 0 &&
+
 								<View>
 									<View style={[styles.titleBox]}>
 										<Text style={styles.titleLeft}>
@@ -520,7 +519,7 @@ const styles = StyleSheet.create({
     },
     titleBox: {
         flexDirection:'row',
-        marginTop: 0, marginBottom: 8, 
+        marginTop: 0, marginBottom: 8,
     },
     titleLeft: {
         flex:1,

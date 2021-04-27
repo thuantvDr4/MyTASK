@@ -52,7 +52,7 @@ class ChooseServiceType extends React.Component {
     * gotoOpenSafeService
     * */
     gotoOpenSafeService =()=>{
-        NavigationService.navigate('OpenSafe');
+        NavigationService.navigate('OpenSafe_Info');
     };
 
 
