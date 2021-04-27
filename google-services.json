@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "200628322076",
+    "firebase_url": "https://mobisale-fcam-stag.firebaseio.com",
+    "project_id": "mobisale-fcam-stag",
+    "storage_bucket": "mobisale-fcam-stag.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:200628322076:android:3beff6d8ebc5838f2044d9",
+        "android_client_info": {
+          "package_name": "com.mobisalefcamstag"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "200628322076-b0decal7ss83l83irn57hk1nfer7hkb8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDFzF_VmNbY1QzgEf_GnWdWZhL40Rq1qak"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "200628322076-b0decal7ss83l83irn57hk1nfer7hkb8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "200628322076-kq2lq633nl622b86o3oqvo28is97brts.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.fpt.MobisaleFCamStag"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

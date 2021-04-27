@@ -2,7 +2,7 @@ import * as t from './actionTypes';
 import * as api from './api';
 
 /**
- * 
+ *
  */
 export function resetAllDataBookport() {
     return (dispatch) => {
@@ -11,7 +11,7 @@ export function resetAllDataBookport() {
 }
 
 /**
- * 
+ *
  */
 export function isMapReady() {
     return (dispatch) => {

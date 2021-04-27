@@ -17,7 +17,7 @@ import * as api from '../api';
 import {KEYBOARD_NUMBER} from '../constants';
 
 // REDUX ACTION
-import { actions as customerInfo } from '../';
+import {actions as customerInfo,} from '../';
 const { nextStep, updateInfoRegistration } = customerInfo;
 
 // LIB CUSTOM
@@ -37,6 +37,7 @@ import ButtonNext from '../components/ButtonNext';
 // GLOBAL STYLE
 import styles from '../styles';
 import ols from '../../../styles/Ola-style';
+
 
 
 class CustomerInfo extends React.Component {
@@ -173,7 +174,7 @@ class CustomerInfo extends React.Component {
     }
 
 
-    _onNextStep =()=> {
+    _onNextStep_2 =()=> {
         NavigationService.navigate('openSafe_ciServiceType');
     }
 
@@ -183,7 +184,7 @@ class CustomerInfo extends React.Component {
      * @param dataTemp: Step Page
      * @private
      */
-    _onNextStep_2() {
+    _onNextStep() {
         const {data, dataTemp} = this.state;
         if (! this.isValidData()) {
             return;
@@ -722,7 +723,7 @@ class CustomerInfo extends React.Component {
 
 
 function mapStateToProps(state) {
-    // GET STATE FROM SALENEW
+    // GET STATE FROM OPENSAFE
     const stateSL = state.saleNewReducer.openSafeObj;
 
     const FormData = {

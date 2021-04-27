@@ -8,6 +8,7 @@ import { reducer as listCustomerInfoReducer } from "../modules/list-customer-inf
 import { reducer as saleNewReducer } from "../modules/sale-new";
 import { reducer as potentialCustomer } from "../modules/potential-customer";
 import { reducer as extraServiceInfoReducer } from "../modules/extra-service-infomation";
+import { reducer as openSafeReducer } from "../modules/openSafe-info/index";
 
 const rootReducer = combineReducers({
   splashReducer,
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
   listCustomerInfoReducer,
   saleNewReducer,
   potentialCustomer,
-  extraServiceInfoReducer
+  extraServiceInfoReducer,
+  openSafeReducer,
 });
 
 export default rootReducer;

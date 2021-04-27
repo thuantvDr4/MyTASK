@@ -120,8 +120,8 @@ class Tabbar extends Component {
 
         } else {
             Alert.alert(
-                strings('customer_info.dialog.title'),
-                strings('dl.customer_info.goBack'),
+                strings('dl.open_safe.title_dialog'),
+                strings('dl.open_safe.goBack'),
                 [
                     { text: strings('dialog.btnCancel'), onPress: () => {}, style: "cancel" },
                     { text: strings('dialog.btnOK'), onPress: () => {

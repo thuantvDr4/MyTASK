@@ -1,10 +1,12 @@
+
+
 import * as t from './actionTypes';
 import * as api from './api';
 
 
 export function nextStep(dataTemp) {
     return (dispatch) => {
-        
+
         if (dataTemp.step === 1) {
             dispatch({ type: t.STEP_F_DONE, isScreen: !dataTemp.nextScreen ? dataTemp.isScreen : dataTemp.nextScreen });
 

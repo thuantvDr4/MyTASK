@@ -8,6 +8,9 @@ import { RegistrationObj } from './entities';
 let initialState = {
     //dia chi lap dat
     RegistrationObj: RegistrationObj,
+    //
+    openSafeObj: RegistrationObj,
+    //
 
     //bookport
     objBookport : {
@@ -25,9 +28,6 @@ let initialState = {
         allowBookport: 1, // cho phep bookport,
         isMapReady : false
     },
-
-    //thong tin goi openSafe-service
-    openSafeObj: RegistrationObj,
 };
 
 const saleNewReducer = (state = initialState, action) => {
@@ -74,8 +74,9 @@ const saleNewReducer = (state = initialState, action) => {
                     PotentialObjID:     action.data.PotentialObjID ? action.data.PotentialObjID : null,
                     Telegram:           action.data.Telegram ? action.data.Telegram : "",
                 },
+                //
 
-                openSafeObj:{
+                openSafeObj: {
                     ...state.openSafeObj,
                     LocationId:         action.data.Location.Id || null,
                     BillTo_City:        action.data.Location.Name || "",

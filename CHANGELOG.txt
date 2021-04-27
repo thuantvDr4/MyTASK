@@ -1,36 +1,3 @@
-
-Version 2.9, 2021-03-23
-
-- mirgrate androidX
-
-#################################################################################
-Version 2.8.1, 2021-03-10
-
-- them khmer-name trong phiếu Bán them
-
-##################################################################################
-
-Version 2.8, 2020-11-12
-
--      KHTN - Thêm thông tin Email, Telegram, Birthday vào màn hình tạo, cập nhật KHTN
--      KHTN - Thêm tính năng recare, birthday, remind thông tin recare, birthday qua notification cho sale
--      KHTN - Cập nhật báo cáo KHTN trên inside, thêm thông tin recare, birthday
--      KHTN - Thêm tính năng cập nhật KHTN với những thông tin sai.
--      Thêm thông tin gói dịch vụ hiện hành trong danh sách kết quả của kiếm kiếm HD bán thêm.
--      Thêm Note vào HD bán thêm upgrade
--      Thêm thông tin Total money, Payment menthod trên phiếu thi công của inside
--      Thêm báo cáo phát triển thuê bao cho bán thêm
--      Cập nhật báo cáo lương có bổ sung thêm Bán thêm
-
-##################################################################################
-
-Version 2.7, 2020-09-16
-
--      Bán thêm Internet Upgrade
--      Bán thêm Equipment, IP thêm thanh toán qua Transfer, Wing
--      Bán thêm Internet Upgrade thêm thanh toán qua Cash, Transfer, Wing, Collect When Deploy
--      Thêm Notification tới sale
-
 ##################################################################################
 
 Version 2.6, 2020-05-21

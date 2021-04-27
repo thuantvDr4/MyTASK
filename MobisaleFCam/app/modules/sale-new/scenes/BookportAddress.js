@@ -19,7 +19,6 @@ import {mapLocation} from 'app-libs/helpers/mapPicker';
 import {actions as act, constants as c} from '../';
 
 
-
 const {saveInstallAddress, resetAllDataBookport} = act;
 
 // STYLE
@@ -254,12 +253,6 @@ class BookportAddress extends React.Component {
         });
     }
 
-    /*
-    * TEST
-    * */
-    onSubmit_2 =()=>{
-        NavigationService.navigate('ChooseServiceType');
-    }
 
 
     onSubmit() {
@@ -573,6 +566,6 @@ export default connect(
         }
     },
     {
-        saveInstallAddress, resetAllDataBookport
+        saveInstallAddress, resetAllDataBookport,
     }
 )(BookportAddress);

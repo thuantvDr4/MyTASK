@@ -1,21 +1,21 @@
 import * as t from './actionTypes';
 import {RegistrationObj} from '../sale-new/entities';
 
-let initialState = { 
-    isStep: true, 
+let initialState = {
+    isStep: true,
     isStepFDone: false,
     isStepSDone: false,
     isStepTDone: false,
     isScreen: 'ciInfo'
 };
 
-const customerInfoReducer = (state = initialState, action) => {
-    
+const openSafeReducer = (state = initialState, action) => {
+
     switch (action.type) {
-        
+
         case t.STEP_F_DONE:
             state = {
-                ...state, 
+                ...state,
                 isStep: false,
                 isStepFDone: true,
                 isStepSDone: false,
@@ -26,7 +26,7 @@ const customerInfoReducer = (state = initialState, action) => {
 
         case t.STEP_S_DONE:
             state = {
-                ...state, 
+                ...state,
                 isStep: false,
                 isStepFDone: true,
                 isStepSDone: true,
@@ -34,7 +34,7 @@ const customerInfoReducer = (state = initialState, action) => {
                 isScreen: action.isScreen
             };
             return state;
-        
+
         case t.STEP_T_DONE:
             return initialState;
 
@@ -50,4 +50,4 @@ const customerInfoReducer = (state = initialState, action) => {
 };
 
 
-export default customerInfoReducer;
+export default openSafeReducer;
