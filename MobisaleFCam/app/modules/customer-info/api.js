@@ -3,8 +3,8 @@ import {mapPromotionList, mapDeviceList, mapFeeList, mapPickerIPList, mapMonthLi
 
 /**
  * Xu ly load danh sach loai dich vu (Internet, thiet bi)
- * 
- * @param function callback 
+ *
+ * @param function callback
  */
 export function loadServiceType(callback, options)
 {
@@ -32,8 +32,8 @@ export function loadServiceType(callback, options)
 
 /**
  * Xu ly load danh sach loai dich vu internet (Goi F5, F2, ...)
- * 
- * @param function callback 
+ *
+ * @param function callback
  */
 export function loadLocalTypeList(callback, options)
 {
@@ -41,7 +41,7 @@ export function loadLocalTypeList(callback, options)
 
     myNetwork.post(
         '/Data/GetLocalTypeList',
-        { 
+        {
             UserName: Username,
             Kind: Kind
         }
@@ -64,8 +64,8 @@ export function loadLocalTypeList(callback, options)
 
 /**
  * Xu ly load CLKM
- * 
- * @param function callback 
+ *
+ * @param function callback
  */
 export function loadPromotionList(callback, options)
 {
@@ -99,8 +99,8 @@ export function loadPromotionList(callback, options)
 
 /**
  * Xu ly load Phi hoa mang
- * 
- * @param function callback 
+ *
+ * @param function callback
  */
 export function loadConnectionFeeList(callback, options)
 {
@@ -129,8 +129,8 @@ export function loadConnectionFeeList(callback, options)
 
 /**
  * Xu ly load Phuong thuc thanh toan hang thang
- * 
- * @param function callback 
+ *
+ * @param function callback
  */
 export function loadPaymentMethodPerMonthList(callback, options)
 {
@@ -160,13 +160,14 @@ export function loadPaymentMethodPerMonthList(callback, options)
 
 /**
  * Xu ly load Danh sach thiet bi
- * 
- * @param function callback 
+ *
+ * @param function callback
  */
 export function loadDeviceList(callback, options)
 {
+    console.log('Params---', options.params)
     const {LocationId, MonthOfPrepaid, LocalType} = options.params;
-    
+
     myNetwork.post(
         '/Data/GetDeviceList',
         {
@@ -193,11 +194,11 @@ export function loadDeviceList(callback, options)
 
 /**
  * Xu ly load Danh sach IP
- * 
- * @param function callback 
+ *
+ * @param function callback
  */
 export function loadIPList(callback, options)
-{   
+{
     myNetwork.post(
         '/Registration/StaticIP_GetPrices', {}
     )
@@ -218,11 +219,11 @@ export function loadIPList(callback, options)
 
 /**
  * Xu ly load Danh sach Month IP
- * 
- * @param function callback 
+ *
+ * @param function callback
  */
 export function loadMonthList(callback, options)
-{   
+{
     myNetwork.post(
         'Registration/StaticIP_GetMonths', {}
     )
@@ -243,17 +244,17 @@ export function loadMonthList(callback, options)
 
 /**
  * Xu ly load Danh sach Gift
- * 
- * @param function callback 
+ *
+ * @param function callback
  */
-export function loadGiftList(callback, options) {   
+export function loadGiftList(callback, options) {
     myNetwork.post(
         'Registration/Gift_GetList', {}
     )
     .then(response => response.data)
     .then(response => {
         if (response.Code === 1) {
-            
+
             callback(response.Data);
         }
         else {
@@ -268,8 +269,8 @@ export function loadGiftList(callback, options) {
 
 /**
  * Tinh tong tien
- * 
- * @param function callback 
+ *
+ * @param function callback
  */
 export function caclRegistrationTotal(data, callback)
 {
@@ -295,11 +296,11 @@ export function caclRegistrationTotal(data, callback)
 
 /**
  * Tinh tong tien thiet bi (khong su dung)
- * 
- * @param function callback 
+ *
+ * @param function callback
  */
 export function calcTotalDevice(LocationID, ListDevice, MonthOfPrepaid, callback)
-{    
+{
     myNetwork.post(
         '/Data/GetTotalDevice',
         {

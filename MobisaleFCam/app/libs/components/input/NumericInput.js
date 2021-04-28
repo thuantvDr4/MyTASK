@@ -17,15 +17,15 @@ class Button extends React.Component
 
 /**
  * Numeric input element
- * 
+ *
  * ############# Properties #############
  * 1. maxValue: Max value allow. Interger
  * 2. value: Default value. Interger
- * 
+ *
  * ############# Events #################
  * 1. onChange(value): Event when select change
  *
- * 
+ *
  * @author DaiDP
  * @since Aug, 2018
  */
@@ -56,7 +56,7 @@ class NumericInput extends React.PureComponent
         newVal = newVal >= 1 ? newVal : 1;
 
         this.setState({
-            value: newVal 
+            value: newVal
         });
 
         // callback ra ngoai
@@ -104,22 +104,25 @@ class NumericInput extends React.PureComponent
     render()
     {
         return (
-            <View style={[styles.inputContainerStyle, (this.props.editable ? '' : styles.inputContainerStyleDisable) ]}> 
+            <View style={[styles.inputContainerStyle, (this.props.editable ? '' : styles.inputContainerStyleDisable) ]}>
                 <Button onPress={this.state.value > 1 ? this._dec : null } style={styles.leftButtonStyle}>
                     <Icon name='md-remove' size={16} style={[styles.iconStyle, (this.props.editable && this.state.value > 1 ? '' : styles.iconStyleDisable) ]} />
                 </Button>
                 <View style={styles.inputWraperStyle}>
-                    <TextInput 
+                    <TextInput
                         editable={this.props.editable}
-                        returnKeyType='done' 
-                        underlineColorAndroid='rgba(0,0,0,0)' 
-                        keyboardType='numeric' 
+                        returnKeyType='done'
+                        underlineColorAndroid='rgba(0,0,0,0)'
+                        keyboardType='numeric'
                         value={this.state.value.toString()}
-                        onChangeText={this._onChange} 
+                        onChangeText={this._onChange}
                         style={[styles.inputStyle, (this.props.editable ? '' : styles.iconStyleDisable) ]}
                     />
                 </View>
-                <Button onPress={this._inc} style={styles.rightButtonStyle}>
+                <Button
+                    disabled = {!this.props.editable}
+                    onPress={this._inc}
+                    style={styles.rightButtonStyle}>
                     <Icon name='md-add' size={16} style={[styles.iconStyle, (this.props.editable ? '' : styles.iconStyleDisable) ]} />
                 </Button>
             </View>

@@ -16,14 +16,14 @@ import {connect} from 'react-redux';
 
 // LIB CUSTOM
 import NavigationService from 'app-libs/helpers/NavigationService';
-import PickerSearchInput from 'app-libs/components/input/PickerSearchInput';
+import PickerSearchInput from '../../../libs/components/input/PickerSearchInput';
 import ButtonElement from 'app-libs/components/input/ButtonElement';
 import PickerCLKMInput from 'app-libs/components/input/PickerCLKMInput';
 import PopupWarning from 'app-libs/components/PopupWarning';
 import TechLoading from 'app-libs/components/TechLoading';
 // COMPONENT
 import FormDeviceList from '../components/FormDeviceList';
-import FormIpList from '../components/FormIpList';
+import FormPackageList from "../components/FormPackageList";
 import mapServiceType from '../helpers/mapServiceType';
 // API
 import * as api from '../api';
@@ -73,14 +73,13 @@ class ServiceType extends Component
                 nextScreen: 'ciAmount'
             },
             data: this.props.FormData,
-            showE: false,
-            showI: false,
             loadingVisible: false
         };
+        console.log('---FormData-->', this.props.FormData);
 
     }
 
-    isValidData() {
+    isValidData =()=> {
         const {data} = this.state;
         let errorList = [];
 
@@ -175,72 +174,14 @@ class ServiceType extends Component
         return false;
     }
 
-    changeLocalType(selectItem) {
 
-        if (selectItem == this.state.data.LocalType) {
-            return;
-        }
-
-        this.setState({
-            data: {
-                ...this.state.data,
-                LocalType: selectItem,
-                Promotion: null,
-                Device: {
-                    List: [],
-                    DeviceTotal: 0
-                }
-            }
-        });
-    }
-
-    changePickerValue(name, selectItem) {
-
+    /*
+    * changePickerValue
+    * */
+    changePickerValue =(name, selectItem)=> {
+        console.log('--->',name, selectItem)
+        //
         const data = this.state.data;
-
-        // Luon chọn INTERNET
-        if (name === 'ServiceType' && selectItem && selectItem.findIndex(item => item.Id === INTERNET_ID.Id) < 0) {
-            selectItem.unshift(INTERNET_ID);
-        }
-
-        if (name === 'ServiceType' && selectItem) {
-            this.setState({
-                ...this.state,
-                showE: selectItem.find(item => item.Id === 2) !== undefined ? true : false,
-                showI: selectItem.find(item => item.Id === 3) !== undefined ? true : false,
-                data: {
-                    ...data,
-                    StaticIP: selectItem.find(item => item.Id === 3) !== undefined
-                        ? data.StaticIP
-                        : {
-                            ListIP: null,
-                            ListMonth: { Value: 1, Name: '1M' },
-                            Total: null,
-                            ListStaticIP: []
-                        },
-                    Device: selectItem.find(item => item.Id === 2) !== undefined
-                        ? data.Device
-                        : {
-                            DeviceTotal: null,
-                            List: []
-                        }
-                }
-            })
-        }
-
-        //
-        if (data[name] == selectItem) {
-            return;
-        }
-
-        //
-        if (name === 'Promotion') {
-            data['Device'] = {
-                List: [],
-                DeviceTotal: 0
-            };
-        }
-
         //
         data[name] = selectItem;
 
@@ -252,7 +193,7 @@ class ServiceType extends Component
         }, 50);
     }
 
-    submitData(dataAmount) {
+    submitData =(dataAmount)=> {
 
         // Xu ly data submit
         const { data, tabnav } = this.state;
@@ -293,8 +234,14 @@ class ServiceType extends Component
         });
     }
 
-    _onNextStep() {
-        if (! this.isValidData()) {
+    //TEST
+    _onNextStep=()=>{
+        const data = this.state.data;
+        console.log('---DATA state--->', data)
+    }
+
+    _onNextStep_2 =()=> {
+        if (! this.isValidData() ) {
             return;
         }
 
@@ -339,7 +286,7 @@ class ServiceType extends Component
         });
     }
 
-    _loading(isShow)
+    _loading =(isShow)=>
     {
         this.setState({
             loadingVisible: isShow
@@ -360,6 +307,7 @@ class ServiceType extends Component
 
                 <FormDeviceList
                     ref={'deviceType'}
+                    isMultiChoose={ true }
                     label = {strings('open_safe.service_type.form.listDevice_label')}
                     placeholder = {strings('open_safe.service_type.form.listDevice_placeholder')}
                     filterText = {strings('open_safe.service_type.form.listDevice_filterText')}
@@ -367,13 +315,14 @@ class ServiceType extends Component
                     amountLabel = {strings('open_safe.service_type.form.listDevice_amount')}
                     getOptionData = {api.loadDeviceList}
                     params = {{
-                        LocationId: this.props.LocationId,
-                        MonthOfPrepaid: data.Promotion ? data.Promotion.MonthOfPrepaid : null,
-                        LocalType: data.LocalType ? data.LocalType.Id : null
+                        LocationId: 1000,//this.props.LocationId,
+                        MonthOfPrepaid: 6, // TEST
+                        LocalType: 109 //data.LocalType ? data.LocalType.Id : null
                     }}
                     allowRefresh={false}
-                    value = {DATA}
+                    value = {data.Device}
                     onChange = {(selectedItem) => this.changePickerValue('Device', selectedItem)}
+                    // onChange = {(selectedItem) => console.log('Device', selectedItem)}
                 />
             </View>
         )
@@ -393,8 +342,9 @@ class ServiceType extends Component
                     {strings('open_safe.service_type.package')}
                 </Text>
 
-                <FormDeviceList
-                    ref={'deviceType'}
+                <FormPackageList
+                    ref={'packageType'}
+                    isMultiChoose = {false}
                     label = {strings('open_safe.service_type.form.listPackage_label')}
                     placeholder = {strings('open_safe.service_type.form.listPackage_placeholder')}
                     filterText = {strings('open_safe.service_type.form.listPackage_filterText')}
@@ -402,13 +352,14 @@ class ServiceType extends Component
                     amountLabel = {strings('open_safe.service_type.form.listPackage_amount')}
                     getOptionData = {api.loadDeviceList}
                     params = {{
-                        LocationId: this.props.LocationId,
-                        MonthOfPrepaid: data.Promotion ? data.Promotion.MonthOfPrepaid : null,
-                        LocalType: data.LocalType ? data.LocalType.Id : null
+                        LocationId: 1000,//this.props.LocationId,
+                        MonthOfPrepaid: 6, // TEST
+                        LocalType: 109 //data.LocalType ? data.LocalType.Id : null
                     }}
                     allowRefresh={false}
-                    value = {DATA_2}
-                    onChange = {(selectedItem) => this.changePickerValue('Device', selectedItem)}
+                    value = {data.PackageSafe}
+                    // onChange = {(selectedItem) => this.changePickerValue('Package', selectedItem)}
+                    onChange = {(selectedItem) => console.log('Package', selectedItem)}
                 />
             </View>
         )
@@ -502,6 +453,7 @@ export default connect((state) => {
         },
         networkType: state.saleNewReducer.objBookport.networkType
     }
+
 }, {nextStep, updateInfoRegistration})(ServiceType);
 
 

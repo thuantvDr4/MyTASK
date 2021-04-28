@@ -59,7 +59,7 @@
     "react-native-iphone-x-helper": "^1.2.0",
     "react-native-level-fs": "^3.0.1",
     "react-native-loading-spinner-overlay": "^0.5.2",
-    "react-native-maps": "git://github.com/react-native-community/react-native-maps.git#master",
+    "react-native-maps": "^0.28.0",
     "react-native-md5": "^1.0.0",
     "react-native-modal-datetime-picker": "^6.0.0",
     "react-native-os": "^1.2.1",

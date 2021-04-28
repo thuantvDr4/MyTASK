@@ -4,7 +4,7 @@ import NumericInput from '../../../libs/components/input/NumericInput';
 
 import PickerDeviceInput from './PickerDeviceInput';
 
-class FormDeviceList extends React.PureComponent
+class FormPackageList extends React.PureComponent
 {
     constructor(props)
     {
@@ -28,9 +28,11 @@ class FormDeviceList extends React.PureComponent
 
     onSelectedDevice =(selectedItem)=>
     {
+        let _selectedItem = [selectedItem];
+
         this.setState({
-            devices: selectedItem,
-            amount: this.calcTotalAmount(selectedItem)
+            devices: _selectedItem,
+            amount: this.calcTotalAmount(_selectedItem)
         }, () => this.callbackOnChange());
     }
 
@@ -70,7 +72,7 @@ class FormDeviceList extends React.PureComponent
     /*
     * _renderItem
     * */
-    _renderItem =(item, index)=>
+    _renderItem (item, index)
     {
         return (
             <View style={styles.numericContainer} key={"item-" + item.Id}>
@@ -80,7 +82,7 @@ class FormDeviceList extends React.PureComponent
                 </View>
                 <View style={styles.amountContainer}>
                     <NumericInput
-                        editable={item.ChangeNumber === 1}
+                        editable={false}
                         maxValue={this.props.maxValue}
                         value={item.Number}
                         onChange={(val) => this.changeAmount(item.Id, val)}
@@ -91,7 +93,7 @@ class FormDeviceList extends React.PureComponent
     }
 
 
-    _renderDetail =()=>
+    _renderDetail ()
     {
         if (this.state.devices.length === 0) {
             return null;
@@ -102,6 +104,8 @@ class FormDeviceList extends React.PureComponent
         {
             listItem.push( this._renderItem(this.state.devices[index], index) );
         }
+
+        console.log('LIST-ITEM-->', listItem)
 
         return(
             <React.Fragment>
@@ -117,11 +121,11 @@ class FormDeviceList extends React.PureComponent
     }
 
     /**
-	 *
-	 */
-	setValid(valid) {
-		this.refs['pickerType'].setValid(valid);
-	}
+     *
+     */
+    setValid(valid) {
+        this.refs['pickerType'].setValid(valid);
+    }
 
 
     render() {
@@ -132,7 +136,7 @@ class FormDeviceList extends React.PureComponent
                 <PickerDeviceInput
                     {...this.props}
                     value={this.state.devices}
-                    onChange={this.onSelectedDevice.bind(this)}
+                    onChange={this.onSelectedDevice}
                     key="picker"
                     ref={'pickerType'}
                 />
@@ -143,7 +147,7 @@ class FormDeviceList extends React.PureComponent
     }
 }
 
-FormDeviceList.defaultProps = {
+FormPackageList.defaultProps = {
     unitLabel: "Unit price",
     amountLabel: "Amount",
     maxValue: 9,
@@ -153,7 +157,7 @@ FormDeviceList.defaultProps = {
     }
 }
 
-export default FormDeviceList;
+export default FormPackageList;
 
 
 const styles = StyleSheet.create({
