@@ -31,7 +31,7 @@ export default function mapServiceType(RegistrationObj) {
         GroupPoints: RegistrationObj.GroupPoints,
         VAT: RegistrationObj.VAT,
 
-        PackageSafe: {
+        Package: {
             List: RegistrationObj.ListPackage ? mapDeviceList(RegistrationObj.ListPackage) : [],
             DeviceTotal: RegistrationObj.PackageTotal
         },

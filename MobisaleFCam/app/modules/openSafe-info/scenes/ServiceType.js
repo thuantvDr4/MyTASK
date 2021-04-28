@@ -79,94 +79,41 @@ class ServiceType extends Component
 
     }
 
+    /*
+    * Check valid
+    * */
     isValidData =()=> {
         const {data} = this.state;
         let errorList = [];
 
-        // Check Service Type
-        if (data.ServiceType == null) {
-            this.refs['ServiceType'].setValid(false);
+        // Check deviceType
+        if (data.Device.List.length === 0) {
+            this.refs['deviceType'].setValid(false);
 
             errorList.push({
-                name: 'ServiceType',
-                msg: strings('dl.customer_info.service_type.err.ServiceType')
+                name: 'deviceType',
+                msg: 'vui logn nhap divice'
             });
         }
         else {
-            this.refs['ServiceType'].setValid(true);
+            this.refs['deviceType'].setValid(true);
         }
 
-        // Check Local Type
-        if (data.LocalType == null) {
-            this.refs['LocalType'].setValid(false);
+        // check Package-type
+        if (data.Package.List.length === 0) {
+            this.refs['packageType'].setValid(false);
 
             errorList.push({
-                name: 'LocalType',
-                msg: strings('dl.customer_info.service_type.err.LocalType')
+                name: 'packageType',
+                msg: 'vui logn nhap packageType'
             });
         }
         else {
-            this.refs['LocalType'].setValid(true);
+            this.refs['packageType'].setValid(true);
         }
 
-        // Check CLKM
-        if (data.Promotion == null) {
-            this.refs['Promotion'].setValid(false);
-
-            errorList.push({
-                name: 'Promotion',
-                msg: strings('dl.customer_info.service_type.err.Promotion')
-            });
-        }
-        else {
-            this.refs['Promotion'].setValid(true);
-        }
-
-        // Check Connection fee
-        if (data.ConnectionFee == null) {
-            this.refs['ConnectionFee'].setValid(false);
-
-            errorList.push({
-                name: 'ConnectionFee',
-                msg: strings('dl.customer_info.service_type.err.ConnectionFee')
-            });
-        }
-        else {
-            this.refs['ConnectionFee'].setValid(true);
-        }
-
-        // Check Payment Method Per Month
-        if (data.PaymentMethodPerMonth == null) {
-            this.refs['PaymentMethodPerMonth'].setValid(false);
-
-            errorList.push({
-                name: 'PaymentMethodPerMonth',
-                msg: strings('dl.customer_info.service_type.err.PaymentMethodPerMonth')
-            });
-        }
-        else {
-            this.refs['PaymentMethodPerMonth'].setValid(true);
-        }
-
-
-        // Check IP
-        if (this.state.showI) {
-            if (data.StaticIP == null || data.StaticIP.ListStaticIP == null || data.StaticIP.ListStaticIP.length === 0) {
-                this.refs['IPType'].setValid(false);
-
-                errorList.push({
-                    name: 'IPType',
-                    msg: strings('dl.customer_info.service_type.err.IpAdd')
-                });
-            }
-            else {
-                this.refs['IPType'].setValid(true);
-            }
-        }
-
-
-
-        if (errorList.length == 0) {
+        //
+        if (errorList.length === 0) {
             return true;
         }
 
@@ -178,8 +125,7 @@ class ServiceType extends Component
     /*
     * changePickerValue
     * */
-    changePickerValue =(name, selectItem)=> {
-        console.log('--->',name, selectItem)
+    changePickerValue (name, selectItem){
         //
         const data = this.state.data;
         //
@@ -236,6 +182,11 @@ class ServiceType extends Component
 
     //TEST
     _onNextStep=()=>{
+        if (! this.isValidData() ) {
+            return;
+        }
+        alert('OK')
+
         const data = this.state.data;
         console.log('---DATA state--->', data)
     }
@@ -357,9 +308,9 @@ class ServiceType extends Component
                         LocalType: 109 //data.LocalType ? data.LocalType.Id : null
                     }}
                     allowRefresh={false}
-                    value = {data.PackageSafe}
-                    // onChange = {(selectedItem) => this.changePickerValue('Package', selectedItem)}
-                    onChange = {(selectedItem) => console.log('Package', selectedItem)}
+                    value = {data.Package}
+                    onChange = {(selectedItem) => this.changePickerValue('Package', selectedItem)}
+                    // onChange = {(selectedItem) => console.log('Package', selectedItem)}
                 />
             </View>
         )

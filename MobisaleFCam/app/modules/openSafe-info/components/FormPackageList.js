@@ -1,13 +1,14 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import NumericInput from '../../../libs/components/input/NumericInput';
-
 import PickerDeviceInput from './PickerDeviceInput';
 
-class FormPackageList extends React.PureComponent
-{
-    constructor(props)
-    {
+
+/*
+* CLASS
+* */
+class FormPackageList extends React.PureComponent {
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -16,8 +17,7 @@ class FormPackageList extends React.PureComponent
         }
     }
 
-    componentWillReceiveProps(nextProps)
-    {
+    componentWillReceiveProps(nextProps) {
         if (nextProps.value !== this.props.value) {
             this.setState({
                 devices: nextProps.value.List,
@@ -26,29 +26,28 @@ class FormPackageList extends React.PureComponent
         }
     }
 
-    onSelectedDevice =(selectedItem)=>
-    {
-        let _selectedItem = [selectedItem];
+    onSelectedDevice =(selectedItem)=> {
+        if(selectedItem.length === 0){
+            return;
+        }
 
         this.setState({
-            devices: _selectedItem,
-            amount: this.calcTotalAmount(_selectedItem)
+            devices: [selectedItem],
+            amount: this.calcTotalAmount([selectedItem])
         }, () => this.callbackOnChange());
     }
 
-    callbackOnChange =()=>
-    {
+    callbackOnChange () {
         this.props.onChange && this.props.onChange({
             List: this.state.devices,
             DeviceTotal: this.state.amount
         });
     }
 
-    changeAmount =(id, val)=>
-    {
+    changeAmount(id, val) {
         // Gan so luong cua item
         let devices = this.state.devices;
-        const index = devices.findIndex(x => x.Id === id);
+        const index = devices.findIndex(x => x.Id == id);
         devices[index].Number = parseInt(val);
 
         this.setState({
@@ -57,11 +56,10 @@ class FormPackageList extends React.PureComponent
         }, () => this.callbackOnChange());
     }
 
-    calcTotalAmount =(devices)=>
-    {
+    calcTotalAmount(devices) {
         // Tinh so tien
         let amount = 0;
-        for(x in devices) {
+        for (x in devices) {
             amount += devices[x].Number * devices[x].Price;
         }
 
@@ -69,11 +67,7 @@ class FormPackageList extends React.PureComponent
     }
 
 
-    /*
-    * _renderItem
-    * */
-    _renderItem (item, index)
-    {
+    _renderItem =(item, index)=> {
         return (
             <View style={styles.numericContainer} key={"item-" + item.Id}>
                 <View style={styles.nameContainer}>
@@ -93,21 +87,17 @@ class FormPackageList extends React.PureComponent
     }
 
 
-    _renderDetail ()
-    {
+    _renderDetail() {
         if (this.state.devices.length === 0) {
             return null;
         }
 
         let listItem = [];
-        for (index = 0; index < this.state.devices.length; index++)
-        {
-            listItem.push( this._renderItem(this.state.devices[index], index) );
+        for (index = 0; index < this.state.devices.length; index++) {
+            listItem.push(this._renderItem(this.state.devices[index], index));
         }
 
-        console.log('LIST-ITEM-->', listItem)
-
-        return(
+        return (
             <React.Fragment>
                 <View style={styles.headContainer} key="header">
                     <Text style={styles.headText}>{this.props.unitLabel}</Text>
@@ -116,6 +106,12 @@ class FormPackageList extends React.PureComponent
 
                 {listItem}
 
+                {/*
+                <TextReadOnlyInput
+                    label="Total money equipment"
+                    value={this.state.amount.toString()}
+                />
+                */}
             </React.Fragment>
         );
     }
@@ -126,6 +122,21 @@ class FormPackageList extends React.PureComponent
     setValid(valid) {
         this.refs['pickerType'].setValid(valid);
     }
+
+    /*
+    * renderList
+    * */
+    renderList_2 = () => {
+        const {devices, amount} = this.state;
+
+        return (
+            (devices.length === 0) ? <View/> :
+                this._renderItem(devices[0], 0)
+        );
+    }
+
+
+
 
 
     render() {
@@ -142,6 +153,8 @@ class FormPackageList extends React.PureComponent
                 />
 
                 {listDetail}
+
+
             </React.Fragment>
         );
     }
