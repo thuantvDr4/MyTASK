@@ -92,7 +92,7 @@ class ServiceType extends Component
 
             errorList.push({
                 name: 'deviceType',
-                msg: 'vui logn nhap divice'
+                msg: strings('dl.open_safe.customer_info.service_type.equipment')
             });
         }
         else {
@@ -105,7 +105,7 @@ class ServiceType extends Component
 
             errorList.push({
                 name: 'packageType',
-                msg: 'vui logn nhap packageType'
+                msg: strings('dl.open_safe.customer_info.service_type.package')
             });
         }
         else {
@@ -125,7 +125,7 @@ class ServiceType extends Component
     /*
     * changePickerValue
     * */
-    changePickerValue (name, selectItem){
+    changePickerValue =(name, selectItem)=>{
         //
         const data = this.state.data;
         //
@@ -139,6 +139,9 @@ class ServiceType extends Component
         }, 50);
     }
 
+    /*
+    * submitData
+    * */
     submitData =(dataAmount)=> {
 
         // Xu ly data submit
@@ -175,20 +178,25 @@ class ServiceType extends Component
             setTimeout(() => {
                 this._loading(false);
                 this.props.nextStep(tabnav);
-                NavigationService.navigate('ciAmount');
+                NavigationService.navigate('openSafe_ciAmount');
             }, 0);
         });
     }
 
     //TEST
     _onNextStep=()=>{
+        const { data, tabnav } = this.state;
         if (! this.isValidData() ) {
             return;
         }
         alert('OK')
-
-        const data = this.state.data;
-        console.log('---DATA state--->', data)
+        console.log('---DATA state--->', data);
+        // goto amount
+        setTimeout(() => {
+            this._loading(false);
+            this.props.nextStep(tabnav);
+            NavigationService.navigate('openSafe_ciAmount');
+        }, 0);
     }
 
     _onNextStep_2 =()=> {
@@ -273,7 +281,6 @@ class ServiceType extends Component
                     allowRefresh={false}
                     value = {data.Device}
                     onChange = {(selectedItem) => this.changePickerValue('Device', selectedItem)}
-                    // onChange = {(selectedItem) => console.log('Device', selectedItem)}
                 />
             </View>
         )
@@ -310,7 +317,6 @@ class ServiceType extends Component
                     allowRefresh={false}
                     value = {data.Package}
                     onChange = {(selectedItem) => this.changePickerValue('Package', selectedItem)}
-                    // onChange = {(selectedItem) => console.log('Package', selectedItem)}
                 />
             </View>
         )

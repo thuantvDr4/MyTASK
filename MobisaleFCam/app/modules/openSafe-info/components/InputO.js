@@ -23,16 +23,18 @@ export default class InputO extends Component {
 		};
 	}
 
-	setValid =(isValid)=> {
+	setValid (isValid) {
 		this.setState({
 			isValid: isValid
 		});
 	}
 
+
 	render() {
 		const validStyle = createValidStyleSheet(this.state.isValid);
 		return (
-			<View style={[styles.field, validStyle.validStyleBorder]}>
+			<View style={[styles.field, validStyle.validStyleBorder]}
+			>
 				<Text style={[styles.plfake, ols.fs12]}>{this.props.label}</Text>
 				<TextInput
 					{...this.props}

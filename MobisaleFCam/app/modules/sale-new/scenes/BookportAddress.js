@@ -297,7 +297,7 @@ class BookportAddress extends React.Component {
                     this.props.saveInstallAddress(this.state.data, () => {
                         // NavigationService.navigate('BookPort'); //-------->V2.8
                         //
-                        NavigationService.navigate(this.state.route_name); //--------> V2.10
+                       NavigationService.navigate(this.state.route_name); //--------> V2.10 openSafe_ciAmount
                     });
                 });
 

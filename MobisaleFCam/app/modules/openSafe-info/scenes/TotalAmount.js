@@ -1,7 +1,7 @@
 /**
- * Màn hình tổng tiền
- * @uthor thuantv
- * @since 20/04/2021
+ * Todo: Màn hình tổng tiền
+ * codeBy thuantv
+ * date: 20/04/2021
  */
 
 //  LIB
@@ -30,6 +30,7 @@ import PopupWarning from 'app-libs/components/PopupWarning';
 import TechLoading from 'app-libs/components/TechLoading';
 import PickerSearchInput from 'app-libs/components/input/PickerSearchInput';
 
+
 // COMPONENT
 import ButtonCreateInfo from '../components/ButtonCreateInfo';
 
@@ -40,7 +41,6 @@ import mapTotalType from '../helpers/mapTotalType';
 import styles from '../styles';
 import ols from '../../../styles/Ola-style';
 import InputO from "../components/InputO";
-
 
 
 const VAT = [
@@ -54,6 +54,8 @@ class TotalAmount extends Component {
 
     constructor(props) {
         super(props);
+
+        this.vatRef =  React.createRef();
 
         this.state = {
             dataTemp: {
@@ -81,7 +83,7 @@ class TotalAmount extends Component {
         this.props.navigation.addListener('willFocus', () => {
 
             // GET API
-            // this._getDeposit();
+            this._getVAT();
 
             // this.setState({
             //     ...this.state,
@@ -94,6 +96,34 @@ class TotalAmount extends Component {
             //     },
             //     AllData: this.props.AllData,
             // });
+        });
+    }
+
+
+    /**
+     * GET API VAT
+     * @param
+     * @private
+     */
+    _getVAT =()=> {
+        this._loading(true);
+        // goi API generation
+        api.GetVatList({}, (success, result, msg) => {
+            // this._loading(false);
+
+            if (success) {
+                this.setState({
+                    ...this.state,
+                    dataAPI: {
+                        ...this.state.dataAPI,
+                        apiVAT: result,
+                    },
+                    loadingVisible: false
+                });
+            }
+            else {
+                this._error(msg);
+            }
         });
     }
 
@@ -110,7 +140,7 @@ class TotalAmount extends Component {
         // console.log("------------------");
 
         // Data if change because merge to contructor not update
-        if (nextProps.FormData != this.state.data) {
+        if (nextProps.FormData !== this.state.data) {
 
             newState.data.Total = nextProps.FormData.Total;
             newState.data.InternetTotal = nextProps.FormData.InternetTotal,
@@ -127,7 +157,7 @@ class TotalAmount extends Component {
      * @param
      * @private
      */
-    _onChangeSel(value, kind) {
+    _onChangeSel =(value, kind)=> {
 
         switch (kind) {
             case 'vat':
@@ -170,21 +200,10 @@ class TotalAmount extends Component {
     /**
      * VALIDATE FORM
      */
-    isValidData() {
+    isValidData =()=> {
         const { data } = this.state;
         let errorList = [];
 
-        // Check DepositFee
-        if (data.DepositFee == null) {
-            this.refs['DepositFeeType'].setValid(false);
-
-            errorList.push({
-                name: 'DepositFeeType',
-                msg: strings('dl.customer_info.total.err.DepositFeeType')
-            });
-        } else {
-            this.refs['DepositFeeType'].setValid(true);
-        }
         // Check VAT
         if (data.VAT === null) {
             this.refs['vatType'].setValid(false);
@@ -202,6 +221,7 @@ class TotalAmount extends Component {
             ( data.KhmerName === null || data.KhmerName === '' || (data.KhmerName.trim() === ""))
         ) {
             // this.refs['KhmerNameType'].setValid(false);
+
             errorList.push({
                 name: 'KhmerNameType',
                 msg: strings('dl.customer_info.total.err.KhmerNameType')
@@ -280,69 +300,16 @@ class TotalAmount extends Component {
         });
     }
 
-    /**
-     * GET API DATCOC
-     * @param
-     * @private
-     */
-    _getDeposit() {
-        this._loading(true);
 
-        // goi API generation
-        api.GetDepositList({}, (success, result, msg) => {
-            // this._loading(false);
-            if (success) {
-                this.setState({
-                    ...this.state,
-                    dataAPI: {
-                        ...this.state.dataAPI,
-                        apiDeposit: result,
-                    }
-                });
 
-                // GET API
-                this._getVAT();
-            }
-            else {
-                this._error(msg);
-            }
-        });
-    }
 
-    /**
-     * GET API VAT
-     * @param
-     * @private
-     */
-    _getVAT() {
-        // this._loading(true);
-
-        // goi API generation
-        api.GetVatList({}, (success, result, msg) => {
-            // this._loading(false);
-
-            if (success) {
-                this.setState({
-                    ...this.state,
-                    dataAPI: {
-                        ...this.state.dataAPI,
-                        apiVAT: result,
-                    },
-                    loadingVisible: false
-                });
-            }
-            else {
-                this._error(msg);
-            }
-        });
-    }
 
     /**
      * SUBMIT
      * @param
      * @private
      */
-    _onSubmit() {
+    _onSubmit_2 =()=> {
         //
         if (! this.isValidData()) {
             return;
@@ -393,12 +360,25 @@ class TotalAmount extends Component {
         });
     }
 
+
+    /*
+    * _onSubmit --> TEST
+    * */
+    _onSubmit =()=>{
+        //
+        if (! this.isValidData()) {
+            return;
+        }
+        alert('OK')
+    }
+
+
     /**
      * PUSH API TAO THONG TIN KHACH HANG
      * @param
      * @private
      */
-    _createInfoCustomer(data, dataTemp) {
+    _createInfoCustomer =(data, dataTemp)=> {
 
         this._loading(true);
 
@@ -428,7 +408,7 @@ class TotalAmount extends Component {
      * @param err
      * @private
      */
-    _error(err) {
+    _error =(err)=> {
         this._loading(false);
         // alert(JSON.stringify(err));
         // alert(err);
@@ -440,7 +420,7 @@ class TotalAmount extends Component {
      * @param isShow
      * @private
      */
-    _loading(isShow) {
+    _loading =(isShow)=> {
         this.setState({
             ...this.state,
             loadingVisible: isShow
@@ -524,7 +504,7 @@ class TotalAmount extends Component {
                                 <ModalPicker
                                     ref="vatType"
                                     label={strings('customer_info.total.form.vat_label')}
-                                    options={VAT}
+                                    options={objVAT}  //VAT
                                     placeholder={(this.state.data.VAT !== 0 && !this.state.data.VAT) ? strings('customer_info.total.form.vat_placeholder') : (this.state.data.VAT + '%')}
                                     headerTitle={strings('customer_info.total.form.vat_headertitle')}
                                     getLabel={item => (item.Name + '%')}
@@ -534,7 +514,9 @@ class TotalAmount extends Component {
                                     }}
                                     defVal={ this.state.data.VAT }
                                 />
+
                             </View>
+
 
                             {/*....KhmerName...*/}
                             { (this.state.data.VAT > 0) &&
@@ -552,7 +534,10 @@ class TotalAmount extends Component {
                                         onChangeText={(text) => this._onChangeText('KhmerName', text)}
                                         value={this.state.data.KhmerName}
                                     />
+
                                 </View>
+
+
                             }
                             {/*...Total..*/}
                             <View style={[styles.field]}>
@@ -573,7 +558,7 @@ class TotalAmount extends Component {
                                     strings('customer_info.customer_info.form.btnCreate_label') :
                                     strings('customer_info.customer_info.form.btnUpdate_label')}
                                 style={{marginBottom: 24, }}
-                                onSubmit={() => this._onSubmit()}
+                                onSubmit={this._onSubmit}
                             />
                         </View>
                     </View>
@@ -591,7 +576,7 @@ function mapStateToProps(state) {
     // console.log('--------- all state ', state.saleNewReducer.RegistrationObj);
 
     const stateSL = state.saleNewReducer.openSafeObj;
-    console.log('----RegistrationObj ', stateSL)
+    console.log('----RegistrationObj--amount ', stateSL)
 
     const FormData = {
         InternetTotal: stateSL.InternetTotal,
