@@ -21,3 +21,4 @@ export const REGION_BOOK_PORT= 'sale-new/REGION_BOOK_PORT';
 export const IS_MAP_READY  = 'sale-new/IS_MAP_READY';
 
 export const UPDATE_OPENSAFE_REGISTRATION  = 'sale-new/update_openSafe_registration';
+export const PUSH_DATA_INFO_OPENSAFE_REGISTRATION  = 'sale-new/push_data_info_openSafe_registration';

@@ -85,7 +85,7 @@ class ListCustomersInfo extends React.Component {
      * @private
      ***************************************************/
     getLocationData(callback) {
-        
+
         setTimeout(() => {
             callback(this.props.locationOpt);
         }, 0);
@@ -197,7 +197,7 @@ class ListCustomersInfo extends React.Component {
 
         api.GetRegistrationAll(MyData, (success, result, msg) => {
             this._loading(false);
-            
+
             if(success) {
                 this.setState({
                     ...this.state,
@@ -211,11 +211,13 @@ class ListCustomersInfo extends React.Component {
     }
 
     _handleBtnDetail (data1, data2){
-        
+
         if (this.state.dataType !== 1) {
             NavigationService.navigate('ContractDetail', {Contract: data1, ObjID: data2, pdfDownloadLink: this.props.pdfDownloadLink});
         } else {
-            NavigationService.navigate('lciDetailCustomer', {RegID : data1, RegCode : data2});
+          //NavigationService.navigate('lciDetailCustomer', {RegID : data1, RegCode : data2}); //
+
+            NavigationService.navigate('openSafe_DetailCustomer', {RegID : data1, RegCode : data2}); // for open-safe
         }
     }
 
@@ -261,7 +263,7 @@ class ListCustomersInfo extends React.Component {
 
         return (
             <View style={styles.container}>
-                
+
                 <View style={styles.listInfoContainer}>
 
                     <View style={styles.filterContainer2}>
@@ -271,7 +273,7 @@ class ListCustomersInfo extends React.Component {
                         <KeyboardAvoidingView behavior="padding" enabled>
                             <View style={[styles.searchContainer, {
                                 paddingRight:0, paddingLeft:0, paddingBottom: 0,
-                                flexDirection: 'row', 
+                                flexDirection: 'row',
                                 justifyContent: 'space-between',
                                 alignItems: 'center'}]}>
                                 <View style={[styles.boxSearch, {width: '65%'}]}>
@@ -316,7 +318,7 @@ class ListCustomersInfo extends React.Component {
                                 </View>
                             </View>
                         </KeyboardAvoidingView>
-                        
+
                         {
                             // FILTER
                         }
@@ -354,7 +356,7 @@ class ListCustomersInfo extends React.Component {
                                     </Text>
                                 </TouchableOpacity>
                             </View>
-                        
+
                             </View>
                         </View>
                     </View>
@@ -362,12 +364,12 @@ class ListCustomersInfo extends React.Component {
                     {
                         // LIST CUSTOMER
                     }
-                    <ScrollView 
-                        contentContainerStyle={[styles.scrollView, {paddingBottom:20}]} 
+                    <ScrollView
+                        contentContainerStyle={[styles.scrollView, {paddingBottom:20}]}
                         keyboardDismissMode={'on-drag'} >
                         {
                             !this.state.dataEmpty && Object.keys(this.state.objInfoCus).length > 0
-                            ? 
+                            ?
                             this.state.objInfoCus.map((infoCus, index) => (
                                 <View style={styles.oneList} key={infoCus.RegCode}>
                                     <View style={styles.infoBox}>
@@ -375,6 +377,13 @@ class ListCustomersInfo extends React.Component {
                                             <Text style={styles.infoTitle}>{strings('list_customer_info.list.list.Status')}</Text>
                                             <Text style={[styleStatus, {fontWeight:'700' }]}>{infoCus.RegStatus}</Text>
                                         </View>
+
+                                        {/*....V2.10..update..*/}
+                                        <View style={[styles.oneInfo, {marginTop: 8}]}>
+                                            <Text style={styles.infoTitle}>{'Service type'}</Text>
+                                            <Text style={[styleStatus, {fontWeight:'700' }]}>{infoCus.ServiceType}</Text>
+                                        </View>
+
                                         <View style={styles.oneInfo}>
                                             <Text style={styles.infoTitle}>{!infoCus.FullName ? strings('list_customer_info.list.list.fullname') : strings('list_customer_info.list.list.fullname')}</Text>
                                             <Text style={styles.infoValue}>{!infoCus.FullName ? infoCus.FullName : infoCus.FullName}</Text>
@@ -409,12 +418,12 @@ class ListCustomersInfo extends React.Component {
                                     </View>
                                 </View>
                             ))
-                            :  
+                            :
                             // Render view khi khong co data tra ve
                             <View style={styles.dataEmpty} >
                                 <View style={[styles.wrapImage]}>
-                                    <Image 
-                                        style={styles.imageNoData} 
+                                    <Image
+                                        style={styles.imageNoData}
                                         source={require('../../../assets/images/contract-list/report.png')}
                                     />
                                     <View>

@@ -713,6 +713,8 @@ function mapStateToProps(state) {
     // GET STATE FROM OPENSAFE
     const stateSL = state.saleNewReducer.openSafeObj;
 
+    console.log('saleNewReducer-->',stateSL)
+
     const FormData = {
         GroupPoints: stateSL.GroupPoints,
         CusTypeDetail: stateSL.CusTypeDetail,

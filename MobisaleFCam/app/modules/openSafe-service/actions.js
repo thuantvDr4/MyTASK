@@ -2,35 +2,18 @@ import * as t from './actionTypes';
 import * as api from './api';
 
 
-export function nextStep(dataTemp) {
+//========>V2.10
+
+export function pushDataInfoRegistration(data) {
     return (dispatch) => {
-        
-        if (dataTemp.step === 1) {
-            dispatch({ type: t.STEP_F_DONE, isScreen: !dataTemp.nextScreen ? dataTemp.isScreen : dataTemp.nextScreen });
-
-        } else if (dataTemp.step === 2) {
-            dispatch({ type: t.STEP_S_DONE, isScreen: !dataTemp.nextScreen ? dataTemp.isScreen : dataTemp.nextScreen });
-
-        } else if (dataTemp.step === 3) {
-            dispatch({ type: t.STEP_T_DONE });
-
-        } else {
-            dispatch({ type: t.BACK_STEP });
-        }
+        dispatch({type: 'sale-new/push_data_info_openSafe_registration', data: data });
+        return Promise.resolve()
     }
 }
 
-export function submitCreateTTKH(dataTemp) {
-    return (dispatch) => {
-        if (dataTemp.step === 3) {
-            dispatch({ type: t.SUBMIT_STEP_LAST});
-        }
-    }
-}
 
-export function updateInfoRegistration(data, callback) {
+export function showTabBar(data) {
     return (dispatch) => {
-        dispatch({type: 'sale-new/UPDATE_INFO_REGISTRATION', data: data });
-        callback();
+        dispatch({type: 'home/SHOW_TAB_BAR', data: data });
     }
 }

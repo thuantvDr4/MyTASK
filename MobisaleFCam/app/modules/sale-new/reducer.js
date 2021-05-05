@@ -137,6 +137,15 @@ const saleNewReducer = (state = initialState, action) => {
             break;
 
 
+        // 2.10 : day thong tin da co tu man hinh chi tiet TTKH vao registation -
+        case t.PUSH_DATA_INFO_OPENSAFE_REGISTRATION:
+            state = {
+                ...state,
+                openSafeObj: action.data,
+            };
+            break;
+
+
         // day thong tin da co tu man hinh chi tiet TTKH vao registation - port map
         case t.PUSH_DATA_INFO_REGISTRATION:
             state = {

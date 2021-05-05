@@ -34,8 +34,9 @@ class HandleSoftBackButton extends React.Component {
                             NavigationService.navigate('BookportAddress', {
                                 payload: null
                             });
+
                         } else {
-                            NavigationService.navigate('lciDetailCustomer', {
+                            NavigationService.navigate('openSafe_DetailCustomer', {
                                 RegID : FormDataUpdated.RegId,
                                 RegCode : FormDataUpdated.RegCode
                             });
@@ -57,7 +58,7 @@ class HandleSoftBackButton extends React.Component {
 }
 
 export default connect( (state) => {
-    const stateSL = state.saleNewReducer.RegistrationObj;
+    const stateSL = state.saleNewReducer.openSafeObj;
 
     return {
         FormDataUpdated: stateSL

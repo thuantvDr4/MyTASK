@@ -129,7 +129,7 @@ class Tabbar extends Component {
                             if (!FormDataUpdated.RegCode) {
                                 NavigationService.navigate('BookportAddress', {});
                             } else {
-                                NavigationService.navigate('lciDetailCustomer', {
+                                NavigationService.navigate('openSafe_DetailCustomer', {
                                     RegID : FormDataUpdated.RegId,
                                     RegCode : FormDataUpdated.RegCode
                                 });
@@ -218,7 +218,7 @@ class Tabbar extends Component {
 function mapStateToProps(state) {
 
     const stateCI = state.customerInfoReducer;
-    const stateSL = state.saleNewReducer.RegistrationObj;
+    const stateSL = state.saleNewReducer.openSafeObj;
 
     return {
         isStep: stateCI.isStep,

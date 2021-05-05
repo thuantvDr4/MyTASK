@@ -9,9 +9,9 @@ import {strings} from "locales/i18n";
 import {connect} from "react-redux";
 
 // ACTION
-import {actions as a, constants as c} from "../";
+import {actions as act, constants as c} from "../";
 
-const {pushDataInfoRegistration, showTabBar} = a;
+const {pushDataInfoRegistration, showTabBar} = act;
 
 // API
 import * as api from "../api";
@@ -72,8 +72,8 @@ class DetailCustomersInfo extends React.Component {
                 RegCode: navigation.getParam("RegCode", "0")
             };
 
-            // this._handleLoadInfoCus(myData);
-            // this.props.showTabBar(false);
+            this._handleLoadInfoCus(myData);
+            this.props.showTabBar(false);
         });
     }
 
@@ -94,6 +94,9 @@ class DetailCustomersInfo extends React.Component {
         this._handleLoadInfoCus(myData);
     }
 
+    /*
+    * _handleLoadInfoCus
+    * */
     _handleLoadInfoCus(myData) {
         this._loading(true);
 
@@ -119,9 +122,38 @@ class DetailCustomersInfo extends React.Component {
     * _handleUpdateInfo
     * */
     _handleUpdateInfo =()=> {
-        NavigationService.navigate("OpenSafe_Info", {
+        //show loading
+        this._loading(true);
+        // gọi api
+        const myData = {
+            RegID: this.state.objDetailCus.RegId,
+            RegCode: this.state.objDetailCus.RegCode
+        }
 
-        });
+        api.GetRegistrationByID(myData, (success, result, msg)=>{
+            if (success) {
+
+                console.log('Result---->', result)
+
+                let objResult = result[0];
+                objResult.FullAddress = objResult.Address;
+
+                this.props.showTabBar(true);
+
+                this.props.pushDataInfoRegistration(objResult).then(() => {
+                    this._loading(false);
+                    setTimeout(() => {
+                        NavigationService.navigate("OpenSafe_Info", {
+                            lciDetailCustomer: true,
+                            titleNav: strings("open_safe.titleNavigation.update")
+                        });
+                    }, 500);
+                });
+            } else {
+                this._errorMsg(msg.message);
+            }
+
+        } );
     }
 
 
