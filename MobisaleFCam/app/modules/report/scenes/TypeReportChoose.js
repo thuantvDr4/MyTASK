@@ -36,14 +36,18 @@ class TypeReportChoose extends React.PureComponent {
                 },
                 {
                     Id: 2,
-                    Name: strings('report.typereportchoose.typereports.salaryreport.title')
+                    Name: strings('report.open_safe.title')
                 },
                 {
                     Id: 3,
-                    Name: strings('report.typereportchoose.typereports.cancelservicereport.title')
+                    Name: strings('report.typereportchoose.typereports.salaryreport.title')
                 },
                 {
                     Id: 4,
+                    Name: strings('report.typereportchoose.typereports.cancelservicereport.title')
+                },
+                {
+                    Id: 5,
                     Name: strings('report.typereportchoose.typereports.salarybonusreport.title')
                 }
             ],
@@ -51,23 +55,33 @@ class TypeReportChoose extends React.PureComponent {
             dataSource: [
                 {
                     Id: 0,
-                    Name: strings('report.filter.title')
+                    Name: strings('report.filter.title'),
+                    RouteName: 'hideTabBottomReportFilter',
                 },
                 {
                     Id: 1,
-                    Name: strings('report.extraService.title')
+                    Name: strings('report.extraService.title'),
+                    RouteName: 'hideTabBottomExtraServiceReport',
                 },
                 {
                     Id: 2,
-                    Name: strings('report.typereportchoose.typereports.salaryreport.title')
+                    Name: strings('report.open_safe.title'),
+                    RouteName: 'hideTabBottomOpenSafeFilter',
                 },
                 {
                     Id: 3,
-                    Name: strings('report.typereportchoose.typereports.cancelservicereport.title')
+                    Name: strings('report.typereportchoose.typereports.salaryreport.title'),
+                    RouteName: 'hideTabBottomSalaryReport',
                 },
                 {
                     Id: 4,
-                    Name: strings('report.typereportchoose.typereports.salarybonusreport.title')
+                    Name: strings('report.typereportchoose.typereports.cancelservicereport.title'),
+                    RouteName: 'hideTabBottomCancelServiceReport',
+                },
+                {
+                    Id: 5,
+                    Name: strings('report.typereportchoose.typereports.salarybonusreport.title'),
+                    RouteName: 'hideTabBottomSalaryBonusReport',
                 }],
 
             text: ''
@@ -97,14 +111,24 @@ class TypeReportChoose extends React.PureComponent {
         });
     }
 
+
+    /*
+    * itemOnPress
+    * */
+    _itemOnPress =(routeName)=>{
+        if(!routeName){
+           return;
+        }
+        NavigationService.navigate(routeName)
+    }
+
+
+
     /**
      * Render item of Flatview
      */
     _renderItem = ({item, index}) => (
-        <TouchableOpacity style={styles.typereport} onPress={() => {
-            // sự kiện chuyển trang khi chọn 1 mục trong list
-            NavigationService.navigate(this.itemsNavigation[item.Id])
-        }}>
+        <TouchableOpacity style={styles.typereport} onPress={() =>this._itemOnPress(item.RouteName)}>
             <View style={styles.optionContainer}>
                 <Text style={styles.optionText}>{item.Name}</Text>
             </View>
