@@ -52,10 +52,88 @@ export function mapDeviceList(listDevice)
     return dataPicker;
 }
 
+export function mapDeviceList_openSafe(listDevice)
+{
+    let dataPicker = [];
+
+    for (let item of listDevice)
+    {
+        dataPicker.push({
+            Name: item.Name,
+            Value: item.Id? item.Id : item.ID,
+            Id: item.Id? item.Id : item.ID,
+            Price: item.Price,
+            Number: item.Number !== undefined ? item.Number : 1,
+            ChangeNumber: 1, // 1:cho phep thay đổi SL | 0: không cho phep thay đổi SL
+        });
+    }
+
+    return dataPicker;
+}
+
+export function mapPackageList_openSafe(listDevice)
+{
+    let dataPicker = [];
+
+    for (let item of listDevice)
+    {
+        dataPicker.push({
+            Name: item.Name,
+            Value: item.Id? item.Id : item.ID,
+            Id: item.Id? item.Id : item.ID,
+            Price: item.Price,
+            Number: item.Number !== undefined ? item.Number : 1,
+            ChangeNumber: 0, // 1:cho phep thay đổi SL | 0: không cho phep thay đổi SL
+        });
+    }
+
+    return dataPicker;
+}
+
+
+export function mapDeviceList_OSUpdate(listDevice)
+{
+    let dataPicker = [];
+
+    for (let item of listDevice)
+    {
+        dataPicker.push({
+            Name: item.Name,
+            Value: item.Id? item.Id : item.ID,
+            Id: item.Id? item.Id : item.ID,
+            Price: item.Price,
+            Number: item.Qty !== undefined ? item.Qty : 1,
+            ChangeNumber: 1, // 1:cho phep thay đổi SL | 0: không cho phep thay đổi SL
+        });
+    }
+
+    return dataPicker;
+}
+
+export function mapPackageList_OSUpdate(listDevice)
+{
+    let dataPicker = [];
+
+    for (let item of listDevice)
+    {
+        dataPicker.push({
+            Name: item.Name,
+            Value: item.Id? item.Id : item.ID,
+            Id: item.Id? item.Id : item.ID,
+            Price: item.Price,
+            Number: item.Qty !== undefined ? item.Qty : 1,
+            ChangeNumber: 0, // 1:cho phep thay đổi SL | 0: không cho phep thay đổi SL
+        });
+    }
+
+    return dataPicker;
+}
+
+
 /**
  * Dung map List Device bán thêm
- * 
- * @param array  
+ *
+ * @param array
  */
 export function mapDeviceListExtra(listDevice)
 {
@@ -79,8 +157,8 @@ export function mapDeviceListExtra(listDevice)
 
 /**
  * Dung map List Device bán thêm
- * 
- * @param array  
+ *
+ * @param array
  */
 export function mapDeviceListExtra_type2(listDevice)
 {
@@ -103,8 +181,8 @@ export function mapDeviceListExtra_type2(listDevice)
 
 /**
  * Dung map IP
- * 
- * @param array  
+ *
+ * @param array
  */
 export function mapIPList(listIP)
 {
@@ -115,7 +193,7 @@ export function mapIPList(listIP)
 
     for (let item of listIP)
     {
-        if (x == 0) {    
+        if (x == 0) {
             dataPicker.push({
                 ID: item.ID,
                 ShortName: item.ShortName,
@@ -132,8 +210,8 @@ export function mapIPList(listIP)
 
 /**
  * Dung map IP
- * 
- * @param array  
+ *
+ * @param array
  */
 export function mapPickerIPList(listIP)
 {
@@ -153,8 +231,8 @@ export function mapPickerIPList(listIP)
 
 /**
  * Dung map Month
- * 
- * @param array  
+ *
+ * @param array
  */
 export function mapMonthList(month)
 {
@@ -173,8 +251,8 @@ export function mapMonthList(month)
 
 /**
  * Dung map Gift
- * 
- * @param array  
+ *
+ * @param array
  */
 export function mapGiftList(gift)
 {
@@ -194,8 +272,8 @@ export function mapGiftList(gift)
 
 /**
  * Dung map cho phi hoa mang, tien dat coc
- * 
- * @param array listFee 
+ *
+ * @param array listFee
  */
 export function mapFeeList(listFee)
 {
@@ -214,7 +292,7 @@ export function mapFeeList(listFee)
 
 /**
  * Dung map cho advisory result
- * 
+ *
  * @param array list advisory result
  */
 export function mapListAdvisoryResult(list) {

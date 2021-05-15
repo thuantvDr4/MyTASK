@@ -21,15 +21,13 @@ import HomeNavigation from '../modules/home/navigations/HomeNavigation';
 import ContractNavigation from '../modules/contract/navigations/ContractNavigation';
 import SaleNewNavigation from '../modules/sale-new/navigations/SaleNewNavigation';
 
-import OpenSafeInfo_nav from '../modules/openSafe-info/navigations/openSafe-nav';
-import OpenSafeService_nav from '../modules/openSafe-service/navigations/openSafeService-nav';
 
 // COMPONENT
 import SearchPickerDynamic from '../libs/components/SearchPickerDynamic';
 import SearchPickerCLKM from '../libs/components/SearchPickerCLKM';
 import SearchMultiPickerDynamic from '../libs/components/SearchMultiPickerDynamic';
 import PotentialCustomerNavigation from '../modules/potential-customer/navigations/PotentialCustomerNavigation';
-
+import SearchSinglePickerDynamic from '../libs/components/SearchSinglePickerDynamic';
 
 // v2 - 2019
 import ContractListNavigation from '../modules/contract-list/navigations/ContractListNavigation';
@@ -48,6 +46,10 @@ import NotificationList from '../modules/home/scenes/NotificationList';
 import ExtraServiceNavigation from '../modules/extra-service/navigations/ExtraServiceNavigation';
 import CustomerInfoExtraNavigation from '../modules/extra-service-infomation/navigations/ExtraServiceInfoNavigation';
 import ExSerBookNavigation from '../modules/extra-service-bookport/navigations/ExSerBookNavigation';
+
+// V2.10
+import OpenSafeInfo_nav from '../modules/openSafe-info/navigations/openSafe-nav';
+import OpenSafeService_nav from '../modules/openSafe-service/navigations/openSafeService-nav';
 
 
 const AppNavigator = createStackNavigator(
@@ -89,12 +91,13 @@ const AppNavigator = createStackNavigator(
             }
         },
 
-        OpenSafe_DetailCustomer: {
+        OpenSafe_service: {
             screen: OpenSafeService_nav,
             navigationOptions: {
                 header: null,
             }
         },
+
 
         CustomerInfo: {
             screen: CustomerInfoNavigation,
@@ -123,6 +126,10 @@ const AppNavigator = createStackNavigator(
         SearchMultiPickerDynamic: {
             screen: SearchMultiPickerDynamic
         },
+        SearchSinglePickerDynamic: {
+            screen: SearchSinglePickerDynamic
+        },
+
         vund : {
             screen : DetailCustomersInfo,
             navigationOptions: {

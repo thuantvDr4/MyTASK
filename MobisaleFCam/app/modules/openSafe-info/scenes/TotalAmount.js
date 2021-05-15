@@ -41,6 +41,7 @@ import mapTotalType from '../helpers/mapTotalType';
 import styles from '../styles';
 import ols from '../../../styles/Ola-style';
 import InputO from "../components/InputO";
+import {makeDataDevice_OS} from "../helpers/mixData";
 
 
 const VAT = [
@@ -84,18 +85,6 @@ class TotalAmount extends Component {
 
             // GET API
             this._getVAT();
-
-            // this.setState({
-            //     ...this.state,
-            //     data: {
-            //         ...this.props.FormData,
-            //         ListGift: this.state.data.ListGift ? this.props.FormData.ListGift : this.state.data.ListGift,
-            //         DepositFee: this.state.data.DepositFee != 0 && !this.state.data.DepositFee ? this.props.FormData.DepositFee : this.state.data.DepositFee,
-            //         VAT: this.state.data.VAT != 0 && !this.state.data.VAT ? this.props.FormData.VAT : this.state.data.VAT,
-            //         // Total: this.state.data.Total === this.props.FormData.Total ? this.props.FormData.Total : this.state.data.Total,
-            //     },
-            //     AllData: this.props.AllData,
-            // });
         });
     }
 
@@ -143,12 +132,9 @@ class TotalAmount extends Component {
         if (nextProps.FormData !== this.state.data) {
 
             newState.data.Total = nextProps.FormData.Total;
-            newState.data.InternetTotal = nextProps.FormData.InternetTotal,
-            newState.data.DeviceTotal = nextProps.FormData.DeviceTotal,
-            newState.data.StaticIPTotal = nextProps.FormData.StaticIPTotal,
-            newState.data.ConnectionFee = nextProps.FormData.ConnectionFee
+            newState.data.PackageTotal = nextProps.FormData.PackageTotal;
+            newState.data.DeviceTotal = nextProps.FormData.DeviceTotal;
         }
-
         this.setState(newState);
     }
 
@@ -169,7 +155,7 @@ class TotalAmount extends Component {
                         KhmerName: parseInt(value.Name) > 0? this.state.data.KhmerName : ''
                     }
                 }, () => {
-                    // this._calcTotalAmount();
+                    this._calcTotalAmount();
                 });
                 break;
 
@@ -238,6 +224,7 @@ class TotalAmount extends Component {
         return false;
     }
 
+
     /**
      * TINH TONG TIEN
      * @param
@@ -249,26 +236,12 @@ class TotalAmount extends Component {
         const { AllData, Username } = this.props;
 
         const formData = {
-            UserName:       Username,
-
-            LocalType:      AllData.LocalType,
-            PromotionId:    AllData.PromotionId,
-            MonthOfPrepaid: AllData.MonthOfPrepaid,
-            ListDevice:     AllData.ListDevice,
-            ConnectionFee:  AllData.ConnectionFee,
-            LocationId:     AllData.LocationId,
-            ObjId:          AllData.ObjId,
-            Contract:       AllData.Contract,
-            ListStaticIP:   AllData.ListStaticIP,
-
-            DepositFee:     data.DepositFee,
-            VAT:            data.VAT,
-
-            Total:          data.Total,
-            InternetTotal:  data.InternetTotal,
-            DeviceTotal:    data.DeviceTotal,
-            StaticIPTotal:  data.StaticIPTotal,
+            "VAT": data.VAT,
+            "ListOSDevice": AllData.ListOSDevice,
+            "ListOSPackage": AllData.ListOSPackage,
+            "Total": data.Total,
         };
+
 
         // show loading
         this._loading(true);
@@ -285,8 +258,6 @@ class TotalAmount extends Component {
                     const postData = {
                         ...this.props.AllData,
                         Total:      rData.Total,
-                        ListGift:   data.ListGift ? [data.ListGift] : [],
-                        DepositFee: data.DepositFee,
                         VAT:        data.VAT
                     }
 
@@ -309,7 +280,7 @@ class TotalAmount extends Component {
      * @param
      * @private
      */
-    _onSubmit_2 =()=> {
+    _onSubmit =()=> {
         //
         if (! this.isValidData()) {
             return;
@@ -320,18 +291,11 @@ class TotalAmount extends Component {
         //
         const { AllData } = this.props;
         const { data, dataTemp } = this.state;
+
         let RegistrationObj = {};
-
-        RegistrationObj.InternetTotal   = AllData.InternetTotal;
-        RegistrationObj.DeviceTotal     = AllData.DeviceTotal;
-        RegistrationObj.StaticIPTotal   = AllData.StaticIPTotal;
-        RegistrationObj.ConnectionFee   = AllData.ConnectionFee;
-
-        RegistrationObj.ListGift        = data.ListGift ? [data.ListGift] : [];
-        RegistrationObj.DepositFee      = data.DepositFee;
         RegistrationObj.VAT             = data.VAT;
-        RegistrationObj.Total           = data.Total
-        RegistrationObj.KhmerName       = data.KhmerName //KhmerName
+        RegistrationObj.Total           = data.Total;
+        RegistrationObj.KhmerName       = data.KhmerName; //KhmerName
 
         //
         const postData = {
@@ -343,14 +307,6 @@ class TotalAmount extends Component {
         this.props.updateInfoRegistration(postData, () => {
 
             // Chuyen trang
-            // setTimeout(() => {
-            //     this._loading(false);
-            //     // Create PDK or UPDATE
-            //     this._createInfoCustomer(postData, dataTemp);
-            // }, 50);
-
-            //
-            // this._loading(false);
 
             // thuantv-edit: 22/10/2020
             this.setState({...this.state, disableButton: true},
@@ -360,17 +316,6 @@ class TotalAmount extends Component {
         });
     }
 
-
-    /*
-    * _onSubmit --> TEST
-    * */
-    _onSubmit =()=>{
-        //
-        if (! this.isValidData()) {
-            return;
-        }
-        alert('OK')
-    }
 
 
     /**
@@ -391,7 +336,7 @@ class TotalAmount extends Component {
 
             if (success) {
                 this.props.submitCreateTTKH(dataTemp);
-                NavigationService.navigate('lciDetailCustomer', {RegID : result[0].RegID, RegCode : result[0].RegCode});
+                NavigationService.navigate('openSafe_DetailCustomer', {RegID : result[0].RegID, RegCode : result[0].RegCode});
             }
             else {
                 setTimeout(() => {
@@ -432,13 +377,12 @@ class TotalAmount extends Component {
         // console.log(this.state.AllData);
         const objVAT = Object.values(this.state.dataAPI.apiVAT);
 
-        const { InternetTotal, DeviceTotal, StaticIPTotal, ConnectionFee, Total } = this.state.data
+        const { PackageTotal, DeviceTotal, Total, KhmerName } = this.state.data
 
-        const priI = parseInt(InternetTotal);
+        const priPa = parseInt(PackageTotal);
         const priD = parseInt(DeviceTotal);
-        const priC = parseInt(ConnectionFee);
-        const priS = parseInt(StaticIPTotal);
-        const tempTotal = !Total ? priI + priD + priC + priS : Total;
+
+        const tempTotal = !Total ?  priD + priPa : Total;
 
         return (
             <KeyboardAvoidingView
@@ -482,7 +426,7 @@ class TotalAmount extends Component {
                                 autoCapitalize={'none'}
                                 returnKeyType={'done'}
                                 autoCorrect={false}
-                                value={'140'}
+                                value={''+DeviceTotal}
                             />
 
                             {/*..package..*/}
@@ -496,7 +440,7 @@ class TotalAmount extends Component {
                                 autoCapitalize={'none'}
                                 returnKeyType={'done'}
                                 autoCorrect={false}
-                                value={'140'}
+                                value={''+PackageTotal}
                             />
 
                             {/*....VAT..*/}
@@ -579,15 +523,12 @@ function mapStateToProps(state) {
     console.log('----RegistrationObj--amount ', stateSL)
 
     const FormData = {
-        InternetTotal: stateSL.InternetTotal,
-        DeviceTotal: stateSL.DeviceTotal,
-        StaticIPTotal: stateSL.StaticIPTotal,
-        ConnectionFee: stateSL.ConnectionFee,
-        DepositFee: stateSL.DepositFee,
-        ListGift: mapTotalType(stateSL.ListGift),
+        // ListGift: mapTotalType(stateSL.ListGift),
         VAT: stateSL.VAT,
         Total: stateSL.Total,
         KhmerName: stateSL.KhmerName,
+        DeviceTotal: stateSL.DeviceTotal,
+        PackageTotal: stateSL.PackageTotal
     }
 
     return {

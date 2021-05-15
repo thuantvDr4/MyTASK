@@ -174,9 +174,6 @@ class CustomerInfo extends React.Component {
     }
 
 
-    _onNextStep_2 =()=> {
-        NavigationService.navigate('openSafe_ciServiceType');
-    }
 
     /**
      * GO TO STEP 2

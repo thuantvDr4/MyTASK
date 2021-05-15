@@ -16,15 +16,13 @@ import {connect} from 'react-redux';
 
 // LIB CUSTOM
 import NavigationService from 'app-libs/helpers/NavigationService';
-import PickerSearchInput from '../../../libs/components/input/PickerSearchInput';
 import ButtonElement from 'app-libs/components/input/ButtonElement';
-import PickerCLKMInput from 'app-libs/components/input/PickerCLKMInput';
 import PopupWarning from 'app-libs/components/PopupWarning';
 import TechLoading from 'app-libs/components/TechLoading';
 // COMPONENT
 import FormDeviceList from '../components/FormDeviceList';
-import FormPackageList from "../components/FormPackageList";
 import mapServiceType from '../helpers/mapServiceType';
+import {makeDataDevice_OS} from "../helpers/mixData";
 // API
 import * as api from '../api';
 // ACTION
@@ -35,29 +33,8 @@ const {nextStep, updateInfoRegistration} = customerInfo;
 import moduleStyle from '../styles';
 import ols from '../../../styles/Ola-style';
 // CONSTANTS
-import {INTERNET_ID} from '../../../config/constants';
 import InputO from "../components/InputO";
 
-const DIVICES = [
-    {ID:'1', Name: 'Equipment 1', Price: 50, Number:1, ChangeNumber: 1},
-    {ID:'2', Name: 'Equipment 2', Price: 50, Number:1, ChangeNumber: 1},
-    {ID:'3', Name: 'Equipment 3', Price: 50, Number:1, ChangeNumber: 1},
-    {ID:'4', Name: 'Equipment 4', Price: 50, Number:1, ChangeNumber: 1},
-]
-
-const DATA = {
-    List: DIVICES,
-    DeviceTotal: 200
-}
-
-const PACKAGE = [
-    {ID:'1', Name: 'Safe 1', Price: 50, Number:1, ChangeNumber: 0},
-    {ID:'2', Name: 'Safe 2', Price: 50, Number:1, ChangeNumber: 0},
-]
-const DATA_2 = {
-    List: PACKAGE,
-    DeviceTotal: 200
-}
 
 /*
 * CLASS
@@ -75,8 +52,6 @@ class ServiceType extends Component
             data: this.props.FormData,
             loadingVisible: false
         };
-        console.log('---FormData-->', this.props.FormData);
-
     }
 
     /*
@@ -139,38 +114,34 @@ class ServiceType extends Component
         }, 50);
     }
 
+
+    /*
+ * changePickerValue
+ * */
+    changePickerValue_2 =(name, selectItem)=>{
+        //
+        console.log('...no goi cai nay chưa', selectItem)
+
+    }
+
+
     /*
     * submitData
     * */
     submitData =(dataAmount)=> {
-
         // Xu ly data submit
         const { data, tabnav } = this.state;
         let RegistrationObj = {};
 
         RegistrationObj.SaleId              = this.props.SaleId;
-        RegistrationObj.ListServiceType     = data.ServiceType;
 
-        RegistrationObj.LocalType           = data.LocalType.Id;
-        RegistrationObj.LocalTypeName       = data.LocalType.Name;
+        RegistrationObj.ListOSDevice        = makeDataDevice_OS(data.Device.List);
+        RegistrationObj.DeviceTotal         = data.Device.DeviceTotal;
 
-        RegistrationObj.PromotionId         = data.Promotion.Id;
-        RegistrationObj.PromotionName       = data.Promotion.Name;
-        RegistrationObj.PromotionDescription= data.Promotion.Description;
-        RegistrationObj.MonthOfPrepaid      = data.Promotion.MonthOfPrepaid;
+        RegistrationObj.ListOSPackage          = makeDataDevice_OS(data.Package.List);
+        RegistrationObj.PackageTotal         = data.Package.DeviceTotal;
 
-        RegistrationObj.ConnectionFee       = data.ConnectionFee.Id;
-
-        RegistrationObj.PaymentMethodPerMonth     = data.PaymentMethodPerMonth.Id;
-        RegistrationObj.PaymentMethodPerMonthName = data.PaymentMethodPerMonth.Name;
-
-        RegistrationObj.ListDevice          = data.Device.List;
-        RegistrationObj.ListStaticIP        = data.StaticIP.ListStaticIP;
-
-        RegistrationObj.DeviceTotal         = dataAmount.DeviceTotal;
         RegistrationObj.Total               = dataAmount.Total;
-        RegistrationObj.InternetTotal       = dataAmount.InternetTotal;
-        RegistrationObj.StaticIPTotal       = dataAmount.StaticIPTotal;
 
         // dispatch redux
         this.props.updateInfoRegistration(RegistrationObj, () => {
@@ -178,28 +149,18 @@ class ServiceType extends Component
             setTimeout(() => {
                 this._loading(false);
                 this.props.nextStep(tabnav);
+                //goto
                 NavigationService.navigate('openSafe_ciAmount');
             }, 0);
         });
     }
 
-    //TEST
-    _onNextStep=()=>{
-        const { data, tabnav } = this.state;
-        if (! this.isValidData() ) {
-            return;
-        }
-        alert('OK')
-        console.log('---DATA state--->', data);
-        // goto amount
-        setTimeout(() => {
-            this._loading(false);
-            this.props.nextStep(tabnav);
-            NavigationService.navigate('openSafe_ciAmount');
-        }, 0);
-    }
 
-    _onNextStep_2 =()=> {
+    /*
+    *
+    * Handle nut-NEXT
+    * */
+    _onNextStep =()=> {
         if (! this.isValidData() ) {
             return;
         }
@@ -212,28 +173,17 @@ class ServiceType extends Component
         const { golbalData } = this.props;
 
         const formData = {
-            LocationId:         this.props.LocationId,
-            UserName:           this.props.Username,
-
-            LocalType:          data.LocalType.Id,
-            PromotionId:        data.Promotion.Id,
-            MonthOfPrepaid:     data.Promotion.MonthOfPrepaid,
-            ListDevice:         data.Device.List,
-            ConnectionFee:      data.ConnectionFee.Id,
-            ListStaticIP:       data.StaticIP.ListStaticIP,
-
-            ObjId:              golbalData.ObjId,
-            Contract:           golbalData.Contract,
-            VAT:                golbalData.VAT,
-            Total:              golbalData.Total,
-            InternetTotal:      golbalData.InternetTotal,
-            DeviceTotal:        golbalData.DeviceTotal,
-            DepositFee:         golbalData.DepositFee
+            "VAT": golbalData.VAT? golbalData.VAT : 0,
+            "ListOSDevice": makeDataDevice_OS(data.Device.List),
+            "ListOSPackage": makeDataDevice_OS(data.Package.List),
+            "Total": golbalData.Total,
         };
+
 
         api.caclRegistrationTotal(formData, (isSuccess, data, msg) => {
             // Xu ly thanh cong
             if (isSuccess) {
+
                 return this.submitData(data);
             }
 
@@ -273,11 +223,7 @@ class ServiceType extends Component
                     unitLabel = {strings('open_safe.service_type.form.listDevice_unitPrice')}
                     amountLabel = {strings('open_safe.service_type.form.listDevice_amount')}
                     getOptionData = {api.loadDeviceList}
-                    params = {{
-                        LocationId: 1000,//this.props.LocationId,
-                        MonthOfPrepaid: 6, // TEST
-                        LocalType: 109 //data.LocalType ? data.LocalType.Id : null
-                    }}
+                    params = {null}
                     allowRefresh={false}
                     value = {data.Device}
                     onChange = {(selectedItem) => this.changePickerValue('Device', selectedItem)}
@@ -300,7 +246,7 @@ class ServiceType extends Component
                     {strings('open_safe.service_type.package')}
                 </Text>
 
-                <FormPackageList
+                <FormDeviceList
                     ref={'packageType'}
                     isMultiChoose = {false}
                     label = {strings('open_safe.service_type.form.listPackage_label')}
@@ -308,16 +254,13 @@ class ServiceType extends Component
                     filterText = {strings('open_safe.service_type.form.listPackage_filterText')}
                     unitLabel = {strings('open_safe.service_type.form.listPackage_unitPrice')}
                     amountLabel = {strings('open_safe.service_type.form.listPackage_amount')}
-                    getOptionData = {api.loadDeviceList}
-                    params = {{
-                        LocationId: 1000,//this.props.LocationId,
-                        MonthOfPrepaid: 6, // TEST
-                        LocalType: 109 //data.LocalType ? data.LocalType.Id : null
-                    }}
+                    getOptionData = {api.loadPackageList}
+                    params = {null}
                     allowRefresh={false}
                     value = {data.Package}
                     onChange = {(selectedItem) => this.changePickerValue('Package', selectedItem)}
                 />
+
             </View>
         )
     }
@@ -392,7 +335,7 @@ class ServiceType extends Component
 export default connect((state) => {
     const RegistrationObj = state.saleNewReducer.openSafeObj;
 
-    console.log('openSafe-->reducer--', RegistrationObj);
+    console.log('openSafe-->reducer--serviceType-->', RegistrationObj);
 
     return {
         SaleId: state.authReducer.userInfo.SaleId,

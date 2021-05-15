@@ -4,8 +4,6 @@ import {View} from 'react-native';
 import ListCustomersInfo from '../scenes/ListCustomersInfo';
 import DetailCustomersInfo from '../scenes/DetailCustomersInfo';
 
-//==> V2.10
-import DetailCustomersInfo_openSafe from '../../openSafe-service/scenes/DetailCustomersInfo';
 
 export default createStackNavigator(
     {
@@ -15,9 +13,6 @@ export default createStackNavigator(
         lciDetailCustomer: {
             screen: DetailCustomersInfo,
         },
-        openSafe_DetailCustomer: {
-            screen: DetailCustomersInfo_openSafe,
-        }
     },
     {
         initialRouteName: 'lciListCustomer',

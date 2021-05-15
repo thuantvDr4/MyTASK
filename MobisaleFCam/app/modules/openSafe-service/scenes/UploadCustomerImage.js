@@ -67,8 +67,21 @@ class UploadCustomerImage extends React.Component {
      */
     componentDidMount() {
         this._isMounted = true;
+        //
+        this.showLoading(true);
+        // goi API generation Token
+        api.getSystemApiToken({}, (success, result, msg) => {
+            this.showLoading(false);
 
-
+            if (success) {
+                this.setState({
+                    ...this.state,
+                    dataSystemApiToken: result[0].Token
+                });
+            } else {
+                this._error(msg);
+            }
+        });
     }
 
     /**
@@ -237,14 +250,13 @@ class UploadCustomerImage extends React.Component {
     /**
      * Tien hanh Upload anh
      */
-    _uploadImage(file, isResize = false) {
+    _uploadImage(file, isResize = false)  {
         // set progress
         this.setState({ ...this.state, indeterminate: false, status: 'uploading'});
 
         const formData = {
             image: isResize ? file._resize : file,
             imageType: file.mime,
-            //image: this.state.imgList,
             RegID: this.state.RegID,
             Username: this.props.Username,
             dataSystemApiToken: this.state.dataSystemApiToken
@@ -277,7 +289,7 @@ class UploadCustomerImage extends React.Component {
      */
     uploadSuccess() {
 
-        if (this.listErr.length != 0) {
+        if (this.listErr.length !== 0) {
 
             this.showLoadingProgress(false);
             this.refs['popup'].getWrappedInstance().show(this.listErr[0]);
@@ -304,7 +316,9 @@ class UploadCustomerImage extends React.Component {
 
                 // Tro ve trang details customer
                 setTimeout(() => {
-                    this.props.navigation.goBack();
+
+                    this._goBack();
+
                 }, 500);
 
                 return;
@@ -313,6 +327,18 @@ class UploadCustomerImage extends React.Component {
             }
         });
     }
+
+
+    /*
+    * GoBack
+    * */
+    _goBack =()=>{
+        NavigationService.navigate('openSafe_DetailCustomer',{
+            RegID: this.state.RegID,
+            RegCode: this.state.RegCode
+        })
+    }
+
 
     /**
      * Xu ly chon hinh anh

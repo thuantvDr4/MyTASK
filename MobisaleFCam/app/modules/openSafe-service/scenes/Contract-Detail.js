@@ -61,16 +61,17 @@ class ContractDetail extends React.Component {
             RegId: this.props.navigation.getParam("RegID", "0"),
             RegCode: this.props.navigation.getParam("RegCode", "0")
         };
-        this.props.navigation.setParams({visible: false});
+
     }
 
     componentDidMount() {
         this.props.navigation.addListener("willFocus", () => {
             const {navigation} = this.props;
-            const myData = {
-                RegID: navigation.getParam("RegID", "0"),
-                RegCode: navigation.getParam("RegCode", "0")
-            };
+
+            const PARAMS = this.props.navigation.state.params;
+
+            console.log('PARAM---', PARAMS)
+
 
             // this._handleLoadInfoCus(myData);
             // this.props.showTabBar(false);

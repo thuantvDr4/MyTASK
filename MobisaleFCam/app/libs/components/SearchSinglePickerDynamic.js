@@ -1,37 +1,36 @@
 import React from 'react';
-import {View, FlatList, Text, StyleSheet, TextInput, TouchableOpacity, BackHandler} from 'react-native';
+import {View, FlatList, Text, StyleSheet, TextInput, TouchableOpacity, TouchableWithoutFeedback, BackHandler} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {strings} from 'locales/i18n';
 import TechLoading from 'app-libs/components/TechLoading';
-
 
 /**
  * Search multiple select picker component
  *
  * use:
- * 		this.props.navigation.navigate('SearchPickerDynamic', {
+ * 		this.props.navigation.navigate('SearchMultiPickerDynamic', {
  * 			onChange: (selectedItemList) => {
  * 				// To do: Callback function when picker selected and go back this screen
  * 			},
  *          title: "Địa chỉ lắp đặt",
  *          placeholder: "Nhap ten tinh thanh",
- *          allowRefresh: {true} // An hien nut refresh cache
  * 			getOptionData: (callback, isRefresh) => {
  *              // To do something
  *              callback(data);
  *          }
  *      })
  *
- * @author DaiDP
- * @since Aug, 2018
+ * @author thuantv
+ * @since May, 2021
  */
-class SearchPickerDynamic extends React.Component
+class SearchSinglePickerDynamic extends React.PureComponent
 {
 	/**
 	 * Config navigation bar
 	 */
     static navigationOptions = ({navigation, navigationOptions}) => {
 		return {
-            headerStyle: {
+			headerStyle: {
                 backgroundColor: '#0B76FF',
                 elevation: 0,
                 shadowOpacity: 0,
@@ -42,36 +41,37 @@ class SearchPickerDynamic extends React.Component
                 fontWeight: 'bold',
                 textAlign: 'center',
                 alignSelf: 'center',
-                width: navigation.getParam('allowRefresh') ? '90%' : '70%'
+                width: '70%'
             },
             title: navigation.getParam('title', 'Config title here'),
-            headerRight: (
-                navigation.getParam('allowRefresh') ?
-                    <TouchableOpacity onPress={() => navigation.getParam('loadData')(1)} style={{marginRight: 10}}>
-                        <Icon name="refresh" size={24} style={{color: '#fff'}}/>
-                    </TouchableOpacity>
-                : null
-            )
 		}
     };
 
+    data = [];
     _didFocusSubscription;
     _willBlurSubscription;
 
     constructor(props)
     {
-		super(props);
+        super(props);
+
+        let selectedItemList = this.props.navigation.getParam('selectItem', []);
+        for (index in selectedItemList) {
+            selectedItemList[index].isSelected = true;
+        }
 
 		// init state
         this.state = {
             data: [], // full data from API
             dataSource: [], // Data display option
             text: '',
-            loadingVisible: true,
+            selectedItems: selectedItemList,
+            loadingVisible: true
         }
 
-		// bind event
-        this._onChange = this._onChange.bind(this);
+        // bind event
+        this.onConfirm = this.onConfirm.bind(this);
+        this._onSelect = this._onSelect.bind(this);
         this._filterSearch = this._filterSearch.bind(this);
         this.onBackButtonPressAndroid = this.onBackButtonPressAndroid.bind(this);
 
@@ -79,7 +79,6 @@ class SearchPickerDynamic extends React.Component
             BackHandler.addEventListener('hardwareBackPress', this.onBackButtonPressAndroid)
         );
     }
-
 
     componentDidMount()
     {
@@ -112,6 +111,13 @@ class SearchPickerDynamic extends React.Component
         });
 
         getOptionData((data) => {
+            for (i in this.state.selectedItems) {
+                index = data.findIndex(item => item.Id === this.state.selectedItems[i].Id);
+                if (index >= 0) {
+                    data[index].isSelected = true;
+                }
+            }
+
             this.setState({
                 data: data,
                 loadingVisible: false
@@ -127,12 +133,7 @@ class SearchPickerDynamic extends React.Component
 	 * @param {*} text
 	 */
     _filterSearch(text) {
-        const newData = this.state.data.filter((item) => {
-            const itemData = item.Name.toUpperCase();
-            const textData = text.toUpperCase();
-
-            return itemData.indexOf(textData) > -1;
-        });
+        const newData = this._getFilterData(text);
 
         this.setState({
             text: text,
@@ -140,27 +141,83 @@ class SearchPickerDynamic extends React.Component
         });
     }
 
+    _getFilterData(text)
+    {
+        return this.state.data.filter((item) => {
+            const itemData = item.Name.toUpperCase();
+            const textData = text.toUpperCase();
+
+            return itemData.indexOf(textData) > -1;
+        });
+    }
+
+    onConfirm()
+    {
+        let selectedItemList = this.state.selectedItems;
+        for (index in selectedItemList) {
+            delete selectedItemList[index].isSelected;
+        }
+
+        this.props.navigation.goBack();
+        this.props.navigation.state.params.onChange(selectedItemList);
+    }
+
+
+
 	/**
 	 * Callback when select item on list
 	 *
 	 * @param {*} selectItem
 	 */
-    _onChange(selectItem)
+    _onSelect (selectItem)
     {
-        this.props.navigation.goBack();
-        this.props.navigation.state.params.onChange(selectItem);
+        //
+        const  {dataSource, data} = this.state;
+        // Khoi tao data
+        const newList =  dataSource.map((item)=>{
+            return{
+                ...item,
+                isSelected: item.Id === selectItem.Id ? true : false
+            }
+        })
+
+        this.setState({
+            selectedItems: [selectItem],
+            dataSource: newList,
+            data: data
+        });
     }
 
 	/**
 	 * Render item of Flatview
 	 */
-    _renderItem = ({item}) => (
-        <TouchableOpacity onPress={() => { this._onChange(item) }}>
-            <View style={styles.optionContainer}>
-                <Text style={styles.optionText}>{item.Name}</Text>
-            </View>
-        </TouchableOpacity>
-    );
+    _renderItem = ({item}) => {
+        const isSelected = item.isSelected | false;
+
+        if (isSelected)
+        {
+            return (
+                <TouchableWithoutFeedback onPress={() => { this._onSelect(item) }}>
+                    <View style={ [styles.optionContainer, styles.optionBorderSeleted] }>
+                        <Text style={ [styles.optionText, styles.optionTextSeleted] }>{item.Name}</Text>
+                        <Icon name="check" size={16} style={ [styles.optionIcon, styles.optionTextSeleted] }/>
+                    </View>
+                </TouchableWithoutFeedback>
+            );
+        }
+        else
+        {
+            return (
+                <TouchableOpacity onPress={() => { this._onSelect(item) }}>
+                    <View style={styles.optionContainer}>
+                        <Text style={styles.optionText}>{item.Name}</Text>
+                        <Icon name="check" size={16} style={styles.optionIcon}/>
+                    </View>
+                </TouchableOpacity>
+            );
+        }
+
+    }
 
 	/**
 	 * Render view
@@ -170,7 +227,7 @@ class SearchPickerDynamic extends React.Component
 		const placeholder = this.props.navigation.getParam('placeholder', '');
 
         return (
-            <View style={{ flex:1}}>
+            <View style={{ flex:1 }}>
                 <View style={styles.searchBar}>
                     <View style={styles.searchInput}>
                         <Icon name="search" size={16} style={styles.icon}/>
@@ -191,6 +248,12 @@ class SearchPickerDynamic extends React.Component
                         keyExtractor={(item, index) => index + "_" + item.Id}
                     />
                 </View>
+
+                <View style={styles.confirmBar}>
+                    <TouchableOpacity style={styles.button} onPress={this.onConfirm}>
+                        <Text style={styles.buttonText}>{strings('dialog.confirm')}</Text>
+                    </TouchableOpacity>
+                </View>
                 <TechLoading visible={this.state.loadingVisible}/>
             </View>
         );
@@ -198,7 +261,7 @@ class SearchPickerDynamic extends React.Component
 }
 
 
-export default SearchPickerDynamic;
+export default SearchSinglePickerDynamic;
 
 const styles = StyleSheet.create({
     searchBar: {
@@ -211,7 +274,7 @@ const styles = StyleSheet.create({
     searchInput: {
         backgroundColor: '#fff',
         borderRadius: 5,
-        marginHorizontal: 24,
+        marginHorizontal: 32,
         marginBottom: 16,
         minHeight: 40,
         flexDirection: 'row',
@@ -235,7 +298,7 @@ const styles = StyleSheet.create({
     },
     optionContainer: {
         borderWidth: 1,
-        borderColor: '#0b76ff',
+        borderColor: '#9ec9ff',
         marginHorizontal: 24,
         marginVertical: 6,
         borderRadius: 5,
@@ -246,10 +309,44 @@ const styles = StyleSheet.create({
     optionText: {
         alignSelf: 'flex-start',
         paddingHorizontal: 10,
-        color: '#0b76ff',
+        color: '#9ec9ff',
         fontSize: 14,
-        marginVertical: 16,
-        //lineHeight: 48
-        lineHeight: 18
+        lineHeight: 48
     },
+    optionIcon: {
+        position: 'absolute',
+        right: 15,
+        color: '#9ec9ff',
+    },
+    optionBorderSeleted: {
+        borderColor: '#0b76ff',
+    },
+    optionTextSeleted: {
+        color: '#0b76ff',
+    },
+
+    confirmBar: {
+        borderTopWidth: 1,
+        borderTopColor: 'rgba(154,154,154,0.4)'
+    },
+    button: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#0B76FF',
+        height: 48,
+        borderRadius: 5,
+        zIndex: 100,
+        marginHorizontal: 25,
+        marginBottom: 24, marginTop: 10,
+        shadowColor: '#9EC9FF',
+        shadowOffset: {width: 0, height: 10},
+        shadowOpacity: 0.75,
+        shadowRadius: 7,
+        elevation: 10,
+    },
+    buttonText: {
+        color: 'white',
+        backgroundColor: 'transparent',
+        fontSize: 20,
+    }
 });

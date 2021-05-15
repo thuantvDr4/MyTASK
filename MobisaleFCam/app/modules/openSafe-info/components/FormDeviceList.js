@@ -28,6 +28,7 @@ class FormDeviceList extends React.PureComponent
 
     onSelectedDevice =(selectedItem)=>
     {
+
         this.setState({
             devices: selectedItem,
             amount: this.calcTotalAmount(selectedItem)

@@ -1,5 +1,6 @@
 import myNetwork from '../../config/network';
-import {mapPromotionList, mapDeviceList, mapFeeList, mapPickerIPList, mapMonthList} from 'app-libs/helpers/mapPicker';
+import {mapPromotionList, mapDeviceList_openSafe,
+    mapFeeList, mapPickerIPList, mapMonthList, mapPackageList_openSafe} from 'app-libs/helpers/mapPicker';
 
 /**
  * Xu ly load danh sach loai dich vu (Internet, thiet bi)
@@ -165,21 +166,16 @@ export function loadPaymentMethodPerMonthList(callback, options)
  */
 export function loadDeviceList(callback, options)
 {
-    const {LocationId, MonthOfPrepaid, LocalType} = options.params;
-
+    // const {LocationId, MonthOfPrepaid, LocalType} = options.params;
     myNetwork.post(
-        '/Data/GetDeviceList',
-        {
-            LocationId: LocationId,
-            MonthOfPrepaid: MonthOfPrepaid,
-            LocalType: LocalType,
-            Type: 1, // 1: Ban moi, 2: Ban them
-        }
+        '/Data/GetOpenSafeDevice',
+        {}
     )
     .then(response => response.data)
     .then(response => {
+       // console.log('DATA-API-->', response)
         if (response.Code === 1) {
-            callback(mapDeviceList(response.Data));
+            callback( mapDeviceList_openSafe(response.Data) );
         }
         else {
             callback([]);
@@ -190,6 +186,39 @@ export function loadDeviceList(callback, options)
         callback([]);
     });
 }
+
+
+
+/**
+ * Xu ly load Danh gói dịch vụ homeSafe
+ *
+ * @param function callback
+ */
+export function loadPackageList(callback, options)
+{
+    // const {LocationId, MonthOfPrepaid, LocalType} = options.params;
+
+    myNetwork.post(
+        '/Data/GetOpenSafePackage',
+        {}
+    )
+        .then(response => response.data)
+        .then(response => {
+           // console.log('DATA-API-->', response)
+            if (response.Code === 1) {
+                callback(mapPackageList_openSafe(response.Data) );
+            }
+            else {
+                callback([]);
+            }
+        })
+        .catch(error => {
+            if (error === null) return;
+            callback([]);
+        });
+}
+
+
 
 /**
  * Xu ly load Danh sach IP
@@ -274,7 +303,7 @@ export function loadGiftList(callback, options) {
 export function caclRegistrationTotal(data, callback)
 {
     myNetwork.post(
-        '/Registration/GetRegistrationTotal',
+        '/RegistrationOpenSafe/GetOSRegistrationTotal',
         data
     )
     .then(response => response.data)
@@ -348,6 +377,9 @@ export function GetCustomerType(myData, callback) {
     });
 }
 
+
+
+
 // GET API QUOC TICH
 export function GetNationalityList(myData, callback) {
     myNetwork.post(
@@ -367,6 +399,7 @@ export function GetNationalityList(myData, callback) {
         callback(false, null, {message: error});
     });
 }
+
 
 // GET API VAT
 export function GetVatList(myData, callback) {
@@ -413,7 +446,7 @@ export function GetDepositList(myData, callback) {
 // TẠO THÔNG TIN KHACH HÀNG
 export function createInfoCustomer(myData, callback) {
     myNetwork.post(
-        'Registration/UpdateRegistration',
+        '/RegistrationOpenSafe/UpdateOSRegistration',
         myData
     )
     .then(response => response.data)

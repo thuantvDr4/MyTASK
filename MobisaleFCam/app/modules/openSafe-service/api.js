@@ -435,6 +435,8 @@ export function createInfoCustomer(myData, callback) {
 
 
 
+
+
 //=============>2.10- 05/05/2021
 /**
  * API lay chi tiet TTKH
@@ -444,7 +446,7 @@ export function createInfoCustomer(myData, callback) {
  */
 export function GetRegistrationDetail(myData, callback) {
     myNetwork.post(
-        '/Registration/GetRegistrationDetail',
+        '/RegistrationOpenSafe/GetOSRegistrationByID',
         myData
     )
         .then(response => response.data)
@@ -462,32 +464,6 @@ export function GetRegistrationDetail(myData, callback) {
 }
 
 
-
-/**
- * API Lay full thong tin dung cho viec update, edit
- *
- * @param {*} myData
- * @param {*} callback
- */
-export function GetRegistrationByID(myData, callback) {
-    myNetwork.post(
-        '/Registration/GetRegistrationByID',
-        myData
-    )
-        .then(response => response.data)
-        .then(response => {
-            if (response.Code === 1) {
-                callback(true, response.Data, null);
-            }
-            else {
-                callback(false, null, {Code: response.Code, message: response.Message});
-            }
-        })
-        .catch(error => {
-            //if (error === null) return;
-            callback(false, null, {message: error});
-        });
-}
 
 
 
@@ -658,6 +634,8 @@ export function downloadImage(idImage, dataSystemApiToken, callback) {
         });
 }
 
+
+
 /**
  * Cap nhat hinh anh TTKH
  *
@@ -668,7 +646,7 @@ export function updateRegistrationImage(data, callback) {
     const {RegID, RegCode, ImageInfo} = data;
 
     myNetwork.post(
-        '/Registration/UpdateRegistrationImage',
+        '/RegistrationOpenSafe/UpdateOSRegistrationImage',
         {
             RegID: RegID,
             RegCode: RegCode,
@@ -686,6 +664,33 @@ export function updateRegistrationImage(data, callback) {
         })
         .catch(error => {
             //if (error === null) return;
+            callback(false, null, {message: error});
+        });
+}
+
+
+/**
+ * Get System Api Token
+ *
+ * @param {*} myData = ""
+ * @param {*} callback
+ */
+export function getSystemApiToken(myData, callback) {
+    myNetwork.post(
+        '/User/GetSystemApiToken',
+        myData
+    )
+        .then(response => response.data)
+        .then(response => {
+            if (response.Code === 1) {
+                callback(true, response.Data, null);
+            }
+            else {
+                callback(false, null, {Code: response.Code, message: response.Message});
+            }
+        })
+        .catch(error => {
+            if (error === null) return;
             callback(false, null, {message: error});
         });
 }

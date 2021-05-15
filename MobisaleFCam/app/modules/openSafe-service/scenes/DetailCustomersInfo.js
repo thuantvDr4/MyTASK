@@ -41,7 +41,8 @@ class DetailCustomersInfo extends React.Component {
             headerLeft: (
                 <HeaderBackButton
                     onPress={() => {
-                        navigation.goBack();
+                       // navigation.goBack();
+                        NavigationService.navigate("TabListCustomerInfo");
                     }}
                     tintColor="#fff"
                 />
@@ -59,20 +60,25 @@ class DetailCustomersInfo extends React.Component {
             loadingVisible: false,
             objDetailCus: null,
             RegId: this.props.navigation.getParam("RegID", "0"),
-            RegCode: this.props.navigation.getParam("RegCode", "0")
+            RegCode: this.props.navigation.getParam("RegCode", "0"),
+            //
+            params: {
+                RegId: this.props.navigation.getParam("RegID", "0"),
+                RegCode: this.props.navigation.getParam("RegCode", "0"),
+            },
+
         };
         this.props.navigation.setParams({visible: false});
     }
 
     componentDidMount() {
-        this.props.navigation.addListener("willFocus", () => {
-            const {navigation} = this.props;
-            const myData = {
-                RegID: navigation.getParam("RegID", "0"),
-                RegCode: navigation.getParam("RegCode", "0")
-            };
 
-            this._handleLoadInfoCus(myData);
+        this.props.navigation.addListener("willFocus", () => {
+
+            const PARAMS = this.props.navigation.state.params;
+
+            const {params} = this.state;
+            this._handleLoadInfoCus(params);
             this.props.showTabBar(false);
         });
     }
@@ -81,32 +87,21 @@ class DetailCustomersInfo extends React.Component {
         this.props.showTabBar(true);
     }
 
-    /**
-     * Refresh data khi navigation back. Fix truong hop upload anh roi quay troi lai
-     */
-    loadData() {
-        this._loading(false);
-        const myData = {
-            RegID: this.state.RegId,
-            RegCode: this.state.RegCode
-        };
-
-        this._handleLoadInfoCus(myData);
-    }
 
     /*
     * _handleLoadInfoCus
     * */
     _handleLoadInfoCus(myData) {
+
         this._loading(true);
 
         api.GetRegistrationDetail(myData, (success, result, msg) => {
-
+            console.log('DETAIL-----', result)
             if (success) {
                 this.setState({
                     loadingVisible: false,
                     objDetailCus: result[0],
-                    RegId: myData.RegID,
+                    RegId: myData.RegId,
                     RegCode: myData.RegCode
                 });
             } else {
@@ -124,36 +119,24 @@ class DetailCustomersInfo extends React.Component {
     _handleUpdateInfo =()=> {
         //show loading
         this._loading(true);
-        // gọi api
-        const myData = {
-            RegID: this.state.objDetailCus.RegId,
-            RegCode: this.state.objDetailCus.RegCode
-        }
+        //
+        const {objDetailCus} = this.state;
 
-        api.GetRegistrationByID(myData, (success, result, msg)=>{
-            if (success) {
+        let objResult = {...objDetailCus};
+        objResult.FullAddress = objDetailCus.Address;
 
-                console.log('Result---->', result)
+        this.props.showTabBar(true);
 
-                let objResult = result[0];
-                objResult.FullAddress = objResult.Address;
-
-                this.props.showTabBar(true);
-
-                this.props.pushDataInfoRegistration(objResult).then(() => {
-                    this._loading(false);
-                    setTimeout(() => {
-                        NavigationService.navigate("OpenSafe_Info", {
-                            lciDetailCustomer: true,
-                            titleNav: strings("open_safe.titleNavigation.update")
-                        });
-                    }, 500);
+        this.props.pushDataInfoRegistration(objResult).then(() => {
+            this._loading(false);
+            setTimeout(() => {
+                NavigationService.navigate("OpenSafe_Info", {
+                    lciDetailCustomer: true,
+                    titleNav: strings("open_safe.titleNavigation.update")
                 });
-            } else {
-                this._errorMsg(msg.message);
-            }
+            }, 500);
+        });
 
-        } );
     }
 
 
@@ -187,13 +170,6 @@ class DetailCustomersInfo extends React.Component {
     }
 
 
-    /*
-    * viewContract
-    * */
-    viewContract =()=> {
-        NavigationService.navigate('openSafe_CreateContract', {});
-    }
-
 /*
 * FOR------> FUNCTIONS
 *
@@ -203,13 +179,9 @@ class DetailCustomersInfo extends React.Component {
 * _uploadImg
 * */
     _uploadImg =()=>{
-        // NavigationService.navigate("openSafe_UploadImage", {
-        //     RegID: objDetailCus.RegId,
-        //     RegCode: objDetailCus.RegCode,
-        //     refreshData: this.loadData.bind(this)
-        // });
         NavigationService.navigate("openSafe_UploadImg", {
-
+            RegID: this.state.objDetailCus.RegId,
+            RegCode: this.state.objDetailCus.RegCode,
         });
     }
 
@@ -217,23 +189,34 @@ class DetailCustomersInfo extends React.Component {
 * _viewDetailImg
 * */
     _viewDetailImg =()=>{
-        // goi API generation Token
-        // this._loading(true);
-        // api.getSystemApiToken({}, (success, result, msg) => {
-        //     this._loading(false);
-        //
-        //     if (success) {
-        //         NavigationService.navigate("lciViewCustomerImage", {
-        //             listImage: this.state.objDetailCus.ImageInfo,
-        //             dataSystemApiToken: result[0].Token
-        //         });
-        //     } else {
-        //         this._error(msg);
-        //     }
-        // });
 
-        alert('_viewDetailImg')
+       // goi API generation Token
+        this._loading(true);
+        api.getSystemApiToken({}, (success, result, msg) => {
+            this._loading(false);
+
+            if (success) {
+                NavigationService.navigate("lciViewCustomerImage", {
+                    listImage: this.state.objDetailCus.ImageInfo,
+                    dataSystemApiToken: result[0].Token
+                });
+            } else {
+                this._error(msg);
+            }
+        });
     }
+
+
+
+    /*
+* viewContract
+* */
+    viewContract =()=> {
+        NavigationService.navigate('openSafe_CreateContract', {
+            payload: this.state.objDetailCus
+        });
+    }
+
 
 /*
 * FOR----> COMPONENTS
@@ -252,40 +235,21 @@ class DetailCustomersInfo extends React.Component {
                     styleLabel={[styles.styleLabel, {fontWeight: '700', color: '#030303'}]}
                     styleValue={styles.styleValue}
                     label={strings("open_safe.detail_info.equipment")}
-                    value={objDetailCus ? objDetailCus.InternetTotal : null}
+                    value={objDetailCus ? objDetailCus.Total : null}
                 />
-                {/** line */}
-                <View style={styles.lineMid}/>
-
-                <TextInfo
-                    styleWrapper={styles.wrapperOne}
-                    styleLabel={styles.styleLabel}
-                    styleValue={styles.styleValue}
-                    label={'OpenSafe 1'}
-                    value={20}
-                />
-
-                <TextInfo
-                    styleWrapper={styles.wrapperOne}
-                    styleLabel={styles.styleLabel}
-                    styleValue={styles.styleValue}
-                    label={'OpenSafe 2'}
-                    value={20}
-                />
-
 
                 {
                     objDetailCus
-                    && objDetailCus.ListDevice
-                    && objDetailCus.ListDevice.length > 0
+                    && objDetailCus.ListOpenSafeDevice
+                    && objDetailCus.ListOpenSafeDevice.length > 0
                         ?
                         <View style={styles.lineMid}/>
                         : null
                 }
 
                 {
-                    objDetailCus
-                        ? objDetailCus.ListDevice.map(
+                    objDetailCus&&objDetailCus.ListOSDevice?
+                         objDetailCus.ListOSDevice.map(
                         (itemDevice, index) => (
                             <TextInfo
                                 key={index}
@@ -293,32 +257,10 @@ class DetailCustomersInfo extends React.Component {
                                 styleLabel={{...styles.styleLabel, flex: 1}}
                                 styleValue={{...styles.styleValue, flex: 1}}
                                 label={itemDevice.Name}
-                                value={itemDevice.TotalPrice}
+                                value={itemDevice.Total}
                             />
                         )
                         )
-                        : null
-                }
-
-                {
-                    objDetailCus
-                    && objDetailCus.ListStaticIP
-                    && objDetailCus.ListStaticIP.length > 0
-                        ?
-                        <View>
-                            <View style={styles.lineMid}/>
-                            <TextInfo
-                                styleWrapper={styles.wrapperOne}
-                                styleLabel={styles.styleLabel}
-                                styleValue={styles.styleValue}
-                                label={strings("list_customer_info.detail.IpAddress")}
-                                value={
-                                    objDetailCus.ListStaticIP[0].Total
-                                        ? objDetailCus.ListStaticIP[0].Total
-                                        : 0
-                                }
-                            />
-                        </View>
                         : null
                 }
             </View>
@@ -339,23 +281,21 @@ class DetailCustomersInfo extends React.Component {
                     styleLabel={[styles.styleLabel, {fontWeight: '700', color: '#030303'}]}
                     styleValue={styles.styleValue}
                     label={strings("open_safe.detail_info.package")}
-                    value={objDetailCus ? objDetailCus.InternetTotal : null}
+                    value={objDetailCus ? objDetailCus.Total : null}
                 />
-                {/** line */}
-                <View style={styles.lineMid}/>
 
                 {
                     objDetailCus
-                    && objDetailCus.ListDevice
-                    && objDetailCus.ListDevice.length > 0
+                    && objDetailCus.ListOpenSafePackage
+                    && objDetailCus.ListOpenSafePackage.length > 0
                         ?
                         <View style={styles.lineMid}/>
                         : null
                 }
 
                 {
-                    objDetailCus
-                        ? objDetailCus.ListDevice.map(
+                    objDetailCus&&objDetailCus.ListOSPackage?
+                         objDetailCus.ListOSPackage.map(
                         (itemDevice, index) => (
                             <TextInfo
                                 key={index}
@@ -363,42 +303,13 @@ class DetailCustomersInfo extends React.Component {
                                 styleLabel={{...styles.styleLabel, flex: 1}}
                                 styleValue={{...styles.styleValue, flex: 1}}
                                 label={itemDevice.Name}
-                                value={itemDevice.TotalPrice}
+                                value={itemDevice.Total}
                             />
                         )
                         )
                         : null
                 }
 
-                {
-                    objDetailCus
-                    && objDetailCus.ListStaticIP
-                    && objDetailCus.ListStaticIP.length > 0
-                        ?
-                        <View>
-                            <View style={styles.lineMid}/>
-                            <TextInfo
-                                styleWrapper={styles.wrapperOne}
-                                styleLabel={styles.styleLabel}
-                                styleValue={styles.styleValue}
-                                label={strings("list_customer_info.detail.IpAddress")}
-                                value={
-                                    objDetailCus.ListStaticIP[0].Total
-                                        ? objDetailCus.ListStaticIP[0].Total
-                                        : 0
-                                }
-                            />
-                        </View>
-                        : null
-                }
-
-                <TextInfo
-                    styleWrapper={styles.wrapperOne}
-                    styleLabel={styles.styleLabel}
-                    styleValue={styles.styleValue}
-                    label={'Safe 1'}
-                    value={20}
-                />
             </View>
         )
     }
@@ -449,7 +360,7 @@ class DetailCustomersInfo extends React.Component {
                                         styleLabel={styles.styleLabel}
                                         styleValue={styles.styleValue}
                                         label={strings("open_safe.detail_info.service_type")}
-                                        value={objDetailCus ? objDetailCus.OpenSafe : null}
+                                        value={objDetailCus ? objDetailCus.RegTypeName : null}
                                     />
 
                                     <TextInfo
@@ -521,7 +432,7 @@ class DetailCustomersInfo extends React.Component {
                             </View>
 
                             {/*
-                                // ---- Detail payment
+                                // ----
                             */}
                             <View style={styles.midContainer}>
                                 <View style={styles.titleBox}>

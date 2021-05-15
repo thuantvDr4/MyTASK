@@ -59,9 +59,11 @@ class CreateContract extends React.Component {
     constructor(props) {
         super(props);
 
+        const {payload} = this.props.navigation.state.params;
+
         this.state = {
             loadingVisible: false,
-            objDetailCus: null,
+            objDetailCus: payload,
             RegId: this.props.navigation.getParam("RegID", "0"),
             RegCode: this.props.navigation.getParam("RegCode", "0")
         };
@@ -71,13 +73,14 @@ class CreateContract extends React.Component {
     componentDidMount() {
         this.props.navigation.addListener("willFocus", () => {
             const {navigation} = this.props;
-            const myData = {
-                RegID: navigation.getParam("RegID", "0"),
-                RegCode: navigation.getParam("RegCode", "0")
-            };
 
-            // this._handleLoadInfoCus(myData);
-            // this.props.showTabBar(false);
+            const {RegId, RegCode } = navigation.getParam("payload", null);
+
+            this.setState({
+                RegId: RegId,
+                RegCode: RegCode,
+            });
+
         });
     }
 
@@ -85,45 +88,7 @@ class CreateContract extends React.Component {
         this.props.showTabBar(true);
     }
 
-    /**
-     * Refresh data khi navigation back. Fix truong hop upload anh roi quay troi lai
-     */
-    loadData() {
-        this._loading(false);
-        const myData = {
-            RegID: this.state.RegId,
-            RegCode: this.state.RegCode
-        };
-
-        this._handleLoadInfoCus(myData);
-    }
-
-    _handleLoadInfoCus(myData) {
-        this._loading(true);
-
-        api.GetRegistrationDetail(myData, (success, result, msg) => {
-
-            if (success) {
-                this.setState({
-                    loadingVisible: false,
-                    objDetailCus: result[0],
-                    RegId: myData.RegID,
-                    RegCode: myData.RegCode
-                });
-            } else {
-                this._loading(false);
-                this._errorMsg(msg.message);
-            }
-        });
-    }
-
-
-    /*
-    * _handleUpdateInfo
-    * */
-    _handleUpdateInfo = () => {
-        NavigationService.navigate("OpenSafe_Info", {});
-    }
+    
 
 
     /**
@@ -200,7 +165,7 @@ class CreateContract extends React.Component {
                                         styleLabel={styles.styleLabel}
                                         styleValue={styles.styleValue}
                                         label={strings("open_safe.create_contract.cus_name")}
-                                        value={objDetailCus ? objDetailCus.FullName : 'Thuantv'}
+                                        value={objDetailCus ? objDetailCus.FullName : ''}
                                     />
 
                                     <TextInfo
@@ -208,7 +173,7 @@ class CreateContract extends React.Component {
                                         styleLabel={styles.styleLabel}
                                         styleValue={styles.styleValue}
                                         label={strings("open_safe.create_contract.code")}
-                                        value={objDetailCus ? objDetailCus.RegCode : 'FZ3123123'}
+                                        value={objDetailCus ? objDetailCus.RegCode : ''}
                                     />
 
                                     <TextInfo
@@ -216,7 +181,7 @@ class CreateContract extends React.Component {
                                         styleLabel={styles.styleLabel}
                                         styleValue={styles.styleValue}
                                         label={strings("open_safe.create_contract.email")}
-                                        value={objDetailCus ? objDetailCus.Phone1 : 'thuantv@gmail.com'}
+                                        value={objDetailCus ? objDetailCus.Email : ''}
                                     />
 
                                     <TextInfo
@@ -224,7 +189,7 @@ class CreateContract extends React.Component {
                                         styleLabel={styles.styleLabel}
                                         styleValue={styles.styleValue}
                                         label={strings("open_safe.create_contract.phone")}
-                                        value={objDetailCus ? objDetailCus.Phone1 : '9999999999'}
+                                        value={objDetailCus ? objDetailCus.Phone1 : ''}
                                     />
 
                                     <TextInfo
@@ -232,7 +197,7 @@ class CreateContract extends React.Component {
                                         styleLabel={styles.styleLabel}
                                         styleValue={styles.styleValue}
                                         label={strings("open_safe.create_contract.address")}
-                                        value={objDetailCus ? objDetailCus.Address : '123 abc,P12,Q10'}
+                                        value={objDetailCus ? objDetailCus.Address : ''}
                                     />
                                 </View>
                             </View>

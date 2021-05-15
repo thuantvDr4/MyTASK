@@ -49,26 +49,25 @@
     "ContractTemp":"",
     "BookportIdentityId":"",
     "LatlngDevice":"",
-    "LocalType":null,
-    "PromotionId":null,
-    "PromotionName":"",
-    "PromotionDescription":"",
-    "MonthOfPrepaid":null,
+
+    "ListServiceType": [{
+        "Id": 7,
+        "Name": "Opensafe"
+    }],
+
+    "LocalType": 302,
+    "LocalTypeName": "Homesafe",
+
     "Total":null,
-    "InternetTotal":null,
+
     "DeviceTotal":null,
-    "DepositFee":null,
-    "ConnectionFee":null,
-    "PaymentMethodPerMonth":null,
-    "IP":"",
-    "ListStaticIP": null,
-    "StaticIPTotal": null,
-    "ListGift": null,
-    "ListDevice": null,
+
+    "ListOSGift": null,
+    "ListOSDevice": null,
     "PotentialObjID": null,
     "Telegram"  :   "",
     "KhmerName": "",
-    "ListPackage": null,
+    "ListOSPackage": null,
     "PackageTotal": null
 }
 

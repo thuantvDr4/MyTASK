@@ -78,7 +78,7 @@ class PickerDeviceInput extends React.PureComponent
                 selectItem: this.state.selectItem
             });
         }else {
-            NavigationService.navigate('SearchPickerDynamic', {
+            NavigationService.navigate('SearchSinglePickerDynamic', {
                 getOptionData: this.getOptionData.bind(this),
                 onChange: this.onChange.bind(this),
                 title: this.props.label,
