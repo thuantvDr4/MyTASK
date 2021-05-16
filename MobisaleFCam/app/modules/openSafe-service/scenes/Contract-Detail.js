@@ -41,7 +41,7 @@ class ContractDetail extends React.Component {
             headerLeft: (
                 <HeaderBackButton
                     onPress={() => {
-                        navigation.goBack();
+                        NavigationService.navigate("TabListCustomerInfo");
                     }}
                     tintColor="#fff"
                 />
@@ -67,8 +67,7 @@ class ContractDetail extends React.Component {
     componentDidMount() {
         this.props.navigation.addListener("willFocus", () => {
             const {navigation} = this.props;
-
-            const PARAMS = this.props.navigation.state.params;
+            const PARAMS = navigation.state.params;
 
             console.log('PARAM---', PARAMS)
 
@@ -116,14 +115,6 @@ class ContractDetail extends React.Component {
 
 
 
-    /*
-    * _handleUpdateInfo
-    * */
-    _handleUpdateInfo =()=> {
-        NavigationService.navigate("OpenSafe_Info", {
-
-        });
-    }
 
 
     /**

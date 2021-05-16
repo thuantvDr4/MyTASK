@@ -41,7 +41,6 @@ class DetailCustomersInfo extends React.Component {
             headerLeft: (
                 <HeaderBackButton
                     onPress={() => {
-                       // navigation.goBack();
                         NavigationService.navigate("TabListCustomerInfo");
                     }}
                     tintColor="#fff"

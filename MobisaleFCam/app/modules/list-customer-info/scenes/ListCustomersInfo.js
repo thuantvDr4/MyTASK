@@ -219,7 +219,6 @@ class ListCustomersInfo extends React.Component {
         * 2: Bán thêm internet , Equipment , IP
         * 3: Bán mới OS
         * */
-            console.log(regId, regCode, regType);
 
         switch (regType){
             case 1: {
@@ -239,8 +238,25 @@ class ListCustomersInfo extends React.Component {
     /*
     * _viewContractDetail
     * */
-    _viewContractDetail =(contract, objID)=>{
-        NavigationService.navigate('ContractDetail', {Contract: contract, ObjID: objID, pdfDownloadLink: this.props.pdfDownloadLink});
+    _viewContractDetail =(contract, objID, regType)=>{
+        /*regType =
+        * 1 : Bán mới internet + Equipment + IP
+        * 2: Bán thêm internet , Equipment , IP
+        * 3: Bán mới OS
+        * */
+        switch (regType){
+            case 1: {
+                NavigationService.navigate('ContractDetail', {Contract: contract, ObjID: objID, pdfDownloadLink: this.props.pdfDownloadLink});
+            }
+                break;
+            case 3: {
+                NavigationService.navigate('openSafe_DetailContract', {Contract: contract, ObjID: objID});
+            }
+                break;
+            default : break;
+        }
+
+
     }
 
 
@@ -431,7 +447,7 @@ class ListCustomersInfo extends React.Component {
                                             style={styles.btnCreate}
                                             onPress={()=> {
                                                 if (this.state.dataType !== 1) {
-                                                    this._viewContractDetail(infoCus.Contract, infoCus.ObjID)
+                                                    this._viewContractDetail(infoCus.Contract, infoCus.ObjID, infoCus.RegType)
                                                 } else {
                                                     this._viewCustomerDetail(infoCus.RegID, infoCus.RegCode, infoCus.RegType)
                                                 }

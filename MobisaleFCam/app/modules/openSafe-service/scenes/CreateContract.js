@@ -61,11 +61,14 @@ class CreateContract extends React.Component {
 
         const {payload} = this.props.navigation.state.params;
 
+        const {UserName} = this.props.userInfo; // props from redux-reducer
+
         this.state = {
             loadingVisible: false,
             objDetailCus: payload,
             RegId: this.props.navigation.getParam("RegID", "0"),
-            RegCode: this.props.navigation.getParam("RegCode", "0")
+            RegCode: this.props.navigation.getParam("RegCode", "0"),
+            UserName: UserName,
         };
         this.props.navigation.setParams({visible: false});
     }
@@ -74,7 +77,7 @@ class CreateContract extends React.Component {
         this.props.navigation.addListener("willFocus", () => {
             const {navigation} = this.props;
 
-            const {RegId, RegCode } = navigation.getParam("payload", null);
+            const {RegId, RegCode} = navigation.getParam("payload", null);
 
             this.setState({
                 RegId: RegId,
@@ -87,8 +90,6 @@ class CreateContract extends React.Component {
     componentWillUnmount() {
         this.props.showTabBar(true);
     }
-
-    
 
 
     /**
@@ -126,12 +127,58 @@ class CreateContract extends React.Component {
     *
     * */
 
+
     /*
         * createContract
         * */
     createContract = () => {
-        NavigationService.navigate('openSafe_DetailContract', {});
+        //
+        const {UserName, RegCode} = this.state;
+        //
+        const data = {
+            "Username": UserName,
+            "RegCode": RegCode,
+        };
+        this._createOSContract(data);
     }
+
+
+    /*
+    * call api--> Tao hợp đồng
+    * */
+    _createOSContract = (myData) => {
+        //
+        this._loading(true);
+        //
+        api.createOSContract(myData, (success, result, msg) => {
+            console.log('API-RESULT-----', result)
+            if (success) {
+                this._loading(false);
+                //
+                const {Contract, ObjId} = result[0];
+
+                const params ={
+                    "ObjId":ObjId,
+                    "Contract":Contract
+                };
+                this._gotoContractDetail(params);
+
+            } else {
+                this._loading(false);
+                this._errorMsg(msg.message);
+            }
+        });
+    }
+
+
+    /*
+    * gotoContractDetail
+    * params send = {"ObjId":11231,"Contract":"PPHJ20019"}
+    * */
+    _gotoContractDetail =(params)=>{
+        NavigationService.navigate('openSafe_DetailContract', params);
+    }
+
 
 
     /*
@@ -227,9 +274,27 @@ class CreateContract extends React.Component {
     }
 }
 
-export default connect(
-    state => {
-        return {};
-    },
-    {pushDataInfoRegistration, showTabBar}
-)(CreateContract);
+/*
+*
+* */
+
+const mapStateToProps = state => {
+    const userInfo = state.authReducer.userInfo;
+    console.log('USER---', userInfo)
+
+    return{
+        userInfo
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return{
+        pushDataInfoRegistration, showTabBar
+    }
+}
+
+/*
+*
+* */
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateContract);

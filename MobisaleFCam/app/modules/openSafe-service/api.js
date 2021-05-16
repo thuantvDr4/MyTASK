@@ -694,3 +694,27 @@ export function getSystemApiToken(myData, callback) {
             callback(false, null, {message: error});
         });
 }
+
+
+/*
+* TẠO HOP DONG
+* */
+export function createOSContract(myData, callback) {
+    myNetwork.post(
+        '/RegistrationOpenSafe/CreateOSObject',
+        myData
+    )
+        .then(response => response.data)
+        .then(response => {
+            if (response.Code === 1) {
+                callback(true, response.Data, null);
+            }
+            else {
+                callback(false, null, {Code: response.Code, message: response.Message});
+            }
+        })
+        .catch(error => {
+            if (error === null) return;
+            callback(false, null, {message: error});
+        });
+}
