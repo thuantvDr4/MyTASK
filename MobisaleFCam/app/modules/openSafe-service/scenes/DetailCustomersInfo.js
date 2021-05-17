@@ -234,7 +234,7 @@ class DetailCustomersInfo extends React.Component {
                     styleLabel={[styles.styleLabel, {fontWeight: '700', color: '#030303'}]}
                     styleValue={styles.styleValue}
                     label={strings("open_safe.detail_info.equipment")}
-                    value={objDetailCus ? objDetailCus.Total : null}
+                    value={objDetailCus ? objDetailCus.DeviceTotal : null}
                 />
 
                 {
@@ -280,7 +280,7 @@ class DetailCustomersInfo extends React.Component {
                     styleLabel={[styles.styleLabel, {fontWeight: '700', color: '#030303'}]}
                     styleValue={styles.styleValue}
                     label={strings("open_safe.detail_info.package")}
-                    value={objDetailCus ? objDetailCus.Total : null}
+                    value={objDetailCus ? objDetailCus.PackageTotal : null}
                 />
 
                 {

@@ -718,3 +718,87 @@ export function createOSContract(myData, callback) {
             callback(false, null, {message: error});
         });
 }
+
+
+
+/**
+ * API lay chi tiet HOP DONG
+ *
+ * @param {*} myData
+ * @param {*} callback
+ */
+export function GetContractDetail(myData, callback) {
+    myNetwork.post(
+        '/RegistrationOpenSafe/GetOSContractDetail',
+        myData
+    )
+        .then(response => response.data)
+        .then(response => {
+            if (response.Code === 1) {
+                callback(true, response.Data, null);
+            }
+            else {
+                callback(false, null, {Code: response.Code, message: response.Message});
+            }
+        })
+        .catch(error => {
+            callback(false, null, {message: error});
+        });
+}
+
+
+
+
+
+
+/**
+ * API Lay phuong thuc thanh toan
+ *
+ * @param {*} myData
+ * @param {*} callback
+ */
+export function getPaymentMethodList(myData, callback) {
+    myNetwork.post(
+        '/Data/GetPaymentMethodList',
+        myData
+    )
+        .then(response => response.data)
+        .then(response => {
+            if (response.Code === 1) {
+                callback(true, response.Data, null);
+            }
+            else {
+                callback(false, null, {Code: response.Code, message: response.Message});
+            }
+        })
+        .catch(error => {
+            callback(false, null, {message: error});
+        });
+}
+
+
+
+/**
+ * API thuc hien payment
+ *
+ * @param {*} myData
+ * @param {*} callback
+ */
+export function updateOSPayment(myData, callback) {
+    myNetwork.post(
+        '/RegistrationOpenSafe/UpdateOSPayment',
+        myData
+    )
+        .then(response => response.data)
+        .then(response => {
+            if (response.Code === 1) {
+                callback(true, response.Data, null);
+            }
+            else {
+                callback(false, null, {Code: response.Code, message: response.Message});
+            }
+        })
+        .catch(error => {
+            callback(false, null, {message: error});
+        });
+}

@@ -54,57 +54,52 @@ class ContractDetail extends React.Component {
 
     constructor(props) {
         super(props);
-
+        // params ={"ObjId":11231,"Contract":"PPHJ20019"}
+        const PARAMS = this.props.navigation.state.params;
         this.state = {
             loadingVisible: false,
-            objDetailCus: null,
-            RegId: this.props.navigation.getParam("RegID", "0"),
-            RegCode: this.props.navigation.getParam("RegCode", "0")
+            objDetailContract: null,
+            params: PARAMS,
         };
 
     }
 
+
+    /*
+    * componentDidMount
+    * */
     componentDidMount() {
         this.props.navigation.addListener("willFocus", () => {
-            const {navigation} = this.props;
-            const PARAMS = navigation.state.params;
+            //
+            const {params} = this.state;
+            //
+            this._getContractDetail(params);
 
-            console.log('PARAM---', PARAMS)
-
-
-            // this._handleLoadInfoCus(myData);
-            // this.props.showTabBar(false);
+            //
+            this.props.showTabBar(false);
         });
     }
 
+    /*
+    * componentWillUnmount
+    * */
     componentWillUnmount() {
         this.props.showTabBar(true);
     }
 
-    /**
-     * Refresh data khi navigation back. Fix truong hop upload anh roi quay troi lai
-     */
-    loadData() {
-        this._loading(false);
-        const myData = {
-            RegID: this.state.RegId,
-            RegCode: this.state.RegCode
-        };
 
-        this._handleLoadInfoCus(myData);
-    }
-
-    _handleLoadInfoCus(myData) {
+    /*
+    * _getContractDetail
+    * */
+    _getContractDetail(myData) {
         this._loading(true);
-
-        api.GetRegistrationDetail(myData, (success, result, msg) => {
-
+        //
+        api.GetContractDetail(myData, (success, result, msg) => {
+            console.log('API--result--', result)
             if (success) {
+                this._loading(false);
                 this.setState({
-                    loadingVisible: false,
-                    objDetailCus: result[0],
-                    RegId: myData.RegID,
-                    RegCode: myData.RegCode
+                    objDetailContract: result
                 });
             } else {
                 this._loading(false);
@@ -114,21 +109,18 @@ class ContractDetail extends React.Component {
     }
 
 
-
-
-
     /**
      * show Loi
      * @param err
      * @private
      */
-    _error =(err)=> {
+    _error = (err) => {
         this._loading(false);
         if (!err.message) return;
         this.refs["popup"].getWrappedInstance().show(err.message);
     }
 
-    _errorMsg =(err)=> {
+    _errorMsg = (err) => {
         this._loading(false);
         if (!err) return;
         this.refs["popup"].getWrappedInstance().show(err.toString());
@@ -139,7 +131,7 @@ class ContractDetail extends React.Component {
      * @param isShow
      * @private
      */
-    _loading =(isShow)=> {
+    _loading = (isShow) => {
         this.setState({
             ...this.state,
             loadingVisible: isShow
@@ -147,109 +139,74 @@ class ContractDetail extends React.Component {
     }
 
 
+
+    /*...FOR------> FUNCTIONS.....*/
+
+
     /*
     * _handlePayment
     * */
-    _handlePayment =()=> {
-        NavigationService.navigate('openSafe_CreateContract', {});
+    _handlePayment = () => {
+        NavigationService.navigate('openSafe_ReceiptDetail', this.state.objDetailContract);
     }
 
-    /*
-    * FOR------> FUNCTIONS
-    *
-    * */
 
 
-
+   /*.....FOR----> COMPONENTS....*/
 
     /*
-    * FOR----> COMPONENTS
-    *
+    * RenderItemList
     * */
-
-
-    /*
-    * RenderEquipment
-    * */
-    RenderEquipment =()=>{
-        const {objDetailCus} = this.state;
-
-        return(
-            <View style={{ paddingHorizontal: 12,}}>
-                <TextInfo
-                    styleWrapper={styles.wrapperOne}
-                    styleLabel={[styles.styleLabel, {fontWeight: '700', color: '#030303'}]}
-                    styleValue={styles.styleValue}
-                    label={strings("open_safe.detail_contract.equipment")}
-                    value={objDetailCus ? objDetailCus.InternetTotal : null}
-                />
-                {/** line */}
-                <View style={styles.lineMid}/>
-
-                <TextInfo
-                    styleWrapper={styles.wrapperOne}
-                    styleLabel={styles.styleLabel}
-                    styleValue={styles.styleValue}
-                    label={'OpenSafe 1'}
-                    value={20}
-                />
-
-                <TextInfo
-                    styleWrapper={styles.wrapperOne}
-                    styleLabel={styles.styleLabel}
-                    styleValue={styles.styleValue}
-                    label={'OpenSafe 2'}
-                    value={20}
-                />
-
-
+    RenderItemList = (data) => {
+        return (
+            <>
                 {
-                    objDetailCus
-                    && objDetailCus.ListDevice
-                    && objDetailCus.ListDevice.length > 0
-                        ?
-                        <View style={styles.lineMid}/>
-                        : null
-                }
-
-                {
-                    objDetailCus
-                        ? objDetailCus.ListDevice.map(
-                        (itemDevice, index) => (
+                    data.map((item, index) => {
+                        return (
                             <TextInfo
                                 key={index}
                                 styleWrapper={styles.wrapperOne}
                                 styleLabel={{...styles.styleLabel, flex: 1}}
                                 styleValue={{...styles.styleValue, flex: 1}}
-                                label={itemDevice.Name}
-                                value={itemDevice.TotalPrice}
+                                label={item.Name}
+                                value={item.Total}
                             />
                         )
-                        )
+                    })
+                }
+            </>
+        )
+    }
+
+
+    /*
+    * RenderEquipment
+    * */
+    RenderEquipment = () => {
+        const {objDetailContract} = this.state;
+
+        return (
+            <View style={{paddingHorizontal: 12,}}>
+                <TextInfo
+                    styleWrapper={styles.wrapperOne}
+                    styleLabel={[styles.styleLabel, {fontWeight: '700', color: '#030303'}]}
+                    styleValue={styles.styleValue}
+                    label={strings("open_safe.detail_contract.equipment")}
+                    value={objDetailContract ? objDetailContract.DeviceTotal : null}
+                />
+                {/*..LIST-DEVICE..*/}
+                {
+                    objDetailContract
+                    && objDetailContract.ListOpenSafeDevice
+                    && objDetailContract.ListOpenSafeDevice.length > 0
+                        ?
+                        <>
+                            <View style={styles.lineMid}/>
+                            {this.RenderItemList(objDetailContract.ListOpenSafeDevice)}
+                        </>
                         : null
                 }
 
-                {
-                    objDetailCus
-                    && objDetailCus.ListStaticIP
-                    && objDetailCus.ListStaticIP.length > 0
-                        ?
-                        <View>
-                            <View style={styles.lineMid}/>
-                            <TextInfo
-                                styleWrapper={styles.wrapperOne}
-                                styleLabel={styles.styleLabel}
-                                styleValue={styles.styleValue}
-                                label={strings("list_customer_info.detail.IpAddress")}
-                                value={
-                                    objDetailCus.ListStaticIP[0].Total
-                                        ? objDetailCus.ListStaticIP[0].Total
-                                        : 0
-                                }
-                            />
-                        </View>
-                        : null
-                }
             </View>
         )
     }
@@ -258,76 +215,32 @@ class ContractDetail extends React.Component {
     /*
 * RenderPackages
 * */
-    RenderPackages =()=>{
-        const {objDetailCus} = this.state;
+    RenderPackages = () => {
+        const {objDetailContract} = this.state;
 
-        return(
-            <View style={{ paddingHorizontal: 12,}}>
+        return (
+            <View style={{paddingHorizontal: 12,}}>
                 <TextInfo
                     styleWrapper={styles.wrapperOne}
                     styleLabel={[styles.styleLabel, {fontWeight: '700', color: '#030303'}]}
                     styleValue={styles.styleValue}
                     label={strings("open_safe.detail_contract.package")}
-                    value={objDetailCus ? objDetailCus.InternetTotal : null}
+                    value={objDetailContract ? objDetailContract.PackageTotal : null}
                 />
-                {/** line */}
-                <View style={styles.lineMid}/>
 
+                {/*..LIST-PACKAGES..*/}
                 {
-                    objDetailCus
-                    && objDetailCus.ListDevice
-                    && objDetailCus.ListDevice.length > 0
+                    objDetailContract
+                    && objDetailContract.ListOpenSafePackage
+                    && objDetailContract.ListOpenSafePackage.length > 0
                         ?
-                        <View style={styles.lineMid}/>
-                        : null
-                }
-
-                {
-                    objDetailCus
-                        ? objDetailCus.ListDevice.map(
-                        (itemDevice, index) => (
-                            <TextInfo
-                                key={index}
-                                styleWrapper={styles.wrapperOne}
-                                styleLabel={{...styles.styleLabel, flex: 1}}
-                                styleValue={{...styles.styleValue, flex: 1}}
-                                label={itemDevice.Name}
-                                value={itemDevice.TotalPrice}
-                            />
-                        )
-                        )
-                        : null
-                }
-
-                {
-                    objDetailCus
-                    && objDetailCus.ListStaticIP
-                    && objDetailCus.ListStaticIP.length > 0
-                        ?
-                        <View>
+                        <>
                             <View style={styles.lineMid}/>
-                            <TextInfo
-                                styleWrapper={styles.wrapperOne}
-                                styleLabel={styles.styleLabel}
-                                styleValue={styles.styleValue}
-                                label={strings("list_customer_info.detail.IpAddress")}
-                                value={
-                                    objDetailCus.ListStaticIP[0].Total
-                                        ? objDetailCus.ListStaticIP[0].Total
-                                        : 0
-                                }
-                            />
-                        </View>
+                            {this.RenderItemList(objDetailContract.ListOpenSafePackage)}
+                        </>
                         : null
                 }
 
-                <TextInfo
-                    styleWrapper={styles.wrapperOne}
-                    styleLabel={styles.styleLabel}
-                    styleValue={styles.styleValue}
-                    label={'Safe 1'}
-                    value={20}
-                />
             </View>
         )
     }
@@ -338,8 +251,11 @@ class ContractDetail extends React.Component {
     *
     * */
     render() {
-        const {objDetailCus} = this.state;
-
+        const {objDetailContract} = this.state;
+        const statusStyle = {
+            ...styles.styleValue,
+            color: (objDetailContract && objDetailContract.PaidStatus !== 0) ? 'green' : 'red',
+        };
 
         return (
             <View style={styles.container}>
@@ -363,9 +279,9 @@ class ContractDetail extends React.Component {
                                     <TextInfo
                                         styleWrapper={styles.wrapperOne}
                                         styleLabel={styles.styleLabel}
-                                        styleValue={styles.styleValue}
+                                        styleValue={[statusStyle]}
                                         label={strings("open_safe.detail_contract.status")}
-                                        value={objDetailCus ? objDetailCus.RegStatus : null}
+                                        value={objDetailContract ? objDetailContract.PaidStatusName : null}
                                     />
 
                                     <TextInfo
@@ -373,7 +289,7 @@ class ContractDetail extends React.Component {
                                         styleLabel={styles.styleLabel}
                                         styleValue={styles.styleValue}
                                         label={strings("open_safe.detail_contract.service_type")}
-                                        value={objDetailCus ? objDetailCus.OpenSafe : null}
+                                        value={'OpenSafe'}
                                     />
 
                                     <TextInfo
@@ -381,7 +297,7 @@ class ContractDetail extends React.Component {
                                         styleLabel={styles.styleLabel}
                                         styleValue={styles.styleValue}
                                         label={strings("open_safe.detail_contract.cus_name")}
-                                        value={objDetailCus ? objDetailCus.FullName : null}
+                                        value={objDetailContract ? objDetailContract.FullName : null}
                                     />
 
                                     <TextInfo
@@ -389,7 +305,7 @@ class ContractDetail extends React.Component {
                                         styleLabel={styles.styleLabel}
                                         styleValue={styles.styleValue}
                                         label={strings("open_safe.detail_contract.contract_no")}
-                                        value={objDetailCus ? objDetailCus.RegCode : null}
+                                        value={objDetailContract ? objDetailContract.Contract : null}
                                     />
 
                                     <TextInfo
@@ -397,7 +313,7 @@ class ContractDetail extends React.Component {
                                         styleLabel={styles.styleLabel}
                                         styleValue={styles.styleValue}
                                         label={strings("open_safe.detail_contract.phone")}
-                                        value={objDetailCus ? objDetailCus.Phone1 : null}
+                                        value={objDetailContract ? objDetailContract.Phone1 : null}
                                     />
 
                                     <TextInfo
@@ -405,7 +321,7 @@ class ContractDetail extends React.Component {
                                         styleLabel={styles.styleLabel}
                                         styleValue={styles.styleValue}
                                         label={strings("open_safe.detail_contract.install_address")}
-                                        value={objDetailCus ? objDetailCus.Address : null}
+                                        value={objDetailContract ? objDetailContract.Address : null}
                                     />
                                 </View>
                             </View>
@@ -435,13 +351,13 @@ class ContractDetail extends React.Component {
                                     <View style={[styles.lineMid, {borderTopColor: '#C2D0E2'}]}/>
 
                                     {/*...VAT..*/}
-                                    <View style={{paddingHorizontal:12}}>
+                                    <View style={{paddingHorizontal: 12}}>
                                         <TextInfo
                                             styleWrapper={styles.wrapperOne}
                                             styleLabel={styles.styleLabel}
                                             styleValue={styles.styleValue}
                                             label={strings("open_safe.detail_contract.vat")}
-                                            value={objDetailCus ? objDetailCus.VAT : null}
+                                            value={objDetailContract ? objDetailContract.VAT : null}
                                         />
                                     </View>
 
@@ -452,62 +368,28 @@ class ContractDetail extends React.Component {
                                     styleLabel={styles.styleLabelTotal}
                                     styleValue={styles.styleValueTotal}
                                     label={strings("open_safe.detail_contract.total_amount")}
-                                    value={objDetailCus ? objDetailCus.Total : null}
+                                    value={objDetailContract ? objDetailContract.Total : null}
                                 />
                             </View>
 
-                            {/*
-								// ---- Gift
-							*/}
-                            {
-                                !objDetailCus || objDetailCus.ListGift.length > 0 &&
+                        </View>
 
-                                <View>
-                                    <View style={[styles.titleBox]}>
-                                        <Text style={styles.titleLeft}>
-                                            {strings("open_safe.detail_contract.gift")}
+                        {/*....BUTTON-PAYMENT...*/}
+                        {objDetailContract && objDetailContract.PaidStatus !== 0 ? null :
+                            <View>
+                                <View style={{marginBottom: 24}}>
+                                    <TouchableOpacity
+                                        style={styles.btnContainer}
+                                        onPress={this._handlePayment}
+                                    >
+                                        <Text style={styles.btnText}>
+                                            {strings("open_safe.detail_contract.payment")}
                                         </Text>
-                                    </View>
-
-                                    <View style={[{
-                                        justifyContent: 'center',
-                                        alignItems: 'center',
-                                        borderWidth: 1,
-                                        borderColor: '#0b76ff',
-                                        borderRadius: 5,
-                                        marginBottom: 12,
-                                    }]}>
-                                        <Text style={[{
-                                            textAlign: 'center',
-                                            paddingHorizontal: 10,
-                                            paddingVertical: 10,
-                                            color: '#0b76ff',
-                                            fontSize: 16,
-                                            marginVertical: 5,
-                                            fontWeight: 'bold'
-                                        }]}>
-                                            {objDetailCus ? objDetailCus.ListGift[0].Name : null}
-                                        </Text>
-                                    </View>
+                                    </TouchableOpacity>
                                 </View>
-                            }
-                        </View>
-
-                        {
-                            // BUTTON
-                        }
-                        <View>
-                            <View style={{marginBottom: 24}}>
-                                <TouchableOpacity
-                                    style={styles.btnContainer}
-                                    onPress={this._handlePayment}
-                                >
-                                    <Text style={styles.btnText}>
-                                        {strings("open_safe.detail_contract.payment")}
-                                    </Text>
-                                </TouchableOpacity>
                             </View>
-                        </View>
+                        }
+                        {/*......*/}
                     </View>
                 </ScrollView>
 
@@ -518,9 +400,26 @@ class ContractDetail extends React.Component {
     }
 }
 
-export default connect(
-    state => {
-        return {};
-    },
-    {pushDataInfoRegistration, showTabBar}
-)(ContractDetail);
+/*
+*
+* */
+const mapStateToProps = state => {
+    const userInfo = state.authReducer.userInfo;
+    console.log('USER---', userInfo)
+
+    return {
+        userInfo
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        pushDataInfoRegistration, showTabBar
+    }
+}
+
+
+/*
+*
+* */
+export default connect(mapStateToProps, mapDispatchToProps)(ContractDetail);

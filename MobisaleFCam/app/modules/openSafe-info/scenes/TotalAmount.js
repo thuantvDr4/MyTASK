@@ -25,7 +25,7 @@ const { updateInfoRegistration } = customerInfo;
 
 // LIB CUSTOM
 import NavigationService from 'app-libs/helpers/NavigationService';
-import ModalPicker from 'app-libs/components/ModalPicker';
+import ModalPicker from '../../../libs/components/ModalPicker';
 import PopupWarning from 'app-libs/components/PopupWarning';
 import TechLoading from 'app-libs/components/TechLoading';
 import PickerSearchInput from 'app-libs/components/input/PickerSearchInput';

@@ -342,6 +342,11 @@
           "ConnectionFee": "\nConnection Fee amount is required",
           "VAT": "\nVAT amount is required"
         }
+      },
+      "receipt_detail": {
+        "PaymentMethod": "\nPayment method is required \n\nរបៀបក្នុងការបង់ប្រាក់តម្រូវអោយមាន",
+        "confirm_pay": "\nAre you sure you want to pay \nfor this contract: ",
+        "confirm_pay_km": "\nតើអ្នកចង់បង់ប្រាក់សម្រាប់កិច្ចសន្យានេះ "
       }
     }
   }

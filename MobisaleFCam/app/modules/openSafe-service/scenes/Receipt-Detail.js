@@ -29,11 +29,18 @@ import PopupAction from 'app-libs/components/PopupAction';
 import TextInfo from "app-libs/components/input/TextInfo";
 import NavigationService from "app-libs/helpers/NavigationService";
 import PickerInputDynamic from 'app-libs/components/input/PickerInputDynamic';
+import ModalPicker from '../../../libs/components/ModalPicker';
 
 // STYLE
 import ols from "../../../styles/Ola-style";
 import styles from "../DetailCustomer.styles";
 import moduleStyle from "../../extra-service/styles";
+
+
+const VAT = [
+    {id: 0, Name :'0', value: 0},
+    {id: 10, Name :'10', value: 10},
+]
 
 
 /*
@@ -61,71 +68,43 @@ class ReceiptDetail extends React.Component {
     constructor(props) {
         super(props);
 
+        // params ={"ObjId":11231,"Contract":"PPHJ20019"}
+        const PARAMS = this.props.navigation.state.params;
+        console.log('PARAMS---', PARAMS)
+
         this.state = {
             loadingVisible: false,
-            objDetailCus: null,
+            objDetailContract: PARAMS,
             RegId: this.props.navigation.getParam("RegID", "0"),
-            RegCode: this.props.navigation.getParam("RegCode", "0")
+            RegCode: this.props.navigation.getParam("RegCode", "0"),
+            //
+            listPaymentMethod: [],
+            paymentMethod: null
         };
         this.props.navigation.setParams({visible: false});
     }
 
+
+    /*
+    * componentDidMount
+    * */
     componentDidMount() {
         this.props.navigation.addListener("willFocus", () => {
             const {navigation} = this.props;
-            const myData = {
-                RegID: navigation.getParam("RegID", "0"),
-                RegCode: navigation.getParam("RegCode", "0")
-            };
 
-            // this._handleLoadInfoCus(myData);
-            // this.props.showTabBar(false);
+            this._getPaymentMethodList();
+
+            this.props.showTabBar(false);
         });
     }
 
+    /*
+    * componentWillUnmount
+    * */
     componentWillUnmount() {
         this.props.showTabBar(true);
     }
 
-    /**
-     * Refresh data khi navigation back. Fix truong hop upload anh roi quay troi lai
-     */
-    loadData() {
-        this._loading(false);
-        const myData = {
-            RegID: this.state.RegId,
-            RegCode: this.state.RegCode
-        };
-
-        this._handleLoadInfoCus(myData);
-    }
-
-    _handleLoadInfoCus(myData) {
-        this._loading(true);
-
-        api.GetRegistrationDetail(myData, (success, result, msg) => {
-
-            if (success) {
-                this.setState({
-                    loadingVisible: false,
-                    objDetailCus: result[0],
-                    RegId: myData.RegID,
-                    RegCode: myData.RegCode
-                });
-            } else {
-                this._loading(false);
-                this._errorMsg(msg.message);
-            }
-        });
-    }
-
-
-    /*
-    * _handleUpdateInfo
-    * */
-    _handleUpdateInfo = () => {
-        NavigationService.navigate("OpenSafe_Info", {});
-    }
 
 
     /**
@@ -163,14 +142,61 @@ class ReceiptDetail extends React.Component {
     *
     * */
 
+
+    /*
+    * _getPaymentMethodList
+    * */
+    _getPaymentMethodList = ()=> {
+        this._loading(true);
+        //
+        const data ={
+            // Nếu là bán mới truyền PaymentType=1, nếu là bán thêm truyền PaymentType=2
+            PaymentType: 1
+        }
+        //
+        api.getPaymentMethodList(data, (success, result, msg) => {
+            if (success) {
+                this._loading(false);
+                //
+                this.setState({
+                    listPaymentMethod: result
+                })
+                //
+            } else {
+                this._loading(false);
+                this._errorMsg(msg.message);
+            }
+        });
+    }
+
+
+
+    /*
+    * _onChangeValue
+    * */
+    _onChangeValue =(value)=>{
+        this.setState({
+            paymentMethod: value
+        })
+    }
+
+
+
     /*
         * createContract
         * */
     confirmPayment = () => {
+        //
+        const {paymentMethod, objDetailContract} = this.state;
         // Validate du lieu
-        const en = strings('dl.contract.invoice_detail.confirm_pay');
-        const km = strings('dl.contract.invoice_detail.confirm_pay_km');
-        const _contractNo = 'NO_999999999'
+        const en = strings('dl.open_safe.receipt_detail.confirm_pay');
+        const km = strings('dl.open_safe.receipt_detail.confirm_pay_km');
+        const _contractNo = objDetailContract&&objDetailContract.Contract
+        //check  valid
+        if(!paymentMethod){
+            this._errorMsg(strings('dl.open_safe.receipt_detail.PaymentMethod'));
+            return;
+        }
 
         // Hien thong bao xac nhan
         this.refs['popup_confirm'].getWrappedInstance().show(en + `${_contractNo}` + '?\n\n' + km + `${_contractNo}` + '?');
@@ -178,12 +204,44 @@ class ReceiptDetail extends React.Component {
 
 
     /*
+    * submitPayment
+    * */
+    submitPayment =()=>{
+        const {paymentMethod, objDetailContract} = this.state;
+        const data = {
+            "ObjID":objDetailContract.ObjId,
+            "PaymentMethod":paymentMethod.Id
+        };
+        //
+        this._loading(true);
+        //
+        api.updateOSPayment(data, (success, result, msg) => {
+            //console.log('API--result--', result)
+            if (success) {
+                this._loading(false);
+                //
+                const payload = {
+                    Contract: objDetailContract.Contract,
+                    ObjId: objDetailContract.ObjId
+                }
+                NavigationService.navigate('openSafe_DetailContract', payload);
+                //
+            } else {
+                this._loading(false);
+                this._errorMsg(msg.message);
+            }
+        });
+    }
+
+
+
+    /*
     * RENDER-RETURN
     *
     * */
     render() {
-        const {objDetailCus} = this.state;
-
+        const {objDetailContract} = this.state;
+        console.log('STATE---', objDetailContract)
         return (
             <View style={styles.container}>
                 <ScrollView
@@ -208,7 +266,7 @@ class ReceiptDetail extends React.Component {
                                         styleLabel={styles.styleLabel}
                                         styleValue={styles.styleValue}
                                         label={strings("open_safe.receipt_detail.equipment")}
-                                        value={objDetailCus ? objDetailCus.FullName : '140'}
+                                        value={objDetailContract ? objDetailContract.DeviceTotal : null}
                                     />
 
                                     <TextInfo
@@ -216,7 +274,7 @@ class ReceiptDetail extends React.Component {
                                         styleLabel={styles.styleLabel}
                                         styleValue={styles.styleValue}
                                         label={strings("open_safe.receipt_detail.package")}
-                                        value={objDetailCus ? objDetailCus.RegCode : '20'}
+                                        value={objDetailContract ? objDetailContract.PackageTotal : null}
                                     />
 
                                     <TextInfo
@@ -224,7 +282,7 @@ class ReceiptDetail extends React.Component {
                                         styleLabel={styles.styleLabel}
                                         styleValue={styles.styleValue}
                                         label={strings("open_safe.receipt_detail.vat")}
-                                        value={objDetailCus ? objDetailCus.Phone1 : '10%'}
+                                        value={objDetailContract ? `${objDetailContract.VAT}%` : null}
                                     />
 
                                     <TextInfo
@@ -232,7 +290,7 @@ class ReceiptDetail extends React.Component {
                                         styleLabel={styles.styleLabel}
                                         styleValue={styles.styleValue}
                                         label={strings("open_safe.receipt_detail.total")}
-                                        value={objDetailCus ? objDetailCus.Phone1 : '176'}
+                                        value={objDetailContract ? objDetailContract.Total : null}
                                     />
                                 </View>
                             </View>
@@ -242,17 +300,21 @@ class ReceiptDetail extends React.Component {
                             <Text style={[styles.titleLeft, {fontSize: 14, fontWeight: '700'}]}>
                                 {strings('open_safe.receipt_detail.payment')}
                             </Text>
-                            {/*.....*/}
+
+                            {/*...METHOD-PAYMENT..*/}
                             <View style={{marginTop:10}}>
-                                <PickerInputDynamic
+                                <ModalPicker
                                     ref="PaymentMethod"
-                                    prompt={strings('open_safe.receipt_detail.payment_method')}
                                     label={strings('open_safe.receipt_detail.payment_method')}
-                                    getOptionData={()=>{}}
-                                    onBeforeLoad={() => this.showLoading(true)}
-                                    onAfterLoad={() => this.showLoading(false)}
-                                    defaultValue={{Name: "Choose payment method"}}
-                                    onValueChange={(selectedItem) => console.log('PaymentMethod', selectedItem)}
+                                    options={this.state.listPaymentMethod}  //VAT
+                                    placeholder={strings('open_safe.receipt_detail.choose_payment_method')}
+                                    headerTitle={strings('open_safe.receipt_detail.payment_method')}
+                                    getLabel={item => (item.Name)}
+                                    defaultValue = {null }
+                                    onValueChange={value => {
+                                        this._onChangeValue(value)
+                                    }}
+                                    defVal={ '' }
                                 />
                             </View>
 
@@ -279,7 +341,7 @@ class ReceiptDetail extends React.Component {
                 <PopupWarning ref="popup"/>
                 <PopupAction
                     ref="popup_confirm"
-                    actionCallback={()=>console.log('Call back confirm')}
+                    actionCallback={this.submitPayment}
                 />
                 {/*.....*/}
             </View>
@@ -287,9 +349,28 @@ class ReceiptDetail extends React.Component {
     }
 }
 
-export default connect(
-    state => {
-        return {};
-    },
-    {pushDataInfoRegistration, showTabBar}
-)(ReceiptDetail);
+
+/*
+*
+* */
+const mapStateToProps = state => {
+    const userInfo = state.authReducer.userInfo;
+    console.log('USER---', userInfo)
+
+    return {
+        userInfo
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        pushDataInfoRegistration, showTabBar
+    }
+}
+
+
+/*
+*
+* */
+export default connect(mapStateToProps, mapDispatchToProps)(ReceiptDetail);
+

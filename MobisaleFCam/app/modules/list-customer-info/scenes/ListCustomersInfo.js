@@ -250,7 +250,7 @@ class ListCustomersInfo extends React.Component {
             }
                 break;
             case 3: {
-                NavigationService.navigate('openSafe_DetailContract', {Contract: contract, ObjID: objID});
+                NavigationService.navigate('openSafe_DetailContract', {Contract: contract, ObjId: objID});
             }
                 break;
             default : break;
@@ -421,7 +421,7 @@ class ListCustomersInfo extends React.Component {
                                         {/*....V2.10..update..*/}
                                         <View style={[styles.oneInfo, {marginTop: 8}]}>
                                             <Text style={styles.infoTitle}>{'Service type'}</Text>
-                                            <Text style={[styleStatus, {fontWeight:'700' }]}>{infoCus&&infoCus.RegTypeName}</Text>
+                                            <Text style={[styles.infoValue, {fontWeight:'700' }]}>{infoCus&&infoCus.RegTypeName}</Text>
                                         </View>
 
                                         <View style={styles.oneInfo}>
