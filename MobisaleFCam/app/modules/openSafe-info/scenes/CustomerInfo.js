@@ -168,9 +168,18 @@ class CustomerInfo extends React.Component {
      * @private
      */
     _editInstallAddress =()=>{
-        NavigationService.navigate('BookportAddress', {
-            payload: 'OpenSafe_Info'
+        const {data} = this.state;
+        // luu cac thong tin truoc khi edit-address
+        this.props.updateInfoRegistration(data, () => {
+            // Chuyen trang
+            setTimeout(() => {
+                //
+                NavigationService.navigate('BookportAddress', {
+                    payload: {serviceType: 3, serviceName: "Opensafe"}
+                });
+            }, 200);
         });
+
     }
 
 
@@ -710,7 +719,7 @@ function mapStateToProps(state) {
     // GET STATE FROM OPENSAFE
     const stateSL = state.saleNewReducer.openSafeObj;
 
-    console.log('saleNewReducer-->',stateSL)
+    console.log('openSafeObj--reducer-->',stateSL)
 
     const FormData = {
         GroupPoints: stateSL.GroupPoints,

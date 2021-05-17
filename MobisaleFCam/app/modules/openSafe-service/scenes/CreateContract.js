@@ -206,7 +206,7 @@ class CreateContract extends React.Component {
                                     </Text>
                                 </View>
 
-                                <View style={[styles.inner, {borderWidth: 0}]}>
+                                <View style={[styles.inner, {borderWidth: 0, paddingTop: 12}]}>
                                     <TextInfo
                                         styleWrapper={styles.wrapperOne}
                                         styleLabel={styles.styleLabel}

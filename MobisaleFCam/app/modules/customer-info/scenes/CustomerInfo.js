@@ -166,25 +166,16 @@ class CustomerInfo extends React.Component {
         }
     }
 
-    /**
-     * PRESS Navigation Back
-     * @param
-     * @private
-     */
-    _onPress() {
-        NavigationService.navigate('BookportAddress', {
-            payload: 'BookPort'
-        });
-    }
+
 
     /**
-     * PRESS Navigation Back
+     * edit-address
      * @param
      * @private
      */
     _editInstallAddress =()=> {
         NavigationService.navigate('BookportAddress', {
-            payload: 'BookPort'
+           payload:{ serviceType: 1, serviceName: "Internet"}
         });
     }
 

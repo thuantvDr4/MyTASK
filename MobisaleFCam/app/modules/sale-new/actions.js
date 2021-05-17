@@ -138,6 +138,13 @@ export function saveInstallAddress(data, callback) {
     }
 }
 
+export function saveInstallAddress_OpenSafe(data, callback) {
+    return (dispatch) => {
+        dispatch({type: t.SAVE_INSTALL_ADDRESS_OPENSAFE, data: data });
+        callback();
+    }
+}
+
 export function updateInfoRegistration(data, callback) {
     return (dispatch) => {
         dispatch({type: t.UPDATE_INFO_REGISTRATION, data: data });

@@ -221,6 +221,32 @@ class DetailCustomersInfo extends React.Component {
 * FOR----> COMPONENTS
 *
 * */
+
+    /*
+* RenderItemList
+* */
+    RenderItemList = (data) => {
+        return (
+            <>
+                {
+                    data.map((item, index) => {
+                        return (
+                            <TextInfo
+                                key={index}
+                                styleWrapper={styles.wrapperOne}
+                                styleLabel={{...styles.styleLabel, flex: 1}}
+                                styleValue={{...styles.styleValue, flex: 1}}
+                                label={item.Name}
+                                value={item.Total}
+                            />
+                        )
+                    })
+                }
+            </>
+        )
+    }
+
+
     /*
     * RenderEquipment
     * */
@@ -237,31 +263,21 @@ class DetailCustomersInfo extends React.Component {
                     value={objDetailCus ? objDetailCus.DeviceTotal : null}
                 />
 
+                {/*..LIST-DEVICE..*/}
                 {
                     objDetailCus
                     && objDetailCus.ListOpenSafeDevice
                     && objDetailCus.ListOpenSafeDevice.length > 0
                         ?
-                        <View style={styles.lineMid}/>
+                        <>
+                            {/*...LINE..*/}
+                            <View style={styles.lineMid}/>
+                            {/*...*/}
+                            {this.RenderItemList(objDetailCus.ListOpenSafeDevice)}
+                        </>
                         : null
                 }
 
-                {
-                    objDetailCus&&objDetailCus.ListOSDevice?
-                         objDetailCus.ListOSDevice.map(
-                        (itemDevice, index) => (
-                            <TextInfo
-                                key={index}
-                                styleWrapper={styles.wrapperOne}
-                                styleLabel={{...styles.styleLabel, flex: 1}}
-                                styleValue={{...styles.styleValue, flex: 1}}
-                                label={itemDevice.Name}
-                                value={itemDevice.Total}
-                            />
-                        )
-                        )
-                        : null
-                }
             </View>
         )
     }
@@ -283,32 +299,20 @@ class DetailCustomersInfo extends React.Component {
                     value={objDetailCus ? objDetailCus.PackageTotal : null}
                 />
 
+                {/*..LIST-PACKAGES..*/}
                 {
                     objDetailCus
                     && objDetailCus.ListOpenSafePackage
                     && objDetailCus.ListOpenSafePackage.length > 0
                         ?
-                        <View style={styles.lineMid}/>
+                        <>
+                            {/*..LINE..*/}
+                            <View style={styles.lineMid}/>
+                            {/*...*/}
+                            {this.RenderItemList(objDetailCus.ListOpenSafePackage)}
+                        </>
                         : null
                 }
-
-                {
-                    objDetailCus&&objDetailCus.ListOSPackage?
-                         objDetailCus.ListOSPackage.map(
-                        (itemDevice, index) => (
-                            <TextInfo
-                                key={index}
-                                styleWrapper={styles.wrapperOne}
-                                styleLabel={{...styles.styleLabel, flex: 1}}
-                                styleValue={{...styles.styleValue, flex: 1}}
-                                label={itemDevice.Name}
-                                value={itemDevice.Total}
-                            />
-                        )
-                        )
-                        : null
-                }
-
             </View>
         )
     }

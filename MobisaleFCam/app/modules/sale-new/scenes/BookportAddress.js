@@ -19,7 +19,7 @@ import {mapLocation} from 'app-libs/helpers/mapPicker';
 import {actions as act, constants as c} from '../';
 
 
-const {saveInstallAddress, resetAllDataBookport} = act;
+const {saveInstallAddress, resetAllDataBookport, saveInstallAddress_OpenSafe} = act;
 
 // STYLE
 import ols from '../../../styles/Ola-style';
@@ -32,11 +32,13 @@ class BookportAddress extends React.Component {
 
     constructor(props) {
         super(props);
+        //
         this.state = {
             data: {},
             showBuilding: false,
             loadingVisible : false,
-            route_name: ''
+            route_name: '',
+            params: null
         };
 
         this.changeLocation = this.changeLocation.bind(this);
@@ -61,10 +63,12 @@ class BookportAddress extends React.Component {
         //check cho TH edit -address
         this.props.navigation.addListener('willFocus', (prop) => {
             //
-            const payload = this.props.navigation.getParam('payload', 'ChooseServiceType');
+            const payload = this.props.navigation.getParam('payload', null);
+            //
             this.setState({
                 ...this.state,
-                route_name: payload? payload : 'ChooseServiceType'
+                params: payload,
+                openSafeObj:  this.props.openSafeObj
             })
 
         });
@@ -294,11 +298,9 @@ class BookportAddress extends React.Component {
                         FullAddress: result[0]['Result']
                     }
                 }, () => {
-                    this.props.saveInstallAddress(this.state.data, () => {
-                        // NavigationService.navigate('BookPort'); //-------->V2.8
-                        //
-                       NavigationService.navigate(this.state.route_name); //--------> V2.10 openSafe_ciAmount
-                    });
+
+                    this._gotoNextScreen();
+
                 });
 
             } else {
@@ -307,6 +309,62 @@ class BookportAddress extends React.Component {
         });
     }
 
+    /*
+    * _gotoNextScreen
+    * */
+    _gotoNextScreen =()=>{
+        const {params} = this.state;
+        if(!params){
+            //TH-tạo mơi
+
+            //save address moi len store
+            this.props.saveInstallAddress(this.state.data, () => {
+                //chuyển tới màn hình chọn loại dịch vu
+                NavigationService.navigate('ChooseServiceType');
+                //
+            });
+            //
+        }else {
+            //TH- edit-address
+            switch (params.serviceType) {
+                case 1: {
+                    // save address moi len store
+                    this.props.saveInstallAddress(this.state.data, () => {
+                        //quay lai màn hình BOOk-PORT
+                        NavigationService.navigate('BookPort');
+                        //
+                    });
+
+                }
+                break;
+
+                case 3: {
+                    // save address moi len store
+                    const myData = {
+                        ...this.state.openSafeObj,
+                        ...this.state.data,
+                    }
+                    this.props.saveInstallAddress_OpenSafe(myData, () => {
+                        //Quay lại màn hình OPEN-SAFE -info
+                        NavigationService.navigate('OpenSafe_Info');
+                        //
+                    });
+
+                }
+                break;
+                //
+                default: break;
+            }
+        }
+
+    }
+
+
+
+
+    /*
+    *
+    * */
     isValidData() {
 
         const {data} = this.state;
@@ -560,12 +618,14 @@ class BookportAddress extends React.Component {
 
 export default connect(
     (state) => {
+
         return {
             locationOpt: mapLocation(state.authReducer.userInfo.ListLocation),
-            RegistrationObj: state.saleNewReducer.RegistrationObj
+            RegistrationObj: state.saleNewReducer.RegistrationObj,
+            openSafeObj: state.saleNewReducer.openSafeObj
         }
     },
     {
-        saveInstallAddress, resetAllDataBookport,
+        saveInstallAddress, resetAllDataBookport, saveInstallAddress_OpenSafe
     }
 )(BookportAddress);

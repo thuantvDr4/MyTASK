@@ -22,3 +22,5 @@ export const IS_MAP_READY  = 'sale-new/IS_MAP_READY';
 
 export const UPDATE_OPENSAFE_REGISTRATION  = 'sale-new/update_openSafe_registration';
 export const PUSH_DATA_INFO_OPENSAFE_REGISTRATION  = 'sale-new/push_data_info_openSafe_registration';
+
+export const SAVE_INSTALL_ADDRESS_OPENSAFE  = 'sale-new/save_install_address_openSafe';
