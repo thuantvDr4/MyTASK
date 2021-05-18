@@ -19,6 +19,7 @@ import TechLoading from 'app-libs/components/TechLoading';
 import * as api from '../api';
 // HELPER
 import {mapLocation} from "app-libs/helpers/mapPicker";
+import CustomFlatList from "../../../libs/components/CustomFlatlist";
 
 
 const DATA = [
@@ -64,7 +65,7 @@ const DATA = [
 /*
 * RowInfo
 * */
-const RowInfo =({label = 'LABEL', value = 'VALUE', valueStyle})=>{
+const RowInfo =({label = 'LABEL', value = '', valueStyle})=>{
     return(
         <View style={[styles.oneInfo, {marginBottom: 8}]}>
             <Text style={styles.infoTitle}>{label}</Text>
@@ -88,6 +89,7 @@ class OpenSafeList extends React.PureComponent {
 
     constructor(props) {
         super(props);
+
         this.state = {
             loadingVisible: false,
             searchData: {
@@ -111,11 +113,15 @@ class OpenSafeList extends React.PureComponent {
         this._errorMsg = this._errorMsg.bind(this);
         this._loading = this._loading.bind(this);
         this.changeLocation = this.changeLocation.bind(this);
+
         this.searchData = this.props.navigation.getParam('searchData');
     }
 
     componentDidMount() {
-        this._handleSearchData(this.searchData);
+
+        this.props.navigation.addListener('willFocus',
+            () => this._handleSearchData(this.searchData)
+        );  //
     }
 
 
@@ -123,21 +129,26 @@ class OpenSafeList extends React.PureComponent {
     * _handleSearchData
     * */
     _handleSearchData(myData) {
-        const searchData = myData.searchData;
-        const dateShow = myData.dateShow;
-        dateShow.LocationId = this.state.data.Location.Id;
-        dateShow.Status = searchData.Status.value;
+
+        const {searchData, dateShow} = myData;
+        const data = {
+            "LocationId": this.state.data.Location.Id,
+            "FromDate": dateShow.FromDate,
+            "ToDate": dateShow.ToDate,
+            "Status": searchData.Status.value,
+        };
+        //
         this._loading(true);
         // add param location
-        api.reportPTTB(dateShow, (success, result, msg) => {
-
+        api.reportOpenSafePTTB(data, (success, result, msg) => {
+            //console.log('----result-API', result)
             this._loading(false);
             if (success) {
                 this.setState({
                     ...this.state,
                     searchData: searchData,
                     dateShow: dateShow,
-                    objItem: DATA //result
+                    objItem: result //result
                 });
             } else {
                 // console.log(success, result, msg);
@@ -253,7 +264,7 @@ class OpenSafeList extends React.PureComponent {
                     {/*...Service-type...*/}
                     <RowInfo
                         label={strings('report.open_safe.form.serviceType')}
-                        value={item.ServiceType}
+                        value={item.LocalTypeName}
                     />
                     {/*...NAME...*/}
                     <RowInfo
@@ -268,7 +279,7 @@ class OpenSafeList extends React.PureComponent {
                     {/*...PHONE...*/}
                     <RowInfo
                         label={strings('report.open_safe.form.phone')}
-                        value={item.Phone}
+                        value={item.Phone1}
                     />
                     {/*...ADDRESS...*/}
                     <RowInfo
@@ -313,9 +324,13 @@ class OpenSafeList extends React.PureComponent {
                 </View>
 
                 <ScrollView style={styles.scrollView}>
-                    {this.state.objItem !== null && this.state.objItem.length > 0 ? this.state.objItem.map((item, index) =>
-                        this.RenderItem(item, index)
-                    ) : null}
+                  {/*...LIST...*/}
+                    <CustomFlatList
+                        renderItem={(item,index) => this.RenderItem(item, index)}
+                        isLoading={this.state.loadingVisible}
+                        data={this.state.objItem}
+                    />
+
                     {/*..white-safe..*/}
                     <View style={{height:40}}/>
                     {/*....*/}

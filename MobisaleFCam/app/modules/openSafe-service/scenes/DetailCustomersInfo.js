@@ -107,7 +107,6 @@ class DetailCustomersInfo extends React.Component {
         this._loading(true);
 
         api.GetRegistrationDetail(myData, (success, result, msg) => {
-            console.log('DETAIL-----', result)
             if (success) {
                 this.setState({
                     loadingVisible: false,
