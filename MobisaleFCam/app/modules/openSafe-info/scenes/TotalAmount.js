@@ -296,6 +296,8 @@ class TotalAmount extends Component {
         RegistrationObj.VAT             = data.VAT;
         RegistrationObj.Total           = data.Total;
         RegistrationObj.KhmerName       = data.KhmerName; //KhmerName
+        RegistrationObj.LocalType       = 302; // cho homeSafe
+        RegistrationObj.LocalTypeName   = "Homesafe";
 
         //
         const postData = {
@@ -324,10 +326,10 @@ class TotalAmount extends Component {
      * @private
      */
     _createInfoCustomer =(data, dataTemp)=> {
-
+        //
+        console.log('--DATA-TAO--', data)
         this._loading(true);
-
-        // goi API generation
+        // goi API: TAO KH
         api.createInfoCustomer(data, (success, result, msg) => {
             this._loading(false);
 

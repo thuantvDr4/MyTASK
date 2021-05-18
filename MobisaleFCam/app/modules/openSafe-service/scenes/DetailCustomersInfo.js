@@ -52,46 +52,58 @@ class DetailCustomersInfo extends React.Component {
         };
     };
 
+    /*
+    * constructor
+    * */
     constructor(props) {
         super(props);
-
         this.state = {
             loadingVisible: false,
             objDetailCus: null,
-            RegId: this.props.navigation.getParam("RegID", "0"),
-            RegCode: this.props.navigation.getParam("RegCode", "0"),
             //
             params: {
-                RegId: this.props.navigation.getParam("RegID", "0"),
-                RegCode: this.props.navigation.getParam("RegCode", "0"),
+                RegId: 0,
+                RegCode: 0,
             },
 
         };
         this.props.navigation.setParams({visible: false});
     }
 
+    /*
+    * componentDidMount
+    * */
     componentDidMount() {
-
         this.props.navigation.addListener("willFocus", () => {
-
-            const PARAMS = this.props.navigation.state.params;
-
-            const {params} = this.state;
-            this._handleLoadInfoCus(params);
+            // get param
+            const PARAMS = {
+                RegId: this.props.navigation.getParam("RegID", "0"),
+                RegCode: this.props.navigation.getParam("RegCode", "0"),
+            }
+            // lưu local
+            this.setState({
+                params: PARAMS
+            });
+            // goi api: lay thong tin
+            this._handleLoadInfoCus(PARAMS);
+            //
             this.props.showTabBar(false);
         });
     }
 
+    /*
+    * componentWillUnmount
+    * */
     componentWillUnmount() {
         this.props.showTabBar(true);
     }
 
-
+/*------ALL-FUNCTION-------*/
     /*
     * _handleLoadInfoCus
     * */
     _handleLoadInfoCus(myData) {
-
+        //
         this._loading(true);
 
         api.GetRegistrationDetail(myData, (success, result, msg) => {

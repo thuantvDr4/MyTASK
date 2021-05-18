@@ -7,7 +7,7 @@
  */
 
 // LIB
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {KeyboardAvoidingView, View, Text, ScrollView, StyleSheet, Platform} from 'react-native';
 import {strings} from 'locales/i18n';
 
@@ -27,6 +27,7 @@ import {makeDataDevice_OS} from "../helpers/mixData";
 import * as api from '../api';
 // ACTION
 import {actions as customerInfo} from '../';
+
 const {nextStep, updateInfoRegistration} = customerInfo;
 
 // STYLE
@@ -39,8 +40,7 @@ import InputO from "../components/InputO";
 /*
 * CLASS
 * */
-class ServiceType extends Component
-{
+class ServiceType extends Component {
     constructor(props) {
         super(props);
 
@@ -57,7 +57,7 @@ class ServiceType extends Component
     /*
     * Check valid
     * */
-    isValidData =()=> {
+    isValidData = () => {
         const {data} = this.state;
         let errorList = [];
 
@@ -69,8 +69,7 @@ class ServiceType extends Component
                 name: 'deviceType',
                 msg: strings('dl.open_safe.customer_info.service_type.equipment')
             });
-        }
-        else {
+        } else {
             this.refs['deviceType'].setValid(true);
         }
 
@@ -82,8 +81,7 @@ class ServiceType extends Component
                 name: 'packageType',
                 msg: strings('dl.open_safe.customer_info.service_type.package')
             });
-        }
-        else {
+        } else {
             this.refs['packageType'].setValid(true);
         }
 
@@ -100,7 +98,7 @@ class ServiceType extends Component
     /*
     * changePickerValue
     * */
-    changePickerValue =(name, selectItem)=>{
+    changePickerValue = (name, selectItem) => {
         //
         const data = this.state.data;
         //
@@ -118,7 +116,7 @@ class ServiceType extends Component
     /*
  * changePickerValue
  * */
-    changePickerValue_2 =(name, selectItem)=>{
+    changePickerValue_2 = (name, selectItem) => {
         //
         console.log('...no goi cai nay chưa', selectItem)
 
@@ -128,20 +126,21 @@ class ServiceType extends Component
     /*
     * submitData
     * */
-    submitData =(dataAmount)=> {
+    submitData = (dataAmount) => {
         // Xu ly data submit
-        const { data, tabnav } = this.state;
+        const {data, tabnav} = this.state;
         let RegistrationObj = {};
 
-        RegistrationObj.SaleId              = this.props.SaleId;
+        RegistrationObj.SaleId = this.props.SaleId;
+        RegistrationObj.ListServiceType = [{"Id": 7, "Name": "Opensafe"}];
 
-        RegistrationObj.ListOSDevice        = makeDataDevice_OS(data.Device.List);
-        RegistrationObj.DeviceTotal         = data.Device.DeviceTotal;
+        RegistrationObj.ListOSDevice = makeDataDevice_OS(data.Device.List);
+        RegistrationObj.DeviceTotal = data.Device.DeviceTotal;
 
-        RegistrationObj.ListOSPackage          = makeDataDevice_OS(data.Package.List);
-        RegistrationObj.PackageTotal         = data.Package.DeviceTotal;
+        RegistrationObj.ListOSPackage = makeDataDevice_OS(data.Package.List);
+        RegistrationObj.PackageTotal = data.Package.DeviceTotal;
 
-        RegistrationObj.Total               = dataAmount.Total;
+        RegistrationObj.Total = dataAmount.Total;
 
         // dispatch redux
         this.props.updateInfoRegistration(RegistrationObj, () => {
@@ -160,8 +159,8 @@ class ServiceType extends Component
     *
     * Handle nut-NEXT
     * */
-    _onNextStep =()=> {
-        if (! this.isValidData() ) {
+    _onNextStep = () => {
+        if (!this.isValidData()) {
             return;
         }
 
@@ -169,11 +168,11 @@ class ServiceType extends Component
         //this.submitData(0)
 
         // Xu ly data submit
-        const { data } = this.state;
-        const { golbalData } = this.props;
+        const {data} = this.state;
+        const {golbalData} = this.props;
 
         const formData = {
-            "VAT": golbalData.VAT? golbalData.VAT : 0,
+            "VAT": golbalData.VAT ? golbalData.VAT : 0,
             "ListOSDevice": makeDataDevice_OS(data.Device.List),
             "ListOSPackage": makeDataDevice_OS(data.Package.List),
             "Total": golbalData.Total,
@@ -195,8 +194,7 @@ class ServiceType extends Component
         });
     }
 
-    _loading =(isShow)=>
-    {
+    _loading = (isShow) => {
         this.setState({
             loadingVisible: isShow
         });
@@ -205,8 +203,8 @@ class ServiceType extends Component
     /*
     * _renderEquipment
     * */
-    _renderEquipment =()=> {
-        const { data } = this.state;
+    _renderEquipment = () => {
+        const {data} = this.state;
 
         return (
             <View style={[styles.equipment_ctn]}>
@@ -216,29 +214,28 @@ class ServiceType extends Component
 
                 <FormDeviceList
                     ref={'deviceType'}
-                    isMultiChoose={ true }
-                    label = {strings('open_safe.service_type.form.listDevice_label')}
-                    placeholder = {strings('open_safe.service_type.form.listDevice_placeholder')}
-                    filterText = {strings('open_safe.service_type.form.listDevice_filterText')}
-                    unitLabel = {strings('open_safe.service_type.form.listDevice_unitPrice')}
-                    amountLabel = {strings('open_safe.service_type.form.listDevice_amount')}
-                    getOptionData = {api.loadDeviceList}
-                    params = {null}
+                    isMultiChoose={true}
+                    label={strings('open_safe.service_type.form.listDevice_label')}
+                    placeholder={strings('open_safe.service_type.form.listDevice_placeholder')}
+                    filterText={strings('open_safe.service_type.form.listDevice_filterText')}
+                    unitLabel={strings('open_safe.service_type.form.listDevice_unitPrice')}
+                    amountLabel={strings('open_safe.service_type.form.listDevice_amount')}
+                    getOptionData={api.loadDeviceList}
+                    params={null}
                     allowRefresh={false}
-                    value = {data.Device}
-                    onChange = {(selectedItem) => this.changePickerValue('Device', selectedItem)}
+                    value={data.Device}
+                    onChange={(selectedItem) => this.changePickerValue('Device', selectedItem)}
                 />
             </View>
         )
     }
 
 
-
     /*
 * _renderPackages
 * */
-    _renderPackages =()=> {
-        const { data } = this.state;
+    _renderPackages = () => {
+        const {data} = this.state;
 
         return (
             <View style={[styles.equipment_ctn]}>
@@ -248,17 +245,17 @@ class ServiceType extends Component
 
                 <FormDeviceList
                     ref={'packageType'}
-                    isMultiChoose = {false}
-                    label = {strings('open_safe.service_type.form.listPackage_label')}
-                    placeholder = {strings('open_safe.service_type.form.listPackage_placeholder')}
-                    filterText = {strings('open_safe.service_type.form.listPackage_filterText')}
-                    unitLabel = {strings('open_safe.service_type.form.listPackage_unitPrice')}
-                    amountLabel = {strings('open_safe.service_type.form.listPackage_amount')}
-                    getOptionData = {api.loadPackageList}
-                    params = {null}
+                    isMultiChoose={false}
+                    label={strings('open_safe.service_type.form.listPackage_label')}
+                    placeholder={strings('open_safe.service_type.form.listPackage_placeholder')}
+                    filterText={strings('open_safe.service_type.form.listPackage_filterText')}
+                    unitLabel={strings('open_safe.service_type.form.listPackage_unitPrice')}
+                    amountLabel={strings('open_safe.service_type.form.listPackage_amount')}
+                    getOptionData={api.loadPackageList}
+                    params={null}
                     allowRefresh={false}
-                    value = {data.Package}
-                    onChange = {(selectedItem) => this.changePickerValue('Package', selectedItem)}
+                    value={data.Package}
+                    onChange={(selectedItem) => this.changePickerValue('Package', selectedItem)}
                 />
 
             </View>
@@ -271,25 +268,28 @@ class ServiceType extends Component
     *
     * */
     render() {
-        const { data } = this.state;
+        const {data} = this.state;
 
         return (
             <KeyboardAvoidingView
                 keyboardVerticalOffset={Platform.select({ios: 70, android: 0})}
-                behavior= {(Platform.OS === 'ios')? "padding" : null}
-                style={[ols.container_keyboard]} >
+                behavior={(Platform.OS === 'ios') ? "padding" : null}
+                style={[ols.container_keyboard]}>
                 <ScrollView
                     keyboardDismissMode={'on-drag'}
                     contentContainerStyle={[ols.wrapper_scrollview]}
                 >
 
-                    <View style={[ols.inner_scrollview, ols.bgw, {paddingHorizontal: 0, justifyContent: 'space-between'}]} >
+                    <View style={[ols.inner_scrollview, ols.bgw, {
+                        paddingHorizontal: 0,
+                        justifyContent: 'space-between'
+                    }]}>
                         <View>
                             {/*...Service-name...*/}
-                            <View style={[styles.container, ols.mgt15, ]}>
+                            <View style={[styles.container, ols.mgt15,]}>
                                 <InputO
                                     ref="ServiceType"
-                                    label = {strings('open_safe.service_type.form.serviceType_label')}
+                                    label={strings('open_safe.service_type.form.serviceType_label')}
                                     style={[styles.textInput, ols.fw500, ols.txtR]}
                                     placeholder={''}
                                     placeholderTextColor='#444444'
@@ -361,14 +361,12 @@ export default connect((state) => {
 * Styles
 * */
 const styles = StyleSheet.create({
-    scrollContainer: {
-
-    },
+    scrollContainer: {},
     container: {
         paddingHorizontal: 24,
         paddingTop: 25
     },
-    equipment_ctn:{
+    equipment_ctn: {
         paddingHorizontal: 24,
         paddingTop: 12
     },

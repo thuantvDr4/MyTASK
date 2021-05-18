@@ -197,12 +197,12 @@ class ContractDetail extends React.Component {
                 {/*..LIST-DEVICE..*/}
                 {
                     objDetailContract
-                    && objDetailContract.ListOpenSafeDevice
-                    && objDetailContract.ListOpenSafeDevice.length > 0
+                    && objDetailContract.ListOSDevice
+                    && objDetailContract.ListOSDevice.length > 0
                         ?
                         <>
                             <View style={styles.lineMid}/>
-                            {this.RenderItemList(objDetailContract.ListOpenSafeDevice)}
+                            {this.RenderItemList(objDetailContract.ListOSDevice)}
                         </>
                         : null
                 }
@@ -231,12 +231,12 @@ class ContractDetail extends React.Component {
                 {/*..LIST-PACKAGES..*/}
                 {
                     objDetailContract
-                    && objDetailContract.ListOpenSafePackage
-                    && objDetailContract.ListOpenSafePackage.length > 0
+                    && objDetailContract.ListOSPackage
+                    && objDetailContract.ListOSPackage.length > 0
                         ?
                         <>
                             <View style={styles.lineMid}/>
-                            {this.RenderItemList(objDetailContract.ListOpenSafePackage)}
+                            {this.RenderItemList(objDetailContract.ListOSPackage)}
                         </>
                         : null
                 }

@@ -422,6 +422,7 @@ export function GetVatList(myData, callback) {
     });
 }
 
+
 // GET API DAT COC
 export function GetDepositList(myData, callback) {
     myNetwork.post(
@@ -443,7 +444,8 @@ export function GetDepositList(myData, callback) {
     });
 }
 
-// TẠO THÔNG TIN KHACH HÀNG
+
+// TẠO-UPDATE: THÔNG TIN KHACH HÀNG
 export function createInfoCustomer(myData, callback) {
     myNetwork.post(
         '/RegistrationOpenSafe/UpdateOSRegistration',

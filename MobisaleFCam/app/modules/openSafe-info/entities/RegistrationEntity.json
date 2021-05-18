@@ -37,7 +37,6 @@
     "BuildingName": "",
     "ImageInfo":"",
     "SaleId":null,
-    "GroupPoints":"",
     "Indoor":"",
     "OutDoor":"",
     "InDType":"",
@@ -47,7 +46,6 @@
     "Lat":"",
     "Lng":"",
     "ContractTemp":"",
-    "BookportIdentityId":"",
     "LatlngDevice":"",
 
     "ListServiceType": [{
@@ -60,13 +58,14 @@
 
     "Total":null,
 
+    "ListOSDevice": null,
     "DeviceTotal":null,
 
     "ListOSGift": null,
-    "ListOSDevice": null,
-    "PotentialObjID": null,
+
     "Telegram"  :   "",
     "KhmerName": "",
+
     "ListOSPackage": null,
     "PackageTotal": null
 }
