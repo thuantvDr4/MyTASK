@@ -158,6 +158,7 @@ class FormBussinessInfo extends Component
             <View>
                 <View style={styles.container}>
                     <InputO
+                        maxLength={200}
                         ref="FullNameType"
                         label={strings('customer_info.customer_info.form.cus_name_personal_label')}
                         style={[styles.textInput, ols.fw500, ols.txtR, {paddingLeft: 120,}]}
@@ -176,6 +177,7 @@ class FormBussinessInfo extends Component
                 <View style={styles.container}>
                     <Text style={[styles.plfake, ols.fs12]}></Text>
                     <InputO
+                        maxLength={100}
                         ref="RepresentiveType"
                         label={strings('customer_info.customer_info.form.cus_delegate_label')}
                         style={[styles.textInput, ols.fw500, ols.txtR, {paddingLeft: 120,}]}
@@ -194,6 +196,7 @@ class FormBussinessInfo extends Component
                 <View style={styles.container}>
                     <Text style={[styles.plfake, ols.fs12]}></Text>
                     <InputO
+                        maxLength={100}
                         ref="TaxCodeType"
                         label={strings('customer_info.customer_info.form.cus_tax_label')}
                         style={[styles.textInput, ols.fw500, ols.txtR, {paddingLeft: 90,}]}

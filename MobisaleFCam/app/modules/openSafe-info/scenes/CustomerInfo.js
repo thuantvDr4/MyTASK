@@ -593,6 +593,7 @@ class CustomerInfo extends React.Component {
                             <View style={styles.rows}>
                                 <View style={styles.cols}>
                                     <InputN
+                                        maxLength={20}
                                         ref="Phone1Type"
                                         style={[styles.textInput, ols.fw500]}
                                         placeholder={strings('customer_info.customer_info.form.con_phone_placeholder')}
@@ -607,6 +608,7 @@ class CustomerInfo extends React.Component {
                                 </View>
                                 <View style={styles.cols}>
                                     <InputO
+                                        maxLength={100}
                                         ref="Contact1Type"
                                         style={[styles.textInput, ols.fw500]}
                                         placeholder={strings('customer_info.customer_info.form.con_name_placeholder')}
@@ -622,6 +624,7 @@ class CustomerInfo extends React.Component {
                             {/*..Email..*/}
                             <View style={styles.container}>
                                 <InputO
+                                    maxLength={200}
                                     ref="EmailType"
                                     label="Email"
                                     style={[styles.textInput, ols.fw500, ols.txtR]}
@@ -639,6 +642,7 @@ class CustomerInfo extends React.Component {
                             {/*...Telegram..*/}
                             <View style={styles.container}>
                                 <InputO
+                                    maxLength={200}
                                     ref="Telegram"
                                     label= {strings('customer_info.customer_info.form.telegram_label')}
                                     style={[styles.textInput, ols.fw500, ols.txtR]}
@@ -680,11 +684,11 @@ class CustomerInfo extends React.Component {
 
                             <View style={styles.container}>
                                 <InputO
+                                    maxLength={1000}
                                     ref="NoteAddressType"
                                     label={strings('customer_info.customer_info.form.note_label')}
                                     style={[styles.textInput, ols.fw500, ols.txtR, {paddingLeft: 100,}]}
                                     placeholder={strings('customer_info.customer_info.form.note_placeholder')}
-                                    maxLength={1000}
                                     placeholderTextColor='#444444'
                                     textAlign={'right'}
                                     autoCapitalize={'none'}

@@ -230,7 +230,7 @@ class TotalAmount extends Component {
      * @param
      * @private
      */
-    _calcTotalAmount() {
+    _calcTotalAmount =()=> {
 
         const { data } = this.state
         const { AllData, Username } = this.props;
@@ -241,6 +241,8 @@ class TotalAmount extends Component {
             "ListOSPackage": AllData.ListOSPackage,
             "Total": data.Total,
         };
+
+        console.log('-----', formData)
 
 
         // show loading
@@ -468,6 +470,7 @@ class TotalAmount extends Component {
                             { (this.state.data.VAT > 0) &&
                                 <View>
                                     <InputO
+                                        maxLength={100}
                                         ref="KhmerNameType"
                                         label={strings('customer_info.total.form.khmerName_label')}
                                         style={[styles.textInput, ols.fw500, {paddingLeft: 100,}]}

@@ -208,7 +208,7 @@ class CreateContract extends React.Component {
 
                                 <View style={[styles.inner, {borderWidth: 0, paddingTop: 12}]}>
                                     <TextInfo
-                                        styleWrapper={styles.wrapperOne}
+                                        styleWrapper={[styles.wrapperOne, {marginBottom: 12,}]}
                                         styleLabel={styles.styleLabel}
                                         styleValue={styles.styleValue}
                                         label={strings("open_safe.create_contract.cus_name")}
@@ -216,7 +216,7 @@ class CreateContract extends React.Component {
                                     />
 
                                     <TextInfo
-                                        styleWrapper={styles.wrapperOne}
+                                        styleWrapper={[styles.wrapperOne, {marginBottom: 12,}]}
                                         styleLabel={styles.styleLabel}
                                         styleValue={styles.styleValue}
                                         label={strings("open_safe.create_contract.code")}
@@ -224,7 +224,7 @@ class CreateContract extends React.Component {
                                     />
 
                                     <TextInfo
-                                        styleWrapper={styles.wrapperOne}
+                                        styleWrapper={[styles.wrapperOne, {marginBottom: 12,}]}
                                         styleLabel={styles.styleLabel}
                                         styleValue={styles.styleValue}
                                         label={strings("open_safe.create_contract.email")}
@@ -232,7 +232,7 @@ class CreateContract extends React.Component {
                                     />
 
                                     <TextInfo
-                                        styleWrapper={styles.wrapperOne}
+                                        styleWrapper={[styles.wrapperOne, {marginBottom: 12,}]}
                                         styleLabel={styles.styleLabel}
                                         styleValue={styles.styleValue}
                                         label={strings("open_safe.create_contract.phone")}

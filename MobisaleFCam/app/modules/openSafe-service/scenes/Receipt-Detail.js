@@ -150,8 +150,8 @@ class ReceiptDetail extends React.Component {
         this._loading(true);
         //
         const data ={
-            // Nếu là bán mới truyền PaymentType=1, nếu là bán thêm truyền PaymentType=2
-            PaymentType: 1
+            // Nếu là bán mới truyền PaymentType=1, nếu là bán thêm truyền PaymentType=2, OS =7
+            PaymentType: 7
         }
         //
         api.getPaymentMethodList(data, (success, result, msg) => {

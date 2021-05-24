@@ -137,6 +137,7 @@ export default class FormPersonalInfo extends Component
             <View>
                 <View style={styles.container}>
                     <InputO
+                        maxLength={200}
                         ref="FullNameType"
                         label={strings('customer_info.customer_info.form.cus_name_label')}
                         style={[styles.textInput, ols.fw500, {paddingLeft: 100,}]}
@@ -168,6 +169,7 @@ export default class FormPersonalInfo extends Component
 
                 <View style={styles.container}>
                     <InputO
+                        maxLength={100}
                         ref="PassportType"
                         label={strings('customer_info.customer_info.form.cus_ID_label')}
                         style={[styles.textInput, ols.fw500, ols.txtR, {paddingLeft: 110,}]}
