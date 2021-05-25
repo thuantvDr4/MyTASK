@@ -37,8 +37,7 @@ class BookportAddress extends React.Component {
             data: {},
             showBuilding: false,
             loadingVisible : false,
-            route_name: '',
-            params: null
+            openSafeObj: this.props.openSafeObj
         };
 
         this.changeLocation = this.changeLocation.bind(this);
@@ -54,25 +53,22 @@ class BookportAddress extends React.Component {
 
     }
 
+    /*
+    * componentDidMount
+    * */
     componentDidMount() {
+        //
+        this._checkBookportForward();
+        //
+    }
 
-        const { navigation } = this.props;
+    /*
+    * check-BookportForward
+    * */
+    _checkBookportForward =()=>{
+        //
         const globalData = this.props.RegistrationObj
-        const bookportForward = navigation.getParam('bookportForward', false);
-
-        //check cho TH edit -address
-        this.props.navigation.addListener('willFocus', (prop) => {
-            //
-            const payload = this.props.navigation.getParam('payload', null);
-            //
-            this.setState({
-                ...this.state,
-                params: payload,
-                openSafeObj:  this.props.openSafeObj
-            })
-
-        });
-
+        const bookportForward = this.props.navigation.getParam('bookportForward', false);
         //
         if (bookportForward) {
 
@@ -141,10 +137,26 @@ class BookportAddress extends React.Component {
                 },
             });
         }
+    }
+
+
+    /**V2.10
+     * MOUNT Received Props
+     */
+    componentWillReceiveProps(nextProps) {
+        // Data if change because merge to contructor not update
+        if (nextProps.openSafeObj !== this.state.openSafeObj) {
+            this.setState({
+                openSafeObj : nextProps.openSafeObj
+            })
+        }
 
     }
 
 
+    /*
+    * getLocationData
+    * */
     getLocationData(callback) {
 
         setTimeout(() => {
@@ -313,48 +325,46 @@ class BookportAddress extends React.Component {
     * _gotoNextScreen
     * */
     _gotoNextScreen =()=>{
-        const {params} = this.state;
-        if(!params){
-            //TH-tạo mơi
+        //
+        const serviceType = this.props.navigation.getParam('serviceType', null);
+        //TH- edit-address
+        switch (serviceType) {
+            case 'Internet': {
+                // save address moi len store
+                this.props.saveInstallAddress(this.state.data, () => {
+                    //quay lai màn hình BOOk-PORT
+                    NavigationService.navigate('BookPort');
+                    //
+                });
 
-            //save address moi len store
-            this.props.saveInstallAddress(this.state.data, () => {
-                //chuyển tới màn hình chọn loại dịch vu
-                NavigationService.navigate('ChooseServiceType');
-                //
-            });
-            //
-        }else {
-            //TH- edit-address
-            switch (params.serviceType) {
-                case 1: {
-                    // save address moi len store
-                    this.props.saveInstallAddress(this.state.data, () => {
-                        //quay lai màn hình BOOk-PORT
-                        NavigationService.navigate('BookPort');
-                        //
-                    });
-
-                }
-                break;
-
-                case 3: {
-                    // save address moi len store
-                    const myData = {
-                        ...this.state.openSafeObj,
-                        ...this.state.data,
-                    }
-                    this.props.saveInstallAddress_OpenSafe(myData, () => {
-                        //Quay lại màn hình OPEN-SAFE -info
-                        NavigationService.navigate('OpenSafe_Info');
-                        //
-                    });
-
-                }
-                break;
-                //
-                default: break;
             }
+                break;
+
+            case 'OpenSafe': {
+                // save address moi len store
+                const myData = {
+                    ...this.state.openSafeObj,
+                    ...this.state.data,
+                }
+                console.log('-----mydata', myData)
+                this.props.saveInstallAddress_OpenSafe(myData, () => {
+                    //Quay lại màn hình OPEN-SAFE -info
+                    NavigationService.navigate('OpenSafe_Info');
+                    //
+                });
+
+            }
+                break;
+            //
+            default: {
+                //save address moi len store
+                this.props.saveInstallAddress(this.state.data, () => {
+                    //chuyển tới màn hình chọn loại dịch vu
+                    NavigationService.navigate('ChooseServiceType');
+                    //
+                });
+            }
+            break;
         }
 
     }

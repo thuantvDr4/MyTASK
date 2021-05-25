@@ -174,9 +174,7 @@ class CustomerInfo extends React.Component {
             // Chuyen trang
             setTimeout(() => {
                 //
-                NavigationService.navigate('BookportAddress', {
-                    payload: {serviceType: 3, serviceName: "Opensafe"}
-                });
+                NavigationService.navigate('BookportAddress', {serviceType: "OpenSafe"});
             }, 200);
         });
 

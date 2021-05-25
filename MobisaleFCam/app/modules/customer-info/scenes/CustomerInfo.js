@@ -174,9 +174,7 @@ class CustomerInfo extends React.Component {
      * @private
      */
     _editInstallAddress =()=> {
-        NavigationService.navigate('BookportAddress', {
-           payload:{ serviceType: 1, serviceName: "Internet"}
-        });
+        NavigationService.navigate('BookportAddress', {serviceType: "Internet"});
     }
 
 
