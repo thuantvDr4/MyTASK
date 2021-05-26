@@ -300,7 +300,7 @@ class TotalAmount extends Component {
                 } else {
                     this._error(msg);
                 }
-            }, 300);
+            }, 500);
         });
     }
 

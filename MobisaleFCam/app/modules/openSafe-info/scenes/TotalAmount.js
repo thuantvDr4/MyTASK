@@ -247,7 +247,7 @@ class TotalAmount extends Component {
             //
             setTimeout( () => {
                 // hide loading
-                this._loading(false);
+                this._loading(false)
                 //
                 if (isSuccess) {
                     const postData = {
@@ -257,11 +257,11 @@ class TotalAmount extends Component {
                     }
                     // dispatch redux store
                     this.props.updateInfoRegistration(postData, () => { });
-
                 } else {
                     this._error(msg);
                 }
-            }, 300);
+                //
+            }, 500);
         });
     }
 
