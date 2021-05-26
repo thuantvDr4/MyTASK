@@ -5,7 +5,6 @@ import {
 } from 'react-native'
 
 // SCREEN
-// import Splash from '../modules/openSafe-info/scenes/TotalAmount'; // for TEST
 
 import Splash from '../modules/splash/scenes/Splash';
 import Upgrade from '../modules/splash/scenes/Upgrade';

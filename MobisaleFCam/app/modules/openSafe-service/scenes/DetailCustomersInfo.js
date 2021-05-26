@@ -206,7 +206,7 @@ class DetailCustomersInfo extends React.Component {
             this._loading(false);
 
             if (success) {
-                NavigationService.navigate("lciViewCustomerImage", {
+                NavigationService.navigate("openSafe_ViewImage", {
                     listImage: this.state.objDetailCus.ImageInfo,
                     dataSystemApiToken: result[0].Token
                 });

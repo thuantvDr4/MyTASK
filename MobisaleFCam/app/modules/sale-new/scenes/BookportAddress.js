@@ -293,8 +293,8 @@ class BookportAddress extends React.Component {
             infoAddress.BuildingId = this.state.data.Building ? this.state.data.Building.Id : null;
         }
 
-        // reset
-        this.props.resetAllDataBookport();
+        // reset -V2.8
+        //this.props.resetAllDataBookport();
 
         // goi API generation
         api.generationAddress(infoAddress, (success, result, msg) => {
@@ -330,6 +330,8 @@ class BookportAddress extends React.Component {
         //TH- edit-address
         switch (serviceType) {
             case 'Internet': {
+                // reset
+                this.props.resetAllDataBookport();
                 // save address moi len store
                 this.props.saveInstallAddress(this.state.data, () => {
                     //quay lai màn hình BOOk-PORT
@@ -346,7 +348,6 @@ class BookportAddress extends React.Component {
                     ...this.state.openSafeObj,
                     ...this.state.data,
                 }
-                console.log('-----mydata', myData)
                 this.props.saveInstallAddress_OpenSafe(myData, () => {
                     //Quay lại màn hình OPEN-SAFE -info
                     NavigationService.navigate('OpenSafe_Info');
@@ -357,6 +358,8 @@ class BookportAddress extends React.Component {
                 break;
             //
             default: {
+                // reset
+                this.props.resetAllDataBookport();
                 //save address moi len store
                 this.props.saveInstallAddress(this.state.data, () => {
                     //chuyển tới màn hình chọn loại dịch vu

@@ -7,6 +7,7 @@ import UploadImage from '../scenes/UploadCustomerImage';
 import CreateContract from '../scenes/CreateContract';
 import ContractDetail from '../scenes/Contract-Detail';
 import ReceiptDetail from '../scenes/Receipt-Detail';
+import ViewImage from '../scenes/ViewCustomerImage';
 
 
 export default createStackNavigator(
@@ -25,7 +26,10 @@ export default createStackNavigator(
         },
         openSafe_ReceiptDetail: {
             screen: ReceiptDetail,
-        }
+        },
+        openSafe_ViewImage: {
+            screen: ViewImage,
+        },
     },
     {
         initialRouteName: 'openSafe_DetailCustomer',

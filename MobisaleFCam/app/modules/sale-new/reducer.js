@@ -46,13 +46,7 @@ const saleNewReducer = (state = initialState, action) => {
 
         // reset toan bo reducer bookport
         case t.RESET_ALL_DATA_BOOKPORT:
-           // state = initialState; //v2.8
-            //V2.10
-            state ={
-                ...state,
-                RegistrationObj: initialState.RegistrationObj,
-                objBookport: initialState.objBookport
-            }
+           state = initialState;
             break;
 
         case t.SAVE_INSTALL_ADDRESS:

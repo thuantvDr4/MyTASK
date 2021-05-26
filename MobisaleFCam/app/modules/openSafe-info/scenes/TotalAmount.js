@@ -329,7 +329,6 @@ class TotalAmount extends Component {
      */
     _createInfoCustomer =(data, dataTemp)=> {
         //
-        console.log('--DATA-TAO--', data)
         this._loading(true);
         // goi API: TAO KH
         api.createInfoCustomer(data, (success, result, msg) => {
@@ -340,7 +339,11 @@ class TotalAmount extends Component {
 
             if (success) {
                 this.props.submitCreateTTKH(dataTemp);
-                NavigationService.navigate('openSafe_DetailCustomer', {RegID : result[0].RegID, RegCode : result[0].RegCode});
+                //
+                const data ={
+                    RegID : result[0].RegID, RegCode : result[0].RegCode
+                }
+                this._gotoNextScreen(data)
             }
             else {
                 setTimeout(() => {
@@ -351,6 +354,18 @@ class TotalAmount extends Component {
             }
         });
     }
+
+
+    /*
+    * _gotoNextScreen
+    * */
+    _gotoNextScreen =(data)=>{
+        // NavigationService.navigate('openSafe_DetailCustomer', data);
+        // fix cho Case backHandler không được remove
+        NavigationService.navigateBackHome('OpenSafe_service', data);
+    }
+
+
 
     /**
      * Show Loi

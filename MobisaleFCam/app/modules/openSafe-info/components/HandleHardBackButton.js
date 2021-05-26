@@ -4,7 +4,7 @@ import { withNavigation } from 'react-navigation';
 import { BackHandler } from 'react-native';
 
 class HandleHardBackButton extends Component {
-	
+
 	constructor(props) {
 		super(props);
 	}
