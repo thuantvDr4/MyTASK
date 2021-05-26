@@ -61,7 +61,6 @@ class ServiceType extends Component {
      * MOUNT Process API
      */
     componentDidMount() {
-        console.log('----states', this.state.data)
         this._getServiceType();
         this._getLocalType();
     }
@@ -86,10 +85,9 @@ class ServiceType extends Component {
         // goi API generation
         api.GetServiceTypeList(data, (success, result, msg) => {
 
-            console.log('----ServiceType', result)
             if (success) {
                 this.setState({
-                    // ListServiceType: result
+                    ListServiceType: result
                 })
             } else {
                 this._error(msg);
@@ -118,7 +116,6 @@ class ServiceType extends Component {
         // goi API generation
         api.GetLocalTypeList(data, (success, result, msg) => {
 
-            console.log('----LocalType', result)
             if (success) {
                     this.setState({
                         listLocalType: result
@@ -191,14 +188,6 @@ class ServiceType extends Component {
     }
 
 
-    /*
- * changePickerValue
- * */
-    changePickerValue_2 = (name, selectItem) => {
-        //
-        console.log('...no goi cai nay chưa', selectItem)
-
-    }
 
 
     /*
@@ -224,8 +213,6 @@ class ServiceType extends Component {
 
         RegistrationObj.Total = dataAmount.Total;
 
-
-        console.log('------RegistrationObj', RegistrationObj)
 
         // dispatch redux
         this.props.updateInfoRegistration(RegistrationObj, () => {
@@ -279,7 +266,7 @@ class ServiceType extends Component {
         });
     }
 
-    _loading = (isShow) => {
+    _loading (isShow) {
         this.setState({
             loadingVisible: isShow
         });

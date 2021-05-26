@@ -78,8 +78,6 @@ class TotalAmount extends Component {
      * MOUNT Process API
      */
     componentDidMount() {
-
-
         // MOUNT DATA AGAIN
         this.props.navigation.addListener('willFocus', () => {
 
@@ -98,8 +96,9 @@ class TotalAmount extends Component {
         this._loading(true);
         // goi API generation
         api.GetVatList({}, (success, result, msg) => {
-            // this._loading(false);
-
+            //
+            this._loading(false);
+            //
             if (success) {
                 this.setState({
                     ...this.state,
@@ -107,7 +106,6 @@ class TotalAmount extends Component {
                         ...this.state.dataAPI,
                         apiVAT: result,
                     },
-                    loadingVisible: false
                 });
             }
             else {
@@ -231,7 +229,9 @@ class TotalAmount extends Component {
      * @private
      */
     _calcTotalAmount =()=> {
-
+        // show loading
+        this._loading(true);
+        //
         const { data } = this.state
         const { AllData, Username } = this.props;
 
@@ -242,29 +242,21 @@ class TotalAmount extends Component {
             "Total": data.Total,
         };
 
-        console.log('-----', formData)
-
-
-        // show loading
-        this._loading(true);
-
         // Xu ly cap nhat gia tien
         api.caclRegistrationTotal(formData, (isSuccess, rData, msg) => {
-
-            // hide loading
+            //
             setTimeout( () => {
+                // hide loading
                 this._loading(false);
-
+                //
                 if (isSuccess) {
-
                     const postData = {
                         ...this.props.AllData,
                         Total:      rData.Total,
-                        VAT:        data.VAT
+                        VAT:        data.VAT,
                     }
-
                     // dispatch redux store
-                    this.props.updateInfoRegistration(postData, () => {});
+                    this.props.updateInfoRegistration(postData, () => { });
 
                 } else {
                     this._error(msg);
@@ -372,7 +364,7 @@ class TotalAmount extends Component {
      * @param err
      * @private
      */
-    _error =(err)=> {
+    _error (err) {
         this._loading(false);
         // alert(JSON.stringify(err));
         // alert(err);
@@ -384,7 +376,7 @@ class TotalAmount extends Component {
      * @param isShow
      * @private
      */
-    _loading =(isShow)=> {
+    _loading (isShow) {
         this.setState({
             ...this.state,
             loadingVisible: isShow

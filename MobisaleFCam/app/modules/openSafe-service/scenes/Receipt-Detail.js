@@ -112,13 +112,13 @@ class ReceiptDetail extends React.Component {
      * @param err
      * @private
      */
-    _error = (err) => {
+    _error (err) {
         this._loading(false);
         if (!err.message) return;
         this.refs["popup"].getWrappedInstance().show(err.message);
     }
 
-    _errorMsg = (err) => {
+    _errorMsg (err) {
         this._loading(false);
         if (!err) return;
         this.refs["popup"].getWrappedInstance().show(err.toString());
@@ -129,7 +129,7 @@ class ReceiptDetail extends React.Component {
      * @param isShow
      * @private
      */
-    _loading = (isShow) => {
+    _loading (isShow) {
         this.setState({
             ...this.state,
             loadingVisible: isShow
