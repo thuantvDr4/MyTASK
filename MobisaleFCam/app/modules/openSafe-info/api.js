@@ -465,3 +465,51 @@ export function createInfoCustomer(myData, callback) {
         callback(false, null, {message: error});
     });
 }
+
+
+/*
+* GetServiceTypeList
+* */
+export function GetServiceTypeList(myData, callback) {
+    myNetwork.post(
+        '/Data/GetServiceTypeList',
+        myData
+    )
+        .then(response => response.data)
+        .then(response => {
+            if (response.Code === 1) {
+                callback(true, response.Data, null);
+            }
+            else {
+                callback(false, null, {Code: response.Code, message: response.Message});
+            }
+        })
+        .catch(error => {
+            if (error === null) return;
+            callback(false, null, {message: error});
+        });
+}
+
+
+/*
+* GetLocalTypeList
+* */
+export function GetLocalTypeList(myData, callback) {
+    myNetwork.post(
+        '/Data/GetLocalTypeList',
+        myData
+    )
+        .then(response => response.data)
+        .then(response => {
+            if (response.Code === 1) {
+                callback(true, response.Data, null);
+            }
+            else {
+                callback(false, null, {Code: response.Code, message: response.Message});
+            }
+        })
+        .catch(error => {
+            if (error === null) return;
+            callback(false, null, {message: error});
+        });
+}

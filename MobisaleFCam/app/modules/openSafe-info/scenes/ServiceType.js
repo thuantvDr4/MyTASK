@@ -50,9 +50,86 @@ class ServiceType extends Component {
                 nextScreen: 'ciAmount'
             },
             data: this.props.FormData,
-            loadingVisible: false
+            ListServiceType: [{"Id": 7, "Name": "Opensafe"}],
+            listLocalType: [],
+            loadingVisible: false,
         };
     }
+
+
+    /**
+     * MOUNT Process API
+     */
+    componentDidMount() {
+        console.log('----states', this.state.data)
+        this._getServiceType();
+        this._getLocalType();
+    }
+
+
+    /**
+     * GET API ServiceType
+     * @param
+     * @private
+     */
+    _getServiceType = () => {
+        /*
+        * 1 là bán mới internet
+        * 2 là bán thêm
+        * 3 là opensafe
+        * */
+        const data = {
+            "RegType": 3
+        }
+        //
+        this._loading(true);
+        // goi API generation
+        api.GetServiceTypeList(data, (success, result, msg) => {
+
+            console.log('----ServiceType', result)
+            if (success) {
+                this.setState({
+                    // ListServiceType: result
+                })
+            } else {
+                this._error(msg);
+            }
+            //
+            this._loading(false);
+        });
+    }
+
+
+    /**
+     * GET API LocalType
+     * @param
+     * @private
+     */
+    _getLocalType = () => {
+        /*
+        * 1 là bán mới internet
+        * 2 là bán thêm
+        * 3 là opensafe
+        * */
+        const data = {
+            "UserName": this.props.Username,
+            "Kind": 3
+        }
+        // goi API generation
+        api.GetLocalTypeList(data, (success, result, msg) => {
+
+            console.log('----LocalType', result)
+            if (success) {
+                    this.setState({
+                        listLocalType: result
+                    })
+            } else {
+                this._error(msg);
+            }
+            //
+        });
+    }
+
 
     /*
     * Check valid
@@ -73,17 +150,18 @@ class ServiceType extends Component {
             this.refs['deviceType'].setValid(true);
         }
 
-        // check Package-type
-        if (data.Package.List.length === 0) {
-            this.refs['packageType'].setValid(false);
+        // check Package-type , 2.10 kho yeu cau check valid
 
-            errorList.push({
-                name: 'packageType',
-                msg: strings('dl.open_safe.customer_info.service_type.package')
-            });
-        } else {
-            this.refs['packageType'].setValid(true);
-        }
+        // if (data.Package.List.length === 0) {
+        //     this.refs['packageType'].setValid(false);
+        //
+        //     errorList.push({
+        //         name: 'packageType',
+        //         msg: strings('dl.open_safe.customer_info.service_type.package')
+        //     });
+        // } else {
+        //     this.refs['packageType'].setValid(true);
+        // }
 
         //
         if (errorList.length === 0) {
@@ -128,11 +206,15 @@ class ServiceType extends Component {
     * */
     submitData = (dataAmount) => {
         // Xu ly data submit
-        const {data, tabnav} = this.state;
+        const {data, tabnav, ListServiceType, listLocalType} = this.state;
         let RegistrationObj = {};
 
         RegistrationObj.SaleId = this.props.SaleId;
-        RegistrationObj.ListServiceType = [{"Id": 7, "Name": "Opensafe"}];
+
+        RegistrationObj.ListServiceType = ListServiceType;
+
+        RegistrationObj.LocalType = listLocalType?listLocalType[0].Id : 302;
+        RegistrationObj.LocalTypeName = listLocalType?listLocalType[0].Name : 'Home Safe';
 
         RegistrationObj.ListOSDevice = makeDataDevice_OS(data.Device.List);
         RegistrationObj.DeviceTotal = data.Device.DeviceTotal;
@@ -141,6 +223,9 @@ class ServiceType extends Component {
         RegistrationObj.PackageTotal = data.Package.DeviceTotal;
 
         RegistrationObj.Total = dataAmount.Total;
+
+
+        console.log('------RegistrationObj', RegistrationObj)
 
         // dispatch redux
         this.props.updateInfoRegistration(RegistrationObj, () => {
@@ -268,7 +353,7 @@ class ServiceType extends Component {
     *
     * */
     render() {
-        const {data} = this.state;
+        const {data, ListServiceType} = this.state;
 
         return (
             <KeyboardAvoidingView
@@ -297,7 +382,7 @@ class ServiceType extends Component {
                                     autoCapitalize={'none'}
                                     returnKeyType={'done'}
                                     autoCorrect={false}
-                                    value={'openSafe'}
+                                    value={ListServiceType[0].Name}
                                     editable={false}
                                 />
                             </View>
@@ -334,9 +419,7 @@ class ServiceType extends Component {
 
 export default connect((state) => {
     const RegistrationObj = state.saleNewReducer.openSafeObj;
-
-    console.log('openSafe-->reducer--serviceType-->', RegistrationObj);
-
+    console.log('----RegistrationObj--Service', RegistrationObj)
     return {
         SaleId: state.authReducer.userInfo.SaleId,
         Username: state.authReducer.userInfo.UserName,
