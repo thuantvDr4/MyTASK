@@ -286,6 +286,7 @@ class ServiceType extends Component {
 
                 <FormDeviceList
                     ref={'deviceType'}
+                    maxValue={10}
                     isMultiChoose={true}
                     label={strings('open_safe.service_type.form.listDevice_label')}
                     placeholder={strings('open_safe.service_type.form.listDevice_placeholder')}

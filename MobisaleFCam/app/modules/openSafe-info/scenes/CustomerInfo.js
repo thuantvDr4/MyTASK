@@ -622,7 +622,7 @@ class CustomerInfo extends React.Component {
                             {/*..Email..*/}
                             <View style={styles.container}>
                                 <InputO
-                                    maxLength={200}
+                                    maxLength={50}
                                     ref="EmailType"
                                     label="Email"
                                     style={[styles.textInput, ols.fw500, ols.txtR]}
@@ -640,7 +640,7 @@ class CustomerInfo extends React.Component {
                             {/*...Telegram..*/}
                             <View style={styles.container}>
                                 <InputO
-                                    maxLength={200}
+                                    maxLength={20}
                                     ref="Telegram"
                                     label= {strings('customer_info.customer_info.form.telegram_label')}
                                     style={[styles.textInput, ols.fw500, ols.txtR]}

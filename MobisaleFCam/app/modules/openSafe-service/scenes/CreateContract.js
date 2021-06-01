@@ -227,16 +227,16 @@ class CreateContract extends React.Component {
                                         styleWrapper={[styles.wrapperOne, {marginBottom: 12,}]}
                                         styleLabel={styles.styleLabel}
                                         styleValue={styles.styleValue}
-                                        label={strings("open_safe.create_contract.email")}
-                                        value={objDetailCus ? objDetailCus.Email : ''}
+                                        label={strings("open_safe.create_contract.phone")}
+                                        value={objDetailCus ? objDetailCus.Phone1 : ''}
                                     />
 
                                     <TextInfo
                                         styleWrapper={[styles.wrapperOne, {marginBottom: 12,}]}
                                         styleLabel={styles.styleLabel}
                                         styleValue={styles.styleValue}
-                                        label={strings("open_safe.create_contract.phone")}
-                                        value={objDetailCus ? objDetailCus.Phone1 : ''}
+                                        label={strings("open_safe.create_contract.email")}
+                                        value={objDetailCus ? objDetailCus.Email : ''}
                                     />
 
                                     <TextInfo

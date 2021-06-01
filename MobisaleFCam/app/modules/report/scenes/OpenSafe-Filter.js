@@ -19,15 +19,15 @@ import NavigationService from 'app-libs/helpers/NavigationService';
 import styles from '../ReportFilter.styles';
 const optionsFilter = [
     {
-        label: strings('report.filter.filter_option.All'),
+        label: strings('report.open_safe.filter_option.All'),
         value: '0'
     },
     {
-        label: strings('report.filter.filter_option.Online'),
+        label: strings('report.open_safe.filter_option.Complete'),
         value: '1'
     },
     {
-        label: strings('report.filter.filter_option.Not_yet_online'),
+        label: strings('report.open_safe.filter_option.Processing'),
         value: '2'
     },
 ];

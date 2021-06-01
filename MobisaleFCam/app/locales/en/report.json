@@ -33,7 +33,7 @@
         "Choose_service": "Choose service",
         "All": "All",
         "Online": "Online",
-        "Not_yet_online": "Not yet online ",
+        "Not_yet_online": "Not yet online "
       },
       "form": {
         "status": "Status",
@@ -118,6 +118,8 @@
         "All": "All",
         "Online": "Online",
         "Not_yet_online": "Not yet online ",
+        "Complete" : "Complete",
+        "Processing" : "Processing"
       },
       "form": {
         "status": "Status",
@@ -125,7 +127,7 @@
         "contract": "Contract number",
         "phone": "Mobile phone",
         "serviceType": "Service type",
-        "address": "Install address",
+        "address": "Install address"
       }
     }
   }
