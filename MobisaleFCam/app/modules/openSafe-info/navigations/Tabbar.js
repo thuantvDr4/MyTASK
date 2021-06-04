@@ -120,14 +120,14 @@ class Tabbar extends Component {
 
         } else {
             Alert.alert(
-                strings('dl.open_safe.title_dialog'),
+               strings('dl.open_safe.title_dialog'),
                 strings('dl.open_safe.goBack'),
                 [
                     { text: strings('dialog.btnCancel'), onPress: () => {}, style: "cancel" },
                     { text: strings('dialog.btnOK'), onPress: () => {
 
                             if (!FormDataUpdated.RegCode) {
-                                NavigationService.navigate('BookportAddress', {});
+                                NavigationService.navigate('ChooseServiceType');
                             } else {
                                 NavigationService.navigate('openSafe_DetailCustomer', {
                                     RegID : FormDataUpdated.RegId,

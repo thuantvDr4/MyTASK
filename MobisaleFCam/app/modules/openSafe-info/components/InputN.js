@@ -36,6 +36,7 @@ export default class InputN extends Component {
 			<View style={[styles.field, validStyle.validStyleBorder]} >
                 <Text style={[styles.plfake, ols.fs12]}>{this.props.label}</Text>
 				<TextInput
+					maxLength={this.props.maxLength}
 					style={[this.props.style, validStyle.validStyleText, {}]}
 					placeholder={this.props.placeholder}
 					placeholderTextColor= { this.state.isValid ? this.props.placeholderTextColor : '#ff5050' }

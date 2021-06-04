@@ -462,9 +462,17 @@ class BookportAddress extends React.Component {
         }
 
         // Check House Number
-        if (! data.BillTo_Number) {
+        // check truong hop user nhap khoang trang
+        if (!data.BillTo_Number || data.BillTo_Number.trim() === '') {
             this.refs['HouseNumber'].setValid(false);
-
+            //clear khoang trang
+            this.setState({
+                data: {
+                    ...this.state.data,
+                    BillTo_Number: ''
+                }
+            });
+            //
             errorList.push({
                 name: 'HouseNumber',
                 msg: strings('dl.sale_new.bookport_address.err.HouseNumber')

@@ -590,6 +590,7 @@ class CustomerInfo extends React.Component {
                             <Text style={[styles.headline, ols.mgt05, ols.cl444, ols.fs14, ols.fw500]}>{strings('customer_info.customer_info.con_info')}</Text>
                             <View style={styles.rows}>
                                 <View style={styles.cols}>
+                                    {/*-----phone--*/}
                                     <InputN
                                         maxLength={20}
                                         ref="Phone1Type"
@@ -605,6 +606,7 @@ class CustomerInfo extends React.Component {
                                     />
                                 </View>
                                 <View style={styles.cols}>
+                                    {/*-----name---*/}
                                     <InputO
                                         maxLength={100}
                                         ref="Contact1Type"

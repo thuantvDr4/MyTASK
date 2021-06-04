@@ -107,6 +107,7 @@ class DetailCustomersInfo extends React.Component {
         this._loading(true);
 
         api.GetRegistrationDetail(myData, (success, result, msg) => {
+
             if (success) {
                 this.setState({
                     loadingVisible: false,
@@ -277,14 +278,14 @@ class DetailCustomersInfo extends React.Component {
                 {/*..LIST-DEVICE..*/}
                 {
                     objDetailCus
-                    && objDetailCus.ListOpenSafeDevice
-                    && objDetailCus.ListOpenSafeDevice.length > 0
+                    && objDetailCus.ListOSDevice
+                    && objDetailCus.ListOSDevice.length > 0
                         ?
                         <>
                             {/*...LINE..*/}
                             <View style={styles.lineMid}/>
                             {/*...*/}
-                            {this.RenderItemList(objDetailCus.ListOpenSafeDevice)}
+                            {this.RenderItemList(objDetailCus.ListOSDevice)}
                         </>
                         : null
                 }
@@ -313,14 +314,14 @@ class DetailCustomersInfo extends React.Component {
                 {/*..LIST-PACKAGES..*/}
                 {
                     objDetailCus
-                    && objDetailCus.ListOpenSafePackage
-                    && objDetailCus.ListOpenSafePackage.length > 0
+                    && objDetailCus.ListOSPackage
+                    && objDetailCus.ListOSPackage.length > 0
                         ?
                         <>
                             {/*..LINE..*/}
                             <View style={styles.lineMid}/>
                             {/*...*/}
-                            {this.RenderItemList(objDetailCus.ListOpenSafePackage)}
+                            {this.RenderItemList(objDetailCus.ListOSPackage)}
                         </>
                         : null
                 }

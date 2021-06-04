@@ -43,6 +43,7 @@ export default class InputO extends Component {
 					placeholderTextColor={
 						this.state.isValid ? this.props.placeholderTextColor : "#ff5050"
 					}
+					maxLength={this.props.maxLength}
 					textAlign={this.props.textAlign}
 					secureTextEntry={this.props.secureTextEntry}
 					autoCorrect={this.props.autoCorrect}
