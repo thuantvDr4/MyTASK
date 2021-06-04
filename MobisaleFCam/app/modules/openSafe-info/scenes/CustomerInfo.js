@@ -6,9 +6,9 @@
 
 //  LIB
 import React from 'react';
-import { View, ScrollView, Image, Text, TouchableOpacity, KeyboardAvoidingView, Platform } from 'react-native';
-import { strings } from 'locales/i18n';
-import { connect } from 'react-redux';
+import {View, ScrollView, Image, Text, TouchableOpacity, KeyboardAvoidingView, Platform} from 'react-native';
+import {strings} from 'locales/i18n';
+import {connect} from 'react-redux';
 
 // API
 import * as api from '../api';
@@ -18,10 +18,11 @@ import {KEYBOARD_NUMBER} from '../constants';
 
 // REDUX ACTION
 import {actions as customerInfo,} from '../';
-const { nextStep, updateInfoRegistration } = customerInfo;
+
+const {nextStep, updateInfoRegistration} = customerInfo;
 
 // LIB CUSTOM
-import { convertPhone, convertWhiteSpace } from "app-libs/helpers/regex";
+import {convertPhone, convertWhiteSpace} from "app-libs/helpers/regex";
 import NavigationService from 'app-libs/helpers/NavigationService';
 import ModalPicker from '../../../libs/components/ModalPicker';
 import PopupWarning from 'app-libs/components/PopupWarning';
@@ -37,7 +38,6 @@ import ButtonNext from '../components/ButtonNext';
 // GLOBAL STYLE
 import styles from '../styles';
 import ols from '../../../styles/Ola-style';
-
 
 
 class CustomerInfo extends React.Component {
@@ -78,7 +78,7 @@ class CustomerInfo extends React.Component {
      * @param
      * @private
      */
-    _onChange =(key, text)=> {
+    _onChange = (key, text) => {
         let state = this.state;
         state.data[key] = text;
         this.setState(state);
@@ -88,12 +88,12 @@ class CustomerInfo extends React.Component {
         }
     }
 
-    _convertPhone =(key)=> {
+    _convertPhone = (key) => {
         // console.log(key);
         // console.log(this.state.data);
 
         let state = this.state;
-        let { Phone1, Phone2 } = state.data
+        let {Phone1, Phone2} = state.data
 
         if (key === 'Phone1' && Phone1 !== '') {
             state.data[key] = convertPhone(Phone1);
@@ -123,7 +123,7 @@ class CustomerInfo extends React.Component {
      * @param
      * @private
      */
-    _onChangeSel =(value, kind)=> {
+    _onChangeSel = (value, kind) => {
         switch (kind) {
 
             case 'lkh':
@@ -167,7 +167,7 @@ class CustomerInfo extends React.Component {
      * @param
      * @private
      */
-    _editInstallAddress =()=>{
+    _editInstallAddress = () => {
         const {data} = this.state;
         // luu cac thong tin truoc khi edit-address
         this.props.updateInfoRegistration(data, () => {
@@ -181,23 +181,28 @@ class CustomerInfo extends React.Component {
     }
 
 
-
     /**
      * GO TO STEP 2
      * @param data
      * @param dataTemp: Step Page
      * @private
      */
-    _onNextStep =()=> {
+    _onNextStep = () => {
         const {data, dataTemp} = this.state;
-        if (! this.isValidData()) {
+        const newData = {...data};
+                newData.GroupPoints = null;
+                newData.Email = data.Email.trim();
+                newData.NoteAddress = data.NoteAddress.trim();
+                newData.Telegram = data.Telegram.trim();
+
+        if (!this.isValidData()) {
             return;
         }
 
         this._loading(true);
 
         // Chuyen trang
-        this.props.updateInfoRegistration(data, () => {
+        this.props.updateInfoRegistration(newData, () => {
             // Chuyen trang
             setTimeout(() => {
                 this._loading(false);
@@ -208,12 +213,11 @@ class CustomerInfo extends React.Component {
     }
 
 
-
     /**
      * VALIDATE FORM
      */
-    isValidData =()=> {
-        const { data } = this.state;
+    isValidData = () => {
+        const {data} = this.state;
         let errorList = [];
 
         // Check loai khach hang
@@ -231,7 +235,7 @@ class CustomerInfo extends React.Component {
         // Check Theo form
         if (data.CusTypeDetail === 12) {
             // Check ca nhan
-            if (data.FullName === "" || ( convertWhiteSpace(data.FullName) === "")) {
+            if (data.FullName === "" || (convertWhiteSpace(data.FullName) === "")) {
                 this.refs['formPersonalType'].setValidForm();
 
                 errorList.push({
@@ -255,7 +259,7 @@ class CustomerInfo extends React.Component {
             }
 
             // Check CMND
-            if (data.Passport === "" || ( convertWhiteSpace(data.Passport) === "") ) {
+            if (data.Passport === "" || (convertWhiteSpace(data.Passport) === "")) {
                 this.refs['formPersonalType'].setValidForm();
 
                 errorList.push({
@@ -267,7 +271,7 @@ class CustomerInfo extends React.Component {
             }
         } else {
             // Check ten doanh nghiep
-            if (data.FullName === "" || ( convertWhiteSpace(data.FullName) === "")) {
+            if (data.FullName === "" || (convertWhiteSpace(data.FullName) === "")) {
                 this.refs['formBusinessType'].setValidForm();
 
                 errorList.push({
@@ -279,7 +283,7 @@ class CustomerInfo extends React.Component {
             }
 
             // Check dai dien doanh nghiep
-            if (data.Representive === "" || ( convertWhiteSpace(data.Representive) === "")) {
+            if (data.Representive === "" || (convertWhiteSpace(data.Representive) === "")) {
                 this.refs['formBusinessType'].setValidForm();
 
                 errorList.push({
@@ -291,7 +295,7 @@ class CustomerInfo extends React.Component {
             }
 
             // Check mst
-            if (data.TaxCode === "" || ( convertWhiteSpace( data.TaxCode) === "")) {
+            if (data.TaxCode === "" || (convertWhiteSpace(data.TaxCode) === "")) {
                 this.refs['formBusinessType'].setValidForm();
 
                 errorList.push({
@@ -353,18 +357,17 @@ class CustomerInfo extends React.Component {
 
 
         // Email
-        if (data.Email !== "") {
-            let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/ ;
+        if (data.Email.trim() !== "") {
+            let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
             if (reg.test(data.Email) === false) {
-                    this.refs['EmailType'].setValid(false);
+                this.refs['EmailType'].setValid(false);
 
-                    errorList.push({
-                        name: 'EmailType',
-                        msg: strings('dl.customer_info.customer_info.err.EmailType')
-                    });
-                }
-            else {
+                errorList.push({
+                    name: 'EmailType',
+                    msg: strings('dl.customer_info.customer_info.err.EmailType')
+                });
+            } else {
                 this.refs['EmailType'].setValid(true);
             }
         } else {
@@ -382,7 +385,7 @@ class CustomerInfo extends React.Component {
     /**
      * LIVE VALIDATE FORM
      */
-    _liveCheck =(key, text)=> {
+    _liveCheck = (key, text) => {
         const data = this.state.data;
 
         switch (key) {
@@ -430,14 +433,12 @@ class CustomerInfo extends React.Component {
     }
 
 
-
-
     /**
      * GET API LOAI KHACH HANG
      * @param
      * @private
      */
-    _getCustomerType =()=> {
+    _getCustomerType = () => {
 
         // goi API generation
         api.GetCustomerType({}, (success, result, msg) => {
@@ -468,7 +469,7 @@ class CustomerInfo extends React.Component {
      * @param
      * @private
      */
-    _getNationly =()=> {
+    _getNationly = () => {
         this._loading(true);
 
         // goi API generation
@@ -527,193 +528,206 @@ class CustomerInfo extends React.Component {
                 ref="formPersonalType"
                 data={this.state.data}
                 onChangeText={this._onChange}
-                onChangeFromChild = {this._onChangeFromChild}
+                onChangeFromChild={this._onChangeFromChild}
             /> :
             <FormBussinessInfo
                 ref="formBusinessType"
                 data={this.state.data}
                 onChangeText={this._onChange}
-                onChangeFromChild = {this._onChangeFromChild}
+                onChangeFromChild={this._onChangeFromChild}
             />;
 
         return (
 
-                <KeyboardAvoidingView
-                    keyboardVerticalOffset={Platform.select({ios: 150, android: 0})}
-                    behavior= {(Platform.OS === 'ios')? "padding" : null}
-                    style={[styles.container]}
+            <KeyboardAvoidingView
+                keyboardVerticalOffset={Platform.select({ios: 150, android: 0})}
+                behavior={(Platform.OS === 'ios') ? "padding" : null}
+                style={[styles.container]}
+            >
+                <ScrollView
+                    keyboardDismissMode={'on-drag'}
+                    contentContainerStyle={[ols.wrapper_scrollview]}
                 >
-                    <ScrollView
-                        keyboardDismissMode={'on-drag'}
-                        contentContainerStyle={[ols.wrapper_scrollview]}
-                    >
-                        <View style={[ols.inner_scrollview, ols.bgw]} >
-                            {/**..Customer Info...*/}
-                            <Text style={[styles.headline, ols.mgt05, ols.cl444, ols.fs14, ols.fw500]}>
-                                {strings('customer_info.customer_info.cus_info')}
-                            </Text>
-                            <View style={styles.container}>
-                                <ModalPicker
-                                    ref="CusTypeDetailType"
-                                    label={strings('customer_info.customer_info.form.cus_info_type_label')}
-                                    options={opjTypeCus}
-                                    placeholder={!FormDataUpdated.CusTypeDetailName ? strings('customer_info.customer_info.form.cus_info_type_default') : FormDataUpdated.CusTypeDetailName }
-                                    headerTitle={strings('customer_info.customer_info.form.cus_info_type_headertitle')}
-                                    getLabel={item => item.Name}
-                                    onValueChange={value => {
-                                        this._onChangeSel(value, 'lkh');
-                                    }}
-                                />
-                            </View>
-                            {/*..render-form..*/}
-                            {renderForm}
-                            {/*...national Type*/}
-                            <View styles={styles.container}>
-                                <ModalPicker
-                                    ref="NationalType"
-                                    label={strings('customer_info.customer_info.form.cus_per_label')}
-                                    options={opjNationCus}
-                                    placeholder={ !FormDataUpdated.NationalityName ? strings('customer_info.customer_info.form.cus_per_placeholder') : FormDataUpdated.NationalityName }
-                                    headerTitle={strings('customer_info.customer_info.form.cus_per_headertitle')}
-                                    getLabel={item => item.Name}
-                                    defaultValue = { !FormDataUpdated.NationalityName ? this.state.data.NationalityName : FormDataUpdated.NationalityName }
-                                    onValueChange={value => {
-                                        this._onChangeSel(value, 'qt');
-                                    }}
-                                />
-                            </View>
+                    <View style={[ols.inner_scrollview, ols.bgw]}>
+                        {/**..Customer Info...*/}
+                        <Text style={[styles.headline, ols.mgt05, ols.cl444, ols.fs14, ols.fw500]}>
+                            {strings('customer_info.customer_info.cus_info')}
+                        </Text>
+                        <View style={styles.container}>
+                            <ModalPicker
+                                ref="CusTypeDetailType"
+                                label={strings('customer_info.customer_info.form.cus_info_type_label')}
+                                options={opjTypeCus}
+                                placeholder={!FormDataUpdated.CusTypeDetailName ? strings('customer_info.customer_info.form.cus_info_type_default') : FormDataUpdated.CusTypeDetailName}
+                                headerTitle={strings('customer_info.customer_info.form.cus_info_type_headertitle')}
+                                getLabel={item => item.Name}
+                                onValueChange={value => {
+                                    this._onChangeSel(value, 'lkh');
+                                }}
+                            />
+                        </View>
+                        {/*..render-form..*/}
+                        {renderForm}
+                        {/*...national Type*/}
+                        <View styles={styles.container}>
+                            <ModalPicker
+                                ref="NationalType"
+                                label={strings('customer_info.customer_info.form.cus_per_label')}
+                                options={opjNationCus}
+                                placeholder={!FormDataUpdated.NationalityName ? strings('customer_info.customer_info.form.cus_per_placeholder') : FormDataUpdated.NationalityName}
+                                headerTitle={strings('customer_info.customer_info.form.cus_per_headertitle')}
+                                getLabel={item => item.Name}
+                                defaultValue={!FormDataUpdated.NationalityName ? this.state.data.NationalityName : FormDataUpdated.NationalityName}
+                                onValueChange={value => {
+                                    this._onChangeSel(value, 'qt');
+                                }}
+                            />
+                        </View>
 
 
-                            {/*
+                        {/*
                             //-- thông tin liên lạc
                             */}
-                            <Text style={[styles.headline, ols.mgt05, ols.cl444, ols.fs14, ols.fw500]}>{strings('customer_info.customer_info.con_info')}</Text>
-                            <View style={styles.rows}>
-                                <View style={styles.cols}>
-                                    {/*-----phone--*/}
-                                    <InputN
-                                        maxLength={20}
-                                        ref="Phone1Type"
-                                        style={[styles.textInput, ols.fw500]}
-                                        placeholder={strings('customer_info.customer_info.form.con_phone_placeholder')}
-                                        autoCapitalize={'none'}
-                                        returnKeyType={'done'}
-                                        autoCorrect={false}
-                                        keyboardType={KEYBOARD_NUMBER}
-                                        onChangeText={(text) => this._onChange('Phone1', text)}
-                                        onBlur={() => this._convertPhone('Phone1')}
-                                        value={this.state.data['Phone1']}
-                                    />
-                                </View>
-                                <View style={styles.cols}>
-                                    {/*-----name---*/}
-                                    <InputO
-                                        maxLength={100}
-                                        ref="Contact1Type"
-                                        style={[styles.textInput, ols.fw500]}
-                                        placeholder={strings('customer_info.customer_info.form.con_name_placeholder')}
-                                        autoCapitalize={'none'}
-                                        returnKeyType={'done'}
-                                        autoCorrect={false}
-                                        onChangeText={(text) => this._onChange('Contact1', text)}
-                                        value={this.state.data['Contact1']}
-                                    />
-                                </View>
-                            </View>
-
-                            {/*..Email..*/}
-                            <View style={styles.container}>
-                                <InputO
-                                    maxLength={50}
-                                    ref="EmailType"
-                                    label="Email"
-                                    style={[styles.textInput, ols.fw500, ols.txtR]}
-                                    placeholder={strings('customer_info.customer_info.form.con_mail_placeholder')}
-                                    placeholderTextColor='#444444'
-                                    textAlign={'right'}
-                                    autoCapitalize={'none'}
-                                    returnKeyType={'done'}
-                                    autoCorrect={false}
-                                    onChangeText={(text) => this._onChange('Email', text)}
-                                    value={this.state.data['Email']}
-                                />
-                            </View>
-
-                            {/*...Telegram..*/}
-                            <View style={styles.container}>
-                                <InputO
+                        <Text
+                            style={[styles.headline, ols.mgt05, ols.cl444, ols.fs14, ols.fw500]}>{strings('customer_info.customer_info.con_info')}</Text>
+                        <View style={styles.rows}>
+                            <View style={styles.cols}>
+                                {/*-----phone--*/}
+                                <InputN
                                     maxLength={20}
-                                    ref="Telegram"
-                                    label= {strings('customer_info.customer_info.form.telegram_label')}
-                                    style={[styles.textInput, ols.fw500, ols.txtR]}
-                                    placeholder={strings('customer_info.customer_info.form.telegram_placeholder')}
-                                    placeholderTextColor='#444444'
-                                    textAlign={'right'}
+                                    ref="Phone1Type"
+                                    style={[styles.textInput, ols.fw500]}
+                                    placeholder={strings('customer_info.customer_info.form.con_phone_placeholder')}
+                                    autoCapitalize={'none'}
+                                    returnKeyType={'done'}
+                                    autoCorrect={false}
                                     keyboardType={KEYBOARD_NUMBER}
-                                    autoCapitalize={'none'}
-                                    returnKeyType={'done'}
-                                    autoCorrect={false}
-                                    onChangeText={(text) => this._onChange('Telegram', text)}
-                                    value={this.state.data['Telegram']}
+                                    onChangeText={(text) => this._onChange('Phone1', text)}
+                                    onBlur={() => this._convertPhone('Phone1')}
+                                    value={this.state.data['Phone1']}
                                 />
                             </View>
-
-                            {/*
-                            //-- thông tin địa chỉ
-                            */}
-                            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                                <Text style={[styles.headline, ols.mgt05, ols.cl444, ols.fs14, ols.fw500]}>{strings('customer_info.customer_info.add_info')}</Text>
-                                {!FormDataUpdated.RegCode ?
-                                    <TouchableOpacity
-                                        style={{ }}
-                                        onPress={ this._editInstallAddress }>
-                                        <Text style={[ols.fs12, ols.mgt05, ols.fs14, ols.fw500, ols.clBlueDark, {  }]}>{'Edit Address'}</Text>
-                                    </TouchableOpacity>
-                                    : <View></View>
-                                }
-                            </View>
-
-                            <View style={[styles.field, { minHeight: 54, justifyContent: 'space-between', flex: 1, flexDirection: 'row', paddingHorizontal: 12 }]}>
-                                <Text style={[ ols.fs12, { top: 10, left: 12, width: '40%', color: '#A9A9A9' }]}>
-                                    {strings('customer_info.customer_info.form.add_placeholder')}
-                                </Text>
-                                <View style={[{width: '60%'}]}>
-                                    <Text style={[ols.fs12, ols.fw500, ols.cl444, { paddingTop: 10, paddingBottom: 10, textAlign: 'right' }]}>{this.state.data.Address}</Text>
-                                </View>
-                            </View>
-
-                            <View style={styles.container}>
+                            <View style={styles.cols}>
+                                {/*-----name---*/}
                                 <InputO
-                                    maxLength={1000}
-                                    ref="NoteAddressType"
-                                    label={strings('customer_info.customer_info.form.note_label')}
-                                    style={[styles.textInput, ols.fw500, ols.txtR, {paddingLeft: 100,}]}
-                                    placeholder={strings('customer_info.customer_info.form.note_placeholder')}
-                                    placeholderTextColor='#444444'
-                                    textAlign={'right'}
+                                    maxLength={100}
+                                    ref="Contact1Type"
+                                    style={[styles.textInput, ols.fw500]}
+                                    placeholder={strings('customer_info.customer_info.form.con_name_placeholder')}
                                     autoCapitalize={'none'}
                                     returnKeyType={'done'}
                                     autoCorrect={false}
-                                    onChangeText={(text) => this._onChange('NoteAddress', text)}
-                                    value={this.state.data['NoteAddress']}
+                                    onChangeText={(text) => this._onChange('Contact1', text)}
+                                    value={this.state.data['Contact1']}
                                 />
-                            </View>
-
-                            {/*
-                                //-- next button
-                            */}
-                            <View style={[ ols.pdt10, {marginBottom: 24}]}>
-                                <ButtonNext
-                                    label={strings('customer_info.customer_info.form.btnNext_label')}
-                                    onNextTab={() => this._onNextStep()} />
                             </View>
                         </View>
 
-                    </ScrollView>
+                        {/*..Email..*/}
+                        <View style={styles.container}>
+                            <InputO
+                                maxLength={50}
+                                ref="EmailType"
+                                label="Email"
+                                style={[styles.textInput, ols.fw500, ols.txtR]}
+                                placeholder={strings('customer_info.customer_info.form.con_mail_placeholder')}
+                                placeholderTextColor='#444444'
+                                textAlign={'right'}
+                                autoCapitalize={'none'}
+                                returnKeyType={'done'}
+                                autoCorrect={false}
+                                onChangeText={(text) => this._onChange('Email', text)}
+                                value={this.state.data['Email']}
+                            />
+                        </View>
 
-                    <PopupWarning ref="popup"/>
-                    <TechLoading visible={this.state.loadingVisible}/>
-                </KeyboardAvoidingView>
+                        {/*...Telegram..*/}
+                        <View style={styles.container}>
+                            <InputO
+                                maxLength={20}
+                                ref="Telegram"
+                                label={strings('customer_info.customer_info.form.telegram_label')}
+                                style={[styles.textInput, ols.fw500, ols.txtR]}
+                                placeholder={strings('customer_info.customer_info.form.telegram_placeholder')}
+                                placeholderTextColor='#444444'
+                                textAlign={'right'}
+                                keyboardType={KEYBOARD_NUMBER}
+                                autoCapitalize={'none'}
+                                returnKeyType={'done'}
+                                autoCorrect={false}
+                                onChangeText={(text) => this._onChange('Telegram', text)}
+                                value={this.state.data['Telegram']}
+                            />
+                        </View>
+
+                        {/*
+                            //-- thông tin địa chỉ
+                            */}
+                        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                            <Text
+                                style={[styles.headline, ols.mgt05, ols.cl444, ols.fs14, ols.fw500]}>{strings('customer_info.customer_info.add_info')}</Text>
+                            {!FormDataUpdated.RegCode ?
+                                <TouchableOpacity
+                                    style={{}}
+                                    onPress={this._editInstallAddress}>
+                                    <Text
+                                        style={[ols.fs12, ols.mgt05, ols.fs14, ols.fw500, ols.clBlueDark, {}]}>{'Edit Address'}</Text>
+                                </TouchableOpacity>
+                                : <View></View>
+                            }
+                        </View>
+
+                        <View style={[styles.field, {
+                            minHeight: 54,
+                            justifyContent: 'space-between',
+                            flex: 1,
+                            flexDirection: 'row',
+                            paddingHorizontal: 12
+                        }]}>
+                            <Text style={[ols.fs12, {top: 10, left: 12, width: '40%', color: '#A9A9A9'}]}>
+                                {strings('customer_info.customer_info.form.add_placeholder')}
+                            </Text>
+                            <View style={[{width: '60%'}]}>
+                                <Text style={[ols.fs12, ols.fw500, ols.cl444, {
+                                    paddingTop: 10,
+                                    paddingBottom: 10,
+                                    textAlign: 'right'
+                                }]}>{this.state.data.Address}</Text>
+                            </View>
+                        </View>
+
+                        <View style={styles.container}>
+                            <InputO
+                                maxLength={1000}
+                                ref="NoteAddressType"
+                                label={strings('customer_info.customer_info.form.note_label')}
+                                style={[styles.textInput, ols.fw500, ols.txtR, {paddingLeft: 100,}]}
+                                placeholder={strings('customer_info.customer_info.form.note_placeholder')}
+                                placeholderTextColor='#444444'
+                                textAlign={'right'}
+                                autoCapitalize={'none'}
+                                returnKeyType={'done'}
+                                autoCorrect={false}
+                                onChangeText={(text) => this._onChange('NoteAddress', text)}
+                                value={this.state.data['NoteAddress']}
+                            />
+                        </View>
+
+                        {/*
+                                //-- next button
+                            */}
+                        <View style={[ols.pdt10, {marginBottom: 24}]}>
+                            <ButtonNext
+                                label={strings('customer_info.customer_info.form.btnNext_label')}
+                                onNextTab={() => this._onNextStep()}/>
+                        </View>
+                    </View>
+
+                </ScrollView>
+
+                <PopupWarning ref="popup"/>
+                <TechLoading visible={this.state.loadingVisible}/>
+            </KeyboardAvoidingView>
         );
     }
 }
@@ -723,7 +737,7 @@ function mapStateToProps(state) {
     // GET STATE FROM OPENSAFE
     const stateSL = state.saleNewReducer.openSafeObj;
 
-    console.log('openSafeObj--reducer-->',stateSL)
+    console.log('openSafeObj--reducer-->', stateSL)
 
     const FormData = {
         GroupPoints: stateSL.GroupPoints,
@@ -743,7 +757,7 @@ function mapStateToProps(state) {
         Email: stateSL.Email,
         Address: stateSL.Address,
         NoteAddress: stateSL.NoteAddress,
-        Telegram : stateSL.Telegram
+        Telegram: stateSL.Telegram
     }
 
     return {

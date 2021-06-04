@@ -1,28 +1,18 @@
+/**
+ * Search single select picker component
+ *
+ * @author thuantv
+ * @since May, 2021
+ */
+
+
 import React from 'react';
 import {View, FlatList, Text, StyleSheet, TextInput, TouchableOpacity, TouchableWithoutFeedback, BackHandler} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {strings} from 'locales/i18n';
 import TechLoading from 'app-libs/components/TechLoading';
 
-/**
- * Search multiple select picker component
- *
- * use:
- * 		this.props.navigation.navigate('SearchMultiPickerDynamic', {
- * 			onChange: (selectedItemList) => {
- * 				// To do: Callback function when picker selected and go back this screen
- * 			},
- *          title: "Địa chỉ lắp đặt",
- *          placeholder: "Nhap ten tinh thanh",
- * 			getOptionData: (callback, isRefresh) => {
- *              // To do something
- *              callback(data);
- *          }
- *      })
- *
- * @author thuantv
- * @since May, 2021
- */
+
 class SearchSinglePickerDynamic extends React.PureComponent
 {
 	/**
@@ -173,19 +163,33 @@ class SearchSinglePickerDynamic extends React.PureComponent
     {
         //
         const  {dataSource, data} = this.state;
-        // Khoi tao data
+        // thay đổi trạng thai: chọn hay bỏ chọn
         const newList =  dataSource.map((item)=>{
             return{
                 ...item,
-                isSelected: item.Id === selectItem.Id ? true : false
+                isSelected: item.Id === selectItem.Id ? !item.isSelected : false
             }
         })
+        // xử lý danh sach da chọn
+        const _selectedItem = this.state.selectedItems ||[];
+        const index = _selectedItem.findIndex(item =>item.Id === selectItem.Id);
 
-        this.setState({
-            selectedItems: [selectItem],
-            dataSource: newList,
-            data: data
-        });
+        if(index >-1){
+            // bỏ chọn item
+            this.setState({
+                selectedItems: [],
+                dataSource: newList,
+                data: data
+            });
+        }else {
+            // chọn item
+            this.setState({
+                selectedItems: [selectItem],
+                dataSource: newList,
+                data: data
+            });
+        }
+
     }
 
 	/**
