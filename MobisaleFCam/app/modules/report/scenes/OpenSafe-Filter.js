@@ -173,7 +173,27 @@ class OpenSafeFilter extends React.PureComponent {
         this.refs['popup'].getWrappedInstance().show(data.message);
     };
 
+    /*----check valid--*/
+    _validDay =()=>{
+        const {searchData} = this.state;
+        const toDate = new Date(searchData.ToDate).getTime();
+        const fromDate = new Date(searchData.FromDate).getTime();
+
+        if(fromDate > toDate){
+            const msg =strings('dl.open_safe.report.date_err')
+            this.refs['popup'].getWrappedInstance().show(msg);
+            return false
+        }else {
+            return true
+        }
+    }
+
+
     _handleSubmit(){
+        if(!this._validDay() ){
+            return
+        }
+        //
         const {searchData, dateShow, Status}  = this.state;
         const mySearch = {
             searchData : searchData,
