@@ -127,7 +127,7 @@ class Tabbar extends Component {
                     { text: strings('dialog.btnOK'), onPress: () => {
 
                             if (!FormDataUpdated.RegCode) {
-                                NavigationService.navigate('ChooseServiceType');
+                                NavigationService.navigate('BookportAddress', {});
                             } else {
                                 NavigationService.navigate('openSafe_DetailCustomer', {
                                     RegID : FormDataUpdated.RegId,

@@ -31,7 +31,7 @@ class HandleSoftBackButton extends React.Component {
                 { text: strings('dialog.btnOK'), onPress: () => {
 
                         if (!FormDataUpdated.RegCode) {
-                            NavigationService.navigate('ChooseServiceType');
+                            NavigationService.navigate('BookportAddress');
 
                         } else {
                             NavigationService.navigate('openSafe_DetailCustomer', {

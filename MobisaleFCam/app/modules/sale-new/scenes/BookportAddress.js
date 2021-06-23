@@ -62,6 +62,7 @@ class BookportAddress extends React.Component {
         //
     }
 
+
     /*
     * check-BookportForward
     * */
@@ -462,17 +463,17 @@ class BookportAddress extends React.Component {
         }
 
         // Check House Number
-        // check truong hop user nhap khoang trang
-        if (!data.BillTo_Number || data.BillTo_Number.trim() === '') {
+        if (! data.BillTo_Number) {
             this.refs['HouseNumber'].setValid(false);
-            //clear khoang trang
-            this.setState({
-                data: {
-                    ...this.state.data,
-                    BillTo_Number: ''
-                }
+
+            errorList.push({
+                name: 'HouseNumber',
+                msg: strings('dl.sale_new.bookport_address.err.HouseNumber')
             });
-            //
+        }
+        else if(data.BillTo_Number.trim().length === 0) {
+            this.refs['HouseNumber'].setValid(false);
+
             errorList.push({
                 name: 'HouseNumber',
                 msg: strings('dl.sale_new.bookport_address.err.HouseNumber')
@@ -482,7 +483,9 @@ class BookportAddress extends React.Component {
             this.refs['HouseNumber'].setValid(true);
         }
 
-        if (errorList.length == 0) {
+
+        //------------>
+        if (errorList.length === 0) {
             return true;
         }
 
