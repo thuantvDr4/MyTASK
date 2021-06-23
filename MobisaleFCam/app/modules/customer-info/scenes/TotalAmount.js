@@ -221,19 +221,27 @@ class TotalAmount extends Component {
             this.refs['vatType'].setValid(true);
         }
 
+
         // Check Khmer-Name
-        if (  data.VAT !== null && data.VAT > 0 &&
-            ( data.KhmerName === null || data.KhmerName === '' || (data.KhmerName.trim() === ""))
-        ) {
-            // this.refs['KhmerNameType'].setValid(false);
+        if ( data.VAT&&data.VAT >0 && data.KhmerName.length === 0) {
+            this.refs['KhmerNameType'].setValid(false);
+
             errorList.push({
                 name: 'KhmerNameType',
                 msg: strings('dl.customer_info.total.err.KhmerNameType')
             });
-        } else {
-            // this.refs['KhmerNameType'].setValid(true);
+        } else if(data.VAT&&data.VAT >0 && data.KhmerName.trim().length === 0){
+            this.refs['KhmerNameType'].setValid(false);
+
+            errorList.push({
+                name: 'KhmerNameType',
+                msg: strings('dl.customer_info.total.err.KhmerNameType')
+            });
+        }else if(data.VAT&&data.VAT >0 && data.KhmerName.trim().length > 0){
+            this.refs['KhmerNameType'].setValid(true);
         }
 
+        //----------->
         if (errorList.length === 0) {
             return true;
         }
@@ -489,7 +497,7 @@ class TotalAmount extends Component {
 
         return (
             <KeyboardAvoidingView
-                keyboardVerticalOffset={Platform.select({ios: 70, android: 0})}
+                keyboardVerticalOffset={Platform.select({ios: 180, android: 0})}
                 behavior= {(Platform.OS === 'ios')? "padding" : null}
                 style={[ols.container_keyboard]} >
                 <ScrollView

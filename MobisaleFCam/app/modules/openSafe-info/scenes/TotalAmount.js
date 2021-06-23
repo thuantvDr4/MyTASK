@@ -196,24 +196,31 @@ class TotalAmount extends Component {
                 name: 'vatType',
                 msg: strings('dl.customer_info.total.err.VatType')
             });
-        } else {
+        }
+        else {
             this.refs['vatType'].setValid(true);
         }
 
         // Check Khmer-Name
-        if (  data.VAT !== null && data.VAT > 0 &&
-            ( data.KhmerName === null || data.KhmerName === '' || (data.KhmerName.trim() === ""))
-        ) {
-            // this.refs['KhmerNameType'].setValid(false);
+        if ( data.VAT&&data.VAT >0 && data.KhmerName.length === 0) {
+            this.refs['KhmerNameType'].setValid(false);
 
             errorList.push({
                 name: 'KhmerNameType',
                 msg: strings('dl.customer_info.total.err.KhmerNameType')
             });
-        } else {
-            // this.refs['KhmerNameType'].setValid(true);
+        } else if(data.VAT&&data.VAT >0 && data.KhmerName.trim().length === 0){
+            this.refs['KhmerNameType'].setValid(false);
+
+            errorList.push({
+                name: 'KhmerNameType',
+                msg: strings('dl.customer_info.total.err.KhmerNameType')
+            });
+        }else if(data.VAT&&data.VAT >0 && data.KhmerName.trim().length > 0){
+            this.refs['KhmerNameType'].setValid(true);
         }
 
+        //----------->
         if (errorList.length === 0) {
             return true;
         }
@@ -475,7 +482,6 @@ class TotalAmount extends Component {
 
                             {/*....KhmerName...*/}
                             { (this.state.data.VAT > 0) &&
-                                <View>
                                     <InputO
                                         maxLength={100}
                                         ref="KhmerNameType"
@@ -490,10 +496,6 @@ class TotalAmount extends Component {
                                         onChangeText={(text) => this._onChangeText('KhmerName', text)}
                                         value={this.state.data.KhmerName}
                                     />
-
-                                </View>
-
-
                             }
                             {/*...Total..*/}
                             <View style={[styles.field]}>

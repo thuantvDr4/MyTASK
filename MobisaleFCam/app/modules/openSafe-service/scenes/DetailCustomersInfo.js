@@ -143,7 +143,7 @@ class DetailCustomersInfo extends React.Component {
             setTimeout(() => {
                 NavigationService.navigate("OpenSafe_Info", {
                     lciDetailCustomer: true,
-                    titleNav: strings("open_safe.titleNavigation.update")
+                    titleNav: strings("open_safe.titleNavigation.new")
                 });
             }, 500);
         });
