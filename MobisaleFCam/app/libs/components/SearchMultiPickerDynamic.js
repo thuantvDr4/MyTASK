@@ -6,12 +6,12 @@ import TechLoading from 'app-libs/components/TechLoading';
 
 /**
  * Search multiple select picker component
- * 
- * use: 
+ *
+ * use:
  * 		this.props.navigation.navigate('SearchMultiPickerDynamic', {
  * 			onChange: (selectedItemList) => {
  * 				// To do: Callback function when picker selected and go back this screen
- * 			}, 
+ * 			},
  *          title: "Địa chỉ lắp đặt",
  *          placeholder: "Nhap ten tinh thanh",
  * 			getOptionData: (callback, isRefresh) => {
@@ -19,18 +19,18 @@ import TechLoading from 'app-libs/components/TechLoading';
  *              callback(data);
  *          }
  *      })
- * 
+ *
  * @author DaiDP
  * @since Aug, 2018
  */
-class SearchMultiPickerDynamic extends React.PureComponent 
+class SearchMultiPickerDynamic extends React.PureComponent
 {
-	/**
-	 * Config navigation bar
-	 */
+    /**
+     * Config navigation bar
+     */
     static navigationOptions = ({navigation, navigationOptions}) => {
-		return {
-			headerStyle: {
+        return {
+            headerStyle: {
                 backgroundColor: '#0B76FF',
                 elevation: 0,
                 shadowOpacity: 0,
@@ -44,7 +44,7 @@ class SearchMultiPickerDynamic extends React.PureComponent
                 width: '70%'
             },
             title: navigation.getParam('title', 'Config title here'),
-		}
+        }
     };
 
     data = [];
@@ -54,13 +54,13 @@ class SearchMultiPickerDynamic extends React.PureComponent
     constructor(props)
     {
         super(props);
-        
+
         let selectedItemList = this.props.navigation.getParam('selectItem', []);
         for (index in selectedItemList) {
             selectedItemList[index].isSelected = true;
         }
-		
-		// init state
+
+        // init state
         this.state = {
             data: [], // full data from API
             dataSource: [], // Data display option
@@ -105,7 +105,7 @@ class SearchMultiPickerDynamic extends React.PureComponent
     _loadData(isRefresh)
     {
         const {getOptionData} = this.props.navigation.state.params;
-        
+
         this.setState({
             loadingVisible: true
         });
@@ -127,11 +127,11 @@ class SearchMultiPickerDynamic extends React.PureComponent
         }, isRefresh);
     }
 
-	/**
-	 * Process filter data on list
-	 * 
-	 * @param {*} text 
-	 */
+    /**
+     * Process filter data on list
+     *
+     * @param {*} text
+     */
     _filterSearch(text) {
         const newData = this._getFilterData(text);
 
@@ -147,7 +147,7 @@ class SearchMultiPickerDynamic extends React.PureComponent
             const itemData = item.Name.toUpperCase();
             const textData = text.toUpperCase();
 
-            return itemData.indexOf(textData) > -1; 
+            return itemData.indexOf(textData) > -1;
         });
     }
 
@@ -162,16 +162,16 @@ class SearchMultiPickerDynamic extends React.PureComponent
         this.props.navigation.state.params.onChange(selectedItemList);
     }
 
-	/**
-	 * Callback when select item on list
-	 * 
-	 * @param {*} selectItem 
-	 */
+    /**
+     * Callback when select item on list
+     *
+     * @param {*} selectItem
+     */
     _onSelect(selectItem)
     {
         // Khoi tao data
         let listSelected = this.state.selectedItems || [];
-        
+
         let isSelected   = true;
         let index        = listSelected.findIndex(item => item.Id === selectItem.Id);
 
@@ -199,9 +199,9 @@ class SearchMultiPickerDynamic extends React.PureComponent
         });
     }
 
-	/**
-	 * Render item of Flatview
-	 */
+    /**
+     * Render item of Flatview
+     */
     _renderItem = ({item}) => {
         const isSelected = item.isSelected | false;
 
@@ -227,15 +227,15 @@ class SearchMultiPickerDynamic extends React.PureComponent
                 </TouchableOpacity>
             );
         }
-        
+
     }
 
-	/**
-	 * Render view
-	 */
+    /**
+     * Render view
+     */
     render()
     {
-		const placeholder = this.props.navigation.getParam('placeholder', '');
+        const placeholder = this.props.navigation.getParam('placeholder', '');
 
         return (
             <View style={{ flex:1 }}>
@@ -251,7 +251,7 @@ class SearchMultiPickerDynamic extends React.PureComponent
                         />
                     </View>
                 </View>
-                
+
                 <View style={styles.optionWraper}>
                     <FlatList
                         data={this.state.dataSource}
@@ -259,7 +259,7 @@ class SearchMultiPickerDynamic extends React.PureComponent
                         keyExtractor={(item, index) => index + "_" + item.Id}
                     />
                 </View>
-                
+
                 <View style={styles.confirmBar}>
                     <TouchableOpacity style={styles.button} onPress={this.onConfirm}>
                         <Text style={styles.buttonText}>{strings('dialog.confirm')}</Text>
@@ -308,17 +308,17 @@ const styles = StyleSheet.create({
         flex: 1
     },
     optionContainer: {
-        borderWidth: 1, 
-        borderColor: '#9ec9ff', 
-        marginHorizontal: 24, 
-        marginVertical: 6, 
-        borderRadius: 5, 
-        justifyContent: 'center', 
-        alignItems:'center', 
+        borderWidth: 1,
+        borderColor: '#9ec9ff',
+        marginHorizontal: 24,
+        marginVertical: 6,
+        borderRadius: 5,
+        justifyContent: 'center',
+        alignItems:'center',
         flexDirection: 'row'
     },
     optionText: {
-        alignSelf: 'flex-start', 
+        alignSelf: 'flex-start',
         paddingHorizontal: 10,
         color: '#9ec9ff',
         fontSize: 14,
@@ -330,7 +330,7 @@ const styles = StyleSheet.create({
         color: '#9ec9ff',
     },
     optionBorderSeleted: {
-        borderColor: '#0b76ff', 
+        borderColor: '#0b76ff',
     },
     optionTextSeleted: {
         color: '#0b76ff',

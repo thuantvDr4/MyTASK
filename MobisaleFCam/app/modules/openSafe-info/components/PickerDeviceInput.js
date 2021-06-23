@@ -70,7 +70,7 @@ class PickerDeviceInput extends React.PureComponent
         const {isMultiChoose, } = this.props;
 
         if(isMultiChoose){
-            NavigationService.navigate('SearchMultiPickerDynamic', {
+            NavigationService.navigate('SearchMultiPickerDynamic_openSafe', {
                 getOptionData: this.getOptionData.bind(this),
                 onChange: this.onChange.bind(this),
                 title: this.props.label,

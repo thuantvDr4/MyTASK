@@ -1,8 +1,8 @@
 /**
- * Search single select picker component
- *
+ * Search dynamic select picker component
+ *only for open-safe
  * @author thuantv
- * @since May, 2021
+ * @since Jun, 2021
  */
 
 
@@ -15,12 +15,12 @@ import TechLoading from 'app-libs/components/TechLoading';
 
 class SearchSinglePickerDynamic extends React.PureComponent
 {
-	/**
-	 * Config navigation bar
-	 */
+    /**
+     * Config navigation bar
+     */
     static navigationOptions = ({navigation, navigationOptions}) => {
-		return {
-			headerStyle: {
+        return {
+            headerStyle: {
                 backgroundColor: '#0B76FF',
                 elevation: 0,
                 shadowOpacity: 0,
@@ -34,7 +34,7 @@ class SearchSinglePickerDynamic extends React.PureComponent
                 width: '70%'
             },
             title: navigation.getParam('title', 'Config title here'),
-		}
+        }
     };
 
     data = [];
@@ -50,7 +50,7 @@ class SearchSinglePickerDynamic extends React.PureComponent
             selectedItemList[index].isSelected = true;
         }
 
-		// init state
+        // init state
         this.state = {
             data: [], // full data from API
             dataSource: [], // Data display option
@@ -117,11 +117,11 @@ class SearchSinglePickerDynamic extends React.PureComponent
         }, isRefresh);
     }
 
-	/**
-	 * Process filter data on list
-	 *
-	 * @param {*} text
-	 */
+    /**
+     * Process filter data on list
+     *
+     * @param {*} text
+     */
     _filterSearch(text) {
         const newData = this._getFilterData(text);
 
@@ -141,24 +141,31 @@ class SearchSinglePickerDynamic extends React.PureComponent
         });
     }
 
+    /*-------onConfirm--*/
     onConfirm()
     {
-        let selectedItemList = this.state.selectedItems;
-        for (index in selectedItemList) {
+        const {dataSource} = this.state;
+        // let selectedItemList = this.state.selectedItems;
+
+        let selectedItemList = dataSource.filter(item =>{
+           return item.isSelected === true;
+        });
+        // loc bo thuoc tinh
+        for ( const index in selectedItemList) {
             delete selectedItemList[index].isSelected;
         }
-
+        // send itemList
         this.props.navigation.goBack();
         this.props.navigation.state.params.onChange(selectedItemList);
     }
 
 
 
-	/**
-	 * Callback when select item on list
-	 *
-	 * @param {*} selectItem
-	 */
+    /**
+     * Callback when select item on list
+     *
+     * @param {*} selectItem
+     */
     _onSelect (selectItem)
     {
         //
@@ -167,34 +174,18 @@ class SearchSinglePickerDynamic extends React.PureComponent
         const newList =  dataSource.map((item)=>{
             return{
                 ...item,
-                isSelected: item.Id === selectItem.Id ? !item.isSelected : false
+                isSelected: item.Id === selectItem.Id ? !item.isSelected : item.isSelected
             }
-        })
-        // xử lý danh sach da chọn
-        const _selectedItem = this.state.selectedItems ||[];
-        const index = _selectedItem.findIndex(item =>item.Id === selectItem.Id);
-
-        if(index >-1){
-            // bỏ chọn item
-            this.setState({
-                selectedItems: [],
-                dataSource: newList,
-                data: data
-            });
-        }else {
-            // chọn item
-            this.setState({
-                selectedItems: [selectItem],
-                dataSource: newList,
-                data: data
-            });
-        }
-
+        });
+        // update lại danh sach
+        this.setState({
+            dataSource: newList,
+        });
     }
 
-	/**
-	 * Render item of Flatview
-	 */
+    /**
+     * Render item of Flatview
+     */
     _renderItem = ({item}) => {
         const isSelected = item.isSelected | false;
 
@@ -223,12 +214,12 @@ class SearchSinglePickerDynamic extends React.PureComponent
 
     }
 
-	/**
-	 * Render view
-	 */
+    /**
+     * Render view
+     */
     render()
     {
-		const placeholder = this.props.navigation.getParam('placeholder', '');
+        const placeholder = this.props.navigation.getParam('placeholder', '');
 
         return (
             <View style={{ flex:1 }}>

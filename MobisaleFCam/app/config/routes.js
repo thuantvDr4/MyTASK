@@ -26,7 +26,10 @@ import SearchPickerDynamic from '../libs/components/SearchPickerDynamic';
 import SearchPickerCLKM from '../libs/components/SearchPickerCLKM';
 import SearchMultiPickerDynamic from '../libs/components/SearchMultiPickerDynamic';
 import PotentialCustomerNavigation from '../modules/potential-customer/navigations/PotentialCustomerNavigation';
+
+//V2.10
 import SearchSinglePickerDynamic from '../libs/components/SearchSinglePickerDynamic';
+import SearchMultiPickerDynamic_openSafe from '../modules/openSafe-info/components/SearchPickerDynamic'
 
 // v2 - 2019
 import ContractListNavigation from '../modules/contract-list/navigations/ContractListNavigation';
@@ -125,9 +128,14 @@ const AppNavigator = createStackNavigator(
         SearchMultiPickerDynamic: {
             screen: SearchMultiPickerDynamic
         },
+        //V2.10
         SearchSinglePickerDynamic: {
             screen: SearchSinglePickerDynamic
         },
+        SearchMultiPickerDynamic_openSafe: {
+            screen: SearchMultiPickerDynamic_openSafe
+        },
+        //end-v2.10
 
         vund : {
             screen : DetailCustomersInfo,

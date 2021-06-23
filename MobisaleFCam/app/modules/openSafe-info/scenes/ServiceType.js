@@ -173,7 +173,7 @@ class ServiceType extends Component {
     /*
     * changePickerValue
     * */
-    changePickerValue = (name, selectItem) => {
+    changePickerValue (name, selectItem) {
         //
         const data = this.state.data;
         //
@@ -232,6 +232,7 @@ class ServiceType extends Component {
     * Handle nut-NEXT
     * */
     _onNextStep = () => {
+
         if (!this.isValidData()) {
             return;
         }
@@ -342,7 +343,6 @@ class ServiceType extends Component {
     * */
     render() {
         const {data, ListServiceType} = this.state;
-
         return (
             <KeyboardAvoidingView
                 keyboardVerticalOffset={Platform.select({ios: 70, android: 0})}
@@ -407,7 +407,6 @@ class ServiceType extends Component {
 
 export default connect((state) => {
     const RegistrationObj = state.saleNewReducer.openSafeObj;
-    console.log('----RegistrationObj--Service', RegistrationObj)
     return {
         SaleId: state.authReducer.userInfo.SaleId,
         Username: state.authReducer.userInfo.UserName,

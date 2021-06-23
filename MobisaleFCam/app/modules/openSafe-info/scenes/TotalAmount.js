@@ -532,7 +532,6 @@ function mapStateToProps(state) {
     // console.log('--------- all state ', state.saleNewReducer.RegistrationObj);
 
     const stateSL = state.saleNewReducer.openSafeObj;
-    console.log('----RegistrationObj--amount ', stateSL)
 
     const FormData = {
         // ListGift: mapTotalType(stateSL.ListGift),
