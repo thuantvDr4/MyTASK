@@ -598,6 +598,7 @@ class CustomerInfo extends React.Component {
                                     ref="Phone1Type"
                                     style={[styles.textInput, ols.fw500]}
                                     placeholder={strings('customer_info.customer_info.form.con_phone_placeholder')}
+                                    placeholderTextColor='#9A9A9A'
                                     autoCapitalize={'none'}
                                     returnKeyType={'done'}
                                     autoCorrect={false}
@@ -614,6 +615,7 @@ class CustomerInfo extends React.Component {
                                     ref="Contact1Type"
                                     style={[styles.textInput, ols.fw500]}
                                     placeholder={strings('customer_info.customer_info.form.con_name_placeholder')}
+                                    placeholderTextColor='#9A9A9A'
                                     autoCapitalize={'none'}
                                     returnKeyType={'done'}
                                     autoCorrect={false}
