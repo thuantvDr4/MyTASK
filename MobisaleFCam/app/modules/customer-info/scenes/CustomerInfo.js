@@ -457,7 +457,7 @@ class CustomerInfo extends React.Component {
                     data: {
                         ...this.state.data,
                         CusTypeDetail: !this.props.FormDataUpdated.CusTypeDetail ? result[0].Id : this.props.FormDataUpdated.CusTypeDetail,
-                        CusTypeDetailName: result[0].Name,
+                        CusTypeDetailName: !this.props.FormDataUpdated.CusTypeDetailName ? result[0].Name : this.props.FormDataUpdated.CusTypeDetailName,
                     },
                     loadingVisible: false
                 });

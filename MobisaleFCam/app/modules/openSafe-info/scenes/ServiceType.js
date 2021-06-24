@@ -407,6 +407,9 @@ class ServiceType extends Component {
 
 export default connect((state) => {
     const RegistrationObj = state.saleNewReducer.openSafeObj;
+
+    // console.log('[service-reducer]----', RegistrationObj)
+
     return {
         SaleId: state.authReducer.userInfo.SaleId,
         Username: state.authReducer.userInfo.UserName,

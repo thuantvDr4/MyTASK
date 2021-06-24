@@ -532,8 +532,8 @@ class TotalAmount extends Component {
 
 function mapStateToProps(state) {
     // console.log('--------- all state ', state.saleNewReducer.RegistrationObj);
-
     const stateSL = state.saleNewReducer.openSafeObj;
+    // console.log('[Total-reducer]----', stateSL)
 
     const FormData = {
         // ListGift: mapTotalType(stateSL.ListGift),

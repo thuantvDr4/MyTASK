@@ -35,6 +35,7 @@ class UploadCustomerImage extends React.Component {
 
     static navigationOptions = {
         title: strings('list_customer_info.upload_image.title'),
+        headerTitleStyle:{fontWeight: 'bold', flex:1,},
         headerRight: <View/>
     };
 
