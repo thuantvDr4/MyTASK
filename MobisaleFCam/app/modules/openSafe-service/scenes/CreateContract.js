@@ -149,11 +149,16 @@ class CreateContract extends React.Component {
     _createOSContract = (myData) => {
         //
         this._loading(true);
+
+        // this._errorMsg('Test');
+
+        setTimeout(()=>{
+            this._loading(false);
+        }, 600)
+
         //
         api.createOSContract(myData, (success, result, msg) => {
-            console.log('API-RESULT-----', result)
             if (success) {
-                this._loading(false);
                 //
                 const {Contract, ObjId} = result[0];
 
@@ -161,11 +166,19 @@ class CreateContract extends React.Component {
                     "ObjId":ObjId,
                     "Contract":Contract
                 };
-                this._gotoContractDetail(params);
-
+                // delay
+                setTimeout(()=>{
+                    this._loading(false);
+                    this._gotoContractDetail(params);
+                }, 600);
+               //
             } else {
-                this._loading(false);
-                this._errorMsg(msg.message);
+                // delay
+                setTimeout(()=>{
+                    this._loading(false);
+                    this._errorMsg(msg.message);
+                }, 600);
+                //
             }
         });
     }
@@ -255,6 +268,7 @@ class CreateContract extends React.Component {
                         <View>
                             <View style={{marginBottom: 24}}>
                                 <TouchableOpacity
+                                    disabled={this.state.loadingVisible}
                                     style={styles.btnContainer}
                                     onPress={this.createContract}
                                 >
