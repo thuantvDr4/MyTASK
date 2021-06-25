@@ -1,10 +1,10 @@
 // LIB
 import React from 'react';
-import {Platform, View, Image, NetInfo, Alert, Text} from 'react-native';
-import {requestPermission} from 'react-native-android-permissions';
-import {strings} from 'locales/i18n';
-import {connect} from 'react-redux';
-import DeviceInfo, {getUniqueId, getModel} from 'react-native-device-info';
+import { Platform, View, Image, NetInfo, Alert, Text} from 'react-native';
+import { requestPermission } from 'react-native-android-permissions';
+import { strings } from 'locales/i18n';
+import { connect } from 'react-redux';
+import DeviceInfo, { getUniqueId, getModel} from 'react-native-device-info';
 import IMEI from 'react-native-imei';
 import CodePush from "react-native-code-push";
 // import { IDFA } from '@ptomasroos/react-native-idfa';
@@ -12,17 +12,16 @@ import CodePush from "react-native-code-push";
 // LIB CUSTOM
 import GlobalVariable from '../../../config/globalVariable';
 import NavigationService from 'app-libs/helpers/NavigationService';
-import {getKongToken} from '../../../config/network';
+import { getKongToken } from '../../../config/network';
 import * as accessCachesLogin from 'app-libs/helpers/accessCachesLogin';
 
 // API
 import * as api from '../api';
 
 // REDUX ACTION
-import {actions as sp} from '../';
-import {getInfo} from '../../auth/actions';
-
-const {setDeviceImei, checkIMEI, setAppVersion, setUserName, setDeviceInfo} = sp;
+import { actions as sp } from '../';
+import { getInfo } from '../../auth/actions';
+const { setDeviceImei, checkIMEI, setAppVersion, setUserName, setDeviceInfo } = sp;
 
 // STYLE
 import styles from '../styles';
@@ -30,7 +29,7 @@ import styles from '../styles';
 // VARIABLE
 import * as con from '../../../config/constants';
 
-//
+// 
 // cd android /&&  ./gradlew clean && ./gradlew assembleReleaseStaging && cd .. && open `pwd`
 // cd android /&&  ./gradlew clean && ./gradlew assembleReleaseProduction && cd .. && open `pwd`
 
@@ -71,7 +70,7 @@ class Splash extends React.Component {
      */
     async getDiviceInfo() {
         let deviceJSON = {}
-        const versionAPP = await DeviceInfo.getVersion();
+
         try {
             deviceJSON.model = await getModel();
             deviceJSON.uniqueId = await getUniqueId();
@@ -104,26 +103,26 @@ class Splash extends React.Component {
 
         setTimeout(() => {
             requestPermission("android.permission.READ_PHONE_STATE")
-                .then((result) => {
+            .then((result) => {
+                
+                // ko commit: S8 IMEI
+                // this.props.setDeviceImei(358059082043856);
+                // ko commit: Android 4
+                // this.props.setDeviceImei(358240051111110);
 
-                        // ko commit: S8 IMEI
-                        // this.props.setDeviceImei(358059082043856);
-                        // ko commit: Android 4
-                        // this.props.setDeviceImei(358240051111110);
-
-                        // commit
-                        this.props.setDeviceImei(this.state.deviceinfo.systemVersion > 9 ? this.state.deviceinfo.androidId : IMEI.getImei());
-                        this.checkInternetStatus();
-                    },
-                    (result) => {
-                        Alert.alert(
-                            strings('dialog.title'),
-                            strings('dl.dialog.lost_internet'),
-                        );
-                    });
+                // commit
+                this.props.setDeviceImei(this.state.deviceinfo.systemVersion > 9 ? this.state.deviceinfo.androidId : IMEI.getImei());
+                this.checkInternetStatus();
+            }, 
+            (result) => {
+                Alert.alert(
+                    strings('dialog.title'),
+                    strings('dl.dialog.lost_internet'),
+                );
+            });
         }, 0);
     }
-
+    
     /**
      * Xin quyen tren IOS
      */
@@ -131,7 +130,7 @@ class Splash extends React.Component {
         // ko commit: S7 PLUS
         // this.props.setDeviceImei("26F02B70-0C83-4A6E-B8E7-92827F4CEBB1");
         // this.props.setDeviceImei("358059082043856");
-
+    
         // commit
         this.props.setDeviceImei(this.state.deviceinfo.uniqueId);
         this.checkInternetStatus();
@@ -169,14 +168,14 @@ class Splash extends React.Component {
 
     /**
      * Kiem tra version cua app
-     *
-     * @param {*} callback
+     * 
+     * @param {*} callback 
      * @note BIG UPDATE 2.3 - Khau nay la cung de autoLogin hoặc manual Login
      */
     checkVersion(callback) {
 
         // Input Param
-        const {deviceinfo} = this.state;
+        const { deviceinfo } = this.state;
         const data = {
             DeviceIMEI: this.props.deviceImei,
             CurrentVersion: deviceinfo.version,
@@ -184,11 +183,11 @@ class Splash extends React.Component {
             AndroidVersion: deviceinfo.systemVersion,
             ModelNumber: deviceinfo.model
         }
-
+        
         // Call API
         api.checkVersion(data, (isSuccess, resp, err) => {
-
-            if (!isSuccess) {
+            
+            if (! isSuccess) {
                 Alert.alert(
                     strings('dialog.title'),
                     err.message.toString()
@@ -196,8 +195,8 @@ class Splash extends React.Component {
                 return;
             }
 
-            if (!resp.IsNew) {
-
+            if (! resp.IsNew) {
+                
                 if (con.RELEASE) {
                     this.checkOTA();
                 }
@@ -216,11 +215,11 @@ class Splash extends React.Component {
 
     /**
      * BIG UPDATE 2.3 - Khau nay la cung de autoLogin hoặc manual Login
-     *
-     * @param {*} callback
+     * 
+     * @param {*} callback 
      */
     autoLoginProcess = (isSuccess, respData, err) => {
-
+        
         if (isSuccess) {
             // ERASE CACHE
             // accessCachesLogin.removeCacheLogin((a)=> {console.log(a)});
@@ -229,7 +228,7 @@ class Splash extends React.Component {
             accessCachesLogin.readCacheLogin((res) => {
 
                 if (res && res.length !== 0) {
-
+                    
                     // PARSE HEADER
                     // GlobalVariable.isLogin = true;
                     GlobalVariable.isRememberPass = true;
@@ -250,11 +249,11 @@ class Splash extends React.Component {
 
     /**
      * Auto Login success
-     *
-     * @param {*} callback
+     * 
+     * @param {*} callback 
      */
     autoLoginSC() {
-        //
+        // 
         GlobalVariable.isLogin = false;
 
         // Set trạng thái đã login thành công
@@ -263,17 +262,16 @@ class Splash extends React.Component {
 
         // redirect to home
         NavigationService.navigateReset('Home');
-
-        // NavigationService.navigateReset('CustomerInfo'); // dung de test man hinh
+        // NavigationService.navigateReset('CustomerInfoExtra');
     }
 
     /**
      * Auto Login Fail
-     *
-     * @param {*} callback
+     * 
+     * @param {*} callback 
      */
     autoLoginER(error) {
-        //
+        // 
         GlobalVariable.isLogin = false;
 
         // CLEAR CACHE SAVE LOGIN HEADER
@@ -281,36 +279,33 @@ class Splash extends React.Component {
 
         // Chuyen ve Login (Unless)
         if (error.Code === -1) {
-
+            
             accessCachesLogin.readCacheLogin((res) => {
-
+                
             });
-            NavigationService.navigateReset('Login', {
-                alert: {
-                    title: strings('dialog.title'),
-                    message: strings('dl.dialog.token_expired'),
-                }
-            });
+            NavigationService.navigateReset('Login', {alert: {
+                title: strings('dialog.title'),
+                message: strings('dl.dialog.token_expired'),
+            }});
         } else {
             // display error
             this.showPopup(strings('dl.dialog.error_connection'));
-        }
+        }  
     }
 
     /**
      * Manual Login
-     *
-     * @param {*} callback
+     * 
+     * @param {*} callback 
      */
     manualLogin(screen, isSuccess, err) {
         // CLEAR CACHE SAVE LOGIN HEADER
         accessCachesLogin.writeCacheLogin('');
 
         // Chuyen ve Login
-
         NavigationService.navigateReset(
-            screen,
-            isSuccess ? null :
+            screen, 
+            isSuccess ? null : 
                 {
                     alert: {
                         title: strings('dialog.title'),
@@ -318,73 +313,72 @@ class Splash extends React.Component {
                     }
                 },
         );
-
     }
 
     /**
      * Check xem co ban cap nhat OTA nao ko
      */
-    checkOTA() {
+	checkOTA() {
         CodePush.checkForUpdate()
-            .then((update) => {
+        .then((update) => {
+            
+            if (update) {
+                this.syncOTA(update);
 
-                if (update) {
-                    this.syncOTA(update);
-
-                } else {
-                    CodePush.getUpdateMetadata(CodePush.UpdateState.RUNNING)
-                        .then((metadata: LocalPackage) => {
-
-                            // JSON.stringify(metadata)
-                        }, (error: any) => {
-
-                        });
-                }
-            });
-
+            } else {
+                CodePush.getUpdateMetadata(CodePush.UpdateState.RUNNING)
+                .then((metadata: LocalPackage) => {
+                    
+                    // JSON.stringify(metadata)
+                }, (error: any) => {
+                    
+                });
+            }
+        });
+		
     }
 
     /**
      * Cap nhat OTA
      */
     syncOTA(updateData) {
-        let {isMandatory} = updateData;
+        let { isMandatory } = updateData;
 
         let warni = {
             title: 'Mobisale Fcam',	                    // Dialog Title
-
+            
             // UPDATE FORCE, có lệnh mandatory (se ko co nut Ignore)
-            mandatoryContinueButtonLabel: 'Update now',		// Button CONTINUE label
+            mandatoryContinueButtonLabel: 'Update now',		// Button CONTINUE label 
             mandatoryUpdateMessage: 'An update is available that must be installed now.\n\n* Note: App will restart after install',
-
+            
             // UPDATE BINH THUONG, ko có lệnh mandatory
-            optionalIgnoreButtonLabel: 'Later',				    // Button IGNORE label
+            optionalIgnoreButtonLabel: 'Later',				    // Button IGNORE label 
             optionalInstallButtonLabel: 'Update',		        // Button INSTALL label
             optionalUpdateMessage: 'An update is available that must be installed now.\n\n',
-
+            
             appendReleaseDescription: false,
             descriptionPrefix: 'Patch note:\n',
         }
 
         CodePush.sync(
-            {
-                updateDialog: isMandatory ? warni : false,
+			{
+                updateDialog: isMandatory ? warni : false, 
                 installMode: isMandatory ? CodePush.InstallMode.IMMEDIATE : CodePush.InstallMode.ON_NEXT_RESTART
-            },
-            (status) => {
+			},
+			(status) => {
                 this.syncStatusOTA(status);
             },
-            ({receivedBytes, totalBytes,}) => {
+			({ receivedBytes, totalBytes, }) => {
                 /* Update download modal progress */
             }
-        );
+		);
     }
 
     /**
      * Status cua OTA
      */
     syncStatusOTA(status) {
-        switch (status) {
+        switch(status) {
             case CodePush.SyncStatus.CHECKING_FOR_UPDATE:
                 // this.setState({ syncMessage: "Checking for update." });
                 // console.log("Checking for update.");
@@ -415,10 +409,11 @@ class Splash extends React.Component {
     }
 
     render() {
-
+        
         return (
             <View style={[styles.container]}>
-                <Image style={styles.logo} source={require('assets/images/splash/Logo_white.png')}/>
+                {/*<Image style={styles.logo} source={ require('assets/images/splash/Logo_white.png') } />*/}
+                <Image style={styles.logo} source={ require('assets/images/splash/__Logo_white.png') } />
             </View>
         );
     }
@@ -429,5 +424,5 @@ export default connect(state => {
     return {
         deviceImei: state.splashReducer.deviceImei
     }
-}, {setDeviceImei, checkIMEI, setAppVersion, setUserName, setDeviceInfo, getInfo})(Splash);
+}, { setDeviceImei, checkIMEI, setAppVersion, setUserName, setDeviceInfo, getInfo })(Splash);
 

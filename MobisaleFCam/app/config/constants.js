@@ -1,11 +1,14 @@
 export const PASS_PHARASE           = 'MoBiSale_Password@0123456789!*.*';
 export const CHECK_SUM_KEY          = 'ftel-mobisale-cam';
 
-export const RELEASE                = false;              // true: RELEASE  --- false: STAGING | DEBUG
 
-export const BASE_URL               = !RELEASE
-                                    ? 'https://sapi.fpt.vn/mobi-mobisaleglobalstag'     // STAGING
-                                    : 'https://sapi.fpt.vn/mobi-mobisaleglobal';        // RELEASE
+export const RELEASE                = true;              // true: RELEASE  --- false: STAGING | DEBUG
+
+// export const BASE_URL               = !RELEASE
+//                                     ? 'https://sapi.fpt.vn/mobi-mobisaleglobalstag'     // STAGING
+//                                     : 'https://sapi.fpt.vn/mobi-mobisaleglobal';        // RELEASE
+
+export const BASE_URL               = 'https://sapi.fpt.vn/mobi-mobisaleglobal';  // edit 16/04/2021
 
 export const KONG_AUTH              = 'Basic dGhhbmhkYzNAZnB0LmNvbS52bjoxMjM0NTY=';
 export const KONG_REFRESH           = 50;                                               // thoi gian refresh kong token. tinh theo phut

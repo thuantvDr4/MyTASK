@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>200628322076-kq2lq633nl622b86o3oqvo28is97brts.apps.googleusercontent.com</string>
+	<string>379186711817-rb4n258g6aj7ok1au88e6228rtm86qmq.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.200628322076-kq2lq633nl622b86o3oqvo28is97brts</string>
+	<string>com.googleusercontent.apps.379186711817-rb4n258g6aj7ok1au88e6228rtm86qmq</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDm02-AN0iX9W0VEK6CX-_HpUWnDOhA3i0</string>
+	<string>AIzaSyBkaXIwHyz8z6QQvoreSnW7a5OFo630Rmc</string>
 	<key>GCM_SENDER_ID</key>
-	<string>200628322076</string>
+	<string>379186711817</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.fpt.MobisaleFCamStag</string>
+	<string>com.fpt.MobisaleFCam</string>
 	<key>PROJECT_ID</key>
-	<string>mobisale-fcam-stag</string>
+	<string>mobisale-fcam</string>
 	<key>STORAGE_BUCKET</key>
-	<string>mobisale-fcam-stag.appspot.com</string>
+	<string>mobisale-fcam.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:200628322076:ios:1eccc6c217f8da602044d9</string>
+	<string>1:379186711817:ios:52c150e64bd94f3b2f97d8</string>
 	<key>DATABASE_URL</key>
-	<string>https://mobisale-fcam-stag.firebaseio.com</string>
+	<string>https://mobisale-fcam.firebaseio.com</string>
 </dict>
 </plist>

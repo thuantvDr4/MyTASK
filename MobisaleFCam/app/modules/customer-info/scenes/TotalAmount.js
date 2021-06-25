@@ -163,6 +163,7 @@ class TotalAmount extends Component {
                         KhmerName: parseInt(value.Name) > 0? this.state.data.KhmerName : ''
                     }
                 }, () => {
+
                     this._calcTotalAmount();
                 });
                 break;
