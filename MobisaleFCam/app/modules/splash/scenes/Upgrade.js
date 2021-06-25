@@ -60,7 +60,7 @@ class Upgrade extends React.Component
     {
         this.showLoading(true);
 
-        
+
         const url = this.state.versionInfo.Link;
         const dateName = moment(new Date()).format("YYYYMMDD_HHmmss");
         let filename_part = url.split(/[\\/]/).pop();
@@ -68,17 +68,17 @@ class Upgrade extends React.Component
         filename_part = filename_part.split('.');
 
         let filename = '';
-        let ext = ''; 
+        let ext = '';
 
         if (filename_part.length !== 1) {
             ext = filename_part.pop();
         } else {
             ext = 'apk';
         }
-        
+
         // filename = filename_part.join('.') + '_' + dateName;
         filename = 'MobisaleGlobal' + '_' + dateName;
-        
+
         const dirs = RNFetchBlob.fs.dirs;
         const filePath = `${dirs.DownloadDir}/${filename}.${ext}`;
         // console.log('FILE_NE', filePath);
@@ -107,7 +107,7 @@ class Upgrade extends React.Component
             this.showLoading(false);
             // console.log(err);
             this.refs['popup'].getWrappedInstance().show(strings('dl.upgrade.noti.warnDownload'));
-        });    
+        });
     }
 
 
@@ -127,8 +127,8 @@ class Upgrade extends React.Component
 
     /**
      * An hien loading
-     * 
-     * @param {*} isShow 
+     *
+     * @param {*} isShow
      */
     showLoading(isShow)
     {
@@ -141,7 +141,7 @@ class Upgrade extends React.Component
     {
         return (
             <View style={[styles.container, {justifyContent: 'space-between'}]}>
-                <Image style={{marginTop: 50}} source={ require('assets/images/splash/Logo_white.png') } />
+                <Image style={{marginTop: 50}} source={ require('assets/images/splash/__Logo_white.png') } />
 
                 <View style={{marginHorizontal: 24}}>
                     <Text style={{fontSize: 20, color: '#FFF', textAlign: 'center'}}>
@@ -150,7 +150,7 @@ class Upgrade extends React.Component
                 </View>
 
                 <View style={{paddingHorizontal: 24, width: '100%', marginBottom: 25}}>
-                    <ButtonBorder 
+                    <ButtonBorder
                         style={{borderWidth: 0}}
                         title="Update now"
                         onPress={this.processUpdate.bind(this)}

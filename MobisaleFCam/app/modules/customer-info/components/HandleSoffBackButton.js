@@ -34,11 +34,11 @@ class HandleSoftBackButton extends React.Component {
                             NavigationService.navigate('BookportAddress', {});
                         } else {
                             NavigationService.navigate('lciDetailCustomer', {
-                                RegID : FormDataUpdated.RegId, 
+                                RegID : FormDataUpdated.RegId,
                                 RegCode : FormDataUpdated.RegCode
                             });
                         }
-                    } 
+                    }
 				},
 			],
 			{ cancelable: false },

@@ -32,13 +32,13 @@ const {nextStep, updateInfoRegistration} = customerInfo;
 import moduleStyle from '../styles';
 import ols from '../../../styles/Ola-style';
 
-// CONSTANTS    
+// CONSTANTS
 import {INTERNET_ID} from '../../../config/constants';
 
 
 /**
  * Man hinh chon loai hinh dich vu cua tao phieu dang ky
- * 
+ *
  * @author DaiDP
  * @since Aug, 2018
  * @description extends ThuanDD3, 2018 - 2020
@@ -134,7 +134,7 @@ class ServiceType extends Component
         // if (this.state.showE) {
         //     if (data.Device == null || data.Device.List.length === 0) {
         //         this.refs['deviceType'].setValid(false);
-    
+
         //         errorList.push({
         //             name: 'deviceType',
         //             msg: strings('dl.customer_info.service_type.err.Device')
@@ -144,7 +144,7 @@ class ServiceType extends Component
         //         this.refs['deviceType'].setValid(true);
         //     }
         // }
-        
+
 
         // Check IP
         if (this.state.showI) {
@@ -161,7 +161,7 @@ class ServiceType extends Component
             }
         }
 
-        
+
 
         if (errorList.length == 0) {
             return true;
@@ -191,9 +191,8 @@ class ServiceType extends Component
     }
 
     changePickerValue(name, selectItem) {
-
         const data = this.state.data;
-        
+
         // Luon chọn INTERNET
         if (name === 'ServiceType' && selectItem && selectItem.findIndex(item => item.Id === INTERNET_ID.Id) < 0) {
             selectItem.unshift(INTERNET_ID);
@@ -206,7 +205,7 @@ class ServiceType extends Component
                 showI: selectItem.find(item => item.Id === 3) !== undefined ? true : false,
                 data: {
                     ...data,
-                    StaticIP: selectItem.find(item => item.Id === 3) !== undefined 
+                    StaticIP: selectItem.find(item => item.Id === 3) !== undefined
                         ? data.StaticIP
                         : {
                             ListIP: null,
@@ -214,8 +213,8 @@ class ServiceType extends Component
                             Total: null,
                             ListStaticIP: []
                         },
-                    Device: selectItem.find(item => item.Id === 2) !== undefined 
-                        ? data.Device 
+                    Device: selectItem.find(item => item.Id === 2) !== undefined
+                        ? data.Device
                         : {
                             DeviceTotal: null,
                             List: []
@@ -224,19 +223,19 @@ class ServiceType extends Component
             })
         }
 
-        // 
+        //
         if (data[name] == selectItem) {
             return;
         }
-        
-        // 
+
+        //
         if (name === 'Promotion') {
             data['Device'] = {
                 List: [],
                 DeviceTotal: 0
             };
         }
-        
+
         //
         data[name] = selectItem;
 
@@ -249,7 +248,7 @@ class ServiceType extends Component
     }
 
     submitData(dataAmount) {
-        
+
         // Xu ly data submit
         const { data, tabnav } = this.state;
         let RegistrationObj = {};
@@ -264,7 +263,7 @@ class ServiceType extends Component
         RegistrationObj.PromotionName       = data.Promotion.Name;
         RegistrationObj.PromotionDescription= data.Promotion.Description;
         RegistrationObj.MonthOfPrepaid      = data.Promotion.MonthOfPrepaid;
-        
+
         RegistrationObj.ConnectionFee       = data.ConnectionFee.Id;
 
         RegistrationObj.PaymentMethodPerMonth     = data.PaymentMethodPerMonth.Id;
@@ -279,7 +278,7 @@ class ServiceType extends Component
         RegistrationObj.StaticIPTotal       = dataAmount.StaticIPTotal;
 
         // dispatch redux
-        this.props.updateInfoRegistration(RegistrationObj, () => { 
+        this.props.updateInfoRegistration(RegistrationObj, () => {
             // Chuyen trang
             setTimeout(() => {
                 this._loading(false);
@@ -296,7 +295,7 @@ class ServiceType extends Component
 
         this._loading(true);
         //this.submitData(0)
-        
+
         // Xu ly data submit
         const { data } = this.state;
         const { golbalData } = this.props;
@@ -329,7 +328,7 @@ class ServiceType extends Component
 
             // Goi API loi
             this._loading(false);
-            
+
             // display error
             this.refs['popup'].getWrappedInstance().show(msg.message);
         });
@@ -349,7 +348,7 @@ class ServiceType extends Component
         return (!showE ? null :
             <View style={[styles.container]}>
                 <View style={[styles.seperator2]}></View>
-                
+
                 <Text style={[moduleStyle.headline, ols.cl444, ols.fs14, ols.fw500, ols.clBlue]}>
                     {strings('customer_info.service_type.device')}
                 </Text>
@@ -363,9 +362,9 @@ class ServiceType extends Component
                     amountLabel = {strings('customer_info.service_type.form.listDevice_amount')}
                     getOptionData = {api.loadDeviceList}
                     params = {{
-                        LocationId: this.props.LocationId, 
-                        MonthOfPrepaid: data.Promotion ? data.Promotion.MonthOfPrepaid : null, 
-                        LocalType: data.LocalType ? data.LocalType.Id : null 
+                        LocationId: this.props.LocationId,
+                        MonthOfPrepaid: data.Promotion ? data.Promotion.MonthOfPrepaid : null,
+                        LocalType: data.LocalType ? data.LocalType.Id : null
                     }}
                     allowRefresh={false}
                     value = {data.Device}
@@ -378,10 +377,10 @@ class ServiceType extends Component
     _renderIP() {
         const { data } = this.state;
         const showI = this.state.showI;
-        
+
         return (!showI ? null :
-            <View style={[styles.container, ols.mgt05]}>   
-                <View style={[styles.seperator2]}></View>    
+            <View style={[styles.container, ols.mgt05]}>
+                <View style={[styles.seperator2]}></View>
 
                 <Text style={[moduleStyle.headline, ols.cl444, ols.fs14, ols.fw500, ols.clBlue]}>
                     {strings('customer_info.service_type.ipAdd')}
@@ -393,18 +392,18 @@ class ServiceType extends Component
                     placeholderIp = {strings('customer_info.service_type.form.listIP_IPplaceholder')}
                     filterTextIp = {strings('customer_info.service_type.form.listIP_IPfilterText')}
                     optionDataIp = {api.loadIPList}
-                    
+
                     labelMo = {strings('customer_info.service_type.form.listIP_Monthlabel')}
                     placeholderMo = {strings('customer_info.service_type.form.listIP_Monthplaceholder')}
                     filterTextMo = {strings('customer_info.service_type.form.listIP_MonthfilterText')}
                     optionDataMo = {api.loadMonthList}
-                    
+
                     priceLabel = {strings('customer_info.service_type.form.listIP_pricelabel')}
                     allowRefresh={false}
                     value = {data.StaticIP}
                     onChange = {(selectedItem) => this.changePickerValue('StaticIP', selectedItem)}
                 />
-                
+
             </View>
         )
     }
@@ -413,11 +412,11 @@ class ServiceType extends Component
         const { data } = this.state;
 
         return (
-            <KeyboardAvoidingView 
-                keyboardVerticalOffset={Platform.select({ios: 70, android: 0})} 
-                behavior= {(Platform.OS === 'ios')? "padding" : null} 
+            <KeyboardAvoidingView
+                keyboardVerticalOffset={Platform.select({ios: 70, android: 0})}
+                behavior= {(Platform.OS === 'ios')? "padding" : null}
                 style={[ols.container_keyboard]} >
-                <ScrollView 
+                <ScrollView
                     keyboardDismissMode={'on-drag'}
                     contentContainerStyle={[ols.wrapper_scrollview]}
                 >
@@ -440,7 +439,7 @@ class ServiceType extends Component
                                     onChange = {(selectedItem) => this.changePickerValue('ServiceType', selectedItem)}
                                 />
                             </View>
-                            
+
                             <View style={[styles.seperator2]}></View>
 
                             {
@@ -500,8 +499,8 @@ class ServiceType extends Component
                                     //     value={data.GroupPoints}
                                     // />
                                 }
-                                
-                                
+
+
                                 {
                                     // PAYMENT
                                 }
@@ -523,7 +522,7 @@ class ServiceType extends Component
                                 // EQUIPMENTS
                                 this._renderEquipment()
                             }
-                            
+
 
                             {
                                 // IP
@@ -533,7 +532,7 @@ class ServiceType extends Component
 
                         <View style={{marginTop: 10}}>
                             <View style={styles.buttonContainer}>
-                                <ButtonElement 
+                                <ButtonElement
                                     title={strings('customer_info.service_type.form.btnNext')}
                                     onPress={this._onNextStep.bind(this)}
                                 />
@@ -573,7 +572,7 @@ export default connect((state) => {
 
 const styles = StyleSheet.create({
     scrollContainer: {
-        
+
     },
     container: {
         paddingHorizontal: 24

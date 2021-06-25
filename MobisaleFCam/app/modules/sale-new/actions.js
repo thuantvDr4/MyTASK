@@ -2,7 +2,7 @@ import * as t from './actionTypes';
 import * as api from './api';
 
 /**
- * 
+ *
  */
 export function resetAllDataBookport() {
     return (dispatch) => {
@@ -11,7 +11,7 @@ export function resetAllDataBookport() {
 }
 
 /**
- * 
+ *
  */
 export function isMapReady() {
     return (dispatch) => {
@@ -134,6 +134,13 @@ export function changeTypeBookport(typeBookport, allowBookport) {
 export function saveInstallAddress(data, callback) {
     return (dispatch) => {
         dispatch({type: t.SAVE_INSTALL_ADDRESS, data: data });
+        callback();
+    }
+}
+
+export function saveInstallAddress_OpenSafe(data, callback) {
+    return (dispatch) => {
+        dispatch({type: t.SAVE_INSTALL_ADDRESS_OPENSAFE, data: data });
         callback();
     }
 }

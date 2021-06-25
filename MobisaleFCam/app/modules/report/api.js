@@ -177,3 +177,30 @@ export function getReportExtraService (data, callback) {
             callback(false, null, {message: error});
         });
 }
+
+
+
+/**
+ * API lay data bao cao phat trien thue bao
+ *
+ * @param {*} myData
+ * @param {*} callback
+ */
+export function reportOpenSafePTTB(myData, callback) {
+    myNetwork.post(
+        '/Report/OpenSafeReportPTTB',
+        myData
+    )
+        .then(response => response.data)
+        .then(response => {
+            if (response.Code === 1) {
+                callback(true, response.Data, null);
+            }
+            else {
+                callback(false, null, {Code: response.Code, message: response.Message});
+            }
+        })
+        .catch(error => {
+            callback(false, null, {message: error});
+        });
+}

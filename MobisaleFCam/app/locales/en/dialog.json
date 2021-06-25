@@ -321,7 +321,35 @@
       "noti": {
         "status": "\nStatus is required. \n\nតម្រូវឱ្យមាន ស្ថានភាព",
         "service": "\nService is required. \n\nតម្រូវឱ្យមាន កសេវាកម្ម",
-        "date_err" : "\nFromDate must be less than or equal ToDate \n\nFromDate ត្រូវតែតូចជាងឬស្មើ ToDate"
+        "date_err": "\nFromDate must be less than or equal ToDate \n\nFromDate ត្រូវតែតូចជាងឬស្មើ ToDate"
+      }
+    },
+    "open_safe": {
+      "title_dialog": "You’re still editing!",
+      "goBack": "\nAre you sure you want to go back with your unfinished info? \n\nតើអ្នកប្រាកដទេថាអ្នកចង់ត្រលប់ទៅវិញជាមួយព័ត៌មានដែលមិនទាន់បញ្ចប់របស់អ្នក?",
+
+      "customer_info": {
+        "service_type": {
+          "equipment": "\nEquipment is required \n\nឧបករណ៍ត្រូវបានទាមទារ",
+          "package": "\nPackage is required. \n\nទាមទារកញ្ចប់"
+        },
+        "total": {
+          "EquipmentAmount": "\nEquipment amount is required",
+          "IpAmount": "\nIP address amount is required",
+          "TotalAmount": "\nTotal amount is required ",
+          "InternetTotal": "\nInternet amount is required",
+          "OldMonthMoney": "\nOld months money amount is required",
+          "ConnectionFee": "\nConnection Fee amount is required",
+          "VAT": "\nVAT amount is required"
+        }
+      },
+      "receipt_detail": {
+        "PaymentMethod": "\nPayment method is required \n\nរបៀបក្នុងការបង់ប្រាក់តម្រូវអោយមាន",
+        "confirm_pay": "\nAre you sure you want to pay \nfor this contract: ",
+        "confirm_pay_km": "\nតើអ្នកចង់បង់ប្រាក់សម្រាប់កិច្ចសន្យានេះ "
+      },
+      "report": {
+        "date_err": "\nFromDate must be less than or equal ToDate \n\nFromDate ត្រូវតែតូចជាងឬស្មើ ToDate"
       }
     }
   }

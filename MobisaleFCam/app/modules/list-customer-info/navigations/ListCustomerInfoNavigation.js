@@ -4,6 +4,7 @@ import {View} from 'react-native';
 import ListCustomersInfo from '../scenes/ListCustomersInfo';
 import DetailCustomersInfo from '../scenes/DetailCustomersInfo';
 
+
 export default createStackNavigator(
     {
         lciListCustomer: {
@@ -11,7 +12,7 @@ export default createStackNavigator(
         },
         lciDetailCustomer: {
             screen: DetailCustomersInfo,
-        }
+        },
     },
     {
         initialRouteName: 'lciListCustomer',

@@ -33,7 +33,7 @@
         "Choose_service": "Choose service",
         "All": "All",
         "Online": "Online",
-        "Not_yet_online": "Not yet online ",
+        "Not_yet_online": "Not yet online "
       },
       "form": {
         "status": "Status",
@@ -96,6 +96,38 @@
             }
           }
         }
+
+      }
+    },
+
+    //V2.10- thuantv-06/05/2021
+    "open_safe": {
+      "title": "OpenSafe Report",
+      "Search_filter": "Search filter",
+      "Status": "Status",
+      "Service": "Service",
+      "From": "From",
+      "To": "To",
+      "Placeholder": "Choose date",
+      "Confirm": "Confirm",
+      "Date_to_invalid": "Input date to Invalid",
+      "Date_from_invalid": "Input date from Invalid",
+      "filter_option": {
+        "Choose_contract_status": "Choose contract status",
+        "Choose_service": "Choose service",
+        "All": "All",
+        "Online": "Online",
+        "Not_yet_online": "Not yet online ",
+        "Complete" : "Complete",
+        "Processing" : "Processing"
+      },
+      "form": {
+        "status": "Status",
+        "name": "Customer name",
+        "contract": "Contract number",
+        "phone": "Mobile phone",
+        "serviceType": "Service type",
+        "address": "Install address"
       }
     }
   }

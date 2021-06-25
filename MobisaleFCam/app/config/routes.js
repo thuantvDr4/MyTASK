@@ -5,6 +5,7 @@ import {
 } from 'react-native'
 
 // SCREEN
+
 import Splash from '../modules/splash/scenes/Splash';
 import Upgrade from '../modules/splash/scenes/Upgrade';
 import Login from '../modules/auth/scenes/Login';
@@ -16,9 +17,9 @@ import CustomerInfoNavigation from '../modules/customer-info/navigations/Custome
 import ListCustomerInfoNavigation from '../modules/list-customer-info/navigations/ListCustomerInfoNavigation';
 import UploadImageCusNavigation from '../modules/list-customer-info/navigations/UploadImageCusNavigation';
 import HomeNavigation from '../modules/home/navigations/HomeNavigation';
-// import SaleNavigation from '../modules/sale/navigations/SaleNavigation';
 import ContractNavigation from '../modules/contract/navigations/ContractNavigation';
 import SaleNewNavigation from '../modules/sale-new/navigations/SaleNewNavigation';
+
 
 // COMPONENT
 import SearchPickerDynamic from '../libs/components/SearchPickerDynamic';
@@ -26,6 +27,9 @@ import SearchPickerCLKM from '../libs/components/SearchPickerCLKM';
 import SearchMultiPickerDynamic from '../libs/components/SearchMultiPickerDynamic';
 import PotentialCustomerNavigation from '../modules/potential-customer/navigations/PotentialCustomerNavigation';
 
+//V2.10
+import SearchSinglePickerDynamic from '../libs/components/SearchSinglePickerDynamic';
+import SearchMultiPickerDynamic_openSafe from '../modules/openSafe-info/components/SearchPickerDynamic'
 
 // v2 - 2019
 import ContractListNavigation from '../modules/contract-list/navigations/ContractListNavigation';
@@ -40,14 +44,18 @@ import Settings from '../modules/home/scenes/Settings';
 // v2.2 - 2019 July
 import NotificationList from '../modules/home/scenes/NotificationList';
 
-// v2.4 - 2020 
+// v2.4 - 2020
 import ExtraServiceNavigation from '../modules/extra-service/navigations/ExtraServiceNavigation';
 import CustomerInfoExtraNavigation from '../modules/extra-service-infomation/navigations/ExtraServiceInfoNavigation';
 import ExSerBookNavigation from '../modules/extra-service-bookport/navigations/ExSerBookNavigation';
 
+// V2.10
+import OpenSafeInfo_nav from '../modules/openSafe-info/navigations/openSafe-nav';
+import OpenSafeService_nav from '../modules/openSafe-service/navigations/openSafeService-nav';
+
 
 const AppNavigator = createStackNavigator(
-    { 
+    {
         Splash: {
             screen: Splash
         },
@@ -78,6 +86,21 @@ const AppNavigator = createStackNavigator(
                 header: null,
             })
         },
+        OpenSafe_Info: {
+            screen: OpenSafeInfo_nav,
+            navigationOptions: {
+                header: null,
+            }
+        },
+
+        OpenSafe_service: {
+            screen: OpenSafeService_nav,
+            navigationOptions: {
+                header: null,
+            }
+        },
+
+
         CustomerInfo: {
             screen: CustomerInfoNavigation,
             navigationOptions: {
@@ -105,6 +128,15 @@ const AppNavigator = createStackNavigator(
         SearchMultiPickerDynamic: {
             screen: SearchMultiPickerDynamic
         },
+        //V2.10
+        SearchSinglePickerDynamic: {
+            screen: SearchSinglePickerDynamic
+        },
+        SearchMultiPickerDynamic_openSafe: {
+            screen: SearchMultiPickerDynamic_openSafe
+        },
+        //end-v2.10
+
         vund : {
             screen : DetailCustomersInfo,
             navigationOptions: {

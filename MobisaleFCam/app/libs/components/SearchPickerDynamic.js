@@ -6,12 +6,12 @@ import TechLoading from 'app-libs/components/TechLoading';
 
 /**
  * Search multiple select picker component
- * 
- * use: 
+ *
+ * use:
  * 		this.props.navigation.navigate('SearchPickerDynamic', {
  * 			onChange: (selectedItemList) => {
  * 				// To do: Callback function when picker selected and go back this screen
- * 			}, 
+ * 			},
  *          title: "Địa chỉ lắp đặt",
  *          placeholder: "Nhap ten tinh thanh",
  *          allowRefresh: {true} // An hien nut refresh cache
@@ -20,11 +20,11 @@ import TechLoading from 'app-libs/components/TechLoading';
  *              callback(data);
  *          }
  *      })
- * 
+ *
  * @author DaiDP
  * @since Aug, 2018
  */
-class SearchPickerDynamic extends React.Component 
+class SearchPickerDynamic extends React.Component
 {
 	/**
 	 * Config navigation bar
@@ -61,7 +61,7 @@ class SearchPickerDynamic extends React.Component
     constructor(props)
     {
 		super(props);
-		
+
 		// init state
         this.state = {
             data: [], // full data from API
@@ -74,7 +74,7 @@ class SearchPickerDynamic extends React.Component
         this._onChange = this._onChange.bind(this);
         this._filterSearch = this._filterSearch.bind(this);
         this.onBackButtonPressAndroid = this.onBackButtonPressAndroid.bind(this);
-        
+
         this._didFocusSubscription = props.navigation.addListener('didFocus', payload =>
             BackHandler.addEventListener('hardwareBackPress', this.onBackButtonPressAndroid)
         );
@@ -106,7 +106,7 @@ class SearchPickerDynamic extends React.Component
     _loadData(isRefresh)
     {
         const {getOptionData} = this.props.navigation.state.params;
-        
+
         this.setState({
             loadingVisible: true
         });
@@ -123,15 +123,15 @@ class SearchPickerDynamic extends React.Component
 
 	/**
 	 * Process filter data on list
-	 * 
-	 * @param {*} text 
+	 *
+	 * @param {*} text
 	 */
     _filterSearch(text) {
         const newData = this.state.data.filter((item) => {
             const itemData = item.Name.toUpperCase();
             const textData = text.toUpperCase();
 
-            return itemData.indexOf(textData) > -1; 
+            return itemData.indexOf(textData) > -1;
         });
 
         this.setState({
@@ -142,8 +142,8 @@ class SearchPickerDynamic extends React.Component
 
 	/**
 	 * Callback when select item on list
-	 * 
-	 * @param {*} selectItem 
+	 *
+	 * @param {*} selectItem
 	 */
     _onChange(selectItem)
     {
@@ -183,7 +183,7 @@ class SearchPickerDynamic extends React.Component
                         />
                     </View>
                 </View>
-                
+
                 <View style={styles.optionWraper}>
                     <FlatList
                         data={this.state.dataSource}
@@ -234,17 +234,17 @@ const styles = StyleSheet.create({
         flex: 1
     },
     optionContainer: {
-        borderWidth: 1, 
-        borderColor: '#0b76ff', 
-        marginHorizontal: 24, 
-        marginVertical: 6, 
-        borderRadius: 5, 
-        justifyContent: 'center', 
-        alignItems:'center', 
+        borderWidth: 1,
+        borderColor: '#0b76ff',
+        marginHorizontal: 24,
+        marginVertical: 6,
+        borderRadius: 5,
+        justifyContent: 'center',
+        alignItems:'center',
         flexDirection: 'row'
     },
     optionText: {
-        alignSelf: 'flex-start', 
+        alignSelf: 'flex-start',
         paddingHorizontal: 10,
         color: '#0b76ff',
         fontSize: 14,

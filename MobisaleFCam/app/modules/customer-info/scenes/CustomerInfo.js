@@ -166,14 +166,17 @@ class CustomerInfo extends React.Component {
         }
     }
 
+
+
     /**
-     * PRESS Navigation Back
+     * edit-address
      * @param
      * @private
      */
-    _onPress() {
-        NavigationService.navigate('BookportAddress', {});
+    _editInstallAddress =()=> {
+        NavigationService.navigate('BookportAddress', {serviceType: "Internet"});
     }
+
 
     /**
      * GO TO STEP 2
@@ -454,7 +457,7 @@ class CustomerInfo extends React.Component {
                     data: {
                         ...this.state.data,
                         CusTypeDetail: !this.props.FormDataUpdated.CusTypeDetail ? result[0].Id : this.props.FormDataUpdated.CusTypeDetail,
-                        CusTypeDetailName: result[0].Name,
+                        CusTypeDetailName: !this.props.FormDataUpdated.CusTypeDetailName ? result[0].Name : this.props.FormDataUpdated.CusTypeDetailName,
                     },
                     loadingVisible: false
                 });
@@ -720,7 +723,7 @@ class CustomerInfo extends React.Component {
                                 {!FormDataUpdated.RegCode ?
                                     <TouchableOpacity
                                         style={{ }}
-                                        onPress={ this._onPress }>
+                                        onPress={ this._editInstallAddress }>
                                         <Text style={[ols.fs12, ols.mgt05, ols.fs14, ols.fw500, ols.clBlueDark, {  }]}>{'Edit Address'}</Text>
                                     </TouchableOpacity>
                                     : <View></View>

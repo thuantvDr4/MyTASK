@@ -1,0 +1,72 @@
+{
+    "RegId":0,
+    "RegCode":"",
+    "ObjId":0,
+    "Contract":"",
+    "FullName":"",
+    "Representive":"",
+    "Birthday":"",
+    "Address":"",
+    "FullAddress": "",
+    "NoteAddress":"",
+    "Passport":"",
+    "CusTypeDetail":null,
+    "CusTypeDetailName":"",
+    "Email":"",
+    "TaxCode":"",
+    "Phone1":"",
+    "Contact1":"",
+    "Phone2":"",
+    "Contact2":"",
+    "Fax":"",
+    "Nationality":null,
+    "NationalityName":"",
+    "VAT":null,
+    "LocationId":1004,
+    "BillTo_City":"",
+    "DistrictId":null,
+    "BillTo_District":"",
+    "WardId":null,
+    "BillTo_Ward":"",
+    "StreetId":null,
+    "BillTo_Street":"",
+    "BillTo_Number":"",
+    "TypeHouse":null,
+    "TypeHouseName": "",
+    "BuildingId":null,
+    "BuildingName": "",
+    "ImageInfo":"",
+    "SaleId":null,
+    "Indoor":"",
+    "OutDoor":"",
+    "InDType":"",
+    "OutDType":"",
+    "ODCCableType":"",
+    "Latlng":"",
+    "Lat":"",
+    "Lng":"",
+    "ContractTemp":"",
+    "LatlngDevice":"",
+
+    "ListServiceType": [{
+        "Id": 7,
+        "Name": "Opensafe"
+    }],
+
+    "LocalType": 302,
+    "LocalTypeName": "Homesafe",
+
+    "Total":null,
+
+    "ListOSDevice": null,
+    "DeviceTotal":null,
+
+    "ListOSGift": null,
+
+    "Telegram"  :   "",
+    "KhmerName": "",
+
+    "ListOSPackage": null,
+    "PackageTotal": null
+}
+

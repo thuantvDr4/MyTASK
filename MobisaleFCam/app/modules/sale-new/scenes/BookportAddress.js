@@ -16,8 +16,10 @@ import PopupWarning from 'app-libs/components/PopupWarning';
 import * as api from '../api';
 // ACTION
 import {mapLocation} from 'app-libs/helpers/mapPicker';
-import {actions as a, constants as c} from '../';
-const {saveInstallAddress, resetAllDataBookport} = a;
+import {actions as act, constants as c} from '../';
+
+
+const {saveInstallAddress, resetAllDataBookport, saveInstallAddress_OpenSafe} = act;
 
 // STYLE
 import ols from '../../../styles/Ola-style';
@@ -30,11 +32,12 @@ class BookportAddress extends React.Component {
 
     constructor(props) {
         super(props);
-
+        //
         this.state = {
             data: {},
             showBuilding: false,
-            loadingVisible : false
+            loadingVisible : false,
+            openSafeObj: this.props.openSafeObj
         };
 
         this.changeLocation = this.changeLocation.bind(this);
@@ -47,15 +50,27 @@ class BookportAddress extends React.Component {
         this._error = this._error.bind(this);
         this._errorMsg = this._errorMsg.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+
     }
 
+    /*
+    * componentDidMount
+    * */
     componentDidMount() {
+        //
+        this._checkBookportForward();
+        //
+    }
 
-        const { navigation } = this.props;
+
+    /*
+    * check-BookportForward
+    * */
+    _checkBookportForward =()=>{
+        //
         const globalData = this.props.RegistrationObj
-        const bookportForward = navigation.getParam('bookportForward', false);
-
-
+        const bookportForward = this.props.navigation.getParam('bookportForward', false);
+        //
         if (bookportForward) {
 
             var myData = {};
@@ -123,9 +138,26 @@ class BookportAddress extends React.Component {
                 },
             });
         }
+    }
+
+
+    /**V2.10
+     * MOUNT Received Props
+     */
+    componentWillReceiveProps(nextProps) {
+        // Data if change because merge to contructor not update
+        if (nextProps.openSafeObj !== this.state.openSafeObj) {
+            this.setState({
+                openSafeObj : nextProps.openSafeObj
+            })
+        }
 
     }
 
+
+    /*
+    * getLocationData
+    * */
     getLocationData(callback) {
 
         setTimeout(() => {
@@ -238,6 +270,8 @@ class BookportAddress extends React.Component {
         });
     }
 
+
+
     onSubmit() {
         if (! this.isValidData()) {
             return;
@@ -255,13 +289,13 @@ class BookportAddress extends React.Component {
 
         };
 
-        if (this.state.data.HomeType.Id == c.HOME_TYPE_BUILDING) {
+        if (this.state.data.HomeType.Id === c.HOME_TYPE_BUILDING) {
 
             infoAddress.BuildingId = this.state.data.Building ? this.state.data.Building.Id : null;
         }
 
-        // reset
-        this.props.resetAllDataBookport();
+        // reset -V2.8
+        //this.props.resetAllDataBookport();
 
         // goi API generation
         api.generationAddress(infoAddress, (success, result, msg) => {
@@ -277,9 +311,9 @@ class BookportAddress extends React.Component {
                         FullAddress: result[0]['Result']
                     }
                 }, () => {
-                    this.props.saveInstallAddress(this.state.data, () => {
-                        NavigationService.navigate('BookPort');
-                    });
+
+                    this._gotoNextScreen();
+
                 });
 
             } else {
@@ -288,6 +322,63 @@ class BookportAddress extends React.Component {
         });
     }
 
+    /*
+    * _gotoNextScreen
+    * */
+    _gotoNextScreen =()=>{
+        //
+        const serviceType = this.props.navigation.getParam('serviceType', null);
+        //TH- edit-address
+        switch (serviceType) {
+            case 'Internet': {
+                // reset
+                this.props.resetAllDataBookport();
+                // save address moi len store
+                this.props.saveInstallAddress(this.state.data, () => {
+                    //quay lai màn hình BOOk-PORT
+                    NavigationService.navigate('BookPort');
+                    //
+                });
+
+            }
+                break;
+
+            case 'OpenSafe': {
+                // save address moi len store
+                const myData = {
+                    ...this.state.openSafeObj,
+                    ...this.state.data,
+                }
+                this.props.saveInstallAddress_OpenSafe(myData, () => {
+                    //Quay lại màn hình OPEN-SAFE -info
+                    NavigationService.navigate('OpenSafe_Info');
+                    //
+                });
+
+            }
+                break;
+            //
+            default: {
+                // reset
+                this.props.resetAllDataBookport();
+                //save address moi len store
+                this.props.saveInstallAddress(this.state.data, () => {
+                    //chuyển tới màn hình chọn loại dịch vu
+                    NavigationService.navigate('ChooseServiceType');
+                    //
+                });
+            }
+            break;
+        }
+
+    }
+
+
+
+
+    /*
+    *
+    * */
     isValidData() {
 
         const {data} = this.state;
@@ -380,11 +471,21 @@ class BookportAddress extends React.Component {
                 msg: strings('dl.sale_new.bookport_address.err.HouseNumber')
             });
         }
+        else if(data.BillTo_Number.trim().length === 0) {
+            this.refs['HouseNumber'].setValid(false);
+
+            errorList.push({
+                name: 'HouseNumber',
+                msg: strings('dl.sale_new.bookport_address.err.HouseNumber')
+            });
+        }
         else {
             this.refs['HouseNumber'].setValid(true);
         }
 
-        if (errorList.length == 0) {
+
+        //------------>
+        if (errorList.length === 0) {
             return true;
         }
 
@@ -541,12 +642,14 @@ class BookportAddress extends React.Component {
 
 export default connect(
     (state) => {
+
         return {
             locationOpt: mapLocation(state.authReducer.userInfo.ListLocation),
-            RegistrationObj: state.saleNewReducer.RegistrationObj
+            RegistrationObj: state.saleNewReducer.RegistrationObj,
+            openSafeObj: state.saleNewReducer.openSafeObj
         }
     },
     {
-        saveInstallAddress, resetAllDataBookport
+        saveInstallAddress, resetAllDataBookport, saveInstallAddress_OpenSafe
     }
 )(BookportAddress);

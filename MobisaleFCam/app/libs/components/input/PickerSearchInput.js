@@ -6,7 +6,7 @@ import { trimLongText } from  'app-libs/helpers/regex';
 
 /**
  * Picker search with new screen
- * 
+ *
  * ############# Properties #############
  * 1. label: Label text
  * 2. placeholder: Text display when not choose
@@ -15,11 +15,11 @@ import { trimLongText } from  'app-libs/helpers/regex';
  * 5. filterText: Text display input filter screen
  * 6. getOptionData(callback, params): Call API to get data. When done, call callback(data).
  * 7. params: When call getOptionData, we will call with this params
- * 
+ *
  * ############# Events #################
  * 1. onChange(value): Event when select change
  *
- * 
+ *
  * @author DaiDP
  * @since Aug, 2018
  * @edit ThuanDD3
@@ -28,8 +28,8 @@ import { trimLongText } from  'app-libs/helpers/regex';
 class PickerSearchInput extends React.PureComponent {
 
     /**
-     * 
-     * @param {*} props 
+     *
+     * @param {*} props
      */
     constructor(props) {
         super(props);
@@ -45,8 +45,8 @@ class PickerSearchInput extends React.PureComponent {
     }
 
     /**
-     * 
-     * @param {*} nextProps 
+     *
+     * @param {*} nextProps
      */
     componentWillReceiveProps(nextProps) {
         let newState = {};
@@ -67,7 +67,7 @@ class PickerSearchInput extends React.PureComponent {
     }
 
     /**
-     * 
+     *
      */
     componentDidMount() {
         if (this.state.selectItem) {
@@ -78,7 +78,7 @@ class PickerSearchInput extends React.PureComponent {
     }
 
     /**
-     * 
+     *
      */
     openOptionScreen() {
         NavigationService.navigate('SearchPickerDynamic', {
@@ -91,9 +91,9 @@ class PickerSearchInput extends React.PureComponent {
     }
 
     /**
-     * 
-     * @param {*} callback 
-     * @param {*} isRefresh 
+     *
+     * @param {*} callback
+     * @param {*} isRefresh
      */
     getOptionData(callback, isRefresh) {
         this.props.getOptionData(callback, {
@@ -103,8 +103,8 @@ class PickerSearchInput extends React.PureComponent {
     }
 
     /**
-     * 
-     * @param {*} selectedItem 
+     *
+     * @param {*} selectedItem
      */
     onChange(selectedItem) {
         // Update 050820: thêm EquipID tắt validate)
@@ -117,8 +117,8 @@ class PickerSearchInput extends React.PureComponent {
     }
 
     /**
-     * 
-     * @param {*} isValid 
+     *
+     * @param {*} isValid
      */
     setValid(isValid) {
         this.setState({
@@ -128,7 +128,7 @@ class PickerSearchInput extends React.PureComponent {
 
 	/**
      * get width label
-     * @param {*} e 
+     * @param {*} e
      */
 	_getWidthLabel = e => {
         const { width } = e.nativeEvent.layout;
@@ -137,14 +137,14 @@ class PickerSearchInput extends React.PureComponent {
 			widthLabel: width
 		});
     };
-    
+
 	/**
      * get width toaàn bộ field
-     * @param {*} e 
+     * @param {*} e
      */
 	_getWidthField = e => {
         const { width } = e.nativeEvent.layout;
-        
+
 		this.setState({
 			widthField: width
 		});
@@ -167,23 +167,24 @@ class PickerSearchInput extends React.PureComponent {
                     </Text>
                 </View>
 
-                <TouchableOpacity 
+                <TouchableOpacity
+                    disabled={this.props.disabled}
                     style={
                         [
-                            styles.fieldContainer, 
+                            styles.fieldContainer,
                             { width: widthField - widthLabel - 26 }
                         ]
-                    } 
+                    }
                     onPress={this.openOptionScreen.bind(this)}>
-                        <Text 
-                            ellipsizeMode={"tail"} 
-                            numberOfLines={1} 
+                        <Text
+                            ellipsizeMode={"tail"}
+                            numberOfLines={1}
                             style={[styles.textField, validStyle.validStyleText]}>
-                                {selectItem ? trimLongText(selectItem.Name) : this.props.placeholder} 
+                                {selectItem ? trimLongText(selectItem.Name) : this.props.placeholder}
                         </Text>
                     <Image style={[styles.ico, { tintColor: '#8a919a'}]} source={require('assets/images/tech-picker/down-arrow.png')} />
                 </TouchableOpacity>
-            </View>            
+            </View>
         );
     }
 }
@@ -196,13 +197,13 @@ export default PickerSearchInput;
 
 const styles = StyleSheet.create({
     wrapper: {
-        flexDirection:'row', alignItems: 'center', justifyContent: 'space-between', 
-        minHeight: 40, paddingHorizontal: 12, 
+        flexDirection:'row', alignItems: 'center', justifyContent: 'space-between',
+        minHeight: 40, paddingHorizontal: 12,
         marginBottom: 12,
         borderColor: '#d0d8e2', borderWidth: 1, borderRadius: 5,
     },
     label: {
-        fontSize: 12, 
+        fontSize: 12,
         color: '#9a9a9a'
     },
     fieldContainer: {

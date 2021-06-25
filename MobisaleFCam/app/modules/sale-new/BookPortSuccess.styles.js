@@ -31,11 +31,11 @@ export default{
         borderWidth: 1,
         borderRadius:5,
         borderColor:'#D0D8E2',
-        padding:12,
+        paddingHorizontal:12,
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom:5,
-        marginTop:5
+        marginTop:5,
     },
     infoTitle : {
         flex:1,

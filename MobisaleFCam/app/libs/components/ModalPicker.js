@@ -20,23 +20,23 @@ const ols = styleRe.default;
 
 /**
  * TechPickup Component
- * 
+ *
  * - Document Readmore here: https://www.npmjs.com/package/react-native-custom-picker
  * - Common Properties and Events:
- * 
+ *
  * ############# Properties #############
  * 1. options: Array of options
  * 2. value: default value of TechPickup
- * 
+ *
  * ############# Events #################
  * 1. onValueChange(value): Event when select change
- * 
+ *
  * @author DaiDP
  * @editor Ola
  * @since Jul, 2018
  */
 export default class ModalPicker extends Component {
-    
+
     constructor(props) {
         super(props);
 
@@ -59,7 +59,7 @@ export default class ModalPicker extends Component {
         });
     }
 
-    setValid(isValid) {
+    setValid (isValid) {
         this.setState({
             isValid: isValid
         })
@@ -95,7 +95,7 @@ export default class ModalPicker extends Component {
                     fieldTemplate={this.renderField.bind(this)}
                     optionTemplate={this.renderOption.bind(this)}
                     headerTemplate={this.renderHeader.bind(this)}
-                    
+
                     modalStyle={ols.dD_modal}
                     backdropStyle={ols.dD_backDrop}
                     modalAnimationType={'fade'}
@@ -110,17 +110,17 @@ export default class ModalPicker extends Component {
     renderField(settings) {
         const {selectedItem, defaultText, getLabel} = settings;
         const validStyle = createValidStyleSheet(this.state.isValid);
-        
+
         return (
             <View style={[ ols.dD_container ]}>
                 <Text style={[ ols.dD_text, ols.txtR, ols.fw500, ols.cl444, !this.state.selectedItem ? validStyle.validStyleText : '' ]}>
-                    { !selectedItem ? defaultText : 
+                    { !selectedItem ? defaultText :
                         (selectedItem !== null && typeof selectedItem === 'object' ? getLabel(selectedItem) : defaultText)
                         // (typeof selectedItem === 'object'
                         //     ? (selectedItem !== null && typeof selectedItem === 'object' ? getLabel(selectedItem) : defaultText)
                         //     : getLabel(selectedItem)
                         // )
-                    } 
+                    }
                 </Text>
                 <Image style={[ols.dD_ico, { tintColor: '#8a919a'}]} source={!this.state.isSelected ? souD : souU} />
             </View>
@@ -139,7 +139,7 @@ export default class ModalPicker extends Component {
             </View>
         )
     }
-    
+
 
     renderOption(settings) {
         const {item, getLabel} = settings;
