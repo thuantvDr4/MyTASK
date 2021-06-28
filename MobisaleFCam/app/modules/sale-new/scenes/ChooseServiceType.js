@@ -33,11 +33,14 @@ class ChooseServiceType extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {};
+        this.state = {
+            cusType: this.props.navigation.getParam('cusType', null),
+        };
 
     }
 
     componentDidMount() {
+      const _cusType = this.props.navigation.getParam('cusType', null);
 
     }
 
@@ -74,11 +77,21 @@ class ChooseServiceType extends React.Component {
                     {/*...white-space...*/}
                     <View style={{height: 13}}/>
                     {/*....*/}
-                    <TouchableOpacity
-                        onPress={this.gotoOpenSafeService}
-                        style={[styles.button_ctn]}>
-                        <Text style={[styles.fz14_400]}>{strings('sale_new.choose_type.open_safe')}</Text>
-                    </TouchableOpacity>
+                    {this.state.cusType === 'Potential'?
+                        <TouchableOpacity
+                            disabled={true}
+                            style={[styles.button_ctn_disabled, ]}>
+                            <Text style={[styles.fz14_400, {color: '#bdbdbd'}]}>{strings('sale_new.choose_type.open_safe')}</Text>
+                        </TouchableOpacity>
+                        :
+                        <TouchableOpacity
+                            onPress={this.gotoOpenSafeService}
+                            style={[styles.button_ctn]}>
+                            <Text style={[styles.fz14_400]}>{strings('sale_new.choose_type.open_safe')}</Text>
+                        </TouchableOpacity>
+
+                    }
+
                 </View>
             </ScrollView>
         );
@@ -105,7 +118,15 @@ const styles = StyleSheet.create({
         fontSize: 14,
         fontWeight: '400',
         color: '#0B76FF'
-    }
+    },
+    button_ctn_disabled: {
+        height: 43,
+        borderWidth: 1,
+        borderColor: '#bdbdbd',
+        borderRadius: 6,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
 
 });
 

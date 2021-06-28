@@ -40,14 +40,15 @@ class HeaderBackButtonBookport extends React.Component {
                 { text: strings('dialog.btnOK'), onPress: () => {
                         if (lciDetailCustomer) {
                             NavigationService.navigate('lciDetailCustomer', {
-                                RegID : this.props.RegistrationObj.RegId, 
+                                RegID : this.props.RegistrationObj.RegId,
                                 RegCode : this.props.RegistrationObj.RegCode});
                         } else if (pcListCustomers) {
                             NavigationService.navigate('pcListCustomers');
                         } else {
-                            this.props.navigation.goBack();
+                            //V2.10 26/06/2021-thuantv
+                            NavigationService.navigate('BookportAddress', {}); //this.props.navigation.goBack();
                         }
-                    } 
+                    }
 				},
 			],
 			{ cancelable: false },

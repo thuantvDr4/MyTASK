@@ -37,7 +37,9 @@ class BookportAddress extends React.Component {
             data: {},
             showBuilding: false,
             loadingVisible : false,
-            openSafeObj: this.props.openSafeObj
+            openSafeObj: this.props.openSafeObj,
+            //2.10
+            cusType: 'New', // new = tao moi | potential = Khach hang TN
         };
 
         this.changeLocation = this.changeLocation.bind(this);
@@ -130,9 +132,16 @@ class BookportAddress extends React.Component {
                 }
             });
 
-        } else {
-
+            //phan loại khach hang
             this.setState({
+                cusType: 'Potential'
+            });
+            //
+
+        } else {
+            //phan loại khach hang
+            this.setState({
+                cusType: 'New',
                 data : {
                     Location : this.props.locationOpt[0]
                 },
@@ -359,12 +368,13 @@ class BookportAddress extends React.Component {
                 break;
             //
             default: {
+                console.log('[State]----', this.state.cusType)
                 // reset
                 this.props.resetAllDataBookport();
                 //save address moi len store
                 this.props.saveInstallAddress(this.state.data, () => {
                     //chuyển tới màn hình chọn loại dịch vu
-                    NavigationService.navigate('ChooseServiceType');
+                    NavigationService.navigate('ChooseServiceType', { cusType: this.state.cusType});
                     //
                 });
             }

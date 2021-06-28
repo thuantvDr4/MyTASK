@@ -65,23 +65,24 @@ class Bookport extends React.Component {
 
 		// Get Param từ màn hình detail customer
 		const lciDetailCustomer = navigation.getParam('lciDetailCustomer', false);
-		
+
 		Alert.alert(
 			strings('sale_new.dialog.title'),
 			strings('dl.sale_new.goBack'),
 			[
 				{ text: strings('dialog.btnCancel'), onPress: () => {}, style: "cancel" },
 				{ text: strings('dialog.btnOK'), onPress: () => {
-					lciDetailCustomer 
+					lciDetailCustomer
 						?
 							// Quay về màn hình Detail Customer
 							NavigationService.navigate('lciDetailCustomer', {
-								RegID : this.props.RegistrationObj.RegId, 
+								RegID : this.props.RegistrationObj.RegId,
 								RegCode : this.props.RegistrationObj.RegCode
 							})
 							// Quay về bình thường
-						: this.props.navigation.goBack() 
-					} 
+							//V2.10-26/06/2021-thuantv
+						:  NavigationService.navigate('BookportAddress', {}); //this.props.navigation.goBack()
+					}
 				},
 			],
 			{ cancelable: false },
