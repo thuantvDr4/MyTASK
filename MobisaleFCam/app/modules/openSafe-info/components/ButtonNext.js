@@ -18,12 +18,12 @@ export default class ButtonNext extends Component {
 		super();
 
 		this.state = {
-			
+
 		};
 	}
 
 	_onPress() {
-		
+
 	}
 
 	_onGrow() {
@@ -35,6 +35,7 @@ export default class ButtonNext extends Component {
 		return (
 			<View>
 				<TouchableOpacity
+					disabled={this.props.disabled}
 					style={[ols.btnFull, ols.btnShadow]}
 					onPress={this.props.onNextTab}
 				>

@@ -390,6 +390,7 @@ class ServiceType extends Component {
                         <View style={{marginTop: 10}}>
                             <View style={styles.buttonContainer}>
                                 <ButtonElement
+                                    disabled={this.state.loadingVisible}
                                     title={strings('open_safe.service_type.form.btnNext')}
                                     onPress={this._onNextStep.bind(this)}
                                 />

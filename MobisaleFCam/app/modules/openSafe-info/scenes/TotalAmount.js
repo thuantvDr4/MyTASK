@@ -68,7 +68,6 @@ class TotalAmount extends Component {
                 apiVAT: [],
             },
             loadingVisible: false,
-            disableButton : false,
         };
 
     }
@@ -308,13 +307,8 @@ class TotalAmount extends Component {
 
         // dispatch redux
         this.props.updateInfoRegistration(postData, () => {
-
             // Chuyen trang
-
-            // thuantv-edit: 22/10/2020
-            this.setState({...this.state, disableButton: true},
-                ()=>this._createInfoCustomer(postData, dataTemp)
-            );
+            this._createInfoCustomer(postData, dataTemp)
 
         });
     }
@@ -331,11 +325,9 @@ class TotalAmount extends Component {
         this._loading(true);
         // goi API: TAO KH
         api.createInfoCustomer(data, (success, result, msg) => {
+            // close loading
             this._loading(false);
-
-            // set lai disableButton
-            this.setState({...this.state, disableButton: false});
-
+            //
             if (success) {
                 this.props.submitCreateTTKH(dataTemp);
                 //
@@ -349,7 +341,6 @@ class TotalAmount extends Component {
                     // this._error(msg.message);
                     this.refs['popup'].getWrappedInstance().show(msg.message);
                 }, 50);
-                // this._error(msg);
             }
         });
     }
@@ -511,7 +502,7 @@ class TotalAmount extends Component {
                         */}
                         <View>
                             <ButtonCreateInfo
-                                disabled={this.state.disableButton}  // tranh double click
+                                disabled={this.state.loadingVisible}  // khoa btn khi đang call api
                                 label={!this.props.AllData.RegCode ?
                                     strings('customer_info.customer_info.form.btnCreate_label') :
                                     strings('customer_info.customer_info.form.btnUpdate_label')}

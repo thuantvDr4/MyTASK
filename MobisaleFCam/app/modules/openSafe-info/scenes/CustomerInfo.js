@@ -509,8 +509,8 @@ class CustomerInfo extends React.Component {
      * @private
      */
     _loading(isShow) {
+        //tao độ trễ sau khi call API
         this.setState({
-            ...this.state,
             loadingVisible: isShow
         });
     }
@@ -720,6 +720,7 @@ class CustomerInfo extends React.Component {
                             */}
                         <View style={[ols.pdt10, {marginBottom: 24}]}>
                             <ButtonNext
+                                disabled={this.state.loadingVisible}
                                 label={strings('customer_info.customer_info.form.btnNext_label')}
                                 onNextTab={() => this._onNextStep()}/>
                         </View>

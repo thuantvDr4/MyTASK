@@ -56,7 +56,10 @@ class SearchSinglePickerDynamic extends React.PureComponent
             dataSource: [], // Data display option
             text: '',
             selectedItems: selectedItemList,
-            loadingVisible: true
+            loadingVisible: true,
+
+            //V2.10
+            isChanged: false,
         }
 
         // bind event
@@ -179,14 +182,18 @@ class SearchSinglePickerDynamic extends React.PureComponent
             this.setState({
                 selectedItems: [],
                 dataSource: newList,
-                data: data
+                data: data,
+                //
+                isChanged: true,
             });
         }else {
             // chọn item
             this.setState({
                 selectedItems: [selectItem],
                 dataSource: newList,
-                data: data
+                data: data,
+                //
+                isChanged: true,
             });
         }
 
@@ -254,7 +261,10 @@ class SearchSinglePickerDynamic extends React.PureComponent
                 </View>
 
                 <View style={styles.confirmBar}>
-                    <TouchableOpacity style={styles.button} onPress={this.onConfirm}>
+                    <TouchableOpacity
+                        disabled={!this.state.isChanged}
+                        style={styles.button}
+                        onPress={this.onConfirm}>
                         <Text style={styles.buttonText}>{strings('dialog.confirm')}</Text>
                     </TouchableOpacity>
                 </View>

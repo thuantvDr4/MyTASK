@@ -3,7 +3,7 @@ import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 
 /**
  * Button element
- * 
+ *
  * @author DaiDP
  * @since Aug, 2018
  */
@@ -12,7 +12,10 @@ export default class ButtonElement extends Component
     render()
     {
         return (
-            <TouchableOpacity style = {styles.button} onPress={this.props.onPress}>
+            <TouchableOpacity
+                disabled={this.props.disabled}
+                style = {styles.button}
+                onPress={this.props.onPress}>
                 <Text style = {styles.text}>{this.props.title || "Continue"}</Text>
             </TouchableOpacity>
         );
