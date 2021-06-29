@@ -29,7 +29,6 @@ import PotentialCustomerNavigation from '../modules/potential-customer/navigatio
 
 //V2.10
 import SearchSinglePickerDynamic from '../libs/components/SearchSinglePickerDynamic';
-import SearchMultiPickerDynamic_openSafe from '../modules/openSafe-info/components/SearchPickerDynamic'
 
 // v2 - 2019
 import ContractListNavigation from '../modules/contract-list/navigations/ContractListNavigation';
@@ -52,6 +51,7 @@ import ExSerBookNavigation from '../modules/extra-service-bookport/navigations/E
 // V2.10
 import OpenSafeInfo_nav from '../modules/openSafe-info/navigations/openSafe-nav';
 import OpenSafeService_nav from '../modules/openSafe-service/navigations/openSafeService-nav';
+import SearchPickerDynamicMultiChose from '../libs/components/SearchMultiPickerDynamic_v2';
 
 
 const AppNavigator = createStackNavigator(
@@ -132,8 +132,8 @@ const AppNavigator = createStackNavigator(
         SearchSinglePickerDynamic: {
             screen: SearchSinglePickerDynamic
         },
-        SearchMultiPickerDynamic_openSafe: {
-            screen: SearchMultiPickerDynamic_openSafe
+        SearchPickerDynamicMultiChose: {
+            screen: SearchPickerDynamicMultiChose
         },
         //end-v2.10
 

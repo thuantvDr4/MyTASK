@@ -28,7 +28,7 @@ class FormDeviceList extends React.PureComponent
 
     onSelectedDevice =(selectedItem)=>
     {
-
+        console.log('[onSelected]----', selectedItem)
         this.setState({
             devices: selectedItem,
             amount: this.calcTotalAmount(selectedItem)
@@ -94,6 +94,7 @@ class FormDeviceList extends React.PureComponent
 
     _renderDetail =()=>
     {
+
         if (this.state.devices.length === 0) {
             return null;
         }

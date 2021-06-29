@@ -5,7 +5,7 @@ import createValidStyleSheet from 'app-libs/helpers/ValidStyleSheet';
 
 /**
  * Picker search with new screen
- * 
+ *
  * ############# Properties #############
  * 1. label: Label text
  * 2. placeholder: Text display when not choose
@@ -14,11 +14,11 @@ import createValidStyleSheet from 'app-libs/helpers/ValidStyleSheet';
  * 5. filterText: Text display input filter screen
  * 6. getOptionData(callback, params): Call API to get data. When done, call callback(data).
  * 7. params: When call getOptionData, we will call with this params
- * 
+ *
  * ############# Events #################
  * 1. onChange(value): Event when select change
  *
- * 
+ *
  * @author DaiDP
  * @since Aug, 2018
  */
@@ -61,13 +61,13 @@ class PickerDeviceInput extends React.PureComponent
             setTimeout(() => {
                 this.props.onChange(this.state.selectItem);
             }, 0);
-            
+
         }
     }
 
     openOptionScreen()
-    {
-        NavigationService.navigate('SearchMultiPickerDynamic', {
+    {   //thuantv-edit:29-06-2021 --> fix bugs cho v2.10
+        NavigationService.navigate('SearchPickerDynamicMultiChose', {
             getOptionData: this.getOptionData.bind(this),
             onChange: this.onChange.bind(this),
             title: this.props.label,
@@ -117,11 +117,11 @@ class PickerDeviceInput extends React.PureComponent
                     <Text style = {styles.label} >{ this.props.label }</Text>
                 </View>
                 <TouchableOpacity style={styles.fieldContainer} onPress={this.openOptionScreen.bind(this)}>
-                
+
                     <Text style={[styles.textField, validStyle.validStyleText]}>{this.props.placeholder} </Text>
                     <Image style={[styles.ico, { tintColor: '#8a919a'}]} source={require('assets/images/tech-picker/down-arrow.png')} />
                 </TouchableOpacity>
-            </View>            
+            </View>
         );
     }
 }
@@ -135,14 +135,14 @@ export default PickerDeviceInput;
 
 const styles = StyleSheet.create({
     wrapper: {
-        flexDirection:'row', alignItems: 'center', justifyContent: 'space-between', 
-        minHeight: 40, paddingHorizontal: 12, 
-        // marginVertical: 0, 
+        flexDirection:'row', alignItems: 'center', justifyContent: 'space-between',
+        minHeight: 40, paddingHorizontal: 12,
+        // marginVertical: 0,
         marginBottom: 12,
         borderColor: '#d0d8e2',  borderWidth: 1, borderRadius: 5,
     },
     label: {
-        fontSize: 12, 
+        fontSize: 12,
         color: '#9a9a9a'
     },
     fieldContainer: {

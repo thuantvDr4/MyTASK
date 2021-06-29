@@ -44,6 +44,16 @@ class NumericInput extends React.PureComponent
         this._onChange = this._onChange.bind(this);
     }
 
+    // update lai state khi prop thay đổi
+    componentWillReceiveProps(nextProps: Readonly<P>, nextContext: any) {
+        if(nextProps.value!==this.props.value){
+            //Perform some operation
+            this.setState({
+                value: nextProps.value
+            })
+        }
+    }
+
     _dec()
     {
         if (! this.props.editable) {

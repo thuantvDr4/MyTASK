@@ -13,7 +13,7 @@ import {strings} from 'locales/i18n';
 import TechLoading from 'app-libs/components/TechLoading';
 
 
-class SearchSinglePickerDynamic extends React.PureComponent
+class SearchPickerDynamicMultiChose extends React.PureComponent
 {
     /**
      * Config navigation bar
@@ -56,7 +56,9 @@ class SearchSinglePickerDynamic extends React.PureComponent
             dataSource: [], // Data display option
             text: '',
             selectedItems: selectedItemList,
-            loadingVisible: true
+            loadingVisible: true,
+            //kiem ta su thay doi
+            isChanged: false,
         }
 
         // bind event
@@ -102,7 +104,7 @@ class SearchSinglePickerDynamic extends React.PureComponent
 
         getOptionData((data) => {
             for (i in this.state.selectedItems) {
-               const index = data.findIndex(item => item.Id === this.state.selectedItems[i].Id);
+                const index = data.findIndex(item => item.Id === this.state.selectedItems[i].Id);
                 if (index >= 0) {
                     data[index].isSelected = true;
                 }
@@ -148,7 +150,7 @@ class SearchSinglePickerDynamic extends React.PureComponent
         // let selectedItemList = this.state.selectedItems;
 
         let selectedItemList = dataSource.filter(item =>{
-           return item.isSelected === true;
+            return item.isSelected === true;
         });
         // loc bo thuoc tinh
         for ( const index in selectedItemList) {
@@ -180,6 +182,8 @@ class SearchSinglePickerDynamic extends React.PureComponent
         // update lại danh sach
         this.setState({
             dataSource: newList,
+            //
+            isChanged: true
         });
     }
 
@@ -245,7 +249,10 @@ class SearchSinglePickerDynamic extends React.PureComponent
                 </View>
 
                 <View style={styles.confirmBar}>
-                    <TouchableOpacity style={styles.button} onPress={this.onConfirm}>
+                    <TouchableOpacity
+                        disabled={!this.state.isChanged}
+                        style={styles.button}
+                        onPress={this.onConfirm}>
                         <Text style={styles.buttonText}>{strings('dialog.confirm')}</Text>
                     </TouchableOpacity>
                 </View>
@@ -256,7 +263,7 @@ class SearchSinglePickerDynamic extends React.PureComponent
 }
 
 
-export default SearchSinglePickerDynamic;
+export default SearchPickerDynamicMultiChose;
 
 const styles = StyleSheet.create({
     searchBar: {
